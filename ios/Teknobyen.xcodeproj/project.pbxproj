@@ -7,11 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		241FDD5C1CD6928100961AFE /* ReservationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241FDD5B1CD6928100961AFE /* ReservationViewController.swift */; };
+		241FDD5F1CD6929900961AFE /* ReservationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241FDD5D1CD6929900961AFE /* ReservationTableViewCell.swift */; };
+		241FDD601CD6929900961AFE /* ReservatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241FDD5E1CD6929900961AFE /* ReservatorViewController.swift */; };
+		241FDD621CD692CE00961AFE /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241FDD611CD692CE00961AFE /* MenuViewController.swift */; };
 		24C7C7A71CD4DD0300859D37 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C7C7A61CD4DD0300859D37 /* AppDelegate.swift */; };
 		24C7C7AC1CD4DD0300859D37 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24C7C7AA1CD4DD0300859D37 /* Main.storyboard */; };
 		24C7C7AE1CD4DD0300859D37 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24C7C7AD1CD4DD0300859D37 /* Assets.xcassets */; };
 		24C7C7B11CD4DD0300859D37 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24C7C7AF1CD4DD0300859D37 /* LaunchScreen.storyboard */; };
-		24C7C7B91CD4DD2900859D37 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C7C7B81CD4DD2900859D37 /* MenuViewController.swift */; };
 		24C7C7C81CD4E45400859D37 /* Projector.png in Resources */ = {isa = PBXBuildFile; fileRef = 24C7C7C41CD4E45400859D37 /* Projector.png */; };
 		24C7C7C91CD4E45400859D37 /* Settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 24C7C7C51CD4E45400859D37 /* Settings.png */; };
 		24C7C7CA1CD4E45400859D37 /* Washing.png in Resources */ = {isa = PBXBuildFile; fileRef = 24C7C7C61CD4E45400859D37 /* Washing.png */; };
@@ -28,13 +31,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		241FDD5B1CD6928100961AFE /* ReservationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReservationViewController.swift; sourceTree = "<group>"; };
+		241FDD5D1CD6929900961AFE /* ReservationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReservationTableViewCell.swift; sourceTree = "<group>"; };
+		241FDD5E1CD6929900961AFE /* ReservatorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReservatorViewController.swift; sourceTree = "<group>"; };
+		241FDD611CD692CE00961AFE /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		24C7C7A31CD4DD0300859D37 /* Teknobyen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Teknobyen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		24C7C7A61CD4DD0300859D37 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		24C7C7AB1CD4DD0300859D37 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		24C7C7AD1CD4DD0300859D37 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		24C7C7B01CD4DD0300859D37 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		24C7C7B21CD4DD0300859D37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		24C7C7B81CD4DD2900859D37 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		24C7C7C41CD4E45400859D37 /* Projector.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Projector.png; sourceTree = "<group>"; };
 		24C7C7C51CD4E45400859D37 /* Settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Settings.png; sourceTree = "<group>"; };
 		24C7C7C61CD4E45400859D37 /* Washing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Washing.png; sourceTree = "<group>"; };
@@ -82,7 +88,10 @@
 			children = (
 				24C7C7A61CD4DD0300859D37 /* AppDelegate.swift */,
 				24C7C7AA1CD4DD0300859D37 /* Main.storyboard */,
-				24C7C7B81CD4DD2900859D37 /* MenuViewController.swift */,
+				241FDD5B1CD6928100961AFE /* ReservationViewController.swift */,
+				241FDD611CD692CE00961AFE /* MenuViewController.swift */,
+				241FDD5D1CD6929900961AFE /* ReservationTableViewCell.swift */,
+				241FDD5E1CD6929900961AFE /* ReservatorViewController.swift */,
 				24C7C7AD1CD4DD0300859D37 /* Assets.xcassets */,
 				24C7C7AF1CD4DD0300859D37 /* LaunchScreen.storyboard */,
 				24C7C7B21CD4DD0300859D37 /* Info.plist */,
@@ -197,8 +206,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				24C7C7A71CD4DD0300859D37 /* AppDelegate.swift in Sources */,
-				24C7C7B91CD4DD2900859D37 /* MenuViewController.swift in Sources */,
+				241FDD621CD692CE00961AFE /* MenuViewController.swift in Sources */,
 				EA04F6F41CD4F4F400E7C1C9 /* WashingViewController.swift in Sources */,
+				241FDD601CD6929900961AFE /* ReservatorViewController.swift in Sources */,
+				241FDD5F1CD6929900961AFE /* ReservationTableViewCell.swift in Sources */,
+				241FDD5C1CD6928100961AFE /* ReservationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
