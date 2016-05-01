@@ -12,13 +12,26 @@ class MenuViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .whiteColor()
         initNavigationBar()
 
     }
     
     private func initNavigationBar() {
-        self.navigationItem.title = "TEKNOBYEN"
-        self.navigationController?.navigationBar.barTintColor = UIColor.orangeColor()
+        self.navigationItem.title = "Teknobyen"
+        self.navigationItem
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        self.navigationItem.title = "Teknobyen"
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        self.navigationItem.title = ""
+    }
+
+    
+    
+    
+   
+
 }
