@@ -9,13 +9,13 @@
 import UIKit
 import SafariServices
 
-class WashingViewController: UIViewController {
+class WashingViewController: UIViewController, NSURLConnectionDelegate {
 
    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.navigationItem.title = "Vaskemaskiner"
 
         // Do any additional setup after loading the view.
     }
@@ -39,12 +39,12 @@ class WashingViewController: UIViewController {
         
     }
     
-    func openWithSafariVC(url: NSURL)
+    private func openWithSafariVC(url: NSURL)
     {
         let svc = SFSafariViewController(URL: url)
         self.presentViewController(svc, animated: true, completion: nil)
     }
-
+    
     /*
     // MARK: - Navigation
 
