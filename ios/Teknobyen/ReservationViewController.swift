@@ -31,19 +31,30 @@ class ReservationViewController: UITableViewController, ReservationDelegate {
     }
 
     func reserve() {
-        saveReservationsToServers()
-        // self.performSegueWithIdentifier("Reserve", sender: self)
+        self.performSegueWithIdentifier("Reserve", sender: self)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "Reserve" {
-            if let rvc = segue.destinationViewController as? ReservatorViewController {
+            if let rvc = segue.destinationViewController as? AddReservattionViewController {
                 rvc.delegate = self
             }
         }
     }
     
+    var reservations = [Reservation(id: 1, date: "Lørdag", startHour: "20:00", stopHour: "22:00", roomNumber: 418, comment: "Skal sjå Breaking bad"),
+                        Reservation(id: 2, date: "Søndag", startHour: "00:00", stopHour: "02:00", roomNumber: 606, comment: "Det vert porno i natt!")]
+    
+    
+    
+    func reservationReceived(reservation: Reservation) {
+        reservations.append(reservation)
+        saveReservationsToServers()
+        self.tableView.reloadData()
+    }
+    
 
+    // Runs asynchronously!!!
     func saveReservationsToServers() {
         // Create a reference to a Firebase location
         let myRootRef = Firebase(url:"https://teknobyen.firebaseio.com")
@@ -91,15 +102,7 @@ class ReservationViewController: UITableViewController, ReservationDelegate {
         return 100.0;//Choose your custom row height
     }
 
-    var reservations = [Reservation(id: 1, date: "Lørdag", startHour: "20:00", stopHour: "22:00", roomNumber: 418, comment: "Skal sjå Breaking bad"),
-                        Reservation(id: 2, date: "Søndag", startHour: "00:00", stopHour: "02:00", roomNumber: 606, comment: "Det vert porno i natt!")]
-    
-   
-    
-    func reservationReceived(reservation: Reservation) {
-        reservations.append(reservation)
-        self.tableView.reloadData()
-    }
+  
 
 }
 

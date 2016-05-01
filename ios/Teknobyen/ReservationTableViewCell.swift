@@ -14,7 +14,6 @@ class ReservationTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.backgroundColor = .yellowColor()
         
         
     }
