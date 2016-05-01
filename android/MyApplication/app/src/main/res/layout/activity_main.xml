@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="#e0d732"
+    android:background="@color/tbYellow"
     tools:context="tbcoders.teknobyen.MainActivity">
 
 
@@ -48,7 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Prosjektor"
+        android:text="@string/projector"
         android:id="@+id/textView"
         android:textColor="@color/logoDefault"
         android:layout_alignBottom="@+id/BTN_projector"
@@ -58,7 +58,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Vaskemaskiner"
+        android:text="@string/washingmachine"
         android:id="@+id/textView2"
         android:textColor="@color/logoDefault"
         android:layout_below="@+id/BTN_washMachine"
@@ -68,7 +68,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Vaskelister"
+        android:text="@string/washinglist"
         android:id="@+id/textView3"
         android:textColor="@color/logoDefault"
         android:layout_marginBottom="21dp"
