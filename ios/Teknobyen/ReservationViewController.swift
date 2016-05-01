@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 /* This class lets the user view what reservations are currently here,
  and also supports adding reservations.
@@ -30,7 +31,8 @@ class ReservationViewController: UITableViewController, ReservationDelegate {
     }
 
     func reserve() {
-        self.performSegueWithIdentifier("Reserve", sender: self)
+        saveReservationsToServers()
+        // self.performSegueWithIdentifier("Reserve", sender: self)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -39,6 +41,23 @@ class ReservationViewController: UITableViewController, ReservationDelegate {
                 rvc.delegate = self
             }
         }
+    }
+    
+
+    func saveReservationsToServers() {
+        // Create a reference to a Firebase location
+        let myRootRef = Firebase(url:"https://teknobyen.firebaseio.com")
+        let ref = myRootRef.childByAppendingPath("reservations")
+        // Write data to Firebase
+        for reservation in reservations {
+            let idRef = ref.childByAppendingPath("\(reservation.id)")
+            idRef.setValue(reservation.format())
+        }
+        
+    }
+    
+    func loadReservationsFromServers() {
+        
     }
     
     
@@ -72,8 +91,8 @@ class ReservationViewController: UITableViewController, ReservationDelegate {
         return 100.0;//Choose your custom row height
     }
 
-    var reservations = [Reservation(date: "Lørdag", startHour: "20:00", stopHour: "22:00", roomNumber: 418, comment: "Skal sjå Breaking bad"),
-                        Reservation(date: "Søndag", startHour: "00:00", stopHour: "02:00", roomNumber: 606, comment: "Det vert porno i natt!")]
+    var reservations = [Reservation(id: 1, date: "Lørdag", startHour: "20:00", stopHour: "22:00", roomNumber: 418, comment: "Skal sjå Breaking bad"),
+                        Reservation(id: 2, date: "Søndag", startHour: "00:00", stopHour: "02:00", roomNumber: 606, comment: "Det vert porno i natt!")]
     
    
     
@@ -90,9 +109,15 @@ protocol ReservationDelegate {
 
 
 struct Reservation {
+    let id: Int
     let date: String
     let startHour: String
     let stopHour: String
     let roomNumber: Int
     let comment: String
+    
+    func format() -> [String: String] {
+        return ["id": "\(id)","date": date, "startHour": startHour, "stopHour": stopHour, "roomNumber": "\(roomNumber)", "comment": comment]
+    }
+    
 }

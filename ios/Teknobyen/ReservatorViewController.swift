@@ -38,6 +38,8 @@ class ReservatorViewController: UIViewController, UIPickerViewDelegate, UIPicker
         pickerDataSource = [["Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag", "Lørdag", "Søndag"], temp, temp]
     }
 
+    var refId = 3
+    
     @IBAction func reservationComplete(sender: UIButton) {
         let comment = commentView.text
         let day = pickerDataSource[0][pickerView.selectedRowInComponent(0)]
@@ -45,7 +47,7 @@ class ReservatorViewController: UIViewController, UIPickerViewDelegate, UIPicker
         let stopHour = pickerDataSource[2][pickerView.selectedRowInComponent(2)]
         let roomNumber = 418
         
-        let reservation = Reservation(date: day, startHour: startHour, stopHour: stopHour, roomNumber: roomNumber, comment: comment)
+        let reservation = Reservation(id: refId, date: day, startHour: startHour, stopHour: stopHour, roomNumber: roomNumber, comment: comment)
         self.delegate.reservationReceived(reservation)
         self.navigationController?.popViewControllerAnimated(true)
     }
