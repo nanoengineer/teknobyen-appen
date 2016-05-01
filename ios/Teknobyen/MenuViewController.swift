@@ -18,8 +18,7 @@ class MenuViewController: UIViewController {
     }
     
     private func initNavigationBar() {
-        self.navigationItem.title = "Teknobyen"
-        self.navigationItem
+        self.navigationItem.title = "TEKNOBYEN"
+        self.navigationController?.navigationBar.barTintColor = UIColor.orangeColor()
     }
-
 }

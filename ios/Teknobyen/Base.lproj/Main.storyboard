@@ -19,35 +19,35 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sws-DE-OCZ">
                                 <rect key="frame" x="127" y="81" width="120" height="120"/>
-                                <state key="normal" image="Projector.png"/>
+                                <state key="normal" image="Video Projector-96.png"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7wL-fP-cmb">
                                 <rect key="frame" x="139" y="255" width="100" height="100"/>
-                                <state key="normal" image="Washing.png"/>
+                                <state key="normal" image="Washing Machine-96.png"/>
                                 <connections>
                                     <segue destination="DCS-KT-3L4" kind="show" id="fVQ-3E-9Bh"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YWf-K7-elv">
                                 <rect key="frame" x="139" y="427" width="100" height="100"/>
-                                <state key="normal" image="Washing_list.png"/>
+                                <state key="normal" image="Todo List-96.png"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Book prosjektor" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XQq-f8-FsR">
                                 <rect key="frame" x="126" y="200" width="121" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.53655112729999999" green="0.56711234509999997" blue="0.6061232003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Vaskemaskiner" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jed-o9-Nmm">
                                 <rect key="frame" x="132" y="371" width="115" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.53655112729999999" green="0.56711234509999997" blue="0.6061232003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Vaskeliste" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kvk-Ye-ud1">
                                 <rect key="frame" x="151" y="545" width="77" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.53655112729999999" green="0.56711234509999997" blue="0.6061232003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -74,17 +74,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QdG-ld-zd1">
-                                <rect key="frame" x="110" y="252" width="154" height="30"/>
-                                <state key="normal" title="Check Machine Status"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QdG-ld-zd1">
+                                <rect key="frame" x="48" y="219" width="278" height="96"/>
+                                <state key="normal" image="Dashboard-96.png"/>
                                 <connections>
                                     <action selector="checkMachineStatusPressed:" destination="DCS-KT-3L4" eventType="touchUpInside" id="L6w-mH-rZd"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1K6-hg-Wnu">
-                                <rect key="frame" x="115" y="447" width="144" height="30"/>
-                                <state key="normal" title="Fill Up Payment Card"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1K6-hg-Wnu">
+                                <rect key="frame" x="55" y="414" width="265" height="96"/>
+                                <state key="normal" image="Swedish Krona-96.png"/>
+                                <connections>
+                                    <action selector="refillPressed:" destination="DCS-KT-3L4" eventType="touchUpInside" id="DMp-hs-py6"/>
+                                </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XSI-iw-qH5">
+                                <rect key="frame" x="162" y="323" width="50" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.53655112729999999" green="0.56711234509999997" blue="0.6061232003" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Påfyll" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YQp-1h-zYB">
+                                <rect key="frame" x="166" y="518" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.53655112729999999" green="0.56711234509999997" blue="0.6061232003" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -114,8 +129,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Projector.png" width="256" height="256"/>
-        <image name="Washing.png" width="256" height="256"/>
-        <image name="Washing_list.png" width="256" height="256"/>
+        <image name="Dashboard-96.png" width="96" height="96"/>
+        <image name="Swedish Krona-96.png" width="96" height="96"/>
+        <image name="Todo List-96.png" width="96" height="96"/>
+        <image name="Video Projector-96.png" width="96" height="96"/>
+        <image name="Washing Machine-96.png" width="96" height="96"/>
     </resources>
 </document>

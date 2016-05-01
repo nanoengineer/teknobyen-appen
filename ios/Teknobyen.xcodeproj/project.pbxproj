@@ -17,6 +17,14 @@
 		24C7C7CA1CD4E45400859D37 /* Washing.png in Resources */ = {isa = PBXBuildFile; fileRef = 24C7C7C61CD4E45400859D37 /* Washing.png */; };
 		24C7C7CB1CD4E45400859D37 /* Washing_list.png in Resources */ = {isa = PBXBuildFile; fileRef = 24C7C7C71CD4E45400859D37 /* Washing_list.png */; };
 		EA04F6F41CD4F4F400E7C1C9 /* WashingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA04F6F31CD4F4F400E7C1C9 /* WashingViewController.swift */; };
+		EA04F7181CD5870500E7C1C9 /* Swedish Krona-96.png in Resources */ = {isa = PBXBuildFile; fileRef = EA04F7131CD5870500E7C1C9 /* Swedish Krona-96.png */; };
+		EA04F7191CD5870500E7C1C9 /* teknobyen.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EA04F7141CD5870500E7C1C9 /* teknobyen.jpg */; };
+		EA04F71A1CD5870500E7C1C9 /* Todo List-96.png in Resources */ = {isa = PBXBuildFile; fileRef = EA04F7151CD5870500E7C1C9 /* Todo List-96.png */; };
+		EA04F71B1CD5870500E7C1C9 /* Video Projector-96.png in Resources */ = {isa = PBXBuildFile; fileRef = EA04F7161CD5870500E7C1C9 /* Video Projector-96.png */; };
+		EA04F71C1CD5870500E7C1C9 /* Washing Machine-96.png in Resources */ = {isa = PBXBuildFile; fileRef = EA04F7171CD5870500E7C1C9 /* Washing Machine-96.png */; };
+		EA04F7201CD5870E00E7C1C9 /* Broom-96.png in Resources */ = {isa = PBXBuildFile; fileRef = EA04F71D1CD5870E00E7C1C9 /* Broom-96.png */; };
+		EA04F7211CD5870E00E7C1C9 /* Dashboard-96.png in Resources */ = {isa = PBXBuildFile; fileRef = EA04F71E1CD5870E00E7C1C9 /* Dashboard-96.png */; };
+		EA04F7221CD5870E00E7C1C9 /* Movie Projector-96.png in Resources */ = {isa = PBXBuildFile; fileRef = EA04F71F1CD5870E00E7C1C9 /* Movie Projector-96.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +40,14 @@
 		24C7C7C61CD4E45400859D37 /* Washing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Washing.png; sourceTree = "<group>"; };
 		24C7C7C71CD4E45400859D37 /* Washing_list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Washing_list.png; sourceTree = "<group>"; };
 		EA04F6F31CD4F4F400E7C1C9 /* WashingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WashingViewController.swift; sourceTree = "<group>"; };
+		EA04F7131CD5870500E7C1C9 /* Swedish Krona-96.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Swedish Krona-96.png"; sourceTree = "<group>"; };
+		EA04F7141CD5870500E7C1C9 /* teknobyen.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = teknobyen.jpg; sourceTree = "<group>"; };
+		EA04F7151CD5870500E7C1C9 /* Todo List-96.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Todo List-96.png"; sourceTree = "<group>"; };
+		EA04F7161CD5870500E7C1C9 /* Video Projector-96.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Video Projector-96.png"; sourceTree = "<group>"; };
+		EA04F7171CD5870500E7C1C9 /* Washing Machine-96.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Washing Machine-96.png"; sourceTree = "<group>"; };
+		EA04F71D1CD5870E00E7C1C9 /* Broom-96.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Broom-96.png"; sourceTree = "<group>"; };
+		EA04F71E1CD5870E00E7C1C9 /* Dashboard-96.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Dashboard-96.png"; sourceTree = "<group>"; };
+		EA04F71F1CD5870E00E7C1C9 /* Movie Projector-96.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Movie Projector-96.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +95,14 @@
 		24C7C7C31CD4E45400859D37 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				EA04F71D1CD5870E00E7C1C9 /* Broom-96.png */,
+				EA04F71E1CD5870E00E7C1C9 /* Dashboard-96.png */,
+				EA04F71F1CD5870E00E7C1C9 /* Movie Projector-96.png */,
+				EA04F7131CD5870500E7C1C9 /* Swedish Krona-96.png */,
+				EA04F7141CD5870500E7C1C9 /* teknobyen.jpg */,
+				EA04F7151CD5870500E7C1C9 /* Todo List-96.png */,
+				EA04F7161CD5870500E7C1C9 /* Video Projector-96.png */,
+				EA04F7171CD5870500E7C1C9 /* Washing Machine-96.png */,
 				24C7C7C41CD4E45400859D37 /* Projector.png */,
 				24C7C7C51CD4E45400859D37 /* Settings.png */,
 				24C7C7C61CD4E45400859D37 /* Washing.png */,
@@ -148,10 +172,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				24C7C7C91CD4E45400859D37 /* Settings.png in Resources */,
+				EA04F7221CD5870E00E7C1C9 /* Movie Projector-96.png in Resources */,
+				EA04F7211CD5870E00E7C1C9 /* Dashboard-96.png in Resources */,
+				EA04F71B1CD5870500E7C1C9 /* Video Projector-96.png in Resources */,
 				24C7C7C81CD4E45400859D37 /* Projector.png in Resources */,
+				EA04F71C1CD5870500E7C1C9 /* Washing Machine-96.png in Resources */,
 				24C7C7B11CD4DD0300859D37 /* LaunchScreen.storyboard in Resources */,
+				EA04F7191CD5870500E7C1C9 /* teknobyen.jpg in Resources */,
 				24C7C7CA1CD4E45400859D37 /* Washing.png in Resources */,
+				EA04F71A1CD5870500E7C1C9 /* Todo List-96.png in Resources */,
+				EA04F7201CD5870E00E7C1C9 /* Broom-96.png in Resources */,
 				24C7C7AE1CD4DD0300859D37 /* Assets.xcassets in Resources */,
+				EA04F7181CD5870500E7C1C9 /* Swedish Krona-96.png in Resources */,
 				24C7C7CB1CD4E45400859D37 /* Washing_list.png in Resources */,
 				24C7C7AC1CD4DD0300859D37 /* Main.storyboard in Resources */,
 			);
