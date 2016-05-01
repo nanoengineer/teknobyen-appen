@@ -1,0 +1,44 @@
+<Page x:Class="Teknobyen.Views.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
+      xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+      xmlns:controls="using:Template10.Controls"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="using:Teknobyen.Views"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:vm="using:Teknobyen.ViewModels" mc:Ignorable="d">
+
+    <Page.DataContext>
+        <vm:MainPageViewModel x:Name="ViewModel" />
+    </Page.DataContext>
+
+    <Page.Resources>
+        <Style TargetType="Button" x:Name="ButtonStyle">
+            <Setter Property="Height" Value="130"/>
+            <Setter Property="Width" Value="130"/>
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="10" />
+        </Style>
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel VerticalAlignment="Center">
+
+            <Button x:Name="ProjectorButton" 
+                    Style="{StaticResource ButtonStyle}" >
+                <Image Source="ms-appx:///Assets/Video Projector-96.png" />
+            </Button>
+            <Button x:Name="ClothesWashButton" 
+                    Style="{StaticResource ButtonStyle}">
+                <Image Source="ms-appx:///Assets/Washing Machine-96.png" />
+            </Button>
+            <Button x:Name="WashListButton" 
+                    Style="{StaticResource ButtonStyle}">
+                <Image Source="ms-appx:///Assets/Washing_list.png" />
+            </Button>
+
+        </StackPanel>
+    </Grid>
+</Page>
+
