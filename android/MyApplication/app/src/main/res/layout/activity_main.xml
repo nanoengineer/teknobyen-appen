@@ -14,17 +14,18 @@
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageButton"
+        android:id="@+id/BTN_washMachine"
         android:src="@drawable/btn_washmachine"
         android:background="@color/tbYellow"
-        android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp" />
+        android:layout_below="@+id/BTN_projector"
+        android:layout_alignLeft="@+id/BTN_projector"
+        android:layout_alignStart="@+id/BTN_projector"
+        android:layout_marginTop="28dp" />
 
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageButton2"
+        android:id="@+id/BTN_projector"
         android:src="@drawable/btn_projector"
         android:background="@color/tbYellow"
         android:focusableInTouchMode="true"
@@ -35,12 +36,13 @@
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageButton3"
+        android:id="@+id/BTN_washList"
         android:src="@drawable/btn_washlist"
         android:background="@color/tbYellow"
-        android:layout_below="@+id/textView2"
-        android:layout_alignLeft="@+id/textView2"
-        android:layout_alignStart="@+id/textView2" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/BTN_washMachine"
+        android:layout_alignStart="@+id/BTN_washMachine"
+        android:layout_marginBottom="38dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -49,7 +51,7 @@
         android:text="Prosjektor"
         android:id="@+id/textView"
         android:textColor="@color/logoDefault"
-        android:layout_below="@+id/imageButton2"
+        android:layout_alignBottom="@+id/BTN_projector"
         android:layout_centerHorizontal="true" />
 
     <TextView
@@ -58,9 +60,9 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Vaskemaskiner"
         android:id="@+id/textView2"
-        android:layout_below="@+id/imageButton"
-        android:layout_centerHorizontal="true"
-        android:textColor="@color/logoDefault" />
+        android:textColor="@color/logoDefault"
+        android:layout_below="@+id/BTN_washMachine"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -69,7 +71,19 @@
         android:text="Vaskelister"
         android:id="@+id/textView3"
         android:textColor="@color/logoDefault"
-        android:layout_below="@+id/imageButton3"
+        android:layout_marginBottom="21dp"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
+
+    <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:scaleType="fitCenter"
+        android:id="@+id/btn_stemmer_det"
+        android:src="@drawable/btn_stemmer_det"
+        android:background="@color/tbYellow"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>
