@@ -14,7 +14,7 @@ namespace Teknobyen.ViewModels
 
         public void GotoClothesWashMenu()
         {
-            this.NavigationService.Navigate(typeof(ClothesWashMenuView));
+            this.NavigationService.Navigate(typeof(LaundryView));
         }
     }
 }

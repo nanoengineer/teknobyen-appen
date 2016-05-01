@@ -18,19 +18,34 @@
             <Setter Property="Height" Value="130"/>
             <Setter Property="Width" Value="130"/>
             <Setter Property="HorizontalAlignment" Value="Center" />
-            <Setter Property="Margin" Value="10" />
+            <Setter Property="Margin" Value="15" />
         </Style>
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <StackPanel VerticalAlignment="Center">
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="NormalState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="521" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="ButtonsPanel.Orientation" Value="Horizontal" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <StackPanel x:Name="ButtonsPanel" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical">
 
             <Button x:Name="ProjectorButton" 
                     Style="{StaticResource ButtonStyle}" >
                 <Image Source="ms-appx:///Assets/Video Projector-96.png" />
             </Button>
             <Button x:Name="ClothesWashButton" 
-                    Style="{StaticResource ButtonStyle}">
+                    Style="{StaticResource ButtonStyle}"
+                    Click="{x:Bind ViewModel.GotoClothesWashMenu}">
                 <Image Source="ms-appx:///Assets/Washing Machine-96.png" />
             </Button>
             <Button x:Name="WashListButton" 

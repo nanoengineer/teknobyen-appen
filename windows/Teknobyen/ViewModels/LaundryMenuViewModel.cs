@@ -7,7 +7,7 @@ using Template10.Mvvm;
 
 namespace Teknobyen.ViewModels
 {
-    class ClothesWashMenuPageModel : ViewModelBase
+    class LaundryMenuViewModel : ViewModelBase
     {
 
     }

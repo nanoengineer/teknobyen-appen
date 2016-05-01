@@ -97,10 +97,14 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\ClothesWashMenuPageModel.cs" />
+    <Compile Include="ViewModels\LaundryViewModel.cs" />
+    <Compile Include="ViewModels\LaundryMenuViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
-    <Compile Include="Views\ClothesWashMenuView.xaml.cs">
-      <DependentUpon>ClothesWashMenuView.xaml</DependentUpon>
+    <Compile Include="Views\LaundryView.xaml.cs">
+      <DependentUpon>LaundryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LaundryMenuView.xaml.cs">
+      <DependentUpon>LaundryMenuView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -136,7 +140,11 @@
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
-    <Page Include="Views\ClothesWashMenuView.xaml">
+    <Page Include="Views\LaundryView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LaundryMenuView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
