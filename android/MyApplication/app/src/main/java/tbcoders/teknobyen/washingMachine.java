@@ -22,7 +22,7 @@ public class washingMachine extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        //Intent intent = new Intent(washingMachine.this, machineStatus.class)
+                        //Intent intent = new Intent(washingMachine.this, machineStatus.class);
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://129.241.152.11/LaundryState?lg=2&ly=9131"));
                         startActivity(intent);
                     }

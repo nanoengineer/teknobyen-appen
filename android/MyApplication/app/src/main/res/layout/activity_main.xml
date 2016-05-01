@@ -7,16 +7,17 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@color/tbYellow"
+    android:background="@color/genBackground"
     tools:context="tbcoders.teknobyen.MainActivity">
 
 
     <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="120dp"
+        android:layout_height="130dp"
+        android:scaleType="fitCenter"
         android:id="@+id/BTN_washMachine"
         android:src="@drawable/btn_washmachine"
-        android:background="@color/tbYellow"
+        android:background="@color/genBackground"
         android:layout_below="@+id/BTN_projector"
         android:layout_alignLeft="@+id/BTN_projector"
         android:layout_alignStart="@+id/BTN_projector"
@@ -27,18 +28,19 @@
         android:layout_height="wrap_content"
         android:id="@+id/BTN_projector"
         android:src="@drawable/btn_projector"
-        android:background="@color/tbYellow"
+        android:background="@color/genBackground"
         android:focusableInTouchMode="true"
         android:layout_alignParentTop="true"
         android:layout_alignLeft="@+id/textView2"
         android:layout_alignStart="@+id/textView2" />
 
     <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="120dp"
+        android:layout_height="130dp"
+        android:scaleType="fitCenter"
         android:id="@+id/BTN_washList"
         android:src="@drawable/btn_washlist"
-        android:background="@color/tbYellow"
+        android:background="@color/genBackground"
         android:layout_alignParentBottom="true"
         android:layout_alignLeft="@+id/BTN_washMachine"
         android:layout_alignStart="@+id/BTN_washMachine"
@@ -81,7 +83,7 @@
         android:scaleType="fitCenter"
         android:id="@+id/btn_stemmer_det"
         android:src="@drawable/btn_stemmer_det"
-        android:background="@color/tbYellow"
+        android:background="@color/genBackground"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />

@@ -20,10 +20,13 @@ public class machineStatus extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_machine_status);
         WebView webView = (WebView)findViewById(R.id.webView);
+        webView.setWebViewClient(new WebViewClient());
         webView.setWebChromeClient(new WebChromeClient());
+        webView.getSettings().setSupportMultipleWindows(true);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
         webView.getSettings().setDomStorageEnabled(true);
+
         webView.setVerticalScrollBarEnabled(false);
         webView.loadUrl("http://129.241.152.11/LaundryState?lg=2&ly=9131");
     }
