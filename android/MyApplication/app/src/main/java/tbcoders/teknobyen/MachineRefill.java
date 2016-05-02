@@ -24,6 +24,9 @@ public class MachineRefill extends AppCompatActivity {
         webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
         webView.getSettings().setDomStorageEnabled(true);
         webView.setVerticalScrollBarEnabled(false);
+        webView.getSettings().setBuiltInZoomControls(true);
+        webView.getSettings().setDisplayZoomControls(false);
+        webView.setInitialScale(130);
         webView.loadUrl("http://129.241.152.11/SaldoForm?lg=2&ly=9131");
     }
 }

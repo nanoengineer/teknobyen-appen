@@ -33,6 +33,9 @@ public class MachineStatus extends AppCompatActivity {
         webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
         webView.getSettings().setDomStorageEnabled(true);
         webView.setVerticalScrollBarEnabled(false);
+        webView.getSettings().setBuiltInZoomControls(true);
+        webView.getSettings().setDisplayZoomControls(false);
+        webView.setInitialScale(130);
         webView.loadUrl("http://129.241.152.11/LaundryState?lg=2&ly=9131");
     }
 }
