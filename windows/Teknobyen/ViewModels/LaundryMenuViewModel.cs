@@ -9,6 +9,13 @@ namespace Teknobyen.ViewModels
 {
     class LaundryMenuViewModel : ViewModelBase
     {
+        public LaundryMenuViewModel()
+        {
+            
+        }
+
 
     }
+
+
 }
