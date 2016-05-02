@@ -7,7 +7,6 @@ import android.webkit.WebView;
 
 public class MachineStatus extends AppCompatActivity {
     //This class is for opening the web browser inside the app.
-    //But it doesn't work yet because I get an access denied error when trying to open the webpage.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
