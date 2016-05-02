@@ -10,7 +10,7 @@ public class MachineRefill extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_webView);
+        setContentView(R.layout.activity_webview);
         SharedPreferences sharedPref = getSharedPreferences("mypref", 0);
         String name = sharedPref.getString("username", "");
         String password = sharedPref.getString("password", "");
