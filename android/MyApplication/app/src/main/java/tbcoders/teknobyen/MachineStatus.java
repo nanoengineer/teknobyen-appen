@@ -1,16 +1,9 @@
 package tbcoders.teknobyen;
 
 import android.content.SharedPreferences;
-import android.net.http.SslError;
-import android.os.Build;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.webkit.SslErrorHandler;
-import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 
 public class MachineStatus extends AppCompatActivity {
     //This class is for opening the web browser inside the app.
@@ -19,7 +12,7 @@ public class MachineStatus extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_machine_status);
+        setContentView(R.layout.activity_webView);
         SharedPreferences sharedPref = getSharedPreferences("mypref", 0);
         String name = sharedPref.getString("username", "");
         String password = sharedPref.getString("password", "");
