@@ -1,7 +1,6 @@
 package tbcoders.teknobyen;
 
 import android.content.Intent;
-import android.media.Image;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -31,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                      @Override
                      public void onClick(View view) {
-                         Intent intent = new Intent(MainActivity.this, washingMachine.class);
+                         Intent intent = new Intent(MainActivity.this, WashingMachine.class);
                          startActivity(intent);
                      }
                  }
