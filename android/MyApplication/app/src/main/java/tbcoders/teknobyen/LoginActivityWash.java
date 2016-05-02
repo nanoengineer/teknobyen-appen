@@ -34,7 +34,7 @@ public class LoginActivityWash extends AppCompatActivity {
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(username.toString().length()>0 && password.toString().length()>0){
+                if(username.getText().toString().length()>0 && password.getText().toString().length()>0){
                     //For å lagre variabelar slik at dei skal vere tilgjengelige etter å ha lukka appen.
                     SharedPreferences sharedPref = getSharedPreferences("mypref", 0);
                     SharedPreferences.Editor editor = sharedPref.edit();
@@ -46,7 +46,7 @@ public class LoginActivityWash extends AppCompatActivity {
                     Intent intent = new Intent(LoginActivityWash.this, WashingMachine.class);
                     startActivity(intent);
                 }else{
-                    Toast.makeText(LoginActivityWash.this, "Felta for brukernavn og passord kan ikkje vere tomme.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivityWash.this, "Feltene for brukernavn og passord kan ikke være tomme", Toast.LENGTH_SHORT).show();
                 }
             }
         });
