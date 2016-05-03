@@ -14,8 +14,6 @@ class ReservationTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -28,4 +26,5 @@ class ReservationTableViewCell: UITableViewCell {
     @IBOutlet weak var roomLabel: UILabel!
     @IBOutlet weak var hourLabel: UILabel!
     @IBOutlet weak var commentLabel: UILabel!
+    
 }

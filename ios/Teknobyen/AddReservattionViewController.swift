@@ -14,7 +14,6 @@ class AddReservattionViewController: UIViewController, UIPickerViewDelegate, UIP
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .yellowColor()
         populateDataSource()
         self.pickerView.dataSource = self;
         self.pickerView.delegate = self;
