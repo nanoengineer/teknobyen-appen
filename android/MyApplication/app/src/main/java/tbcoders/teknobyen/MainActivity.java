@@ -8,12 +8,13 @@ import android.view.View;
 import android.widget.ImageButton;
 
 public class MainActivity extends AppCompatActivity {
-    private static ImageButton washingButton;
+    private static ImageButton imgBTN;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         OnClickWashingButtonListener();
+        OnClickProjectorButtonListener();
 
         final MediaPlayer stemmerDetSound = MediaPlayer.create(this, R.raw.stemmerlyd);
         ImageButton playStemmerDetSound = (ImageButton) this.findViewById(R.id.btn_stemmer_det);
@@ -24,9 +25,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void OnClickProjectorButtonListener() {
+        imgBTN = (ImageButton)findViewById(R.id.BTN_projector);
+        imgBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ProjectorBookings.class);
+                startActivity(intent);
+            }
+        });
+    }
+
     public void OnClickWashingButtonListener(){
-        washingButton = (ImageButton) findViewById(R.id.BTN_washMachine);
-        washingButton.setOnClickListener(
+        imgBTN = (ImageButton) findViewById(R.id.BTN_washMachine);
+        imgBTN.setOnClickListener(
                 new View.OnClickListener() {
                      @Override
                      public void onClick(View view) {
