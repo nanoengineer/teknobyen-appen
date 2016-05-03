@@ -36,11 +36,12 @@
             </Button>
             <Button x:Name="ClothesWashButton" 
                     Style="{StaticResource MainButtonStyle}"
-                    Click="{x:Bind ViewModel.GotoClothesWashMenu}">
+                    Click="{x:Bind ViewModel.GotoLaundryMenu}">
                 <Image Source="ms-appx:///Assets/Washing Machine-96.png" />
             </Button>
             <Button x:Name="WashListButton" 
-                    Style="{StaticResource MainButtonStyle}">
+                    Style="{StaticResource MainButtonStyle}"
+                    Click="{x:Bind ViewModel.GotoWashlistPage}">
                 <Image Source="ms-appx:///Assets/Washing_list.png" />
             </Button>
 

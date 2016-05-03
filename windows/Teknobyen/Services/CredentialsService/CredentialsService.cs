@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Teknobyen.Models;
 using Windows.Security.Credentials;
 
 namespace Teknobyen.Services.CredentialsService
@@ -18,13 +17,22 @@ namespace Teknobyen.Services.CredentialsService
         /// <returns>Bool indicating success</returns>
         public bool DeleteUsers()
         {
-            var vault = new Windows.Security.Credentials.PasswordVault();
-            var credentialList = vault.FindAllByResource(resourceName);
-            foreach (var credential in credentialList)
+            try
             {
-                vault.Remove(credential);
+                var vault = new Windows.Security.Credentials.PasswordVault();
+                var credentialList = vault.FindAllByResource(resourceName);
+                foreach (var credential in credentialList)
+                {
+                    vault.Remove(credential);
+                }
+                return true;
             }
-            return true;
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine(e.Message);
+            }
+            return false;
+            
         }
 
         /// <summary>

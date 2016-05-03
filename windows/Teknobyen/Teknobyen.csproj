@@ -98,9 +98,12 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\LaundryMachineStatusModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\CredentialsService\CredentialsService.cs" />
     <Compile Include="Services\CredentialsService\ICredentialsService.cs" />
+    <Compile Include="Services\LaundryService\ILaundryService.cs" />
+    <Compile Include="Services\LaundryService\LaundryService.cs" />
     <Compile Include="ViewModels\LaundryViewModel.cs" />
     <Compile Include="ViewModels\LaundryMenuViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
@@ -165,9 +168,7 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

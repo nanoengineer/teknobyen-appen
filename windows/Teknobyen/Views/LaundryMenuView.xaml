@@ -37,7 +37,7 @@
                 </StackPanel>
             </Button>
             <Button x:Name="ClothesWashButton" 
-                    Style="{StaticResource ButtonStyle}">
+                    Style="{StaticResource MainButtonStyle}">
                 <StackPanel>
                     <Image Source="ms-appx:///Assets/Swedish Krona-96.png" />
                     <TextBlock Text="Legg inn penger" />
