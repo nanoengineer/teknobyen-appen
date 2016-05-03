@@ -9,7 +9,7 @@ namespace Teknobyen.Services.CredentialsService
 {
     class CredentialsService : ICredentialsService
     {
-        private string resourceName = "Teknobyen";
+        private string resourceName = App.APPID;
 
         /// <summary>
         /// Deletes the currently stored username and password for the laundry login
@@ -42,13 +42,21 @@ namespace Teknobyen.Services.CredentialsService
         /// <returns>Currently stored laundry credentials</returns>
         public PasswordCredential GetUser()
         {
-
-            var vault = new Windows.Security.Credentials.PasswordVault();
-            var credentialList = vault.FindAllByResource(resourceName);
-            if (credentialList.Count > 0)
+            try
             {
-                return credentialList.First();
+                var vault = new Windows.Security.Credentials.PasswordVault();
+                var credentialList = vault.FindAllByResource(resourceName);
+                if (credentialList.Count > 0)
+                {
+                    var credentialsWithPassword = vault.Retrieve(App.APPID, credentialList.First().UserName);
+                    return credentialsWithPassword;
+                }
             }
+            catch (Exception)
+            {
+                return null;
+            }
+            
             return null;
         }
 
@@ -59,11 +67,20 @@ namespace Teknobyen.Services.CredentialsService
         /// <returns>Bool indicating success</returns>
         public bool SaveUser(PasswordCredential user)
         {
-            DeleteUsers();
+            try
+            {
+                DeleteUsers();
 
-            var vault = new Windows.Security.Credentials.PasswordVault();
-            vault.Add(user);
-            return true;
+                var vault = new PasswordVault();
+                vault.Add(user);
+                return true;
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine(e.Message);
+            }
+
+            return false;
         }
     }
 }

@@ -13,6 +13,6 @@
     </Page.DataContext>
     
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <WebView  x:Name="WasherWebView"/>
+        
     </Grid>
 </Page>

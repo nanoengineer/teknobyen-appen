@@ -38,7 +38,7 @@ namespace Teknobyen.Views
         {
             if(e.PropertyName == "HtmlContent")
             {
-                WasherWebView.NavigateToString(ViewModel.HtmlContent);
+                //Do nothing
             }
         }
     }

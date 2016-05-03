@@ -52,13 +52,30 @@ namespace Teknobyen.ViewModels
         public override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             _laundryService = new LaundryService();
-            //GetLaundrySiteHtml();
+            _credentialsService = new CredentialsService();
+            GetLaundrySiteHtml();
             return base.OnNavigatedToAsync(parameter, mode, state);
         }
 
         public async void GetLaundrySiteHtml()
         {
-            //var mList = await _laundryService.GetMachineStatusList(username, password);
+            string username = "";
+            string password = "";
+
+            var t = _credentialsService.GetUser();
+            if (t == null)
+            {
+                //Ask for password
+                username = "AAQA AEAA AAAA C4AW GAB";
+                password = "9137f9";
+            }
+            else
+            {
+                username = t.UserName;
+                password = t.Password;
+            }
+
+            var mList = await _laundryService.GetMachineStatusList(username, password);
         }
 
         

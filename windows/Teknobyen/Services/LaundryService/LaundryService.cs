@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Teknobyen.Models;
 using Windows.Security.Credentials;
@@ -36,8 +37,18 @@ namespace Teknobyen.Services.LaundryService
                     int mNum = 0;
                     bool sussess = int.TryParse(number, out mNum); //Throw exc if false
 
-                    var machine = new LaundryMachineStatusModel();
-                    machine.MachineId = mNum;
+                    int minutesLeft = 0;
+                    if (status == "Ledig")
+                    {
+                        minutesLeft = -1;
+                    }
+                    else
+                    {
+                        string minutesLeftString = Regex.Replace(status, "[^0-9]", "");
+                        bool convertionSuccess = int.TryParse(minutesLeftString, out minutesLeft);
+                    }
+
+                    var machine = new LaundryMachineStatusModel(mNum, minutesLeft);
                     machineList.Add(machine);
                 }
             }
