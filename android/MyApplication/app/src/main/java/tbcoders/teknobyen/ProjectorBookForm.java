@@ -18,7 +18,7 @@ public class ProjectorBookForm extends AppCompatActivity {
     NumberPicker pickstartMin = null;
     NumberPicker pickDate = null;
     String[] dateValues;
-    String[] minValues = {"0", "15", "30", "45", "60"};
+    String[] minValues = {"00", "15", "30", "45", "60"};
 
     int startDayValue = 0;
     int startHourValue = 0;
@@ -106,39 +106,15 @@ public class ProjectorBookForm extends AppCompatActivity {
             public void onClick(View view) {
                 if(pickDate.getValue()>=startDayValue) {
                     if(pickDate.getValue()>startDayValue){
-                        int dayValue = pickDate.getValue();
-                        endDayValue = dayValue;
-                        String day = dateValues[dayValue];
-                        int hourValue = pickStartHour.getValue();
-                        endHourValue = hourValue;
-                        int minValue = pickstartMin.getValue();
-                        endMinValue = minValue;
-                        String trueMinValue = minValues[minValue];
-                        endText.setText(day + " " + hourValue + ":" + trueMinValue);
+                        writeEndTimeMessage();
                     }else{
                         if(pickStartHour.getValue()>=startHourValue){
                             if(pickStartHour.getValue()>startHourValue){
-                                int dayValue = pickDate.getValue();
-                                endDayValue = dayValue;
-                                String day = dateValues[dayValue];
-                                int hourValue = pickStartHour.getValue();
-                                endHourValue = hourValue;
-                                int minValue = pickstartMin.getValue();
-                                endMinValue = minValue;
-                                String trueMinValue = minValues[minValue];
-                                endText.setText(day + " " + hourValue + ":" + trueMinValue);
+                                writeEndTimeMessage();
                             }
                             else{
                                 if(pickstartMin.getValue()>startMinValue){
-                                    int dayValue = pickDate.getValue();
-                                    endDayValue = dayValue;
-                                    String day = dateValues[dayValue];
-                                    int hourValue = pickStartHour.getValue();
-                                    endHourValue = hourValue;
-                                    int minValue = pickstartMin.getValue();
-                                    endMinValue = minValue;
-                                    String trueMinValue = minValues[minValue];
-                                    endText.setText(day + " " + hourValue + ":" + trueMinValue);
+                                    writeEndTimeMessage();
                                 }else{
                                     Toast.makeText(ProjectorBookForm.this, "Verdien for slutttid må være større enn starttid", Toast.LENGTH_SHORT).show();
                                 }
@@ -152,6 +128,17 @@ public class ProjectorBookForm extends AppCompatActivity {
                 }
             }
         });
-
+    }
+    public void writeEndTimeMessage(){
+        final TextView endText = (TextView)findViewById(R.id.endtimeString);
+        int dayValue = pickDate.getValue();
+        endDayValue = dayValue;
+        String day = dateValues[dayValue];
+        int hourValue = pickStartHour.getValue();
+        endHourValue = hourValue;
+        int minValue = pickstartMin.getValue();
+        endMinValue = minValue;
+        String trueMinValue = minValues[minValue];
+        endText.setText(day + " " + hourValue + ":" + trueMinValue);
     }
 }
