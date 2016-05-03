@@ -1,2 +1,2 @@
 # teknobyen-appen
-The Teknobyen App for Android/iOS
+The Teknobyen App for Android/iOS and Windows PC/Mobile
