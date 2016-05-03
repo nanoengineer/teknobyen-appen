@@ -30,7 +30,6 @@ public class LoginActivityWash extends AppCompatActivity {
         login_btn = (Button)findViewById(R.id.acceptBTN);
         cancel_btn = (Button)findViewById(R.id.cancelBTN);
 
-
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -40,6 +39,8 @@ public class LoginActivityWash extends AppCompatActivity {
                     SharedPreferences.Editor editor = sharedPref.edit();
                     String userS = username.getText().toString();
                     String userP = password.getText().toString();
+                    editor.remove("username");
+                    editor.remove("password");
                     editor.putString("username", userS);
                     editor.putString("password", userP);
                     editor.commit();

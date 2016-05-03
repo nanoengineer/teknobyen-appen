@@ -30,7 +30,6 @@ public class WashingMachine extends AppCompatActivity {
             }
         });
     }
-
     public void OnClickStatusListener(){
 
         imageButton = (ImageButton) findViewById(R.id.BTN_washingS);
@@ -48,8 +47,6 @@ public class WashingMachine extends AppCompatActivity {
                             Intent intent = new Intent(WashingMachine.this, LoginActivityWash.class);
                             startActivity(intent);
                         }
-                        //Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://129.241.152.11/LaundryState?lg=2&ly=9131"));
-
                     }
                 }
         );
@@ -70,7 +67,6 @@ public class WashingMachine extends AppCompatActivity {
                             Intent intent = new Intent(WashingMachine.this, LoginActivityWash.class);
                             startActivity(intent);
                         }
-                        //Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://129.241.152.11/SaldoForm?lg=2&ly=9131"));
                     }
                 }
         );
