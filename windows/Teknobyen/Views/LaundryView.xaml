@@ -18,6 +18,27 @@
     
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="NormalState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource NormalMinWidth}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="MyWrapGrid.MaximumRowsOrColumns" Value="3" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="WideState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource WideMinWidth}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="MyWrapGrid.MaximumRowsOrColumns" Value="-1" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
         <!-- Gridview containing machine status -->
         <GridView ItemsSource="{x:Bind ViewModel.StatusCollection, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" SelectionMode="None">
             <GridView.ItemTemplate>
@@ -25,6 +46,11 @@
                     <controls:WashingMachineControl Height="150" Width="150" Mid="{x:Bind MachineId}" MMleft="{x:Bind MinutesLeft}" />
                 </DataTemplate>
             </GridView.ItemTemplate>
+            <GridView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapGrid Name="MyWrapGrid" Orientation="Horizontal" MaximumRowsOrColumns="2" />
+                </ItemsPanelTemplate>
+            </GridView.ItemsPanel>
         </GridView>
 
 

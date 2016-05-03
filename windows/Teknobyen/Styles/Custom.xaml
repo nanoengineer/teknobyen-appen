@@ -3,6 +3,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
     xmlns:local="using:Teknobyen.Styles">
 
+    <x:Double x:Key="NarrowMinWidth">0</x:Double>
+    <x:Double x:Key="NormalMinWidth">521</x:Double>
+    <x:Double x:Key="WideMinWidth">1200</x:Double>
+
     <!--  custom styles here  --> 
     <Style TargetType="Button" x:Name="MainButtonStyle">
         <Setter Property="Height" Value="140"/>

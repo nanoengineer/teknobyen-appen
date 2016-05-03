@@ -30,7 +30,7 @@ namespace Teknobyen.Services.LaundryService
 
                 foreach (var item in s)
                 {
-                    string ss = item.InnerText.Trim();
+                    string ss = item.InnerText.Trim(); //Maskin 2Ledig
                     string status = ss.Substring(8); //Contains status Must be prossesed further
                     string number = ss.Substring(7,1); //Contains machine number
 
