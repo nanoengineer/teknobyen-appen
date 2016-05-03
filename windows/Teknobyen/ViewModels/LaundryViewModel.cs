@@ -1,9 +1,11 @@
 ﻿using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Teknobyen.Models;
 using Teknobyen.Services.CredentialsService;
 using Teknobyen.Services.LaundryService;
 using Template10.Mvvm;
@@ -20,64 +22,50 @@ namespace Teknobyen.ViewModels
         ICredentialsService _credentialsService;
         ILaundryService _laundryService;
 
-        private Uri _washingUrl;
-        public Uri WashingUrl
+
+        private PasswordCredential _credentials;
+        public PasswordCredential Credentials
         {
-            get { return _washingUrl; }
-            set { _washingUrl = value; }
+            get { return _credentials; }
+            set
+            {
+                Set(ref _credentials, value);
+                if(value != null) _credentialsService.SaveUser(value);
+            }
         }
 
-        private string _userName;
-        public string UserName
-        {
-            get { return _userName; }
-            set { Set(ref _userName,value); }
+        private ObservableCollection<LaundryMachineStatusModel> _statusCollection = new ObservableCollection<LaundryMachineStatusModel>();
+        public ObservableCollection<LaundryMachineStatusModel> StatusCollection {
+            get { return _statusCollection; }
+            set { Set(ref _statusCollection, value); }
         }
-
-        private string _password;
-        public string Password
-        {
-            get { return _password; }
-            set { Set(ref _password, value); }
-        }
-
-        private string _htmlContent;
-        public string HtmlContent
-        {
-            get { return _htmlContent; }
-            set { Set(ref _htmlContent,  value); }
-        }
-
 
         public override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             _laundryService = new LaundryService();
             _credentialsService = new CredentialsService();
-            GetLaundrySiteHtml();
+            GetLaundryMachineStatusList();
             return base.OnNavigatedToAsync(parameter, mode, state);
         }
 
-        public async void GetLaundrySiteHtml()
+        public async void GetLaundryMachineStatusList()
         {
-            string username = "";
-            string password = "";
-
-            var t = _credentialsService.GetUser();
-            if (t == null)
+            var loginCredentials = _credentialsService.GetUser();
+            if (loginCredentials == null)
             {
-                //Ask for password
-                username = "AAQA AEAA AAAA C4AW GAB";
-                password = "9137f9";
+                Credentials = null;
+                return;
             }
             else
             {
-                username = t.UserName;
-                password = t.Password;
+                Credentials = loginCredentials;
             }
 
-            var mList = await _laundryService.GetMachineStatusList(username, password);
+            var mList = await _laundryService.GetMachineStatusList(loginCredentials.UserName, loginCredentials.Password);
+            StatusCollection = mList;
         }
 
+        
         
     }
 }

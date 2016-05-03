@@ -4,8 +4,10 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Teknobyen.ViewModels;
+using Template10.Mvvm;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Security.Credentials;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -23,7 +25,30 @@ namespace Teknobyen.Views
     /// </summary>
     public sealed partial class LaundryView : Page
     {
-        // strongly-typed view models enable x:bind
+        private string _username;
+        public string Username
+        {
+            get { return _username; }
+            set { _username = value; CheckCanSave(); }
+        }
+
+        private string _password;
+        public string Password
+        {
+            get { return _password; }
+            set { _password = value; CheckCanSave(); }
+        }
+
+        private void CheckCanSave () {
+            if (Username == null || Password == null)
+            {
+                MyContentDialog.IsPrimaryButtonEnabled = false;
+            }
+            else
+            {
+                MyContentDialog.IsPrimaryButtonEnabled = true;
+            }
+        }
 
         public LaundryView()
         {
@@ -36,10 +61,31 @@ namespace Teknobyen.Views
 
         private void ViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if(e.PropertyName == "HtmlContent")
+            if(e.PropertyName == "Credentials")
             {
-                //Do nothing
+                if (ViewModel.Credentials == null)
+                {
+                    ShowUsernameAndPassworDialog();
+                }
             }
+        }
+
+        private void ShowUsernameAndPassworDialog()
+        {
+            //TODO
+        }
+
+        private async void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var result = await MyContentDialog.ShowAsync();
+            System.Diagnostics.Debug.WriteLine(result);
+            // if result == primary lagre, else display you need to log in and button.
+        }
+
+        //Meget stygg måte
+        private void CheckCanSave(object sender, KeyRoutedEventArgs e)
+        {
+            CheckCanSave();
         }
     }
 }

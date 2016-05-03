@@ -1,0 +1,17 @@
+﻿<UserControl
+    x:Class="Teknobyen.Controls.WashingMachineControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Teknobyen.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="150"
+    d:DesignWidth="150">
+
+    <Grid x:Name="RootGrid" Background="Green">
+        <Image Source="ms-appx:///Assets/LaundrySymbol.png" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Uniform" />        <TextBlock x:Name="IdText" Text="" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>        <TextBlock x:Name="TimeLeftText"  Text="" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="20" Margin="10" />
+
+
+    </Grid>
+</UserControl>
