@@ -7,73 +7,126 @@
 //
 
 import UIKit
+import Firebase
 
-class AddReservattionViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextViewDelegate {
 
+class AddReservattionViewController: UIViewController {
+
+    var idNumber = 0
     
+    @IBOutlet weak var commentField: UITextField!
+    
+    @IBOutlet weak var fromDate: UILabel!
+    @IBOutlet weak var toDate: UILabel!
+    @IBOutlet weak var datePicker: UIDatePicker!
+    
+    var dateFrom: NSDate!
+    var dateTo: NSDate!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        populateDataSource()
-        self.pickerView.dataSource = self;
-        self.pickerView.delegate = self;
-        commentView.text = ""
+        fetchIdFromFireBase()
+        
+        datePicker.datePickerMode = .DateAndTime
+        datePicker.minimumDate = NSDate() // NSDate() automatically gives today's date
+        
+        let sixDays = NSTimeInterval(6.0 * 24.0 * 3600.0)
+        datePicker.maximumDate = NSDate().dateByAddingTimeInterval(sixDays)
+        
+        datePicker.minuteInterval = 15
+        datePicker.locale = NSLocale(localeIdentifier: "no_NO")
+
+        commentField.placeholder = "Beskrivelse"
+        dateFrom = datePicker.date
+        dateTo = datePicker.date
+        updateLabels()
+
+    }
+    
+    var selectedFrom = false
+    
+    @IBAction func userPressedOk(sender: AnyObject) {
+        updateLabels()
+        selectedFrom = !selectedFrom
+    }
+    
+    @IBAction func datePickerAction(sender: AnyObject) {
+        updateLabels()
+    }
+    
+    private func updateLabels() {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateStyle = .FullStyle
+        dateFormatter.timeStyle = .ShortStyle
+        dateFormatter.locale = NSLocale(localeIdentifier: "no_NO")
+        
+        dateFormatter.doesRelativeDateFormatting = true
+        
+        
+        let strDate = dateFormatter.stringFromDate(datePicker.date)
+        
+        if selectedFrom {
+            self.toDate.text = "Til: " + strDate
+            self.dateTo = datePicker.date
+        } else {
+            self.dateFrom = datePicker.date
+            self.fromDate.text = "Fra: " + strDate
+            self.toDate.text = "Til: " + strDate
+        }
     }
     
     var delegate: ReservationDelegate!
     
-    var pickerDataSource: [[String]]!
     
-    private func populateDataSource() {
-        var temp = [String]()
-        for i in 0...23 {
-            if i < 10 {
-                temp.append("0\(i).00")
-            } else {
-                temp.append("\(i).00")
-            }
-            
-        }
-        pickerDataSource = [["Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag", "Lørdag", "Søndag"], temp, temp]
-    }
-
-    var refId = 3
-    
+    // saves the current reservation to the Firebase server
     @IBAction func reservationComplete(sender: UIButton) {
-        let comment = commentView.text
-        let day = pickerDataSource[0][pickerView.selectedRowInComponent(0)]
-        let startHour = pickerDataSource[1][pickerView.selectedRowInComponent(1)]
-        let stopHour = pickerDataSource[2][pickerView.selectedRowInComponent(2)]
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateStyle = .ShortStyle
+        dateFormatter.locale = NSLocale(localeIdentifier: "no_NO")
+        
+        
+        let comment = commentField.text != nil ? commentField.text! : ""
+        let day = dateFormatter.stringFromDate(dateFrom)
+        
+        dateFormatter.dateFormat = "HH:mm"
+        let startHour = dateFormatter.stringFromDate(dateFrom)
+        let stopHour = dateFormatter.stringFromDate(dateTo)
         let roomNumber = 418
         
-        let reservation = Reservation(id: refId, date: day, startHour: startHour, stopHour: stopHour, roomNumber: roomNumber, comment: comment)
+        let reservation = Reservation(id: self.idNumber, date: day, startHour: startHour, stopHour: stopHour, roomNumber: roomNumber, comment: comment)
+        saveReservationToServer(reservation)
         self.delegate.reservationReceived(reservation)
         self.navigationController?.popViewControllerAnimated(true)
+        
     }
     
-    // MARK: Delegate methods
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-        return 3
+    // Runs asynchronously!!!
+    private func saveReservationToServer(reservation: Reservation) {
+        // Create a reference to a Firebase location
+        let ref = Constants.RootReference.childByAppendingPath("reservations")
+        // Write data to Firebase
+        let idRef = ref.childByAppendingPath("\(reservation.id)")
+        idRef.setValue(reservation.format())
     }
     
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerDataSource[component].count;
+    // Return the next available index in the Firebase database
+    private func fetchIdFromFireBase() {
+        let ref = Constants.RootReference.childByAppendingPath("reservations")
+        var count = 0
+        ref.observeSingleEventOfType(.Value, withBlock: { snapshot in
+            for _ in snapshot.children {
+                count += 1
+            }
+            self.idNumber = count
+        })
     }
     
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return pickerDataSource[component][row]
-    }
     
-    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
-        if(text == "\n") {
-            textView.resignFirstResponder()
-            return false
-        }
-        return true
+    private struct Constants {
+        static let RootReference = Firebase(url:"https://teknobyen.firebaseio.com")
     }
    
-    @IBOutlet weak var pickerView: UIPickerView!
-    @IBOutlet weak var commentView: UITextView!
+    
 
     
 

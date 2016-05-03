@@ -1,10 +1,13 @@
 PODS:
   - Firebase (2.5.1)
+  - PIDatePicker (0.1.2)
 
 DEPENDENCIES:
   - Firebase (>= 2.5.1)
+  - PIDatePicker (~> 0.1.0)
 
 SPEC CHECKSUMS:
   Firebase: 3565ea88b830f28f2c77ecc524622bc71a20d085
+  PIDatePicker: 36548c3466dec16e7918e533486ffe86687f65e3
 
 COCOAPODS: 0.39.0

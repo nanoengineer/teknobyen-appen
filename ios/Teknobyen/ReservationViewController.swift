@@ -27,6 +27,8 @@ class ReservationViewController: UITableViewController, ReservationDelegate {
         let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(ReservationViewController.reserve))
         navigationItem.rightBarButtonItem = addButton
         navigationController?.navigationBar.backItem?.title = ""
+        
+        loadReservationsFromServers()
        
     }
 
@@ -42,35 +44,40 @@ class ReservationViewController: UITableViewController, ReservationDelegate {
         }
     }
     
-    var reservations = [Reservation(id: 1, date: "Lørdag", startHour: "20:00", stopHour: "22:00", roomNumber: 418, comment: "Skal sjå Breaking bad"),
-                        Reservation(id: 2, date: "Søndag", startHour: "00:00", stopHour: "02:00", roomNumber: 606, comment: "Det vert porno i natt!")]
+    var reservations = [Reservation]()
     
     
     
     func reservationReceived(reservation: Reservation) {
         reservations.append(reservation)
-        saveReservationsToServers()
         self.tableView.reloadData()
     }
     
 
-    // Runs asynchronously!!!
-    func saveReservationsToServers() {
-        // Create a reference to a Firebase location
-        let myRootRef = Firebase(url:"https://teknobyen.firebaseio.com")
-        let ref = myRootRef.childByAppendingPath("reservations")
-        // Write data to Firebase
-        for reservation in reservations {
-            let idRef = ref.childByAppendingPath("\(reservation.id)")
-            idRef.setValue(reservation.format())
-        }
-        
-    }
+    
     
     func loadReservationsFromServers() {
-        
+        let ref = Constants.RootReference.childByAppendingPath("reservations")
+        ref.observeSingleEventOfType(.Value, withBlock: { snapshot in
+            for stuff in snapshot.children {
+                let comment = stuff.value["comment"] as! String
+                let id = stuff.value["id"] as! String
+                let date = stuff.value["date"] as! String
+                let roomNumber = stuff.value["roomNumber"] as! String
+                let startHour = stuff.value["startHour"] as! String
+                let stopHour = stuff.value["stopHour"] as! String
+                
+                let reservation = Reservation(id: Int(id)!, date: date, startHour: startHour, stopHour: stopHour, roomNumber: Int(roomNumber)!, comment: comment)
+                
+                self.reservations.append(reservation)
+            }
+            self.tableView.reloadData()
+        })
     }
     
+    private struct Constants {
+        static let RootReference = Firebase(url:"https://teknobyen.firebaseio.com")
+    }
     
 
     // MARK: - Table view data source

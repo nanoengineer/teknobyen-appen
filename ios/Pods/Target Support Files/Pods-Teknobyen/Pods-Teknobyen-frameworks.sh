@@ -85,7 +85,9 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-Teknobyen/Firebase.framework"
+  install_framework "Pods-Teknobyen/PIDatePicker.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-Teknobyen/Firebase.framework"
+  install_framework "Pods-Teknobyen/PIDatePicker.framework"
 fi

@@ -5,6 +5,8 @@ use_frameworks!
 
 target 'Teknobyen' do
 pod 'Firebase', '>= 2.5.1'
+pod 'PIDatePicker', '~> 0.1.0'
+
 
 end
 
