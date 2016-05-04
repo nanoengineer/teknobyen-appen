@@ -219,7 +219,7 @@ public class ProjectorBookForm extends AppCompatActivity {
     private void alertMsg(char c){
         String msg = "";
         if(c == 's'){
-            msg = "Verdien for starttid må være mindre enn slutttid";
+            msg = "Verdien for starttid må være mindre enn slutttid og starttid må være større enn tidspunktet som er nå";
         }else if(c == 'e'){
             msg = "Verdien for slutttid må være større enn starttid";
         }else if(c == 'w'){
