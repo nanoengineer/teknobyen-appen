@@ -15,9 +15,8 @@
     <Page.DataContext>
         <vm:LaundryViewModel x:Name="ViewModel" />
     </Page.DataContext>
-    
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="CommonStates">
                 <VisualState x:Name="NormalState">

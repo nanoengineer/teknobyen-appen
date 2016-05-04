@@ -23,6 +23,11 @@ namespace Teknobyen.ViewModels
             _credentialsService = new CredentialsService();
         }
 
+        public void GotoProjectorReservation()
+        {
+            this.NavigationService.Navigate(typeof(ProjectorReservationPage));
+        }
+
         public void GotoLaundryMenu()
         {
             this.NavigationService.Navigate(typeof(LaundryView));

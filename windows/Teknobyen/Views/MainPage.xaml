@@ -4,6 +4,7 @@
       xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
       xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
       xmlns:controls="using:Template10.Controls"
+      xmlns:control="using:Teknobyen.Controls"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="using:Teknobyen.Views"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -30,20 +31,21 @@
 
         <StackPanel x:Name="ButtonsPanel" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical">
 
-            <Button x:Name="ProjectorButton" 
-                    Style="{StaticResource MainButtonStyle}" >
+            <control:LargeImageButton x:Name="ProjectorButton" 
+                                      Style="{StaticResource MainButtonStyle}" 
+                                      Click="{x:Bind ViewModel.GotoProjectorReservation}">
                 <Image Source="ms-appx:///Assets/Video Projector-96.png" />
-            </Button>
-            <Button x:Name="ClothesWashButton" 
+            </control:LargeImageButton>
+            <control:LargeImageButton x:Name="ClothesWashButton" 
                     Style="{StaticResource MainButtonStyle}"
                     Click="{x:Bind ViewModel.GotoLaundryMenu}">
                 <Image Source="ms-appx:///Assets/Washing Machine-96.png" />
-            </Button>
-            <Button x:Name="WashListButton" 
+            </control:LargeImageButton>
+            <control:LargeImageButton x:Name="WashListButton" 
                     Style="{StaticResource MainButtonStyle}"
                     Click="{x:Bind ViewModel.GotoWashlistPage}">
                 <Image Source="ms-appx:///Assets/Washing_list.png" />
-            </Button>
+            </control:LargeImageButton>
 
         </StackPanel>
     </Grid>

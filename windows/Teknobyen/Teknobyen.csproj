@@ -98,6 +98,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\LargeImageButton.cs" />
     <Compile Include="Controls\WashingMachineControl.xaml.cs">
       <DependentUpon>WashingMachineControl.xaml</DependentUpon>
     </Compile>
@@ -110,6 +111,7 @@
     <Compile Include="ViewModels\LaundryViewModel.cs" />
     <Compile Include="ViewModels\LaundryMenuViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
+    <Compile Include="ViewModels\ProjectorReservationViewModel.cs" />
     <Compile Include="Views\LaundryView.xaml.cs">
       <DependentUpon>LaundryView.xaml</DependentUpon>
     </Compile>
@@ -118,6 +120,9 @@
     </Compile>
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProjectorReservationPage.xaml.cs">
+      <DependentUpon>ProjectorReservationPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -174,6 +179,10 @@
     <Page Include="Views\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ProjectorReservationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup />
