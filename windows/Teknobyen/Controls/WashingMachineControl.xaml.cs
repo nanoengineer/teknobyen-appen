@@ -7,6 +7,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Teknobyen.Models;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -52,6 +53,7 @@ namespace Teknobyen.Controls
                 else
                 {
                     TimeLeftText.Text = $"{value} min igjen";
+                    RootGrid.Background = new SolidColorBrush(Color.FromArgb(0, 255, 0, 0));
                 }
             }
         }
