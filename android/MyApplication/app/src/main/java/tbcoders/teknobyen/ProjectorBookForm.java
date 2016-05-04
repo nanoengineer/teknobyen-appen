@@ -47,7 +47,8 @@ public class ProjectorBookForm extends AppCompatActivity {
         //frå lista over dagar
         int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK) - 1;
         dateValues = new String[6];
-        for(int i = 0; i < 6; i++){
+        dateValues[0] = "I dag";
+        for(int i = 1; i < 6; i++){
             if(dayOfWeek + i > 6){
                 dateValues[i] = weekDays[dayOfWeek + i - 7];
             }else{
@@ -62,6 +63,7 @@ public class ProjectorBookForm extends AppCompatActivity {
 
         pickHour = (NumberPicker)findViewById(R.id.startHourPicker);
         pickHour.setDisplayedValues(hourValues);
+
         pickHour.setMaxValue(23);
         pickHour.setMinValue(0);
         pickHour.setWrapSelectorWheel(false);
@@ -81,15 +83,46 @@ public class ProjectorBookForm extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
                 int sdValue = pickDate.getValue();
                 int shValue = pickHour.getValue();
                 int smValue = pickMin.getValue();
+                Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Europe/Oslo"));
+                int currentHour = cal.get(Calendar.HOUR_OF_DAY);
+                int currentMin = cal.get(Calendar.MINUTE);
+                int trueMinValue = Integer.parseInt(minValues[smValue]);
+                //Kontrollering av om tida som skal bookast er mindre enn sluttverdi før den skrivast til tekstfelt.
                 if(sdValue<=endDayValue){
-                    if(sdValue<endDayValue){
+                    if(sdValue != 0 && sdValue < endDayValue){
                         writeStartTimeMessage();
-                    }else{
+                    }else if(sdValue == 0 && shValue >= currentHour && sdValue < endDayValue){
+                        if(shValue>currentHour){
+                            writeStartTimeMessage();
+                        }else{
+                            if(trueMinValue>currentMin){
+                                writeStartTimeMessage();
+                            }else{
+                                alertMsg('s');
+                            }
+                        }
+                    }else if(sdValue == 0 && shValue >= currentHour && endDayValue == 0){
+                        if(shValue>currentHour && shValue < endHourValue){
+                            writeStartTimeMessage();
+                        }else{
+                            if(shValue>currentHour && shValue == endHourValue){
+                                if(smValue<endMinValue){
+                                    writeStartTimeMessage();
+                                }else{
+                                    alertMsg('s');
+                                }
+                            }
+                            else if(trueMinValue>currentMin && shValue == currentHour){
+                                writeStartTimeMessage();
+                            }
+                            else{
+                                alertMsg('s');
+                            }
+                        }
+                    }else if(sdValue == endDayValue){
                         if(shValue<=endHourValue){
                             if(shValue<endHourValue){
                                 writeStartTimeMessage();
@@ -104,6 +137,9 @@ public class ProjectorBookForm extends AppCompatActivity {
                             alertMsg('s');
                         }
                     }
+                    else {
+                        alertMsg('s');
+                    }
                 }else{
                     alertMsg('s');
                 }
@@ -115,34 +151,40 @@ public class ProjectorBookForm extends AppCompatActivity {
         pickHour = (NumberPicker)findViewById(R.id.startHourPicker);
         pickMin = (NumberPicker)findViewById(R.id.startMinutePicker);
         final TextView endText = (TextView)findViewById(R.id.endtimeString);
+
         Button btn = (Button)findViewById(R.id.setBookEnd);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int sdValue = pickDate.getValue();
-                int shValue = pickHour.getValue();
-                int smValue = pickMin.getValue();
-                if(sdValue>=startDayValue) {
-                    if(sdValue>startDayValue){
-                        writeEndTimeMessage();
-                    }else{
-                        if(shValue>=startHourValue){
-                            if(shValue>startHourValue){
-                                writeEndTimeMessage();
-                            }
-                            else{
-                                if(smValue>startMinValue){
-                                    writeEndTimeMessage();
-                                }else{
-                                    alertMsg('e');
-                                }
-                            }
+                TextView startText = (TextView)findViewById(R.id.starttimeString);
+                if(startText.getText().toString().length()>0){
+                    int sdValue = pickDate.getValue();
+                    int shValue = pickHour.getValue();
+                    int smValue = pickMin.getValue();
+                    if(sdValue>=startDayValue) {
+                        if(sdValue>startDayValue){
+                            writeEndTimeMessage();
                         }else{
-                            alertMsg('e');
+                            if(shValue>=startHourValue){
+                                if(shValue>startHourValue){
+                                    writeEndTimeMessage();
+                                }
+                                else{
+                                    if(smValue>startMinValue){
+                                        writeEndTimeMessage();
+                                    }else{
+                                        alertMsg('e');
+                                    }
+                                }
+                            }else{
+                                alertMsg('e');
+                            }
                         }
+                    }else{
+                        alertMsg('e');
                     }
                 }else{
-                    alertMsg('e');
+                    Toast.makeText(ProjectorBookForm.this, "Vennligst velg starttid først", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -178,8 +220,10 @@ public class ProjectorBookForm extends AppCompatActivity {
         String msg = "";
         if(c == 's'){
             msg = "Verdien for starttid må være mindre enn slutttid";
-        }else{
+        }else if(c == 'e'){
             msg = "Verdien for slutttid må være større enn starttid";
+        }else if(c == 'w'){
+            msg = "";
         }
         Toast.makeText(ProjectorBookForm.this, msg, Toast.LENGTH_SHORT).show();
     }
