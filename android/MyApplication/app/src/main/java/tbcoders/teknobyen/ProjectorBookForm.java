@@ -4,29 +4,32 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
 public class ProjectorBookForm extends AppCompatActivity {
-    NumberPicker pickStartHour = null;
-    NumberPicker pickstartMin = null;
+    NumberPicker pickHour = null;
+    NumberPicker pickMin = null;
     NumberPicker pickDate = null;
     String[] dateValues;
-    String[] minValues = {"00", "15", "30", "45", "60"};
+    String[] minValues = {"00", "15", "30", "45"};
+    String[] hourValues = {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"};
 
     int startDayValue = 0;
     int startHourValue = 0;
     int startMinValue = 0;
 
-    int endDayValue = 0;
-    int endHourValue = 0;
-    int endMinValue = 0;
+    int endDayValue = 5;
+    int endHourValue = 23;
+    int endMinValue = 45;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,7 @@ public class ProjectorBookForm extends AppCompatActivity {
 
         OnClickStartListener();
         OnClickEndListener();
+        OnClickReserveListener();
 
         String[] weekDays = {"Søndag", "Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag", "Lørdag"};
         pickDate = (NumberPicker)findViewById(R.id.datePicker);
@@ -44,10 +48,10 @@ public class ProjectorBookForm extends AppCompatActivity {
         int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK) - 1;
         dateValues = new String[6];
         for(int i = 0; i < 6; i++){
-            if(dayOfWeek - 1 + i > 6){
+            if(dayOfWeek + i > 6){
                 dateValues[i] = weekDays[dayOfWeek + i - 7];
             }else{
-                dateValues[i] = weekDays[dayOfWeek - 1 + i];
+                dateValues[i] = weekDays[dayOfWeek + i];
             }
         }
         this.dateValues = dateValues;
@@ -56,89 +60,159 @@ public class ProjectorBookForm extends AppCompatActivity {
         pickDate.setMinValue(0);
         pickDate.setWrapSelectorWheel(false);
 
-        pickStartHour = (NumberPicker)findViewById(R.id.startHourPicker);
-        pickStartHour.setMaxValue(24);
-        pickStartHour.setMinValue(0);
-        pickStartHour.setWrapSelectorWheel(false);
+        pickHour = (NumberPicker)findViewById(R.id.startHourPicker);
+        pickHour.setDisplayedValues(hourValues);
+        pickHour.setMaxValue(23);
+        pickHour.setMinValue(0);
+        pickHour.setWrapSelectorWheel(false);
 
-        pickstartMin = (NumberPicker)findViewById(R.id.startMinutePicker);
-
-        pickstartMin.setMinValue(0);
-        pickstartMin.setMaxValue(4);
-        pickstartMin.setDisplayedValues(minValues);
-        pickstartMin.setWrapSelectorWheel(false);
+        pickMin = (NumberPicker)findViewById(R.id.startMinutePicker);
+        pickMin.setMinValue(0);
+        pickMin.setMaxValue(3);
+        pickMin.setDisplayedValues(minValues);
+        pickMin.setWrapSelectorWheel(false);
     }
 
     public void OnClickStartListener() {
+        pickDate = (NumberPicker)findViewById(R.id.datePicker);
+        pickHour = (NumberPicker)findViewById(R.id.startHourPicker);
+        pickMin = (NumberPicker)findViewById(R.id.startMinutePicker);
         Button btn = (Button)findViewById(R.id.setBookStart);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                pickDate = (NumberPicker)findViewById(R.id.datePicker);
-                pickStartHour = (NumberPicker)findViewById(R.id.startHourPicker);
-                pickstartMin = (NumberPicker)findViewById(R.id.startMinutePicker);
-                TextView startText = (TextView)findViewById(R.id.starttimeString);
-
-                int dayValue = pickDate.getValue();
-                startDayValue = dayValue;
-
-                String day = dateValues[dayValue];
-                int hourValue = pickStartHour.getValue();
-                startHourValue = hourValue;
-
-                int minValue = pickstartMin.getValue();
-                startMinValue = minValue;
-                String trueMinValue = minValues[minValue];
-                startText.setText(day + " " + hourValue + ":" + trueMinValue);
 
 
+                int sdValue = pickDate.getValue();
+                int shValue = pickHour.getValue();
+                int smValue = pickMin.getValue();
+                if(sdValue<=endDayValue){
+                    if(sdValue<endDayValue){
+                        writeStartTimeMessage();
+                    }else{
+                        if(shValue<=endHourValue){
+                            if(shValue<endHourValue){
+                                writeStartTimeMessage();
+                            }else{
+                                if(smValue<endMinValue){
+                                    writeStartTimeMessage();
+                                }else{
+                                    alertMsg('s');
+                                }
+                            }
+                        }else{
+                            alertMsg('s');
+                        }
+                    }
+                }else{
+                    alertMsg('s');
+                }
             }
         });
     }
     public void OnClickEndListener(){
         pickDate = (NumberPicker)findViewById(R.id.datePicker);
-        pickStartHour = (NumberPicker)findViewById(R.id.startHourPicker);
-        pickstartMin = (NumberPicker)findViewById(R.id.startMinutePicker);
+        pickHour = (NumberPicker)findViewById(R.id.startHourPicker);
+        pickMin = (NumberPicker)findViewById(R.id.startMinutePicker);
         final TextView endText = (TextView)findViewById(R.id.endtimeString);
         Button btn = (Button)findViewById(R.id.setBookEnd);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(pickDate.getValue()>=startDayValue) {
-                    if(pickDate.getValue()>startDayValue){
+                int sdValue = pickDate.getValue();
+                int shValue = pickHour.getValue();
+                int smValue = pickMin.getValue();
+                if(sdValue>=startDayValue) {
+                    if(sdValue>startDayValue){
                         writeEndTimeMessage();
                     }else{
-                        if(pickStartHour.getValue()>=startHourValue){
-                            if(pickStartHour.getValue()>startHourValue){
+                        if(shValue>=startHourValue){
+                            if(shValue>startHourValue){
                                 writeEndTimeMessage();
                             }
                             else{
-                                if(pickstartMin.getValue()>startMinValue){
+                                if(smValue>startMinValue){
                                     writeEndTimeMessage();
                                 }else{
-                                    Toast.makeText(ProjectorBookForm.this, "Verdien for slutttid må være større enn starttid", Toast.LENGTH_SHORT).show();
+                                    alertMsg('e');
                                 }
                             }
                         }else{
-                            Toast.makeText(ProjectorBookForm.this, "Verdien for slutttid må være større enn starttid", Toast.LENGTH_SHORT).show();
+                            alertMsg('e');
                         }
                     }
                 }else{
-                    Toast.makeText(ProjectorBookForm.this, "Verdien for slutttid må være større enn starttid", Toast.LENGTH_SHORT).show();
+                    alertMsg('e');
                 }
             }
         });
+    }
+
+    public void writeStartTimeMessage(){
+        final TextView startText = (TextView)findViewById(R.id.starttimeString);
+        int dayValue = pickDate.getValue();
+        startDayValue = dayValue;
+        String day = dateValues[dayValue];
+        int hourValue = pickHour.getValue();
+        String trueHourValue = hourValues[hourValue];
+        startHourValue = hourValue;
+        int minValue = pickMin.getValue();
+        startMinValue = minValue;
+        String trueMinValue = minValues[minValue];
+        startText.setText(day + " " + trueHourValue + ":" + trueMinValue);
     }
     public void writeEndTimeMessage(){
         final TextView endText = (TextView)findViewById(R.id.endtimeString);
         int dayValue = pickDate.getValue();
         endDayValue = dayValue;
         String day = dateValues[dayValue];
-        int hourValue = pickStartHour.getValue();
+        int hourValue = pickHour.getValue();
+        String trueHourValue = hourValues[hourValue];
         endHourValue = hourValue;
-        int minValue = pickstartMin.getValue();
+        int minValue = pickMin.getValue();
         endMinValue = minValue;
         String trueMinValue = minValues[minValue];
-        endText.setText(day + " " + hourValue + ":" + trueMinValue);
+        endText.setText(day + " " + trueHourValue + ":" + trueMinValue);
+    }
+    private void alertMsg(char c){
+        String msg = "";
+        if(c == 's'){
+            msg = "Verdien for starttid må være mindre enn slutttid";
+        }else{
+            msg = "Verdien for slutttid må være større enn starttid";
+        }
+        Toast.makeText(ProjectorBookForm.this, msg, Toast.LENGTH_SHORT).show();
+    }
+    public void OnClickReserveListener(){
+        Button btn = (Button)findViewById(R.id.bookreserveBTN);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TextView startText = (TextView)findViewById(R.id.starttimeString);
+                TextView endText = (TextView)findViewById(R.id.endtimeString);
+                EditText bookDesEdit = (EditText)findViewById(R.id.bookDescriptionEdit);
+                int startTextLength = startText.getText().length();
+                int endTextLength = endText.getText().length();
+                if(startTextLength > 0 && endTextLength > 0 && bookDesEdit.getText().toString().length() > 0){
+                    SimpleDateFormat bookDateFormat = new SimpleDateFormat("dd.MM.yyyy");
+                    Calendar calStart = Calendar.getInstance(TimeZone.getTimeZone("Europe/Oslo"));
+                    calStart.add(Calendar.DATE, startDayValue);
+                    String bookStartDate = bookDateFormat.format(calStart.getTime());
+                    String bookStartTime = "" + hourValues[startHourValue] + ":" + minValues[startMinValue];
+
+                    Calendar calEnd = Calendar.getInstance(TimeZone.getTimeZone("Europe/Oslo"));
+                    calEnd.add(Calendar.DATE, endDayValue);
+                    String bookEndDate = bookDateFormat.format(calEnd.getTime());
+                    String bookEndTime = "" + hourValues[endHourValue] + ":" + minValues[endMinValue];
+
+
+                    String bookText = bookDesEdit.getText().toString();
+
+                    Toast.makeText(ProjectorBookForm.this, bookStartDate + " " + bookStartTime + " - " + bookEndDate + " " + bookEndTime + " " + bookText, Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(ProjectorBookForm.this, "Vennligst velg starttid og slutttid og fyll inn beskrivelse", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 }
