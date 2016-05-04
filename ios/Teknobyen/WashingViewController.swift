@@ -8,14 +8,17 @@
 
 import UIKit
 import SafariServices
+import Fuzi
 
 class WashingViewController: UIViewController, NSURLConnectionDelegate {
 
    
+    @IBOutlet weak var washWebView: UIWebView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Vaskemaskiner"
+        washWebView.hidden = true
 
         // Do any additional setup after loading the view.
     }
@@ -27,10 +30,43 @@ class WashingViewController: UIViewController, NSURLConnectionDelegate {
     
     @IBAction func checkMachineStatusPressed(sender: UIButton) {
         
-        let machineStatusUrl = NSURL(string: "http://129.241.152.11/LaundryState?lg=2&ly=9131")
-        openWithSafariVC(machineStatusUrl!)
+        var htmlString: NSString?
         
+        let username = "pkminne"
+        let pwd = "b5e277"
+        
+        let config = NSURLSessionConfiguration.defaultSessionConfiguration()
+        let userPasswordString = "\(username):\(pwd)"
+        let userPasswordData = userPasswordString.dataUsingEncoding(NSUTF8StringEncoding)
+        let base64EncodedCredential = userPasswordData!.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding64CharacterLineLength)
+        let authString = "Basic \(base64EncodedCredential)"
+        config.HTTPAdditionalHeaders = ["Authorization" : authString]
+        let session = NSURLSession(configuration: config)
+        
+        let url = NSURL(string: "http://129.241.152.11/LaundryState?lg=2&ly=9131")
+        let task = session.dataTaskWithURL(url!) {
+            (let data, let response, let error) in
+            if let httpResponse = response as? NSHTTPURLResponse {
+                htmlString = NSString(data: data!, encoding: NSUTF8StringEncoding)!
+                
+                do {
+                    // if encoding is omitted, it defaults to NSUTF8StringEncoding
+                    let doc = try HTMLDocument(string: String(htmlString), encoding: NSUTF8StringEncoding)
+                    
+                    for element in doc.xpath("//div[contains(@class, 'reservation')]/table//td[contains(@class, 'p')]/text()") {
+                        print(element)
+                    }
+                    
+                } catch let error {
+                    print(error)
+                }
+                
+            }
+            
+        }
+        task.resume()
     }
+    
     
     @IBAction func refillPressed(sender: UIButton) {
         
