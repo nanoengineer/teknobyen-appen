@@ -35,7 +35,6 @@ namespace Teknobyen.Controls
                 IdText.Text = value.ToString();
             }
         }
-
         // Using a DependencyProperty as the backing store for Mid.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MidProperty =
             DependencyProperty.Register("Mid", typeof(int), typeof(WashingMachineControl), new PropertyMetadata(0));
@@ -53,11 +52,10 @@ namespace Teknobyen.Controls
                 else
                 {
                     TimeLeftText.Text = $"{value} min igjen";
-                    RootGrid.Background = new SolidColorBrush(Color.FromArgb(0, 255, 0, 0));
+                    RootGrid.Background = new SolidColorBrush(Color.FromArgb(255, 255, 0, 0));
                 }
             }
         }
-
         // Using a DependencyProperty as the backing store for MMleft.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MMleftProperty =
             DependencyProperty.Register("MMleft", typeof(int), typeof(WashingMachineControl), new PropertyMetadata(0));
