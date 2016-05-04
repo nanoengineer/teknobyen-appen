@@ -17,12 +17,12 @@ class MenuViewController: UIViewController {
     }
     
     private func initNavigationBar() {
-        self.navigationItem.title = "Teknobyen"
-        self.navigationItem
+        self.navigationItem.title = "TEKNOBYEN"
+        self.navigationController?.navigationBar.barTintColor = UIColor.orangeColor()
     }
     
     override func viewWillAppear(animated: Bool) {
-        self.navigationItem.title = "Teknobyen"
+        self.navigationItem.title = "TEKNOBYEN"
     }
     
     override func viewWillDisappear(animated: Bool) {
