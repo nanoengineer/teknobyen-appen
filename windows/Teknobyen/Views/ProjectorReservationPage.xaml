@@ -5,12 +5,14 @@
     xmlns:local="using:Teknobyen.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Template10.Controls"
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
         <Grid.RowDefinitions>
-            <RowDefinition />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*" />
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -24,6 +26,11 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition />
         </Grid.RowDefinitions>
+
+        <controls:PageHeader Text="Prosjektor reservasjon">
+            <controls:PageHeader.SecondaryCommands>
+            </controls:PageHeader.SecondaryCommands>
+        </controls:PageHeader>
 
         <TextBlock Grid.Row="1" Text="Romnummer:" HorizontalAlignment="Center"/>
         <TextBox Grid.Row="2" HorizontalAlignment="Center"/>

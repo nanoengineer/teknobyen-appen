@@ -29,8 +29,17 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
-        <StackPanel x:Name="ButtonsPanel" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
+        <controls:PageHeader Text="Teknobyen">
+            <controls:PageHeader.SecondaryCommands>
+            </controls:PageHeader.SecondaryCommands>
+        </controls:PageHeader>
+
+        <StackPanel x:Name="ButtonsPanel" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical">
             <control:LargeImageButton x:Name="ProjectorButton" 
                                       Style="{StaticResource MainButtonStyle}" 
                                       Click="{x:Bind ViewModel.GotoProjectorReservation}">

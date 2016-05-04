@@ -8,6 +8,7 @@
     xmlns:vm="using:Teknobyen.ViewModels"
     xmlns:models="using:Teknobyen.Models"
     xmlns:controls="using:Teknobyen.Controls"
+    xmlns:t10controls="using:Template10.Controls"
     xmlns:t10Converters="using:Template10.Converters"
     x:Name="pageRoot"
     mc:Ignorable="d">
@@ -38,8 +39,18 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <t10controls:PageHeader Text="Vaskeri status">
+            <t10controls:PageHeader.SecondaryCommands>
+            </t10controls:PageHeader.SecondaryCommands>
+        </t10controls:PageHeader>
+
         <!-- Gridview containing machine status -->
-        <GridView ItemsSource="{x:Bind ViewModel.StatusCollection, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" SelectionMode="None">
+        <GridView ItemsSource="{x:Bind ViewModel.StatusCollection, Mode=OneWay}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" SelectionMode="None">
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="models:LaundryMachineStatusModel">
                     <controls:WashingMachineControl Height="150" Width="150" Mid="{x:Bind MachineId}" MMleft="{x:Bind MinutesLeft}" />
@@ -51,9 +62,6 @@
                 </ItemsPanelTemplate>
             </GridView.ItemsPanel>
         </GridView>
-
-
-
 
         <!--Set vivibility to false for designtime-->
         <ContentDialog x:Name="MyContentDialog"
