@@ -1,5 +1,6 @@
 package tbcoders.teknobyen;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,10 +10,13 @@ import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.client.Firebase;
+
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Random;
 import java.util.TimeZone;
 
 public class ProjectorBookForm extends AppCompatActivity {
@@ -253,10 +257,27 @@ public class ProjectorBookForm extends AppCompatActivity {
                     String bookText = bookDesEdit.getText().toString();
 
                     Toast.makeText(ProjectorBookForm.this, bookStartDate + " " + bookStartTime + " - " + bookEndDate + " " + bookEndTime + " " + bookText, Toast.LENGTH_SHORT).show();
+                    writeToFireBase(bookStartDate, bookStartTime, bookEndDate, bookEndTime, "606", "4", bookText);
+                    Intent intent = new Intent(ProjectorBookForm.this, ProjectorBookings.class);
+                    startActivity(intent);
                 }else{
                     Toast.makeText(ProjectorBookForm.this, "Vennligst velg starttid og slutttid og fyll inn beskrivelse", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+    }
+    public void writeToFireBase(String bookStartDate, String bookStartTime, String bookEndDate, String bookEndTime, String roomNr, String id, String comment){
+        Firebase ref = new Firebase("https://teknobyen.firebaseio.com");
+
+        Random rand = new Random();
+        int n = rand.nextInt(50) + 1;
+
+        Firebase newBooking = ref.child("reservations").child("" + n);
+        newBooking.child("startHour").setValue(bookStartTime);
+        newBooking.child("date").setValue(bookStartDate);
+        newBooking.child("comment").setValue(comment);
+        newBooking.child("roomNumber").setValue(roomNr);
+        newBooking.child("id").setValue(id);
+        newBooking.child("stopHour").setValue(bookEndTime);
     }
 }
