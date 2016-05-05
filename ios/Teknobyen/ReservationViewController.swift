@@ -61,13 +61,12 @@ class ReservationViewController: UITableViewController, ReservationDelegate {
         ref.observeSingleEventOfType(.Value, withBlock: { snapshot in
             for stuff in snapshot.children {
                 let comment = stuff.value["comment"] as! String
-                let id = stuff.value["id"] as! String
                 let date = stuff.value["date"] as! String
                 let roomNumber = stuff.value["roomNumber"] as! String
                 let startHour = stuff.value["startHour"] as! String
                 let stopHour = stuff.value["stopHour"] as! String
                 
-                let reservation = Reservation(id: Int(id)!, date: date, startHour: startHour, stopHour: stopHour, roomNumber: Int(roomNumber)!, comment: comment)
+                let reservation = Reservation(date: date, startHour: startHour, stopHour: stopHour, roomNumber: Int(roomNumber)!, comment: comment)
                 
                 self.reservations.append(reservation)
             }
@@ -119,7 +118,6 @@ protocol ReservationDelegate {
 
 
 struct Reservation {
-    let id: Int
     let date: String
     let startHour: String
     let stopHour: String
@@ -127,7 +125,7 @@ struct Reservation {
     let comment: String
     
     func format() -> [String: String] {
-        return ["id": "\(id)","date": date, "startHour": startHour, "stopHour": stopHour, "roomNumber": "\(roomNumber)", "comment": comment]
+        return ["date": date, "startHour": startHour, "stopHour": stopHour, "roomNumber": "\(roomNumber)", "comment": comment]
     }
     
 }

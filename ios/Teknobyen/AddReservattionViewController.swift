@@ -25,7 +25,6 @@ class AddReservattionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchIdFromFireBase()
         
         datePicker.datePickerMode = .DateAndTime
         datePicker.minimumDate = NSDate() // NSDate() automatically gives today's date
@@ -93,7 +92,7 @@ class AddReservattionViewController: UIViewController {
         let stopHour = dateFormatter.stringFromDate(dateTo)
         let roomNumber = 418
         
-        let reservation = Reservation(id: self.idNumber, date: day, startHour: startHour, stopHour: stopHour, roomNumber: roomNumber, comment: comment)
+        let reservation = Reservation(date: day, startHour: startHour, stopHour: stopHour, roomNumber: roomNumber, comment: comment)
         saveReservationToServer(reservation)
         self.delegate.reservationReceived(reservation)
         self.navigationController?.popViewControllerAnimated(true)
@@ -105,7 +104,7 @@ class AddReservattionViewController: UIViewController {
         // Create a reference to a Firebase location
         let ref = Constants.RootReference.childByAppendingPath("reservations")
         // Write data to Firebase
-        let idRef = ref.childByAppendingPath("\(reservation.id)")
+        let idRef = ref.childByAutoId()
         idRef.setValue(reservation.format())
     }
     
