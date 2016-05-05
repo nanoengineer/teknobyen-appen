@@ -15,6 +15,31 @@ namespace Teknobyen.Services.LaundryService
 {
     public class LaundryService : ILaundryService
     {
+        public async Task<double> GetAccountBalance(string username, string password)
+        {
+            Double _accountBalance = Double.NaN;
+
+            using (var client = GetClient(new Uri("http://129.241.152.11"), username, password))
+            {
+                var response = await client.GetAsync(new Uri("http://129.241.152.11/SaldoForm?lg=2&ly=9131"));
+                string htmlContent = await response.Content.ReadAsStringAsync();
+
+                var doc = new HtmlDocument();
+                doc.LoadHtml(htmlContent);
+
+                var s = doc.DocumentNode.Descendants("tr").Where(x => x.InnerText.Contains("BALANSE"));
+
+                var sList = new List<string>();
+                foreach (var item in s)
+                {
+                    
+                }
+
+            }
+
+            return _accountBalance;
+        }
+
         public async Task<ObservableCollection<LaundryMachineStatusModel>> GetMachineStatusList(string username, string password)
         {
             

@@ -20,6 +20,14 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="NarrowState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource NarrowMinWidth}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="MyWrapGrid.MaximumRowsOrColumns" Value="2" />
+                    </VisualState.Setters>
+                </VisualState>
                 <VisualState x:Name="NormalState">
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="{StaticResource NormalMinWidth}" />
@@ -53,12 +61,18 @@
         <GridView ItemsSource="{x:Bind ViewModel.StatusCollection, Mode=OneWay}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" SelectionMode="None">
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="models:LaundryMachineStatusModel">
-                    <controls:WashingMachineControl Height="150" Width="150" Mid="{x:Bind MachineId}" MMleft="{x:Bind MinutesLeft}" />
+                    <controls:WashingMachineControl Height="150" Width="150" Mid="{x:Bind MachineId}" MMleft="{x:Bind MinutesLeft}" >
+                        <FlyoutBase.AttachedFlyout>
+                            <Flyout>
+                                <Button>Hei</Button>
+                            </Flyout>
+                        </FlyoutBase.AttachedFlyout>
+                    </controls:WashingMachineControl>
                 </DataTemplate>
             </GridView.ItemTemplate>
             <GridView.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapGrid Name="MyWrapGrid" Orientation="Horizontal" MaximumRowsOrColumns="2" />
+                    <WrapGrid Name="MyWrapGrid" Orientation="Horizontal" MaximumRowsOrColumns="3" />
                 </ItemsPanelTemplate>
             </GridView.ItemsPanel>
         </GridView>

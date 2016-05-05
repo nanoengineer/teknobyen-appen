@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    RightTapped="UserControl_RightTapped"
     d:DesignHeight="150"
     d:DesignWidth="150">
 
@@ -14,7 +15,5 @@
         <Image Source="ms-appx:///Assets/LaundrySymbol.png" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Uniform" />
         <TextBlock x:Name="IdText" Text="" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
         <TextBlock x:Name="TimeLeftText"  Text="" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="20" Margin="10" />
-
-
     </Grid>
 </UserControl>

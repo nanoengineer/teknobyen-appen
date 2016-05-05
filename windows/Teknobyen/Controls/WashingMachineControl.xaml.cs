@@ -60,8 +60,9 @@ namespace Teknobyen.Controls
         public static readonly DependencyProperty MMleftProperty =
             DependencyProperty.Register("MMleft", typeof(int), typeof(WashingMachineControl), new PropertyMetadata(0));
 
-
-
-
+        private void UserControl_RightTapped(object sender, RightTappedRoutedEventArgs e)
+        {
+            
+        }
     }
 }

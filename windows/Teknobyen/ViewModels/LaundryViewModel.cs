@@ -45,6 +45,7 @@ namespace Teknobyen.ViewModels
             _laundryService = new LaundryService();
             _credentialsService = new CredentialsService();
             GetLaundryMachineStatusList();
+            //GetLaundryAccountBalance(); FIkk nettvekrsfeil i svaret...
             return base.OnNavigatedToAsync(parameter, mode, state);
         }
 
@@ -63,6 +64,22 @@ namespace Teknobyen.ViewModels
 
             var mList = await _laundryService.GetMachineStatusList(loginCredentials.UserName, loginCredentials.Password);
             StatusCollection = mList;
+        }
+
+        public async void GetLaundryAccountBalance()
+        {
+            var loginCredentials = _credentialsService.GetUser();
+            if (loginCredentials == null)
+            {
+                Credentials = null;
+                return;
+            }
+            else
+            {
+                Credentials = loginCredentials;
+            }
+
+            var b = await _laundryService.GetAccountBalance(loginCredentials.UserName, loginCredentials.Password);
         }
 
         

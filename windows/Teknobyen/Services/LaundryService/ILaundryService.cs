@@ -11,5 +11,6 @@ namespace Teknobyen.Services.LaundryService
     public interface ILaundryService
     {
         Task<ObservableCollection<LaundryMachineStatusModel>> GetMachineStatusList(string username, string password);
+        Task<Double> GetAccountBalance(string username, string password);
     }
 }
