@@ -11,6 +11,7 @@ using Windows.Security.Credentials;
 using Windows.Web.Http;
 using Windows.Web.Http.Headers;
 using Windows.Web.Http.Filters;
+using Teknobyen.Services.FirebaseService;
 
 namespace Teknobyen.ViewModels
 {
@@ -33,9 +34,10 @@ namespace Teknobyen.ViewModels
             this.NavigationService.Navigate(typeof(LaundryView));
         }
 
-        public void GotoWashlistPage()
+        public async void GotoWashlistPage()
         {
-            
+            var s = new FirebaseService();
+            var t = await s.GetReservations();
         }
     }
 }
