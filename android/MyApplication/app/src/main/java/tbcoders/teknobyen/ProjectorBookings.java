@@ -1,6 +1,7 @@
 package tbcoders.teknobyen;
 
 import android.content.Intent;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,12 +16,14 @@ import com.firebase.client.Query;
 import com.firebase.client.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
 public class ProjectorBookings extends AppCompatActivity {
 
-    List<String> bookingsArrayList;
+    ArrayList<Reservations> reservationList;
 
 
     @Override
@@ -46,18 +49,21 @@ public class ProjectorBookings extends AppCompatActivity {
 
     private void fillBookings(){
         final Firebase rootRef = new Firebase("https://teknobyen.firebaseio.com");
-        final Query reservationRef = rootRef.child("reservations");
+        final Firebase reservationRef = rootRef.child("reservations");
 
         reservationRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                bookingsArrayList = new ArrayList<String>();
+                reservationList = new ArrayList<Reservations>();
+
+                reservationRef.child("reservations").child("3").setValue(null);
+
 
                 for (DataSnapshot postSnapshot: snapshot.getChildren()) {
-                    System.out.println(postSnapshot);
-                    bookingsArrayList.add(postSnapshot.toString());
+                    Reservations post = postSnapshot.getValue(Reservations.class);
+                    reservationList.add(post);
+                    fillListView();
                 }
-                fillListView();
             }
             @Override
             public void onCancelled(FirebaseError firebaseError) {
@@ -66,10 +72,10 @@ public class ProjectorBookings extends AppCompatActivity {
         });
 
     }
-
-
     private void fillListView(){
-        ArrayAdapter adapter = new ArrayAdapter(ProjectorBookings.this, R.layout.activity_bookingview, bookingsArrayList);
+        Collections.sort(reservationList);
+        Collections.reverse(reservationList);
+        ArrayAdapter adapter = new ArrayAdapter(ProjectorBookings.this, android.R.layout.simple_list_item_1, reservationList);
         ListView bookingView = (ListView) findViewById(R.id.bookingView);
         bookingView.setAdapter(adapter);
     }
