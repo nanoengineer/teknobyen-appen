@@ -1,6 +1,7 @@
 package tbcoders.teknobyen;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -254,9 +255,13 @@ public class ProjectorBookForm extends AppCompatActivity {
 
 
                     String bookText = bookDesEdit.getText().toString();
+                    SharedPreferences prefs = getSharedPreferences("mypref", 0);
+                    String roomNr = prefs.getString("roomnumber", "");
 
-                    Toast.makeText(ProjectorBookForm.this, bookStartDate + " " + bookStartTime + " - " + bookEndDate + " " + bookEndTime + " " + bookText, Toast.LENGTH_SHORT).show();
-                    writeToFireBase(bookStartDate, bookStartTime, bookEndDate, bookEndTime, "606", "4", bookText);
+                    //Toast.makeText(ProjectorBookForm.this, bookStartDate + " " + bookStartTime + " - " + bookEndDate + " " + bookEndTime + " " + bookText, Toast.LENGTH_SHORT).show();
+
+
+                    writeToFireBase(bookStartDate, bookStartTime, bookEndDate, bookEndTime, roomNr, "4", bookText);
                     Intent intent = new Intent(ProjectorBookForm.this, ProjectorBookings.class);
                     startActivity(intent);
                 }else{

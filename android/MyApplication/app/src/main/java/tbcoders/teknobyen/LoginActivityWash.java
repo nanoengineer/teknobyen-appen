@@ -12,19 +12,22 @@ import android.widget.Toast;
 public class LoginActivityWash extends AppCompatActivity {
     private static EditText username;
     private static EditText password;
+    private static EditText roomNrField;
     String userS = "";
     String userP = "";
     private static Button login_btn;
     private static Button cancel_btn;
+    private static Button roomBTN;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_activity_wash);
-        LoginButton();
+        loginButton();
+        roomButton();
 
     }
-    public void LoginButton(){
+    public void loginButton(){
         username = (EditText)findViewById(R.id.username);
         password = (EditText)findViewById(R.id.password);
         login_btn = (Button)findViewById(R.id.acceptBTN);
@@ -55,6 +58,23 @@ public class LoginActivityWash extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LoginActivityWash.this, WashingMachine.class);
+                startActivity(intent);
+            }
+        });
+    }
+    public void roomButton(){
+        roomBTN = (Button)findViewById(R.id.romNrBTN);
+        roomNrField = (EditText)findViewById(R.id.roomNrEdit);
+        roomBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences sharedPref = getSharedPreferences("mypref", 0);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                String roomNr = roomNrField.getText().toString();
+                editor.remove("roomnumber");
+                editor.putString("roomnumber", roomNr);
+                editor.commit();
+                Intent intent = new Intent(LoginActivityWash.this, MainActivity.class);
                 startActivity(intent);
             }
         });

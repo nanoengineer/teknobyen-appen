@@ -15,8 +15,7 @@
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/username"
-        android:layout_marginTop="61dp"
-        android:layout_below="@+id/textView6"
+        android:layout_alignTop="@+id/textView7"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
@@ -26,10 +25,9 @@
         android:inputType="textPassword"
         android:ems="10"
         android:id="@+id/password"
-        android:layout_marginTop="27dp"
-        android:layout_below="@+id/username"
-        android:layout_alignLeft="@+id/username"
-        android:layout_alignStart="@+id/username" />
+        android:layout_above="@+id/acceptBTN"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -37,7 +35,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/loginString"
         android:id="@+id/textView6"
-        android:layout_alignParentTop="true"
+        android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -49,7 +47,8 @@
         android:id="@+id/textView7"
         android:layout_above="@+id/password"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="25dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -66,20 +65,21 @@
         android:layout_height="wrap_content"
         android:text="@string/accept"
         android:id="@+id/acceptBTN"
-        android:layout_centerVertical="true"
-        android:layout_alignRight="@+id/password"
-        android:layout_alignEnd="@+id/password"
-        android:layout_marginRight="40dp"
-        android:layout_marginEnd="40dp" />
+        android:layout_marginRight="36dp"
+        android:layout_marginEnd="36dp"
+        android:layout_alignTop="@+id/cancelBTN"
+        android:layout_alignRight="@+id/textView9"
+        android:layout_alignEnd="@+id/textView9" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/cancel"
         android:id="@+id/cancelBTN"
-        android:layout_alignTop="@+id/acceptBTN"
+        android:layout_above="@+id/textView9"
         android:layout_alignRight="@+id/textView7"
-        android:layout_alignEnd="@+id/textView7" />
+        android:layout_alignEnd="@+id/textView7"
+        android:layout_marginBottom="22dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -87,8 +87,38 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="@string/infoLogin"
         android:id="@+id/textView9"
-        android:layout_below="@+id/cancelBTN"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Romnr:"
+        android:id="@+id/textView14"
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="36dp" />
+        android:layout_marginTop="49dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/roomNrEdit"
+        android:layout_alignBottom="@+id/textView14"
+        android:layout_toRightOf="@+id/textView7"
+        android:maxLength="3"/>
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bekreft"
+        android:id="@+id/romNrBTN"
+        android:layout_below="@+id/roomNrEdit"
+        android:layout_alignRight="@+id/roomNrEdit"
+        android:layout_alignEnd="@+id/roomNrEdit" />
 </RelativeLayout>

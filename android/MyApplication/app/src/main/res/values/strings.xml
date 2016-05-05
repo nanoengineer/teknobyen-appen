@@ -13,7 +13,7 @@
     <!-- Strings related to login -->
     <string name="infoLogin">Dersom du skriver inn feil brukernavn og/eller passord vil
         ingenting skje når du forsøker å logge inn</string>
-    <string name="loginString">Login</string>
+    <string name="loginString">Login details</string>
     <string name="username">Brukernavn:</string>
     <string name="accept">Bekreft</string>
     <string name="password">Passord:</string>
