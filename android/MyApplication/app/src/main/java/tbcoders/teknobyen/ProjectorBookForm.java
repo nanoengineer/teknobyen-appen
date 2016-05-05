@@ -268,8 +268,8 @@ public class ProjectorBookForm extends AppCompatActivity {
     public void writeToFireBase(String bookStartDate, String bookStartTime, String bookEndDate, String bookEndTime, String roomNr, String id, String comment){
         Firebase ref = new Firebase("https://teknobyen.firebaseio.com");
         Random rand = new Random();
-        int n = rand.nextInt(50) + 1;
-        Firebase newBooking = ref.child("reservations").child("" + n);
+        //int n = rand.nextInt(50) + 1;
+        Firebase newBooking = ref.child("reservations");
         Map<String, String> newBookingMap = new HashMap<String, String>();
         newBookingMap.put("startHour", bookStartTime);
         newBookingMap.put("date", bookStartDate);
@@ -277,6 +277,6 @@ public class ProjectorBookForm extends AppCompatActivity {
         newBookingMap.put("roomNumber", roomNr);
         newBookingMap.put("id", id);
         newBookingMap.put("stopHour", bookEndTime);
-        newBooking.setValue(newBookingMap);
+        newBooking.push().setValue(newBookingMap);
     }
 }
