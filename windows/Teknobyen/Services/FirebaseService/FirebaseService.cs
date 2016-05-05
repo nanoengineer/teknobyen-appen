@@ -18,6 +18,9 @@ namespace Teknobyen.Services.FirebaseService
 
         public async Task<List<ProjectorReservationModel>> GetReservations()
         {
+            var returnObject = new List<ProjectorReservationModel>();
+
+
             string uri = $"{base_uri}/reservations.json?auth={client_secret}";
 
             using (var client = new HttpClient())
@@ -25,15 +28,23 @@ namespace Teknobyen.Services.FirebaseService
                 var response = await client.GetAsync(new Uri(uri));
                 var s = await response.Content.ReadAsStringAsync();
 
-                JObject reservations = JObject.Parse(s);
-                reservations.Children();
-                foreach (var item in reservations.Children())
-                {
-                    var o = JsonConvert.DeserializeObject<ReservationJsonModel>(item.ToString());
-                }
+                JObject parsedJson = JObject.Parse(s);
 
+
+                foreach (var item in parsedJson)
+                {
+                    var tf = item.Value.ToObject<ReservationJsonModel>();
+                    var t = new ProjectorReservationModel();
+                    t.comment = tf.comment;
+                    t.date = DateTime.Parse(tf.date);
+                    t.roomNumber = int.Parse(tf.roomNumber);
+                    t.startHour = DateTime.Parse(tf.startHour);
+                    t.stopHour = DateTime.Parse(tf.stopHour);
+
+                    returnObject.Add(t);
+                }
             }
-            return new List<ProjectorReservationModel>();
+            return returnObject;
         }
 
     }

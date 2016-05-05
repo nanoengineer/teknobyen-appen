@@ -15,7 +15,6 @@ namespace Teknobyen.Services.FirebaseService
     {
         public string comment { get; set; }
         public string date { get; set; }
-        public string id { get; set; }
         public string roomNumber { get; set; }
         public string startHour { get; set; }
         public string stopHour { get; set; }
