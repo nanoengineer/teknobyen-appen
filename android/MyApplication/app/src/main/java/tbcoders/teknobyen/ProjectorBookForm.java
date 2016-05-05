@@ -16,6 +16,8 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 import java.util.TimeZone;
 
@@ -26,6 +28,7 @@ public class ProjectorBookForm extends AppCompatActivity {
     String[] dateValues;
     String[] minValues = {"00", "15", "30", "45"};
     String[] hourValues = {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"};
+    String[] weekDays = {"Søndag", "Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag", "Lørdag"};
 
     int startDayValue = 0;
     int startHourValue = 0;
@@ -43,10 +46,13 @@ public class ProjectorBookForm extends AppCompatActivity {
         OnClickStartListener();
         OnClickEndListener();
         OnClickReserveListener();
+        setupNumberPickers();
 
-        String[] weekDays = {"Søndag", "Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag", "Lørdag"};
+    }
+    public void setupNumberPickers(){
         pickDate = (NumberPicker)findViewById(R.id.datePicker);
         Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Europe/Oslo"));
+
         //Veka startar på søndag som har verdi 1, derfor må eg trekke frå 1 når eg skal hente ut dag
         //frå lista over dagar
         int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK) - 1;
@@ -58,8 +64,7 @@ public class ProjectorBookForm extends AppCompatActivity {
             }else{
                 dateValues[i] = weekDays[dayOfWeek + i];
             }
-        }
-        this.dateValues = dateValues;
+        }this.dateValues = dateValues;
         pickDate.setDisplayedValues(dateValues);
         pickDate.setMaxValue(5);
         pickDate.setMinValue(0);
@@ -67,7 +72,6 @@ public class ProjectorBookForm extends AppCompatActivity {
 
         pickHour = (NumberPicker)findViewById(R.id.startHourPicker);
         pickHour.setDisplayedValues(hourValues);
-
         pickHour.setMaxValue(23);
         pickHour.setMinValue(0);
         pickHour.setWrapSelectorWheel(false);
@@ -90,76 +94,67 @@ public class ProjectorBookForm extends AppCompatActivity {
                 int sdValue = pickDate.getValue();
                 int shValue = pickHour.getValue();
                 int smValue = pickMin.getValue();
-                Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Europe/Oslo"));
-                int currentHour = cal.get(Calendar.HOUR_OF_DAY);
-                int currentMin = cal.get(Calendar.MINUTE);
                 int trueMinValue = Integer.parseInt(minValues[smValue]);
-                //Kontrollering av om tida som skal bookast er mindre enn sluttverdi før den skrivast til tekstfelt.
-                if(sdValue<=endDayValue){
-                    if(sdValue != 0 && sdValue < endDayValue){
-                        writeStartTimeMessage();
-                    }else if(sdValue == 0 && shValue >= currentHour && sdValue < endDayValue){
-                        if(shValue>currentHour){
+                //Kontrollere om starttid er før slutttid før skriving og større enn current time
+                if(controlCurrentTime(sdValue, shValue, trueMinValue)){
+                    if(sdValue<=endDayValue) {
+                        if(sdValue<endDayValue){
                             writeStartTimeMessage();
                         }else{
-                            if(trueMinValue>currentMin){
-                                writeStartTimeMessage();
-                            }else{
-                                alertMsg('s');
-                            }
-                        }
-                    }else if(sdValue == 0 && shValue >= currentHour && endDayValue == 0){
-                        if(shValue>currentHour && shValue < endHourValue){
-                            writeStartTimeMessage();
-                        }else{
-                            if(shValue>currentHour && shValue == endHourValue){
-                                if(smValue<endMinValue){
+                            if(shValue<=endHourValue){
+                                if(shValue<endHourValue){
                                     writeStartTimeMessage();
-                                }else{
-                                    alertMsg('s');
                                 }
-                            }
-                            else if(trueMinValue>currentMin && shValue == currentHour){
-                                writeStartTimeMessage();
-                            }
-                            else{
-                                alertMsg('s');
-                            }
-                        }
-                    }else if(sdValue == endDayValue){
-                        if(shValue<=endHourValue){
-                            if(shValue<endHourValue){
-                                writeStartTimeMessage();
+                                else{
+                                    if(smValue<endMinValue){
+                                        writeStartTimeMessage();
+                                    }else{
+                                        alertMsg('e');
+                                    }
+                                }
                             }else{
-                                if(smValue<endMinValue){
-                                    writeStartTimeMessage();
-                                }else{
-                                    alertMsg('s');
-                                }
+                                alertMsg('e');
                             }
-                        }else{
-                            alertMsg('s');
                         }
-                    }
-                    else {
-                        alertMsg('s');
+                    }else{
+                        alertMsg('e');
                     }
                 }else{
-                    alertMsg('s');
+                    alertMsg('w');
                 }
             }
         });
+    }
+    public boolean controlCurrentTime(int day, int hour, int minute){
+        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Europe/Oslo"));
+        int currentHour = cal.get(Calendar.HOUR_OF_DAY);
+        int currentMin = cal.get(Calendar.MINUTE);
+        if(day != 0){
+            return true;
+        }
+        if(hour >= currentHour){
+            if(hour > currentHour){
+                return true;
+            }else{
+                if(minute > currentMin){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+        }else{
+            return false;
+        }
     }
     public void OnClickEndListener(){
         pickDate = (NumberPicker)findViewById(R.id.datePicker);
         pickHour = (NumberPicker)findViewById(R.id.startHourPicker);
         pickMin = (NumberPicker)findViewById(R.id.startMinutePicker);
-        final TextView endText = (TextView)findViewById(R.id.endtimeString);
-
         Button btn = (Button)findViewById(R.id.setBookEnd);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Ulovlig å sette slutttid før starttid er satt (slik slepp vi å sjekke med current time)
                 TextView startText = (TextView)findViewById(R.id.starttimeString);
                 if(startText.getText().toString().length()>0){
                     int sdValue = pickDate.getValue();
@@ -223,11 +218,13 @@ public class ProjectorBookForm extends AppCompatActivity {
     private void alertMsg(char c){
         String msg = "";
         if(c == 's'){
-            msg = "Verdien for starttid må være mindre enn slutttid og starttid må være større enn tidspunktet som er nå";
+            msg = "Verdien for starttid må være mindre enn slutttid";
         }else if(c == 'e'){
             msg = "Verdien for slutttid må være større enn starttid";
         }else if(c == 'w'){
-            msg = "";
+            msg = "Verdien for starttid må være større enn klokkeslettet som er nå";
+        }else if(c == 'r'){
+            msg = "Vennligst velg starttid, slutttid og fyll inn beskrivelse";
         }
         Toast.makeText(ProjectorBookForm.this, msg, Toast.LENGTH_SHORT).show();
     }
@@ -241,7 +238,9 @@ public class ProjectorBookForm extends AppCompatActivity {
                 EditText bookDesEdit = (EditText)findViewById(R.id.bookDescriptionEdit);
                 int startTextLength = startText.getText().length();
                 int endTextLength = endText.getText().length();
-                if(startTextLength > 0 && endTextLength > 0 && bookDesEdit.getText().toString().length() > 0){
+                int descriptionTextLength = bookDesEdit.getText().toString().length();
+                //Kontrollere om alle felt er utfylt før knappen kan trykkast
+                if(startTextLength > 0 && endTextLength > 0 && descriptionTextLength > 0){
                     SimpleDateFormat bookDateFormat = new SimpleDateFormat("dd.MM.yyyy");
                     Calendar calStart = Calendar.getInstance(TimeZone.getTimeZone("Europe/Oslo"));
                     calStart.add(Calendar.DATE, startDayValue);
@@ -261,23 +260,23 @@ public class ProjectorBookForm extends AppCompatActivity {
                     Intent intent = new Intent(ProjectorBookForm.this, ProjectorBookings.class);
                     startActivity(intent);
                 }else{
-                    Toast.makeText(ProjectorBookForm.this, "Vennligst velg starttid og slutttid og fyll inn beskrivelse", Toast.LENGTH_SHORT).show();
+                    alertMsg('r');
                 }
             }
         });
     }
     public void writeToFireBase(String bookStartDate, String bookStartTime, String bookEndDate, String bookEndTime, String roomNr, String id, String comment){
         Firebase ref = new Firebase("https://teknobyen.firebaseio.com");
-
         Random rand = new Random();
         int n = rand.nextInt(50) + 1;
-
         Firebase newBooking = ref.child("reservations").child("" + n);
-        newBooking.child("startHour").setValue(bookStartTime);
-        newBooking.child("date").setValue(bookStartDate);
-        newBooking.child("comment").setValue(comment);
-        newBooking.child("roomNumber").setValue(roomNr);
-        newBooking.child("id").setValue(id);
-        newBooking.child("stopHour").setValue(bookEndTime);
+        Map<String, String> newBookingMap = new HashMap<String, String>();
+        newBookingMap.put("startHour", bookStartTime);
+        newBookingMap.put("date", bookStartDate);
+        newBookingMap.put("comment", comment);
+        newBookingMap.put("roomNumber", roomNr);
+        newBookingMap.put("id", id);
+        newBookingMap.put("stopHour", bookEndTime);
+        newBooking.setValue(newBookingMap);
     }
 }
