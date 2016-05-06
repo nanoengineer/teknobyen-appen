@@ -10,5 +10,6 @@ namespace Teknobyen.Services.FirebaseService
     interface IFirebaseService
     {
         Task<List<ProjectorReservationModel>> GetReservations();
+        Task<bool> SaveReservation(ProjectorReservationModel s);
     }
 }
