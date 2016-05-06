@@ -27,7 +27,7 @@ namespace Teknobyen.ViewModels
 
         public void GotoProjectorReservation()
         {
-            this.NavigationService.Navigate(typeof(ProjectorReservationPage));
+            this.NavigationService.Navigate(typeof(ProjectorReservationsOverviewPage));
         }
 
         public void GotoLaundryMenu()
@@ -37,17 +37,7 @@ namespace Teknobyen.ViewModels
 
         public async void GotoWashlistPage()
         {
-            var s = new FirebaseService();
-            //var t = await s.GetReservations();
-
-            var t = new ProjectorReservationModel();
-            t.comment = "Hooray";
-            t.date = DateTime.Now;
-            t.roomNumber = 503;
-            t.startHour = DateTime.Now;
-            t.stopHour = DateTime.Now.AddHours(2);
-
-            var success = await s.SaveReservation(t);
+            
         }
     }
 }

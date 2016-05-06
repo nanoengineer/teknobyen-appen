@@ -17,7 +17,12 @@
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <PackageCertificateKeyFile>Teknobyen_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>Teknobyen_StoreKey.pfx</PackageCertificateKeyFile>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <AppxBundle>Always</AppxBundle>
+    <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
+    <HockeyAppResourceId>db58f02bb7524a0ca7e257235d30c153</HockeyAppResourceId>
+    <PackageCertificateThumbprint>5DEC6DEE7691E694990DD0280669849FDEE42D6E</PackageCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
     <DebugSymbols>true</DebugSymbols>
@@ -115,7 +120,9 @@
     <Compile Include="ViewModels\LaundryViewModel.cs" />
     <Compile Include="ViewModels\LaundryMenuViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
+    <Compile Include="ViewModels\ProjectorReservationOverviewViewModel.cs" />
     <Compile Include="ViewModels\ProjectorReservationViewModel.cs" />
+    <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="Views\LaundryView.xaml.cs">
       <DependentUpon>LaundryView.xaml</DependentUpon>
     </Compile>
@@ -128,11 +135,18 @@
     <Compile Include="Views\ProjectorReservationPage.xaml.cs">
       <DependentUpon>ProjectorReservationPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ProjectorReservationsOverviewPage.xaml.cs">
+      <DependentUpon>ProjectorReservationsOverviewPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <None Include="Teknobyen_StoreKey.pfx" />
     <None Include="Teknobyen_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
@@ -143,6 +157,7 @@
     <Content Include="Assets\Washing.png" />
     <Content Include="Assets\Washing_list.png" />
     <Content Include="Help.htm" />
+    <None Include="Package.StoreAssociation.xml" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -185,6 +200,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\ProjectorReservationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProjectorReservationsOverviewPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

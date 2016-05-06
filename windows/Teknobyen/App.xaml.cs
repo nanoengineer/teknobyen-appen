@@ -15,7 +15,9 @@ namespace Teknobyen
 
         public static string APPID = "Teknobyen.App";
 
-        public App() { InitializeComponent(); }
+        public App() {
+            InitializeComponent();
+        }
 
         public override async Task OnInitializeAsync(IActivatedEventArgs args)
         {
@@ -26,6 +28,11 @@ namespace Teknobyen
         {
             NavigationService.Navigate(typeof(Views.MainPage));
             await Task.CompletedTask;
+        }
+
+        public override Task OnPrelaunchAsync(IActivatedEventArgs args, out bool runOnStartAsync)
+        {
+            return base.OnPrelaunchAsync(args, out runOnStartAsync);
         }
     }
 }

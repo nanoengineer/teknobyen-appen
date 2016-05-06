@@ -1,5 +1,6 @@
 ﻿{
   "dependencies": {
+    "HockeySDK.UWP": "4.0.0",
     "HtmlAgilityPack": "1.4.9",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0",
     "Microsoft.Xaml.Behaviors.Uwp.Managed": "1.0.3",

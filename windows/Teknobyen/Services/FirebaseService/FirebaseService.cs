@@ -33,15 +33,23 @@ namespace Teknobyen.Services.FirebaseService
 
                 foreach (var item in parsedJson)
                 {
+                    try
+                    {
                     var tf = item.Value.ToObject<ReservationJsonModel>();
                     var t = new ProjectorReservationModel();
                     t.comment = tf.comment;
                     t.date = DateTime.Parse(tf.date);
                     t.roomNumber = int.Parse(tf.roomNumber);
                     t.startHour = DateTime.Parse(tf.startHour);
+                    t.startHour = new DateTime(t.date.Year, t.date.Month, t.date.Day, t.startHour.Hour, t.startHour.Minute, 0);
                     t.stopHour = DateTime.Parse(tf.stopHour);
 
                     returnObject.Add(t);
+                    }
+                    catch (Exception)
+                    {
+                        System.Diagnostics.Debug.WriteLine("deserializing failed");
+                    }
                 }
             }
             return returnObject;
@@ -55,6 +63,7 @@ namespace Teknobyen.Services.FirebaseService
             using (var client = new HttpClient())
             {
                 HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, new Uri(uri));
+
                 var jsonModel = new ReservationJsonModel();
                 jsonModel.comment = reservation.comment;
                 jsonModel.date = reservation.date.ToString("dd.MM.yyyy");
@@ -63,7 +72,6 @@ namespace Teknobyen.Services.FirebaseService
                 jsonModel.stopHour = reservation.stopHour.ToString("HH:mm");
 
                 var content = JsonConvert.SerializeObject(jsonModel);
-
                 HttpStringContent stringContent = new HttpStringContent(content);
 
                 request.Content = stringContent;

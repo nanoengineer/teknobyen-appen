@@ -1,13 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity
-    Name="5442ab86-c5ee-444f-875f-8da85b07bfce"
-    Publisher = "CN=sindr"
-    Version = "1.0.0.0" /> 
-  <mp:PhoneIdentity PhoneProductId="5442ab86-c5ee-444f-875f-8da85b07bfce" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <Identity Name="10587SindreBrun.Teknobyen" Publisher="CN=1C8A87EB-E851-4884-8D95-C4AD8C392680" Version="1.1.0.0" />
+  <mp:PhoneIdentity PhoneProductId="5442ab86-c5ee-444f-875f-8da85b07bfce" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>Teknobyen</DisplayName>
-    <PublisherDisplayName>sindr</PublisherDisplayName>
+    <PublisherDisplayName>Sindre Brun</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Dependencies>
