@@ -253,15 +253,11 @@ public class ProjectorBookForm extends AppCompatActivity {
                     String bookEndDate = bookDateFormat.format(calEnd.getTime());
                     String bookEndTime = "" + hourValues[endHourValue] + ":" + minValues[endMinValue];
 
-
                     String bookText = bookDesEdit.getText().toString();
                     SharedPreferences prefs = getSharedPreferences("mypref", 0);
                     String roomNr = prefs.getString("roomnumber", "");
 
-                    //Toast.makeText(ProjectorBookForm.this, bookStartDate + " " + bookStartTime + " - " + bookEndDate + " " + bookEndTime + " " + bookText, Toast.LENGTH_SHORT).show();
-
-
-                    writeToFireBase(bookStartDate, bookStartTime, bookEndDate, bookEndTime, roomNr, "4", bookText);
+                    writeToFireBase(bookStartDate, bookStartTime, bookEndDate, bookEndTime, roomNr, bookText);
                     Intent intent = new Intent(ProjectorBookForm.this, ProjectorBookings.class);
                     startActivity(intent);
                 }else{
@@ -270,17 +266,15 @@ public class ProjectorBookForm extends AppCompatActivity {
             }
         });
     }
-    public void writeToFireBase(String bookStartDate, String bookStartTime, String bookEndDate, String bookEndTime, String roomNr, String id, String comment){
+    public void writeToFireBase(String bookStartDate, String bookStartTime, String bookEndDate, String bookEndTime, String roomNr, String comment){
         Firebase ref = new Firebase("https://teknobyen.firebaseio.com");
         Random rand = new Random();
-        //int n = rand.nextInt(50) + 1;
         Firebase newBooking = ref.child("reservations");
         Map<String, String> newBookingMap = new HashMap<String, String>();
         newBookingMap.put("startHour", bookStartTime);
         newBookingMap.put("date", bookStartDate);
         newBookingMap.put("comment", comment);
         newBookingMap.put("roomNumber", roomNr);
-        newBookingMap.put("id", id);
         newBookingMap.put("stopHour", bookEndTime);
         newBooking.push().setValue(newBookingMap);
     }
