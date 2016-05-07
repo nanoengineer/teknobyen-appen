@@ -9,6 +9,7 @@
     xmlns:views="using:Teknobyen.Views"
     xmlns:vm="using:Teknobyen.ViewModels"
     xmlns:models="using:Teknobyen.Models"
+    xmlns:pr="using:PullToRefresh.UWP"
     mc:Ignorable="d">
 
     <Page.DataContext>
@@ -26,37 +27,53 @@
         <controls:PageHeader Text="Prosjektor reservasjoner" HorizontalContentAlignment="Center">
             
         </controls:PageHeader>
-        
-        
-        <!-- Listview med reservasjoner -->
-        <ListView Grid.Row="1" ItemsSource="{x:Bind ViewModel.ReservationsList}" >
-            <ListView.ItemTemplate>
-                <DataTemplate x:DataType="models:ProjectorReservationModel">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
 
-                        <TextBlock Grid.ColumnSpan="2" Text="{x:Bind comment}" Style="{StaticResource TitleTextBlockStyle}"/>
-                        <TextBlock Grid.Column="2" Text="{x:Bind roomNumber}" HorizontalAlignment="Right" Style="{StaticResource BodyTextBlockStyle}"/>
-                        <TextBlock Grid.Row="1" Style="{StaticResource BaseTextBlockStyle}">
-                            <Run Text="{x:Bind date.DayOfWeek}" />
-                        </TextBlock>
-                    </Grid>
+
+        <pr:PullToRefreshBox Grid.Row="1" >
+            <pr:PullToRefreshBox.TopIndicatorTemplate>
+                <DataTemplate>
+                    <pr:PullRefreshProgressControl Progress="{Binding}"
+                                            PullToRefreshText="Pull"
+                                            ReleaseToRefreshText="Release" />
                 </DataTemplate>
-            </ListView.ItemTemplate>
-            <ListView.ItemContainerStyle>
-                <Style TargetType="ListViewItem">
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                </Style>
-            </ListView.ItemContainerStyle>
-        </ListView>
+            </pr:PullToRefreshBox.TopIndicatorTemplate>
+            <!-- Listview med reservasjoner -->
+            <ListView ItemsSource="{x:Bind ViewModel.ReservationsList}" >
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="models:ProjectorReservationModel">
+                        <Grid x:Name="GridItem">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.ColumnSpan="2" Text="{x:Bind comment}" Style="{StaticResource TitleTextBlockStyle}"/>
+                            <TextBlock Grid.Column="2" Text="{x:Bind roomNumber}" HorizontalAlignment="Right" Style="{StaticResource BodyTextBlockStyle}"/>
+                            <TextBlock Grid.Row="1" Style="{StaticResource BaseTextBlockStyle}" Text="{x:Bind date.DayOfWeek}" />
+                            <TextBlock Grid.Row="1" Grid.Column="1" Style="{StaticResource BodyTextBlockStyle}">
+                                <Run Text="{x:Bind startHour.Hour}" />
+                                <Run Text=":" />
+                                <Run Text="{x:Bind startHour.Minute}" />
+                                <Run Text=" - " />
+                                <Run Text="{x:Bind stopHour.Hour}" />
+                                <Run Text=":" />
+                                <Run Text="{x:Bind stopHour.Minute}" />
+                            </TextBlock>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+            </ListView>
+        </pr:PullToRefreshBox>
 
         <!-- Add reservation button -->
         <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="1" Background="Transparent" Margin="0,0,0,10" Click="{x:Bind ViewModel.GotoProjectorReservationPage}">

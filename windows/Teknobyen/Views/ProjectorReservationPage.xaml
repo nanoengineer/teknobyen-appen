@@ -33,16 +33,17 @@
             </controls:PageHeader.SecondaryCommands>
         </controls:PageHeader>
 
-        <TextBlock Grid.Row="2" Text="Romnummer:" HorizontalAlignment="Center" Margin="135,0" Grid.RowSpan="1"/>
-        <TextBox Grid.Row="3" HorizontalAlignment="Center" Margin="148,0"/>
-        <TextBlock Grid.Row="4" Text="Dato" HorizontalAlignment="Center" Margin="164,0,163,0"/>
-        <CalendarDatePicker x:Name="DatePickerControl" Grid.Row="5" HorizontalAlignment="Center" Margin="117,0,116,0"/>
-        <TextBlock Grid.Row="6" Text="Start tid:" HorizontalAlignment="Center" Margin="152,0"/>
-        <TimePicker Grid.Row="7" HorizontalAlignment="Center" Margin="59,0"/>
-        <TextBlock Grid.Row="8" Text="Slutt tid:" HorizontalAlignment="Center" Margin="152,0"/>
-        <TimePicker Grid.Row="9" HorizontalAlignment="Center" Margin="59,0"/>
-        <TextBlock Grid.Row="10" Text="Kommentar:" HorizontalAlignment="Center" Margin="140,0,139,0"/>
-        <TextBox Grid.Row="11" HorizontalAlignment="Center" Margin="148,0"/>
-        <Button Content="Reserver" HorizontalAlignment="Center" Grid.Row="12" Margin="142,0" />
+
+        <TextBlock Grid.Row="2" Text="Romnummer:" HorizontalAlignment="Center"  />
+        <TextBox Grid.Row="3" HorizontalAlignment="Center" />
+        <TextBlock Grid.Row="4" Text="Dato" HorizontalAlignment="Center" />
+        <CalendarDatePicker x:Name="DatePickerControl" Grid.Row="5" HorizontalAlignment="Center" />
+        <TextBlock Grid.Row="6" Text="Start tid:" HorizontalAlignment="Center" />
+        <TimePicker Grid.Row="7" HorizontalAlignment="Center" MinuteIncrement="15"/>
+        <TextBlock Grid.Row="8" Text="Slutt tid:" HorizontalAlignment="Center" />
+        <TimePicker Grid.Row="9" HorizontalAlignment="Center" MinuteIncrement="15"/>
+        <TextBlock Grid.Row="10" Text="Hva skal du/dere?" HorizontalAlignment="Center" />
+        <TextBox Grid.Row="11" HorizontalAlignment="Center" MinWidth="200" />
+        <Button Content="Reserver" HorizontalAlignment="Center" Grid.Row="12" Margin="5"/>
     </Grid>
 </Page>
