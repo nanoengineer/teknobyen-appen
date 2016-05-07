@@ -1,36 +1,18 @@
 //
-//  WashingViewController.swift
+//  WashingRefillViewController.swift
 //  Teknobyen
 //
-//  Created by Tony Wu on 2016-04-30.
+//  Created by Tony Wu on 2016-05-05.
 //  Copyright © 2016 Mathias Breistein. All rights reserved.
 //
 
 import UIKit
 import SafariServices
-import Fuzi
 
-class WashingViewController: UIViewController, NSURLConnectionDelegate {
+class WashingRefillViewController: UIViewController {
 
-   
-    @IBOutlet weak var washWebView: UIWebView!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "Vaskemaskiner"
-        washWebView.hidden = true
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    @IBAction func checkMachineStatusPressed(sender: UIButton) {
-        
-        var htmlString: NSString?
         
         let username = "pkminne"
         let pwd = "b5e277"
@@ -43,36 +25,25 @@ class WashingViewController: UIViewController, NSURLConnectionDelegate {
         config.HTTPAdditionalHeaders = ["Authorization" : authString]
         let session = NSURLSession(configuration: config)
         
-        let url = NSURL(string: "http://129.241.152.11/LaundryState?lg=2&ly=9131")
+        let url = NSURL(string: "http://129.241.152.11/AccountPayment?lg=2&ly=9131")
         let task = session.dataTaskWithURL(url!) {
             (let data, let response, let error) in
             if let httpResponse = response as? NSHTTPURLResponse {
-                htmlString = NSString(data: data!, encoding: NSUTF8StringEncoding)!
-                
-                do {
-                    // if encoding is omitted, it defaults to NSUTF8StringEncoding
-                    let doc = try HTMLDocument(string: String(htmlString), encoding: NSUTF8StringEncoding)
-                    
-                    for element in doc.xpath("//div[contains(@class, 'reservation')]/table//td[contains(@class, 'p')]/text()") {
-                        print(element)
-                    }
-                    
-                } catch let error {
-                    print(error)
-                }
-                
+                print(httpResponse.statusCode.description)
+                print(data)
+                print(error)
+                self.openWithSafariVC(url!)
             }
             
         }
         task.resume()
+    
+        // Do any additional setup after loading the view.
     }
-    
-    
-    @IBAction func refillPressed(sender: UIButton) {
-        
-        let refillUrl = NSURL(string: "http://129.241.152.11/AccountPayment?lg=2&ly=9131")
-        openWithSafariVC(refillUrl!)
-        
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
     
     private func openWithSafariVC(url: NSURL)
@@ -80,7 +51,8 @@ class WashingViewController: UIViewController, NSURLConnectionDelegate {
         let svc = SFSafariViewController(URL: url)
         self.presentViewController(svc, animated: true, completion: nil)
     }
-    
+
+
     /*
     // MARK: - Navigation
 

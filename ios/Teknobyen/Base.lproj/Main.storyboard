@@ -28,7 +28,7 @@
                                 <rect key="frame" x="139" y="255" width="100" height="100"/>
                                 <state key="normal" image="Washing Machine-96.png"/>
                                 <connections>
-                                    <segue destination="DCS-KT-3L4" kind="show" id="fVQ-3E-9Bh"/>
+                                    <segue destination="5JA-aZ-URa" kind="show" id="yFT-jM-18K"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YWf-K7-elv">
@@ -103,21 +103,72 @@
                                 <color key="textColor" red="0.53655112729999999" green="0.56711234509999997" blue="0.6061232003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b3Z-vV-9Go">
-                                <rect key="frame" x="20" y="83" width="335" height="564"/>
-                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
-                            </webView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-                    <connections>
-                        <outlet property="washWebView" destination="b3Z-vV-9Go" id="fDL-pa-FsV"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ier-r1-7Sc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1233.5" y="1290.5"/>
+            <point key="canvasLocation" x="1245.5" y="1126.875"/>
+        </scene>
+        <!--Washing Tab Bar Controller-->
+        <scene sceneID="DmO-YN-qm9">
+            <objects>
+                <tabBarController id="5JA-aZ-URa" customClass="WashingTabBarController" customModule="Teknobyen" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="CtT-4u-CPw">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="iOL-CI-V1C" kind="relationship" relationship="viewControllers" id="9gv-e0-2fV"/>
+                        <segue destination="oqy-GI-epb" kind="relationship" relationship="viewControllers" id="Ln9-k3-q03"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="afV-Ue-vNA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1757.5" y="1255.5"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="jBs-1R-jRF">
+            <objects>
+                <viewController id="oqy-GI-epb" customClass="WashingRefillViewController" customModule="Teknobyen" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qTk-Ws-lwk"/>
+                        <viewControllerLayoutGuide type="bottom" id="baI-DV-1pT"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="DWG-K9-8Nx">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="Rbw-y9-gqh"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Exr-mu-9NC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2461" y="1749"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="7hs-wV-CDj">
+            <objects>
+                <viewController id="iOL-CI-V1C" customClass="WashingStatusViewController" customModule="Teknobyen" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="cZ9-ds-2vv"/>
+                        <viewControllerLayoutGuide type="bottom" id="pzQ-uv-Mgt"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ps8-Sh-DZA">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="1Fz-Yc-Cep"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lVQ-PP-sX4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2399" y="964.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="laC-yb-6rg">
@@ -152,7 +203,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Start" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mhn-yg-exb">
                                 <rect key="frame" x="143" y="417" width="88" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Dag" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2zq-9e-alc">
@@ -166,7 +217,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Slutt" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nHm-v9-aFJ">
                                 <rect key="frame" x="269" y="417" width="106" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="sii-uA-flE">
@@ -178,7 +229,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Beskrivelse" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fMg-R0-6LZ">
                                 <rect key="frame" x="143" y="208" width="88" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pn9-6K-Lqj">
@@ -200,7 +251,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OUY-Gp-uDx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2354.5" y="351.5"/>
+            <point key="canvasLocation" x="2379.5" y="199.5"/>
         </scene>
         <!--Reservation View Controller-->
         <scene sceneID="FoO-zj-hJZ">
