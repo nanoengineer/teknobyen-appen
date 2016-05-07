@@ -2,6 +2,7 @@ package tbcoders.teknobyen;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
         OnClickWashingButtonListener();
         OnClickProjectorButtonListener();
         OnClickSettingsButtonListener();
+        OnClickFyllaButtonListener();
 
         final MediaPlayer stemmerDetSound = MediaPlayer.create(this, R.raw.stemmerlyd);
         ImageButton playStemmerDetSound = (ImageButton) this.findViewById(R.id.btn_stemmer_det);
@@ -57,6 +59,18 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, LoginActivityWash.class);
                 startActivity(intent);
+            }
+        });
+    }
+    public void OnClickFyllaButtonListener(){
+        imgBTN = (ImageButton)findViewById(R.id.BTN_fylla);
+        imgBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Uri gmmIntentUri = Uri.parse("google.navigation:q=Teknobyen studentboliger,+Klæbuveien+Trondheim=w");
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                mapIntent.setPackage("com.google.android.apps.maps");
+                startActivity(mapIntent);
             }
         });
     }

@@ -3,32 +3,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@color/genBackground"
+    android:stretchColumns="0,1"
     tools:context="tbcoders.teknobyen.MainActivity">
 <TableRow>
     <ImageButton
-        android:layout_width="50dp"
-        android:layout_height="50dp"
         android:scaleType="fitCenter"
         android:id="@+id/btn_stemmer_det"
         android:src="@drawable/btn_stemmer_det"
-        android:background="@color/genBackground"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_column="0" />
+        android:background="@color/genBackground"/>
 
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/main_settings"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
         android:src="@drawable/btn_settings"
         android:background="@color/genBackground"
         android:layout_column="1" />
@@ -36,92 +24,65 @@
 
     <TableRow
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        android:layout_height="match_parent"
+        android:layout_weight="2">
         <ImageButton
-            android:layout_width="120dp"
-            android:layout_height="130dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:scaleType="fitCenter"
-            android:id="@+id/BTN_washMachine"
-            android:src="@drawable/btn_washmachine"
-            android:background="@color/genBackground"
-            android:layout_alignTop="@+id/BTN_projector"
-            android:layout_toRightOf="@+id/textView3"
-            android:layout_toEndOf="@+id/textView3" />
-    </TableRow>
-
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/BTN_projector"
             android:src="@drawable/btn_projector"
             android:background="@color/genBackground"
             android:focusableInTouchMode="true"
-            android:layout_marginTop="42dp"
-            android:layout_below="@+id/btn_stemmer_det"
-            android:layout_toLeftOf="@+id/textView3"
-            android:layout_toStartOf="@+id/textView3" />
+            android:layout_marginTop="42dp" />
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter"
+            android:id="@+id/BTN_washMachine"
+            android:src="@drawable/btn_washmachine"
+            android:background="@color/genBackground" />
     </TableRow>
-
+    <TableRow>
+        <TextView
+            android:text="@string/projector"
+            android:textAlignment="center"/>
+        <TextView
+            android:text="@string/washingmachine"
+            android:textAlignment="center"/>
+    </TableRow>
     <TableRow
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        android:layout_height="match_parent"
+        android:layout_weight="2">
         <ImageButton
-            android:layout_width="120dp"
-            android:layout_height="130dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:scaleType="fitCenter"
             android:id="@+id/BTN_washList"
             android:src="@drawable/btn_washlist"
-            android:background="@color/genBackground"
-            android:layout_above="@+id/textView3"
-            android:layout_toLeftOf="@+id/textView3"
-            android:layout_toStartOf="@+id/textView3" />
+            android:background="@color/genBackground" />
+
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter"
+            android:id="@+id/BTN_fylla"
+            android:src="@drawable/btn_fylla"
+            android:background="@color/genBackground" />
     </TableRow>
+    <TableRow
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+        <TextView
+            android:text="@string/washinglist"
+            android:textAlignment="center"
+            />
+        <TextView
+            android:text="@string/fylla"
+            android:textAlignment="center"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/projector"
-        android:id="@+id/textView"
-        android:textColor="@color/logoDefault"
-        android:layout_alignBottom="@+id/BTN_projector"
-        android:layout_alignRight="@+id/BTN_projector"
-        android:layout_alignEnd="@+id/BTN_projector"
-        android:layout_marginRight="16dp"
-        android:layout_marginEnd="16dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/washingmachine"
-        android:id="@+id/textView2"
-        android:textColor="@color/logoDefault"
-        android:layout_below="@+id/BTN_washMachine"
-        android:layout_alignLeft="@+id/BTN_washMachine"
-        android:layout_alignStart="@+id/BTN_washMachine" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/washinglist"
-        android:id="@+id/textView3"
-        android:textColor="@color/logoDefault"
-        android:layout_marginBottom="21dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
-
-
-
-
-
+    </TableRow>
 
 
 </TableLayout>
