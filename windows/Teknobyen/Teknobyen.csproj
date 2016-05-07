@@ -117,6 +117,8 @@
     <Compile Include="Services\FirebaseService\JsonModels.cs" />
     <Compile Include="Services\LaundryService\ILaundryService.cs" />
     <Compile Include="Services\LaundryService\LaundryService.cs" />
+    <Compile Include="Services\SettingsService\ISettingsService.cs" />
+    <Compile Include="Services\SettingsService\SettingsService.cs" />
     <Compile Include="ViewModels\LaundryViewModel.cs" />
     <Compile Include="ViewModels\LaundryMenuViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
@@ -212,7 +214,9 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Common\" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

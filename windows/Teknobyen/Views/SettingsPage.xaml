@@ -6,13 +6,60 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:Teknobyen.ViewModels"
+    xmlns:controls="using:Template10.Controls"
     mc:Ignorable="d">
 
     <Page.DataContext>
         <vm:SettingsViewModel x:Name="ViewModel" />
     </Page.DataContext>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <controls:PageHeader Text="Settings" HorizontalContentAlignment="Center">
+
+        </controls:PageHeader>
+
+
+        <Grid Grid.Row="1"  Padding="5" MaxWidth="600">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="AUto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Roomnumber setting -->
+            <TextBlock Grid.Row="1" Text="Projektor reservasjon" Style="{StaticResource TitleTextBlockStyle}"  />
+            <TextBlock Grid.Row="2" Text="For å reservere psjoektoren må du oppgi romnummeret ditt. Ved å legge det inn her slipper du å fylle det ut manuelt hver gang." TextWrapping="Wrap" />
+            <TextBlock Grid.Row="3" Text="Romnummer:" Style="{StaticResource BaseTextBlockStyle}" />
+            <TextBox Grid.Row="4" PlaceholderText="ex. 403" MaxWidth="100" HorizontalAlignment="Left" MaxLength="3" />
+
+
+            <!-- Laundry login settings -->
+            <TextBlock Text="Vaskeri login" Style="{StaticResource TitleTextBlockStyle}" Grid.Row="6"  />
+            <TextBlock Text="For å kunne vise informasjon fra vaskeriet må du legge inn brukernavn og passord her." Grid.Row="7" TextWrapping="Wrap" Style="{StaticResource SubtitleTextBlockStyle}" />
+            <TextBlock Text="Brukernavn:" Grid.Row="8" Style="{StaticResource BaseTextBlockStyle}" />
+            <TextBox Grid.Row="9" />
+            <TextBlock Text="Passord:" Grid.Row="10" Style="{StaticResource BaseTextBlockStyle}"/>
+            <TextBox Grid.Row="11" />
+
+            <!-- Save button -->
+            <Button Content="Lagre" Grid.Row="13" HorizontalAlignment="Center" Click="{x:Bind ViewModel.SaveSettings}"  />
+        </Grid>
     </Grid>
 </Page>

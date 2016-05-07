@@ -39,6 +39,11 @@ namespace Teknobyen.ViewModels
         {
             
         }
+
+        public void GotoSettingsPage()
+        {
+            this.NavigationService.Navigate(typeof(SettingsPage));
+        }
     }
 }
 

@@ -70,18 +70,17 @@ namespace Teknobyen.Views
             }
         }
 
-        private void ShowUsernameAndPassworDialog()
-        {
-            //TODO
-        }
-
-        private async void Button_Click(object sender, RoutedEventArgs e)
+        private async void ShowUsernameAndPassworDialog()
         {
             var result = await MyContentDialog.ShowAsync();
-            System.Diagnostics.Debug.WriteLine(result);
-            // if result == primary lagre, else display you need to log in and button.
+            if (result == ContentDialogResult.Primary)
+            {
+                var newCredentials = new PasswordCredential(App.APPID, Username, Password);
+                ViewModel.Credentials = newCredentials;
+                ViewModel.GetLaundryMachineStatusList();
+            }
         }
-
+        
         //Meget stygg måte
         private void CheckCanSave(object sender, KeyRoutedEventArgs e)
         {

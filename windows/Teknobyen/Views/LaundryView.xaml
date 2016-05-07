@@ -79,7 +79,6 @@
 
         <!--Set vivibility to false for designtime-->
         <ContentDialog x:Name="MyContentDialog"
-                       Visibility="Collapsed" 
                         VerticalAlignment="Stretch"
                         Title="Innlogging"
                         PrimaryButtonText="Lagre"

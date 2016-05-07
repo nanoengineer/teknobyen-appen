@@ -11,6 +11,14 @@ namespace Teknobyen.Services.CredentialsService
     {
         private string resourceName = App.APPID;
 
+        public static CredentialsService Instance { get; }
+        static CredentialsService()
+        {
+            // implement singleton pattern
+            Instance = Instance ?? new CredentialsService();
+        }
+
+
         /// <summary>
         /// Deletes the currently stored username and password for the laundry login
         /// </summary>

@@ -22,8 +22,14 @@ namespace Teknobyen.ViewModels
         ICredentialsService _credentialsService;
         ILaundryService _laundryService;
 
+        public LaundryViewModel()
+        {
+            _laundryService = new LaundryService();
+            _credentialsService = CredentialsService.Instance;
+        }
 
-        private PasswordCredential _credentials;
+
+        private PasswordCredential _credentials = new PasswordCredential();
         public PasswordCredential Credentials
         {
             get { return _credentials; }
@@ -42,10 +48,8 @@ namespace Teknobyen.ViewModels
 
         public override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
-            _laundryService = new LaundryService();
-            _credentialsService = new CredentialsService();
             GetLaundryMachineStatusList();
-            //GetLaundryAccountBalance(); FIkk nettvekrsfeil i svaret...
+            //GetLaundryAccountBalance(); Fikk nettvekrsfeil i svaret...
             return base.OnNavigatedToAsync(parameter, mode, state);
         }
 
