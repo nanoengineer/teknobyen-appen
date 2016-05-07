@@ -23,7 +23,7 @@
         </Grid.RowDefinitions>
 
 
-        <controls:PageHeader Text="Prosjektor reservasjoner">
+        <controls:PageHeader Text="Prosjektor reservasjoner" HorizontalContentAlignment="Center">
             
         </controls:PageHeader>
         

@@ -120,16 +120,12 @@
     <Compile Include="Services\SettingsService\ISettingsService.cs" />
     <Compile Include="Services\SettingsService\SettingsService.cs" />
     <Compile Include="ViewModels\LaundryViewModel.cs" />
-    <Compile Include="ViewModels\LaundryMenuViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\ProjectorReservationOverviewViewModel.cs" />
     <Compile Include="ViewModels\ProjectorReservationViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="Views\LaundryView.xaml.cs">
       <DependentUpon>LaundryView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\LaundryMenuView.xaml.cs">
-      <DependentUpon>LaundryMenuView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -190,10 +186,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
     <Page Include="Views\LaundryView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\LaundryMenuView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

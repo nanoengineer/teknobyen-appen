@@ -52,7 +52,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <t10controls:PageHeader Text="Vaskeri status">
+        <t10controls:PageHeader Text="Vaskeri status" HorizontalContentAlignment="Center">
             <t10controls:PageHeader.SecondaryCommands>
             </t10controls:PageHeader.SecondaryCommands>
         </t10controls:PageHeader>

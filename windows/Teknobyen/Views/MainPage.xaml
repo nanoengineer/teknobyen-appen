@@ -34,7 +34,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <controls:PageHeader Text="Teknobyen">
+        <controls:PageHeader Text="Teknobyen" HorizontalContentAlignment="Center">
             <controls:PageHeader.SecondaryCommands>
             </controls:PageHeader.SecondaryCommands>
         </controls:PageHeader>

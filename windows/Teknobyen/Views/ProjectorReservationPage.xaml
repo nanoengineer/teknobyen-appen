@@ -28,7 +28,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <controls:PageHeader Text="Prosjektor reservasjon">
+        <controls:PageHeader Text="Ny reservasjon" HorizontalContentAlignment="Center">
             <controls:PageHeader.SecondaryCommands>
             </controls:PageHeader.SecondaryCommands>
         </controls:PageHeader>

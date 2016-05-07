@@ -19,20 +19,15 @@ namespace Teknobyen
             InitializeComponent();
         }
 
-        public override async Task OnInitializeAsync(IActivatedEventArgs args)
+        public override Task OnInitializeAsync(IActivatedEventArgs args)
         {
-            await Task.CompletedTask;
+            return Task.CompletedTask;
         }
 
-        public override async Task OnStartAsync(StartKind startKind, IActivatedEventArgs args)
+        public override Task OnStartAsync(StartKind startKind, IActivatedEventArgs args)
         {
             NavigationService.Navigate(typeof(Views.MainPage));
-            await Task.CompletedTask;
-        }
-
-        public override Task OnPrelaunchAsync(IActivatedEventArgs args, out bool runOnStartAsync)
-        {
-            return base.OnPrelaunchAsync(args, out runOnStartAsync);
+            return Task.CompletedTask;
         }
     }
 }
