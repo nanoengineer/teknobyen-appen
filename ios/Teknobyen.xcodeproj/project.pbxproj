@@ -31,6 +31,7 @@
 		EA0600F41CDD3CA200057196 /* Washing Machine-50.png in Resources */ = {isa = PBXBuildFile; fileRef = EA0600F31CDD3CA200057196 /* Washing Machine-50.png */; };
 		EA0600F61CDD3E1E00057196 /* WashingMachineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0600F51CDD3E1E00057196 /* WashingMachineCell.swift */; };
 		EA0600F81CDDE2C700057196 /* Washing Machine-edge.png in Resources */ = {isa = PBXBuildFile; fileRef = EA0600F71CDDE2C700057196 /* Washing Machine-edge.png */; };
+		EA0600FA1CDE0B5E00057196 /* TBNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0600F91CDE0B5E00057196 /* TBNavigationController.swift */; };
 		EA16AF901CDA5DDB00E73625 /* WashingMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA16AF8F1CDA5DDB00E73625 /* WashingMachine.swift */; };
 		EA16AF941CDA9E0900E73625 /* WashingTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA16AF931CDA9E0900E73625 /* WashingTabBarController.swift */; };
 		EA16AF9B1CDAA60B00E73625 /* WashingStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA16AF9A1CDAA60B00E73625 /* WashingStatusViewController.swift */; };
@@ -69,6 +70,7 @@
 		EA0600F31CDD3CA200057196 /* Washing Machine-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Washing Machine-50.png"; sourceTree = "<group>"; };
 		EA0600F51CDD3E1E00057196 /* WashingMachineCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WashingMachineCell.swift; sourceTree = SOURCE_ROOT; };
 		EA0600F71CDDE2C700057196 /* Washing Machine-edge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Washing Machine-edge.png"; sourceTree = "<group>"; };
+		EA0600F91CDE0B5E00057196 /* TBNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBNavigationController.swift; sourceTree = "<group>"; };
 		EA16AF8F1CDA5DDB00E73625 /* WashingMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WashingMachine.swift; sourceTree = "<group>"; };
 		EA16AF931CDA9E0900E73625 /* WashingTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WashingTabBarController.swift; sourceTree = "<group>"; };
 		EA16AF9A1CDAA60B00E73625 /* WashingStatusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WashingStatusViewController.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 				EA16AFA01CDAB2CE00E73625 /* Constants.swift */,
 				24C7C7AA1CD4DD0300859D37 /* Main.storyboard */,
 				241FDD611CD692CE00961AFE /* MenuViewController.swift */,
+				EA0600F91CDE0B5E00057196 /* TBNavigationController.swift */,
 				24C7C7AD1CD4DD0300859D37 /* Assets.xcassets */,
 				24C7C7AF1CD4DD0300859D37 /* LaunchScreen.storyboard */,
 				24C7C7B21CD4DD0300859D37 /* Info.plist */,
@@ -344,6 +347,7 @@
 				EA16AFA11CDAB2CE00E73625 /* Constants.swift in Sources */,
 				241FDD601CD6929900961AFE /* ReservatorViewController.swift in Sources */,
 				EA0600F61CDD3E1E00057196 /* WashingMachineCell.swift in Sources */,
+				EA0600FA1CDE0B5E00057196 /* TBNavigationController.swift in Sources */,
 				241FDD5F1CD6929900961AFE /* ReservationTableViewCell.swift in Sources */,
 				241FDD5C1CD6928100961AFE /* ReservationViewController.swift in Sources */,
 			);

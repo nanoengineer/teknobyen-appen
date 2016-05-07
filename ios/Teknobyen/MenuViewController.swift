@@ -27,4 +27,12 @@ class MenuViewController: UIViewController {
     override func viewWillDisappear(animated: Bool) {
         self.navigationItem.title = ""
     }
+    
+    override func shouldAutorotate() -> Bool {
+        return false
+    }
+    
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.Portrait
+    }
 }

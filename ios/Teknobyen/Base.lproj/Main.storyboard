@@ -173,7 +173,7 @@
         <!--Navigation Controller-->
         <scene sceneID="laC-yb-6rg">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="wcl-SN-WGf" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="wcl-SN-WGf" customClass="TBNavigationController" customModule="Teknobyen" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="TEk-Os-PZd">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

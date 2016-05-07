@@ -96,8 +96,6 @@ class WashingStatusViewController: UIViewController, UICollectionViewDelegate, U
     
     func loadMachineStatusHtml() {
         
-        var htmlString: NSString?
-        
         let username = "pkminne"
         let pwd = "b5e277"
         
@@ -112,46 +110,57 @@ class WashingStatusViewController: UIViewController, UICollectionViewDelegate, U
         let url = NSURL(string: "http://129.241.152.11/LaundryState?lg=2&ly=9131")
         let task = session.dataTaskWithURL(url!) {
             (let data, let response, let error) in
-//            if var httpResponse = response as? NSHTTPURLResponse {
-                htmlString = NSString(data: data!, encoding: NSUTF8StringEncoding)!
-                do {
-                    // if encoding is omitted, it defaults to NSUTF8StringEncoding
-                    let doc = try HTMLDocument(string: String(htmlString), encoding: NSUTF8StringEncoding)
-                    
-                    var machineIndex:Int = 0
-                    
-                    for element in doc.xpath("//div[contains(@class, 'reservation')]/table//td[contains(@class, 'p')]/text()") {
+                if data != nil {
+                    let htmlString = NSString(data: data!, encoding: NSUTF8StringEncoding)
+                    do {
+                        // if encoding is omitted, it defaults to NSUTF8StringEncoding
+                        let doc = try HTMLDocument(string: String(htmlString), encoding: NSUTF8StringEncoding)
                         
-                        let elementString = String(element)
-                        print("Maskin \(machineIndex + 2): " + elementString)
+                        var machineIndex:Int = 0
                         
-                        if elementString == "Ledig" {
-                            self.washingMachinesData[machineIndex].status = WashingMachineStatus.Available
-                            self.washingMachinesData[machineIndex].minutesRemaining = 0
+                        for element in doc.xpath("//div[contains(@class, 'reservation')]/table//td[contains(@class, 'p')]/text()") {
+                            
+                            let elementString = String(element)
+                            print("Maskin \(machineIndex + 2): " + elementString)
+                            
+                            if elementString == "Ledig" {
+                                self.washingMachinesData[machineIndex].status = WashingMachineStatus.Available
+                                self.washingMachinesData[machineIndex].minutesRemaining = 0
+                            }
+                            else {
+                                let statusMin = String(element).substringWithRange(elementString.startIndex.advancedBy(9) ..< elementString.endIndex.advancedBy(-5))
+                                self.washingMachinesData[machineIndex].status = WashingMachineStatus.Running
+                                self.washingMachinesData[machineIndex].minutesRemaining = Int(statusMin)!
+                            }
+                            
+                            
+                            machineIndex += 1
                         }
-                        else {
-                            let statusMin = String(element).substringWithRange(elementString.startIndex.advancedBy(9) ..< elementString.endIndex.advancedBy(-5))
-                            self.washingMachinesData[machineIndex].status = WashingMachineStatus.Running
-                            self.washingMachinesData[machineIndex].minutesRemaining = Int(statusMin)!
-                        }
                         
+                        dispatch_async(dispatch_get_main_queue(),{
+                            self.washingMachineCollection.reloadData()
+                        })
                         
-                        machineIndex += 1
                     }
-                    
-                    dispatch_async(dispatch_get_main_queue(),{
-                        self.washingMachineCollection.reloadData()
-                    })
-                    
-                } catch let error {
-                    print(error)
+                    catch let error {
+                        print(error)
+                    }
                 }
-            }
-//        }
+                else {
+                    print(data)
+                    self.washingMachineCollection.reloadData()
+                }
+        }
         task.resume()
     }
     
+    override func shouldAutorotate() -> Bool {
+        return false
+    }
     
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.Portrait
+    }
 
     /*
     // MARK: - Navigation
