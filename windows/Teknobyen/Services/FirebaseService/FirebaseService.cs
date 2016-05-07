@@ -12,6 +12,12 @@ namespace Teknobyen.Services.FirebaseService
 {
     class FirebaseService : IFirebaseService
     {
+        public static FirebaseService Instance { get; }
+        static FirebaseService()
+        {
+            // implement singleton pattern
+            Instance = Instance ?? new FirebaseService();
+        }
 
         private string base_uri = "https://teknobyen.firebaseio.com";
         private string client_secret = "5bfmWJnAb6gTwLpnrrDLqSY5c2LQPs88agx3WW2a";
@@ -30,6 +36,7 @@ namespace Teknobyen.Services.FirebaseService
 
                 JObject parsedJson = JObject.Parse(s);
 
+                //var rm = JsonConvert.DeserializeObject<Dictionary<string, ReservationJsonModel>>(s);
 
                 foreach (var item in parsedJson)
                 {
@@ -54,6 +61,13 @@ namespace Teknobyen.Services.FirebaseService
             }
             return returnObject;
         }
+
+        public Task<List<WashDayModel>> GetWashList()
+        {
+            throw new NotImplementedException();
+        }
+
+
 
         //Using https://www.firebase.com/docs/rest/guide/saving-data.html#section-post as guide
         public async Task<bool> SaveReservation(ProjectorReservationModel reservation)
@@ -81,5 +95,39 @@ namespace Teknobyen.Services.FirebaseService
             return true;
        }
 
+        public async Task<bool> SaveWashDayEntry(WashDayModel washDay)
+        {
+            bool success = false;
+            string uri = $"{base_uri}/washdays.json?auth={client_secret}";
+
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, new Uri(uri));
+
+                    //Serialize content
+                    var serializedContent = JsonConvert.SerializeObject(new WashDayJsonModel(washDay));
+                    HttpStringContent content = new HttpStringContent(serializedContent);
+                    request.Content = content;
+                    var s = await client.SendRequestAsync(request);
+
+                    if (s.StatusCode != HttpStatusCode.Ok)
+                    {
+                        success = false;
+                    }
+                    else
+                    {
+                        success = true;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                //TODO: log e to hockeyapp
+            }
+
+            return success;
+        }
     }
 }

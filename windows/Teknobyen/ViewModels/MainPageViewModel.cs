@@ -35,9 +35,9 @@ namespace Teknobyen.ViewModels
             this.NavigationService.Navigate(typeof(LaundryView));
         }
 
-        public async void GotoWashlistPage()
+        public void GotoWashlistPage()
         {
-            
+            this.NavigationService.Navigate(typeof(WashListOverviewPage));
         }
 
         public void GotoSettingsPage()

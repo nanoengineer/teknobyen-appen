@@ -11,5 +11,8 @@ namespace Teknobyen.Services.FirebaseService
     {
         Task<List<ProjectorReservationModel>> GetReservations();
         Task<bool> SaveReservation(ProjectorReservationModel s);
+
+        Task<List<WashDayModel>> GetWashList();
+        Task<bool> SaveWashDayEntry(WashDayModel washDay);
     }
 }
