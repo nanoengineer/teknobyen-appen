@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		241FDD5C1CD6928100961AFE /* ReservationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241FDD5B1CD6928100961AFE /* ReservationViewController.swift */; };
 		241FDD5F1CD6929900961AFE /* ReservationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241FDD5D1CD6929900961AFE /* ReservationTableViewCell.swift */; };
-		241FDD601CD6929900961AFE /* AddReservattionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241FDD5E1CD6929900961AFE /* AddReservattionViewController.swift */; };
 		241FDD621CD692CE00961AFE /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241FDD611CD692CE00961AFE /* MenuViewController.swift */; };
 		24C7C7A71CD4DD0300859D37 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C7C7A61CD4DD0300859D37 /* AppDelegate.swift */; };
 		24C7C7AC1CD4DD0300859D37 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24C7C7AA1CD4DD0300859D37 /* Main.storyboard */; };
@@ -39,12 +38,12 @@
 		EA16AF9F1CDAAC2700E73625 /* Dashboard-50.png in Resources */ = {isa = PBXBuildFile; fileRef = EA16AF9E1CDAAC2700E73625 /* Dashboard-50.png */; };
 		EA16AFA11CDAB2CE00E73625 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA16AFA01CDAB2CE00E73625 /* Constants.swift */; };
 		EA16AFA31CDACB4200E73625 /* WashingRefillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA16AFA21CDACB4200E73625 /* WashingRefillViewController.swift */; };
+		EAD13F151CDE3A50007D14E6 /* AddReservattionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD13F141CDE3A50007D14E6 /* AddReservattionViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		241FDD5B1CD6928100961AFE /* ReservationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReservationViewController.swift; sourceTree = "<group>"; };
 		241FDD5D1CD6929900961AFE /* ReservationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReservationTableViewCell.swift; sourceTree = "<group>"; };
-		241FDD5E1CD6929900961AFE /* ReservatorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReservatorViewController.swift; sourceTree = "<group>"; };
 		241FDD611CD692CE00961AFE /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		24C7C7A31CD4DD0300859D37 /* Teknobyen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Teknobyen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		24C7C7A61CD4DD0300859D37 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -78,6 +77,7 @@
 		EA16AF9E1CDAAC2700E73625 /* Dashboard-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Dashboard-50.png"; sourceTree = "<group>"; };
 		EA16AFA01CDAB2CE00E73625 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		EA16AFA21CDACB4200E73625 /* WashingRefillViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WashingRefillViewController.swift; sourceTree = "<group>"; };
+		EAD13F141CDE3A50007D14E6 /* AddReservattionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddReservattionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,9 +185,9 @@
 		EA16AF971CDA9EE500E73625 /* Projector */ = {
 			isa = PBXGroup;
 			children = (
+				EAD13F141CDE3A50007D14E6 /* AddReservattionViewController.swift */,
 				241FDD5B1CD6928100961AFE /* ReservationViewController.swift */,
 				241FDD5D1CD6929900961AFE /* ReservationTableViewCell.swift */,
-				241FDD5E1CD6929900961AFE /* ReservatorViewController.swift */,
 			);
 			name = Projector;
 			sourceTree = "<group>";
@@ -338,6 +338,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EAD13F151CDE3A50007D14E6 /* AddReservattionViewController.swift in Sources */,
 				24C7C7A71CD4DD0300859D37 /* AppDelegate.swift in Sources */,
 				EA16AF941CDA9E0900E73625 /* WashingTabBarController.swift in Sources */,
 				EA16AF9B1CDAA60B00E73625 /* WashingStatusViewController.swift in Sources */,
@@ -345,7 +346,6 @@
 				EA16AFA31CDACB4200E73625 /* WashingRefillViewController.swift in Sources */,
 				EA16AF901CDA5DDB00E73625 /* WashingMachine.swift in Sources */,
 				EA16AFA11CDAB2CE00E73625 /* Constants.swift in Sources */,
-				241FDD601CD6929900961AFE /* ReservatorViewController.swift in Sources */,
 				EA0600F61CDD3E1E00057196 /* WashingMachineCell.swift in Sources */,
 				EA0600FA1CDE0B5E00057196 /* TBNavigationController.swift in Sources */,
 				241FDD5F1CD6929900961AFE /* ReservationTableViewCell.swift in Sources */,
