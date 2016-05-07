@@ -73,7 +73,7 @@ class WashingStatusViewController: UIViewController, UICollectionViewDelegate, U
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) as! WashingMachineCell
         
         cell.cellImageView.image = UIImage(named: "washingMachineCellImage2")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-        cell.cellImageView.tintColor = UIColor.whiteColor()
+        cell.cellImageView.tintColor = UIColor.whiteColor().colorWithAlphaComponent(0.6)
         
         cell.machine = washingMachinesData[indexPath.row]
         
