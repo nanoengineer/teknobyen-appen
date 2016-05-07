@@ -32,20 +32,22 @@
         <ListView Grid.Row="1" ItemsSource="{x:Bind ViewModel.ReservationsList}" >
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="models:ProjectorReservationModel">
-                    <Grid >
+                    <Grid>
                         <Grid.RowDefinitions>
-                                <RowDefinition />
-                                <RowDefinition />
-                            </Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*"/>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Grid.ColumnSpan="2" Text="{x:Bind comment}" />
-                        <TextBlock Grid.Column="2" Text="{x:Bind roomNumber}" />
-                        <TextBlock Grid.Row="1" Text="{x:Bind date}" />
+                        <TextBlock Grid.ColumnSpan="2" Text="{x:Bind comment}" Style="{StaticResource TitleTextBlockStyle}"/>
+                        <TextBlock Grid.Column="2" Text="{x:Bind roomNumber}" HorizontalAlignment="Right" Style="{StaticResource BodyTextBlockStyle}"/>
+                        <TextBlock Grid.Row="1" Style="{StaticResource BaseTextBlockStyle}">
+                            <Run Text="{x:Bind date.DayOfWeek}" />
+                        </TextBlock>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
@@ -55,14 +57,13 @@
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>
-        
-        
-        
-        
+
         <!-- Add reservation button -->
-        <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="1" Background="Transparent" Margin="0,0,0,10">
-            <Ellipse Fill="Blue" Height="50" Width="50">
-            </Ellipse>
+        <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="1" Background="Transparent" Margin="0,0,0,10" Click="{x:Bind ViewModel.GotoProjectorReservationPage}">
+            <Grid>
+                <Ellipse Fill="LightBlue" Height="50" Width="50" />
+                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE710;" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Foreground="White" />
+            </Grid>
         </Button>
     </Grid>
 </Page>

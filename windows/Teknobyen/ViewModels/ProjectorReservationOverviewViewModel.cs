@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Teknobyen.Models;
 using Teknobyen.Services.FirebaseService;
+using Teknobyen.Views;
 using Template10.Mvvm;
 using Windows.UI.Xaml.Navigation;
 
@@ -26,19 +27,25 @@ namespace Teknobyen.ViewModels
         {
             try
             {
-            var _firebaseService = new FirebaseService();
-            var list = await _firebaseService.GetReservations();
+                var _firebaseService = new FirebaseService();
+                var list = await _firebaseService.GetReservations();
 
-            list = (from s in list
-                               where s.stopHour > DateTime.Now
-                               select s).ToList();
-            //list.Sort();
-            ReservationsList = list;
+                list = (from s in list
+                                   where s.stopHour > DateTime.Now
+                                   select s).ToList();
+                list.Sort();
+                ReservationsList = list;
             }
             catch (Exception)
             {
                 //Log to hockey app
             }
+        }
+
+        public void GotoProjectorReservationPage()
+        {
+            this.NavigationService.Navigate(typeof(ProjectorReservationPage));
+            
         }
     }
 }
