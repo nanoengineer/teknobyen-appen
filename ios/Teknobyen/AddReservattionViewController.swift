@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ReservatorViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextViewDelegate {
+class AddReservattionViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextViewDelegate {
 
     
     

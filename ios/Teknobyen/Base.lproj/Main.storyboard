@@ -188,10 +188,10 @@
             </objects>
             <point key="canvasLocation" x="515" y="352"/>
         </scene>
-        <!--Reservator View Controller-->
+        <!--Add Reservattion View Controller-->
         <scene sceneID="Xoo-K1-mhD">
             <objects>
-                <viewController id="q59-sk-8Ph" customClass="ReservatorViewController" customModule="Teknobyen" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="q59-sk-8Ph" customClass="AddReservattionViewController" customModule="Teknobyen" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="56t-f7-P82"/>
                         <viewControllerLayoutGuide type="bottom" id="YbW-qF-dkz"/>

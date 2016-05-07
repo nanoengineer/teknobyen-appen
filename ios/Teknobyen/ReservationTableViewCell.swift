@@ -11,12 +11,12 @@ import UIKit
 class ReservationTableViewCell: UITableViewCell {
 
     var reservation: Reservation!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         self.backgroundColor = .whiteColor()
-        
-        
+
+
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -29,4 +29,5 @@ class ReservationTableViewCell: UITableViewCell {
     @IBOutlet weak var roomLabel: UILabel!
     @IBOutlet weak var hourLabel: UILabel!
     @IBOutlet weak var commentLabel: UILabel!
+
 }

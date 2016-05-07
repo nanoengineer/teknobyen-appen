@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		241FDD5C1CD6928100961AFE /* ReservationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241FDD5B1CD6928100961AFE /* ReservationViewController.swift */; };
 		241FDD5F1CD6929900961AFE /* ReservationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241FDD5D1CD6929900961AFE /* ReservationTableViewCell.swift */; };
-		241FDD601CD6929900961AFE /* ReservatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241FDD5E1CD6929900961AFE /* ReservatorViewController.swift */; };
+		241FDD601CD6929900961AFE /* AddReservattionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241FDD5E1CD6929900961AFE /* AddReservattionViewController.swift */; };
 		241FDD621CD692CE00961AFE /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241FDD611CD692CE00961AFE /* MenuViewController.swift */; };
 		24C7C7A71CD4DD0300859D37 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C7C7A61CD4DD0300859D37 /* AppDelegate.swift */; };
 		24C7C7AC1CD4DD0300859D37 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24C7C7AA1CD4DD0300859D37 /* Main.storyboard */; };
