@@ -5,10 +5,12 @@ PODS:
 DEPENDENCIES:
   - Firebase (>= 2.5.1)
   - Fuzi (~> 0.3.0)
+  - PIDatePicker (~> 0.1.0)
 
 SPEC CHECKSUMS:
   Firebase: 3565ea88b830f28f2c77ecc524622bc71a20d085
   Fuzi: 25118b725a1637f1676f63ae1acbba1f30a5dd6c
+  PIDatePicker: 36548c3466dec16e7918e533486ffe86687f65e3
 
 PODFILE CHECKSUM: 5bf0dc3f7e635b0181084b334694b201fb6f2df6
 
