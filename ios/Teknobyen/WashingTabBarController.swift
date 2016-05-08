@@ -21,6 +21,9 @@ class WashingTabBarController: UITabBarController, UITabBarControllerDelegate {
         self.viewControllers = [washingStatusVC, washingRefillVC]
         self.navigationItem.title = "Vaskemaskiner"
         
+        self.tabBar.barTintColor = AppConstants.themeColor
+        self.tabBar.tintColor = AppConstants.tabSelectedColor
+        
         statusTabBarItemSetUp()
         refillTabBarItemSetUp()
 
@@ -33,17 +36,20 @@ class WashingTabBarController: UITabBarController, UITabBarControllerDelegate {
     }
     
     private func statusTabBarItemSetUp() {
-        let statusTab = UITabBarItem(title: "Status", image: UIImage(named: "washingTabBarStatus"), tag: 0)
+        
+        let statusTab = UITabBarItem(title: "Status", image: UIImage(named: "washingTabBarStatus")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate), tag: 0)
         self.viewControllers![0].tabBarItem  = statusTab
+        
         statusTab.setTitleTextAttributes([NSForegroundColorAttributeName : AppConstants.tabNormalColor], forState: UIControlState.Normal)
-        self.tabBar.barTintColor = AppConstants.themeColor
+        statusTab.setTitleTextAttributes([NSForegroundColorAttributeName : AppConstants.tabSelectedColor], forState: UIControlState.Selected)
     }
     
     private func refillTabBarItemSetUp() {
         let refillTab = UITabBarItem(title: "Påfyll", image: UIImage(named: "washingTabBarRefill"), tag: 1)
         self.viewControllers![1].tabBarItem = refillTab
+        
         refillTab.setTitleTextAttributes([NSForegroundColorAttributeName : AppConstants.tabNormalColor], forState: UIControlState.Normal)
-        self.tabBar.barTintColor = AppConstants.themeColor
+        refillTab.setTitleTextAttributes([NSForegroundColorAttributeName : AppConstants.tabSelectedColor], forState: UIControlState.Selected)
     }
     
     func tabBarController(tabBarController: UITabBarController, didSelectViewController viewController: UIViewController) {
