@@ -15,7 +15,6 @@ namespace Teknobyen.ViewModels
     {
 
         private List<ProjectorReservationModel> _reservationsList;
-
         public List<ProjectorReservationModel> ReservationsList
         {
             get { return _reservationsList; }
@@ -31,8 +30,8 @@ namespace Teknobyen.ViewModels
                 var list = await _firebaseService.GetReservations();
 
                 list = (from s in list
-                                   where s.stopHour > DateTime.Now
-                                   select s).ToList();
+                        where s.stopHour > DateTime.Now
+                        select s).ToList();
                 list.Sort();
                 ReservationsList = list;
             }

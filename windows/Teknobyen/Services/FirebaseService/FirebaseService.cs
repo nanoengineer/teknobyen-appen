@@ -62,11 +62,35 @@ namespace Teknobyen.Services.FirebaseService
             return returnObject;
         }
 
-        public Task<List<WashDayModel>> GetWashList()
+        public async Task<List<WashDayModel>> GetWashList()
         {
-            throw new NotImplementedException();
-        }
+            List<WashDayModel> listOfWashDays = new List<WashDayModel>();
+            string uri = $"{base_uri}/washdays.json?auth={client_secret}";
 
+            using (var client = new HttpClient())
+            {
+                var response = await client.GetAsync(new Uri(uri));
+                var jsonString = await response.Content.ReadAsStringAsync();
+
+                Dictionary<string, WashDayJsonModel> washDayList = JsonConvert.DeserializeObject<Dictionary<string, WashDayJsonModel>>(jsonString);
+
+                foreach (var item in washDayList)
+                {
+                    try
+                    {
+                        var washDayModel = new WashDayModel(item.Key, item.Value);
+                        listOfWashDays.Add(washDayModel);
+                    }
+                    catch (Exception e)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"Deserialization of washday failed");
+                    }
+                }
+            }
+
+            return listOfWashDays;
+
+        }
 
 
         //Using https://www.firebase.com/docs/rest/guide/saving-data.html#section-post as guide

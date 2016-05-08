@@ -6,7 +6,12 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Template10.Controls"
+    xmlns:vm="using:Teknobyen.ViewModels"
     mc:Ignorable="d">
+
+    <Page.DataContext>
+        <vm:WashListOverviewPageViewModel x:Name="ViewModel" />
+    </Page.DataContext>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
@@ -16,25 +21,29 @@
 
         <controls:PageHeader Text="Vaskeliste" HorizontalContentAlignment="Center" >
             <controls:PageHeader.SecondaryCommands>
-                <AppBarButton Label="Admin" />
+                <AppBarButton Label="Admin" Click="{x:Bind ViewModel.GotoAdminPage}" />
             </controls:PageHeader.SecondaryCommands>
         </controls:PageHeader>
 
-        <Grid Grid.Row="1" MaxWidth="600">
+        <Grid Grid.Row="1" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
             <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="Neste vaskedag:" />
             <!-- Neste vaskedag -->
             <Grid Grid.Row="1">
-                
+                <!--Neste vaskedag control?-->
             </Grid>
 
-            <TextBlock Grid.Row="2" Style="{StaticResource TitleTextBlockStyle}" Text="Vaskeliste:" />
+            <TextBlock Grid.Column="1" Style="{StaticResource TitleTextBlockStyle}" Text="Vaskeliste:" />
             <ListView Grid.Row="3">
                 
             </ListView>

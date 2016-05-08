@@ -125,6 +125,7 @@
     <Compile Include="ViewModels\ProjectorReservationOverviewViewModel.cs" />
     <Compile Include="ViewModels\ProjectorReservationViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
+    <Compile Include="ViewModels\WashListAdminPageViewModel.cs" />
     <Compile Include="ViewModels\WashListOverviewPageViewModel.cs" />
     <Compile Include="Views\LaundryView.xaml.cs">
       <DependentUpon>LaundryView.xaml</DependentUpon>
@@ -140,6 +141,9 @@
     </Compile>
     <Compile Include="Views\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WashListAdminPage.xaml.cs">
+      <DependentUpon>WashListAdminPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\WashListOverviewPage.xaml.cs">
       <DependentUpon>WashListOverviewPage.xaml</DependentUpon>
@@ -207,6 +211,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WashListAdminPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

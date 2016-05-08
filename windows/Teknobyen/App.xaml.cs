@@ -14,6 +14,7 @@ namespace Teknobyen
     {
 
         public static string APPID = "Teknobyen.App";
+        public static string DATEFORMAT = "dd.MM.yyyy";
 
         public App() {
             InitializeComponent();
