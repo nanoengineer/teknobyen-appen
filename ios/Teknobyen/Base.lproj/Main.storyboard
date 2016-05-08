@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="wcl-SN-WGf">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="wcl-SN-WGf">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -99,7 +99,7 @@
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CnB-ik-plO">
                                         <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.49019607840000001" green="0.79215686269999996" blue="0.89019607840000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="Logg Inn">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -245,18 +245,17 @@
                             <constraint firstItem="7wL-fP-cmb" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="5Le-aO-EpZ">
                                 <variation key="heightClass=regular" constant="1.5"/>
                             </constraint>
-                            <constraint firstItem="7wL-fP-cmb" firstAttribute="top" secondItem="XQq-f8-FsR" secondAttribute="bottom" constant="37" id="B2y-D7-z8k"/>
-                            <constraint firstItem="jed-o9-Nmm" firstAttribute="top" secondItem="7wL-fP-cmb" secondAttribute="bottom" constant="16" id="CZT-cq-alJ"/>
+                            <constraint firstItem="7wL-fP-cmb" firstAttribute="top" secondItem="XQq-f8-FsR" secondAttribute="bottom" constant="35" id="B2y-D7-z8k"/>
+                            <constraint firstItem="jed-o9-Nmm" firstAttribute="top" secondItem="7wL-fP-cmb" secondAttribute="bottom" constant="18" id="CZT-cq-alJ"/>
                             <constraint firstItem="jed-o9-Nmm" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Fmn-h0-heX">
                                 <variation key="heightClass=regular" constant="2"/>
                             </constraint>
-                            <constraint firstItem="Sws-DE-OCZ" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="18" id="Jb0-et-eJU"/>
                             <constraint firstItem="YWf-K7-elv" firstAttribute="top" secondItem="jed-o9-Nmm" secondAttribute="bottom" constant="35" id="OY3-gN-7bg"/>
                             <constraint firstItem="XQq-f8-FsR" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Vhe-El-xU2">
                                 <variation key="heightClass=regular" constant="-1"/>
                             </constraint>
                             <constraint firstItem="Sws-DE-OCZ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="dHL-k0-qZG"/>
-                            <constraint firstItem="XQq-f8-FsR" firstAttribute="top" secondItem="Sws-DE-OCZ" secondAttribute="bottom" constant="-5" id="iea-e6-Dab"/>
+                            <constraint firstItem="XQq-f8-FsR" firstAttribute="top" secondItem="Sws-DE-OCZ" secondAttribute="bottom" constant="16" id="iea-e6-Dab"/>
                             <constraint firstItem="Kvk-Ye-ud1" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="jHC-YA-GfG">
                                 <variation key="heightClass=regular" constant="2"/>
                             </constraint>
@@ -265,16 +264,17 @@
                             <constraint firstItem="YWf-K7-elv" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="sox-Js-B7g">
                                 <variation key="heightClass=regular" constant="1.5"/>
                             </constraint>
+                            <constraint firstItem="7wL-fP-cmb" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="ugQ-3x-wN9"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="Jb0-et-eJU"/>
                                 <exclude reference="dHL-k0-qZG"/>
                                 <exclude reference="jzs-CA-GWX"/>
                                 <exclude reference="Vhe-El-xU2"/>
                                 <exclude reference="iea-e6-Dab"/>
                                 <exclude reference="5Le-aO-EpZ"/>
                                 <exclude reference="B2y-D7-z8k"/>
+                                <exclude reference="ugQ-3x-wN9"/>
                                 <exclude reference="CZT-cq-alJ"/>
                                 <exclude reference="Fmn-h0-heX"/>
                                 <exclude reference="OY3-gN-7bg"/>
@@ -285,13 +285,13 @@
                         </variation>
                         <variation key="heightClass=regular">
                             <mask key="constraints">
-                                <include reference="Jb0-et-eJU"/>
                                 <include reference="dHL-k0-qZG"/>
                                 <include reference="jzs-CA-GWX"/>
                                 <include reference="Vhe-El-xU2"/>
                                 <include reference="iea-e6-Dab"/>
                                 <include reference="5Le-aO-EpZ"/>
                                 <include reference="B2y-D7-z8k"/>
+                                <include reference="ugQ-3x-wN9"/>
                                 <include reference="CZT-cq-alJ"/>
                                 <include reference="Fmn-h0-heX"/>
                                 <include reference="OY3-gN-7bg"/>

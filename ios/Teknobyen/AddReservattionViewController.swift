@@ -140,7 +140,7 @@ class AddReservattionViewController: UIViewController, UIPickerViewDelegate, UIP
         updateToDate()
     }
     
-    var pickerData = [["0 timer","1 time", "2 timer", "3 timer"], ["0 minutter", "15 minutter", "30 minutter", "45 minutter"]]
+    var pickerData = [["0 t","1 t", "2 t", "3 t"], ["0 min", "15 min", "30 min", "45 min"]]
     
     // The number of columns of data
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
