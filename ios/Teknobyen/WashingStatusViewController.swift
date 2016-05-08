@@ -27,6 +27,7 @@ class WashingStatusViewController: UIViewController, UICollectionViewDelegate, U
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: AppConstants.varDefs.cellMargin, left: AppConstants.varDefs.cellMargin, bottom: AppConstants.varDefs.cellMargin, right:AppConstants.varDefs.cellMargin)
         layout.itemSize = AppConstants.varDefs.cellSize
+        
     
         
         washingMachineCollection = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
@@ -41,9 +42,9 @@ class WashingStatusViewController: UIViewController, UICollectionViewDelegate, U
         washingMachineCollection.allowsSelection = true
         
         refreshControl = UIRefreshControl()
-        let attributes = [NSForegroundColorAttributeName: AppConstants.tileColor]
+        let attributes = [NSForegroundColorAttributeName: AppConstants.themeColor]
         refreshControl.attributedTitle = NSAttributedString(string: "Oppdatering...", attributes: attributes)
-        refreshControl.tintColor = AppConstants.tileColor
+        refreshControl.tintColor = AppConstants.themeColor
         
         refreshControl.addTarget(self, action: #selector(WashingStatusViewController.pullToRefresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
 
@@ -73,12 +74,12 @@ class WashingStatusViewController: UIViewController, UICollectionViewDelegate, U
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) as! WashingMachineCell
         
         cell.cellImageView.image = UIImage(named: "washingMachineCellImage2")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-        cell.cellImageView.tintColor = UIColor.whiteColor().colorWithAlphaComponent(0.6)
+        cell.cellImageView.tintColor = UIColor.whiteColor().colorWithAlphaComponent(0.8)
         
         cell.machine = washingMachinesData[indexPath.row]
         
         cell.cellText.text = cell.machine!.displayString
-        cell.cellText.font = UIFont.boldSystemFontOfSize(13)
+        cell.backgroundColorUpdate()
         
         if indexPath.row == AppConstants.numOfWashingMachines - 1 {
             refreshControl.endRefreshing()
@@ -133,7 +134,6 @@ class WashingStatusViewController: UIViewController, UICollectionViewDelegate, U
                                 self.washingMachinesData[machineIndex].minutesRemaining = Int(statusMin)!
                             }
                             
-                            
                             machineIndex += 1
                         }
                         
@@ -147,7 +147,8 @@ class WashingStatusViewController: UIViewController, UICollectionViewDelegate, U
                     }
                 }
                 else {
-                    print(data)
+                    print("Error: \(error)): No internet connection")
+                    print("Reponse: \(response)")
                     self.washingMachineCollection.reloadData()
                 }
         }

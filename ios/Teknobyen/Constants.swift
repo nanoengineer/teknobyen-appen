@@ -8,19 +8,20 @@
 
 import Foundation
 import UIKit
-
+import UIColor_Hex_Swift
 
 var AppConstants = Constants()
 
 struct Constants {
     let titleString = "TEKNOBYEN"
-    var themeColor = UIColor(red: 56/255, green: 171/255, blue: 209/255, alpha: 1)
+//    var themeColor = UIColor(red: 56/255, green: 190/255, blue: 209/255, alpha: 1)
+    var themeColor = UIColor(rgba: "#7DCAE3FF")
     let tabNormalColor = UIColor.whiteColor()
-    var tileColor:UIColor {
-        get {
-            return themeColor.colorWithAlphaComponent(0.5)
-        }
-    }
+    
+    let machineAvailColor = UIColor(rgba: "#97E37DC5")
+    let machineBusyColor = UIColor(rgba: "#E3967DC5")
+    let machineUnknownColor = UIColor(rgba: "#E3D059C5")
+    
     let numOfWashingMachines = 6
     let washingMachineStartId: UInt =  4
     

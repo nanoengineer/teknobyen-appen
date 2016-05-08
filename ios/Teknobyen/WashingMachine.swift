@@ -29,12 +29,13 @@ class WashingMachine
             switch status
             {
             case .Available:
-                return "Maskin \(id): LEDIG"
+                return "LEDIG"
             case .Running:
-                return "Maskin \(id): \(minutesRemaining) MIN."
+                return "\(minutesRemaining) MIN"
             case .Unknown:
-                return "Maskin \(id): STATUS UNKNOWN."
+                return "STATUS UNKNOWN"
             }
+
         }
     }
     
