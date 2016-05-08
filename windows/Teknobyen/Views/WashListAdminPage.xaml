@@ -29,7 +29,7 @@
             </Grid.ColumnDefinitions>
         
             <!-- Current wash list grid -->
-            <Grid>
+            <Grid Padding="5,0,10,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*" />
@@ -51,7 +51,7 @@
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
 
-                                <TextBlock Text="{x:Bind Date}" />
+                                <TextBlock Text="{x:Bind Date.Date}" />
                                 <TextBlock Grid.Column="1" Text="{x:Bind Assignment}" />
                                 <TextBlock Grid.Column="2" Text="{x:Bind RoomNumber}" />
                             </Grid>
@@ -86,7 +86,53 @@
             </Grid>
             
             <!-- Create washlist  -->
-            
+            <Grid Grid.Column="1" Padding="5,0,10,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <TextBox Text="{x:Bind ViewModel.WashListAsText, Mode=TwoWay}" AcceptsReturn="True">
+                    
+                </TextBox>
+                <Button Grid.Row="1" Content="Parse" Click="{x:Bind ViewModel.ParseWashListText, Mode=OneWay}" />
+
+                <!-- Parsed dates -->
+                <ListView Grid.Row="3"
+                          ItemsSource="{Binding ParsedWashDayList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          >
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="models:WashDayModel" >
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="{x:Bind Date.Date}" />
+                                <TextBlock Grid.Column="1" Text="{x:Bind Assignment}" />
+                                <TextBlock Grid.Column="2" Text="{x:Bind RoomNumber}" />
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                </ListView>
+
+                <StackPanel Orientation="Horizontal" Grid.Row="4">
+                    <Button Click="{x:Bind ViewModel.SaveParsedList}">
+                        <TextBlock Text="Save" />
+                    </Button>
+                </StackPanel>
+                
+            </Grid>
         </Grid>
     </Grid>
 </Page>
