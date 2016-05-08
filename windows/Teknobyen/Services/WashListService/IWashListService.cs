@@ -10,7 +10,7 @@ namespace Teknobyen.Services.WashListService
     interface IWashListService
     {
         List<WashDayModel> ParseTextToWashList(string washListString);
-        List<string> ValidateWashList(List<WashDayModel> listToValidate);
+        IList<string> ValidateWashList(List<WashDayModel> listToValidate);
 
         List<WashDayModel> GenerateWashList(
             DateTime startDate, DateTime endDate, 

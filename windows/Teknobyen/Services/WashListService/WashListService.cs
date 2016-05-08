@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Teknobyen.Common;
 using Teknobyen.Models;
 
 namespace Teknobyen.Services.WashListService
@@ -20,8 +21,6 @@ namespace Teknobyen.Services.WashListService
         {
             throw new NotImplementedException();
         }
-
-
 
         public List<WashDayModel> ParseTextToWashList(string washListString)
         {
@@ -53,9 +52,43 @@ namespace Teknobyen.Services.WashListService
             return ParsedWashList;
         }
 
-        public List<string> ValidateWashList(List<WashDayModel> listToValidate)
+        public IList<string> ValidateWashList(List<WashDayModel> listToValidate)
         {
-            throw new NotImplementedException();
+            //Must be sorted by date and then assignment
+            listToValidate =  listToValidate.OrderBy(e => e.Date).ThenBy(e => e.Assignment).ToList();
+
+
+            IList<string> errorList = new List<string>();
+            //First ensure there are even entries in the list
+            var entriesCount = listToValidate.Count;
+            if (entriesCount % 2 != 0)
+            {
+                //Add error line
+                errorList.Add("Incorrect number of entries. Should be even numbered.");
+            }
+
+            for (int i = 0; i < (entriesCount/2d); i++)
+            {
+                //Ensure two entries for each date
+                if(listToValidate[2*i].Date.Date != listToValidate[2 * i + 1].Date.Date)
+                {
+                    errorList.Add($"Date entries not correctly aligned");
+                }
+                if (listToValidate[2*i].Assignment != 1 || listToValidate[2*i+1].Assignment != 2)
+                {
+                    errorList.Add("Assignments not correctly numbered eg. not 1 and 2");
+                }
+                if (RoomManager.IsDoubleRoom(listToValidate[2*i].RoomNumber) || RoomManager.IsDoubleRoom(listToValidate[2 * i + 1].RoomNumber))
+                {
+                    if (listToValidate[2*i].RoomNumber != listToValidate[2*i+1].RoomNumber)
+                    {
+                        errorList.Add($"Doubleroom not having both assignments on date {listToValidate[2*i].Date.ToString()}");
+                    }
+                }
+
+            }
+
+            return errorList;
         }
     }
 }

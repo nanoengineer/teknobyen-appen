@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Teknobyen.Common;
 using Teknobyen.Models;
 using Teknobyen.Services.FirebaseService;
 using Teknobyen.Services.WashListService;
@@ -63,7 +64,7 @@ namespace Teknobyen.ViewModels
 
         public async override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
-            WashDayList = await _firebaseService.GetWashList();
+            WashDayList = (await _firebaseService.GetWashList()).OrderBy(e => e.Date).ThenBy(e => e.Assignment).ToList();
         }
 
         public void ParseWashListText()
@@ -72,7 +73,7 @@ namespace Teknobyen.ViewModels
             {
                 var toParse = WashListAsText;
                 ParsedWashDayList = _washListService.ParseTextToWashList(toParse);
-                
+                var errors = _washListService.ValidateWashList(ParsedWashDayList);                
             }
             catch (Exception)
             {

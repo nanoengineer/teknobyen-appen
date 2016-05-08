@@ -8,6 +8,13 @@ namespace Teknobyen.Models
 {
     public class RoomModel
     {
+        public RoomModel() { }
+        public RoomModel(int number, bool doubleR)
+        {
+            RoomNumber = number;
+            DoubleRoom = doubleR;
+        }
+
         public int RoomNumber { get; set; }
         public bool DoubleRoom { get; set; }
     }

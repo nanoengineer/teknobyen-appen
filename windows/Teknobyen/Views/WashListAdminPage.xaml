@@ -77,9 +77,13 @@
                 </Grid>
 
                 <StackPanel Grid.Row="3" Orientation="Horizontal">
-                    <Button Content="Add" />
-                    <Button Content="Add" />
-                    <Button Content="Add" />
+                    <Button >
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE70F;" Margin="0,0,4,0"/>
+                            <TextBlock  Text="Edit"/>
+                        </StackPanel>
+                    </Button>
+                    
                 </StackPanel>
 
 

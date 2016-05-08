@@ -103,6 +103,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Common\RoomManager.cs" />
     <Compile Include="Controls\LargeImageButton.cs" />
     <Compile Include="Controls\WashingMachineControl.xaml.cs">
       <DependentUpon>WashingMachineControl.xaml</DependentUpon>
@@ -227,7 +228,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Common\" />
     <Folder Include="Converter\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
