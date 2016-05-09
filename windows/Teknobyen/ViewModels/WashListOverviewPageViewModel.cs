@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Teknobyen.Models;
 using Teknobyen.Services.FirebaseService;
+using Teknobyen.Services.SettingsService;
 using Teknobyen.Views;
 using Template10.Mvvm;
 using Windows.UI.Xaml.Navigation;
@@ -15,9 +16,13 @@ namespace Teknobyen.ViewModels
     {
         //IWashListService _washlistService;
         IFirebaseService _firebaseService;
+        ISettingsService _settingsService;
+
+
         public WashListOverviewPageViewModel()
         {
             _firebaseService = FirebaseService.Instance;
+            _settingsService = SettingsService.Instance;
         }
 
         #region Bindable proterties
@@ -50,6 +55,13 @@ namespace Teknobyen.ViewModels
         {
             
             WashList = await _firebaseService.GetWashList();
+            var roomnumber = _settingsService.RoomNumber;
+            if (roomnumber != 0)
+            {
+                NextWashDay = (from w in WashList
+                               where w.Date.Date >= DateTime.Today
+                               select w).OrderBy(e => e.Date).ThenBy(e => e.Assignment).ToList().Find(e => e.RoomNumber == 503);
+            }
         }
 
         public void GotoAdminPage()
