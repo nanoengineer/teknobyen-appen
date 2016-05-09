@@ -88,7 +88,7 @@ namespace Teknobyen.Services.FirebaseService
                 }
             }
 
-            return listOfWashDays;
+            return listOfWashDays.OrderBy(e => e.Date).ThenBy(e => e.Assignment).ToList();
 
         }
 

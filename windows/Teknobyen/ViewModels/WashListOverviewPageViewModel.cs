@@ -46,9 +46,10 @@ namespace Teknobyen.ViewModels
 
 
 
-        public override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
+        public async override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
-            return Task.CompletedTask;
+            
+            WashList = await _firebaseService.GetWashList();
         }
 
         public void GotoAdminPage()
