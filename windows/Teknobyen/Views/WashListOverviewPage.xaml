@@ -8,11 +8,33 @@
     xmlns:controls="using:Template10.Controls"
     xmlns:vm="using:Teknobyen.ViewModels"
     xmlns:models="using:Teknobyen.Models"
+    xmlns:t10converters="using:Template10.Converters"
+    xmlns:converters="using:Teknobyen.Converters"
     mc:Ignorable="d">
 
     <Page.DataContext>
         <vm:WashListOverviewPageViewModel x:Name="ViewModel" />
     </Page.DataContext>
+
+    <Page.Resources>
+        <converters:DateToStringConverter x:Key="DateFormater" />
+        <t10converters:ValueWhenConverter x:Key="VisibleWhenNullConverter" When="{x:Null}">
+            <t10converters:ValueWhenConverter.Value>
+                <Visibility>Visible</Visibility>
+            </t10converters:ValueWhenConverter.Value>
+            <t10converters:ValueWhenConverter.Otherwise>
+                <Visibility>Collapsed</Visibility>
+            </t10converters:ValueWhenConverter.Otherwise>
+        </t10converters:ValueWhenConverter>
+        <t10converters:ValueWhenConverter x:Key="CollapsedWhenNullConverter" When="{x:Null}">
+            <t10converters:ValueWhenConverter.Value>
+                <Visibility>Collapsed</Visibility>
+            </t10converters:ValueWhenConverter.Value>
+            <t10converters:ValueWhenConverter.Otherwise>
+                <Visibility>Visible</Visibility>
+            </t10converters:ValueWhenConverter.Otherwise>
+        </t10converters:ValueWhenConverter>
+    </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <VisualStateManager.VisualStateGroups>
@@ -62,7 +84,7 @@
                 </Grid.RowDefinitions>
                 <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="Neste vaskedag:" />
                 <!-- Neste vaskedag -->
-                <Grid Grid.Row="1">
+                <Grid Grid.Row="1" Visibility="{x:Bind ViewModel.NextWashDay, Converter={StaticResource CollapsedWhenNullConverter}}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
                         <RowDefinition Height="*" />
@@ -77,6 +99,7 @@
                     <TextBlock Grid.Column="1" Style="{StaticResource SubtitleTextBlockStyle}" Text="om" />
                     <TextBlock Grid.Column="2" Style="{StaticResource SubtitleTextBlockStyle}" Text="{x:Bind ViewModel.TimeToNextWashDayText}" />
                 </Grid>
+                <TextBlock Grid.Row="1" Text="Ingen fremtidige vaskedager er registrert på ditt rom." Style="{StaticResource SubtitleTextBlockStyle}" Visibility="{x:Bind ViewModel.NextWashDay, Converter={StaticResource VisibleWhenNullConverter}}" />
             </Grid>
 
             <!--  Full vaskeliste -->
@@ -88,7 +111,7 @@
 
                 <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="Vaskeliste:" />
 
-                <ListView Grid.Row="1" ItemsSource="{x:Bind ViewModel.WashList}" >
+                <ListView Grid.Row="1" ItemsSource="{x:Bind ViewModel.WashList}" ContainerContentChanging="ListView_ContainerContentChanging" >
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="models:WashDayModel" >
                             <Grid>
@@ -98,7 +121,7 @@
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
 
-                                <TextBlock Text="{x:Bind Date.Date}" />
+                                <TextBlock Text="{x:Bind Date.Date, Converter={StaticResource DateFormater}}" />
                                 <TextBlock Grid.Column="1" Text="{x:Bind Assignment}" />
                                 <TextBlock Grid.Column="2" Text="{x:Bind RoomNumber}" />
                             </Grid>

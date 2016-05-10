@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Teknobyen.Models;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -25,6 +26,21 @@ namespace Teknobyen.Views
         public WashListOverviewPage()
         {
             this.InitializeComponent();
+        }
+
+        private void ListView_ContainerContentChanging(ListViewBase sender, ContainerContentChangingEventArgs args)
+        {
+            try
+            {
+                sender.ScrollIntoView((from m in ((sender.ItemsSource) as List<WashDayModel>)
+                                       where m.Date.Date == DateTime.Today && m.Assignment == 1
+                                       select m).ToList().First(), ScrollIntoViewAlignment.Leading);
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine(e.Message);
+                //Do nothing
+            }            
         }
     }
 }
