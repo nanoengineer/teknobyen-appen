@@ -1,28 +1,46 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Teknobyen.Services.FirebaseService;
 
 namespace Teknobyen.Models
 {
-    class ProjectorReservationModel : IComparable
+    public class ProjectorReservationModel : IComparable
     {
+        public ProjectorReservationModel() { }
+        public ProjectorReservationModel(string id, ReservationJsonModel jsonModel)
+        {
+            this.reservationId = id;
+            this.userId = jsonModel.userId;
+            this.comment = jsonModel.comment;
+            this.name = jsonModel.name;
+            this.roomNumber = int.Parse(jsonModel.roomNumber);
+            this.date = DateTime.ParseExact(jsonModel.date, App.DATEFORMAT, CultureInfo.InvariantCulture);
+            this.startTime = DateTime.ParseExact(jsonModel.date, App.TIMEFORMAT, CultureInfo.InvariantCulture);
+            this.startTime = new DateTime(date.Year, date.Month, date.Day, startTime.Hour, startTime.Minute, 0);
+            this.endTime = startTime.AddMinutes(double.Parse(jsonModel.duration) * 60);
+        }
+
+        public string reservationId { get; set; }
+        public string userId { get; set; }
         public string comment { get; set; }
-        public DateTime date { get; set; }
-        public int id { get; set; }
+        public string name { get; set; }
         public int roomNumber { get; set; }
-        public DateTime startHour { get; set; }
-        public DateTime stopHour { get; set; }
+        public DateTime date { get; set; }
+        public DateTime startTime { get; set; }
+        public DateTime endTime { get; set; }
 
         public int CompareTo(object obj)
         {
             var compare = obj as ProjectorReservationModel;
-            if (this.startHour < compare.startHour)
+            if (this.startTime < compare.startTime)
             {
                 return -1;
             }
-            else if (this.startHour == compare.startHour)
+            else if (this.startTime == compare.startTime)
             {
                 return 0;
             }

@@ -30,7 +30,7 @@ namespace Teknobyen.ViewModels
                 var list = await _firebaseService.GetReservations();
 
                 list = (from s in list
-                        where s.stopHour > DateTime.Now
+                        where s.endTime > DateTime.Now
                         select s).ToList();
                 list.Sort();
                 ReservationsList = list;

@@ -14,11 +14,25 @@ namespace Teknobyen.Services.FirebaseService
 
     public class ReservationJsonModel
     {
+        public ReservationJsonModel() { }
+        public ReservationJsonModel(ProjectorReservationModel model)
+        {
+            userId = model.userId;
+            comment = model.comment;
+            name = model.name;
+            roomNumber = model.roomNumber.ToString();
+            date = model.date.ToString(App.DATEFORMAT);
+            startTime = model.startTime.ToString(App.TIMEFORMAT);
+            duration = (model.endTime.Subtract(model.startTime)).TotalHours.ToString();
+        }
+
+        public string userId { get; set; }
         public string comment { get; set; }
-        public string date { get; set; }
+        public string name { get; set; }
         public string roomNumber { get; set; }
-        public string startHour { get; set; }
-        public string stopHour { get; set; }
+        public string date { get; set; }
+        public string startTime { get; set; }
+        public string duration { get; set; }
     }
 
     public class WashDayJsonModel
