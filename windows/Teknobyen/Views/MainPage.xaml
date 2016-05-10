@@ -20,7 +20,7 @@
             <VisualStateGroup x:Name="CommonStates">
                 <VisualState x:Name="NormalState">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="521" />
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource NormalMinWidth}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="ButtonsPanel.Orientation" Value="Horizontal" />

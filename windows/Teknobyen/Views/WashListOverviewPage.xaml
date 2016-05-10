@@ -15,6 +15,24 @@
     </Page.DataContext>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStateGroup">
+                <VisualState x:Name="VisualState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource NormalMinWidth}"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="WashListGrid.(Grid.Column)" Value="1"/>
+                        <Setter Target="WashListGrid.(Grid.Row)" Value="0"/>
+                        <Setter Target="WashListGrid.(Grid.RowSpan)" Value="2"/>
+                        <Setter Target="NextWashDayInfo.(Grid.RowSpan)" Value="2"/>
+                        <Setter Target="NextWashDayInfo.(Grid.ColumnSpan)" Value="1"/>
+                        <Setter Target="WashListGrid.(Grid.ColumnSpan)" Value="1"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -27,15 +45,20 @@
         </controls:PageHeader>
 
         <Grid Grid.Row="1" Padding="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Grid>
+            <Grid x:Name="NextWashDayInfo" Grid.RowSpan="1" Grid.ColumnSpan="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="Neste vaskedag:" />
                 <!-- Neste vaskedag -->
@@ -52,14 +75,12 @@
 
                     <TextBlock Grid.Column="0" Style="{StaticResource SubtitleTextBlockStyle}"  Text="{x:Bind ViewModel.NextWashDay.Date.DayOfWeek}" />
                     <TextBlock Grid.Column="1" Style="{StaticResource SubtitleTextBlockStyle}" Text="om" />
-                    <TextBlock Grid.Column="2" Style="{StaticResource SubtitleTextBlockStyle}" Text="20 dager" />
+                    <TextBlock Grid.Column="2" Style="{StaticResource SubtitleTextBlockStyle}" Text="{x:Bind ViewModel.TimeToNextWashDayText}" />
                 </Grid>
             </Grid>
 
-
-
             <!--  Full vaskeliste -->
-            <Grid Grid.Column="1">
+            <Grid x:Name="WashListGrid" Grid.Column="0" Grid.RowSpan="1" Grid.Row="1" Grid.ColumnSpan="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />

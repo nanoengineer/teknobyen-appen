@@ -7,14 +7,40 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:Teknobyen.ViewModels"
     xmlns:controls="using:Template10.Controls"
+    xmlns:t10convert="using:Template10.Converters"
     mc:Ignorable="d">
 
     <Page.DataContext>
         <vm:SettingsViewModel x:Name="ViewModel" />
     </Page.DataContext>
 
+    <Page.Resources>
+        <t10convert:ValueWhenConverter x:Key="VisibleWhenTrueConverter">
+            <t10convert:ValueWhenConverter.When>
+                <x:Boolean>True</x:Boolean>
+            </t10convert:ValueWhenConverter.When>
+            <t10convert:ValueWhenConverter.Value>
+                <Visibility>Visible</Visibility>
+            </t10convert:ValueWhenConverter.Value>
+            <t10convert:ValueWhenConverter.Otherwise>
+                <Visibility>Collapsed</Visibility>
+            </t10convert:ValueWhenConverter.Otherwise>
+        </t10convert:ValueWhenConverter>
+        <t10convert:ValueWhenConverter x:Key="CollapsedWhenTrueConverter">
+            <t10convert:ValueWhenConverter.When>
+                <x:Boolean>False</x:Boolean>
+            </t10convert:ValueWhenConverter.When>
+            <t10convert:ValueWhenConverter.Value>
+                <Visibility>Visible</Visibility>
+            </t10convert:ValueWhenConverter.Value>
+            <t10convert:ValueWhenConverter.Otherwise>
+                <Visibility>Collapsed</Visibility>
+            </t10convert:ValueWhenConverter.Otherwise>
+        </t10convert:ValueWhenConverter>
+    </Page.Resources>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" >
+
+    <Grid x:Name="grid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -23,40 +49,80 @@
         <controls:PageHeader Text="Settings" HorizontalContentAlignment="Center">
 
         </controls:PageHeader>
-        
-        <Grid Grid.Row="1"  Padding="5" MaxWidth="600">
+
+        <Grid Grid.Row="1" Padding="5" MaxWidth="600" HorizontalAlignment="Stretch">
             <Grid.RowDefinitions>
+                <RowDefinition Height="0"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="30"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="30"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="30" />
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="AUto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <!-- Roomnumber setting -->
-            <TextBlock Grid.Row="1" Text="Projektor reservasjon" Style="{StaticResource TitleTextBlockStyle}"  />
-            <TextBlock Grid.Row="2" Text="For å reservere psjoektoren må du oppgi romnummeret ditt. Ved å legge det inn her slipper du å fylle det ut manuelt hver gang." TextWrapping="Wrap" />
-            <TextBlock Grid.Row="3" Text="Romnummer:" Style="{StaticResource BaseTextBlockStyle}" />
-            <TextBox Grid.Row="4" PlaceholderText="ex. 403" Text="{x:Bind ViewModel.RoomNumber, Mode=TwoWay}" MaxWidth="100" HorizontalAlignment="Left" MaxLength="3" />
+            <!-- Roomnumber and name setting -->
+            <Grid  Grid.Row="1" HorizontalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="3*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Projektor reservasjon" Style="{StaticResource TitleTextBlockStyle}" HorizontalAlignment="Center" Grid.ColumnSpan="2" />
+
+                <TextBlock Grid.Row="1" Text="Navn:" Style="{StaticResource BaseTextBlockStyle}" />
+                <TextBox Grid.Row="1" Grid.Column="1" PlaceholderText="" Text="{x:Bind ViewModel.Name, Mode=TwoWay}"  HorizontalAlignment="Stretch" />
+                <TextBlock Grid.Row="2" Text="Romnummer:" Style="{StaticResource BaseTextBlockStyle}" />
+                <TextBox Grid.Row="2" Grid.Column="1" PlaceholderText="ex. 403" Text="{x:Bind ViewModel.RoomNumber, Mode=TwoWay}" MaxWidth="100" HorizontalAlignment="Right" MaxLength="3" />
+            </Grid>
 
 
             <!-- Laundry login settings -->
-            <TextBlock Text="Vaskeri login" Style="{StaticResource TitleTextBlockStyle}" Grid.Row="6"  />
-            <TextBlock Text="For å kunne vise informasjon fra vaskeriet må du legge inn brukernavn og passord her." Grid.Row="7" TextWrapping="Wrap" Style="{StaticResource BodyTextBlockStyle}" />
-            <TextBlock Text="Brukernavn:" Grid.Row="8" Style="{StaticResource BaseTextBlockStyle}" />
-            <TextBox Grid.Row="9" Text="{x:Bind ViewModel.Username, Mode=TwoWay}" />
-            <TextBlock Text="Passord:" Grid.Row="10" Style="{StaticResource BaseTextBlockStyle}"/>
-            <TextBox Grid.Row="11" Text="{x:Bind ViewModel.Password, Mode=TwoWay}" />
+            <Grid Grid.Row="3" HorizontalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="3*" />
+                </Grid.ColumnDefinitions>
 
+                <TextBlock Text="Vaskeri login" Style="{StaticResource TitleTextBlockStyle}" Grid.ColumnSpan="2" HorizontalAlignment="Center"  />
+                <TextBlock Text="Brukernavn:" Grid.Row="1" Style="{StaticResource BaseTextBlockStyle}" />
+                <TextBox Grid.Row="1" Grid.Column="1" Text="{x:Bind ViewModel.Username, Mode=TwoWay}" />
+                <TextBlock Text="Passord:" Grid.Row="2" Style="{StaticResource BaseTextBlockStyle}"/>
+                <TextBox Grid.Row="2" Grid.Column="1" Text="{x:Bind ViewModel.Password, Mode=TwoWay}" />
+                <Image Grid.Row="3" Height="20" Width="20" Source="msappx:///Assets/Cansel-96.png" />
+            </Grid>
+
+            <!-- Admin section -->
+            <!--<Grid Grid.Row="5" Visibility="{x:Bind ViewModel.IsAdmin, Converter={StaticResource CollapsedWhenTrueConverter}, Mode=OneWay}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <ToggleSwitch x:Name="toggleSwitch"  Header="Er du medlem av BBU?" OffContent="Nei" OnContent="Ja"  />
+                    <StackPanel Grid.Row="1" Visibility="{Binding IsOn, ElementName=toggleSwitch}">
+                        <TextBlock Text="Passord:" />
+                        <TextBox Text="{x:Bind ViewModel.AdminPassword, Mode=TwoWay}" />
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Row="5" Visibility="{x:Bind ViewModel.IsAdmin, Converter={StaticResource VisibleWhenTrueConverter}, Mode=OneWay}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Du er logget inn som BBU medlem. Klikk knappen nedenfor for å logge ut." />
+                    <Button Grid.Row="1" Content="Logg ut" Click="{x:Bind ViewModel.LogoutOfAdmin}" />
+                </Grid>-->
             <!-- Save button -->
             <Button Content="Lagre" Grid.Row="13" HorizontalAlignment="Center" Click="{x:Bind ViewModel.SaveSettings}"  />
         </Grid>

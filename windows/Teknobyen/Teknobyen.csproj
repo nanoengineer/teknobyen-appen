@@ -161,7 +161,9 @@
     <None Include="Teknobyen_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Cancel-96.png" />
     <Content Include="Assets\LaundrySymbol.png" />
+    <Content Include="Assets\Ok-96.png" />
     <Content Include="Assets\Swedish Krona-96.png" />
     <Content Include="Assets\Video Projector-96.png" />
     <Content Include="Assets\Washing Machine-96.png" />
@@ -228,7 +230,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Converter\" />
+    <Folder Include="Converters\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

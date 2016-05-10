@@ -9,5 +9,8 @@ namespace Teknobyen.Services.SettingsService
     interface ISettingsService
     {
         int RoomNumber { get; set; }
+        string Name { get; set; }
+        bool IsAdmin { get; set; }
+        bool IsLoggedInToLaundrySite { get; set; }
     }
 }

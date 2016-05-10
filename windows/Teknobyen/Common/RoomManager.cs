@@ -152,7 +152,6 @@ namespace Teknobyen.Common
         public static List<RoomModel> GetContinuousListOfRooms(int beginning, int count, List<RoomModel> exclude = null)
         {
             var roomList = new List<RoomModel>();
-
             
             var roomNumbersToExclude = new List<int>();
             if (exclude != null)
@@ -180,8 +179,8 @@ namespace Teknobyen.Common
                 if (rooms.Count > (count-roomList.Count))
                 {
                     rooms = rooms.GetRange(0, (count - roomList.Count));
-                    roomList = rooms;
-                    return rooms;
+                    roomList.AddRange(rooms);
+                    return roomList;
                 }
                 else
                 {

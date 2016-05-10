@@ -36,6 +36,26 @@ namespace Teknobyen.ViewModels
             set { Set(ref _nextWashDay, value); }
         }
 
+        public string TimeToNextWashDayText {
+            get
+            {
+                if (NextWashDay == null)
+                {
+                    return "";
+                }
+                var daysLeft = (NextWashDay.Date.Subtract(DateTime.Today));
+                if (daysLeft.Days > 14)
+                {
+                    return $"{daysLeft.Days / 7} uker og {daysLeft.Days % 7} dager";
+                }
+                else
+                {
+                    return $"{daysLeft.Days} dager";
+                }
+
+            }
+        }
+
         private List<WashDayModel> _washList;
         public List<WashDayModel> WashList
         {
@@ -52,8 +72,6 @@ namespace Teknobyen.ViewModels
 
         #endregion
 
-
-
         public async override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             
@@ -63,11 +81,11 @@ namespace Teknobyen.ViewModels
             {
                 NextWashDay = (from w in WashList
                                where w.Date.Date >= DateTime.Today
-                               select w).OrderBy(e => e.Date).ThenBy(e => e.Assignment).ToList().Find(e => e.RoomNumber == 503);
+                               select w).OrderBy(e => e.Date).ThenBy(e => e.Assignment).ToList().Find(e => e.RoomNumber == roomnumber);
             }
 
-            var t = _washListService.GenerateWashList(new DateTime(2016, 5, 23), new DateTime(2016, 6, 5), RoomManager.GetRoomModel(303));
-            var g = _washListService.ValidateWashList(t);
+            //var t = _washListService.GenerateWashList(new DateTime(2016, 5, 23), new DateTime(2016, 8, 5), RoomManager.GetRoomModel(303));
+            //var g = _washListService.ValidateWashList(t);
         }
 
         public void GotoAdminPage()

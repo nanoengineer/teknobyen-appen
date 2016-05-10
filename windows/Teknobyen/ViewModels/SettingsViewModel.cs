@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Teknobyen.Services.CredentialsService;
+using Teknobyen.Services.LaundryService;
 using Teknobyen.Services.SettingsService;
 using Template10.Mvvm;
 using Windows.UI.Xaml.Navigation;
@@ -14,36 +15,28 @@ namespace Teknobyen.ViewModels
     {
         ISettingsService _settingsService;
         ICredentialsService _credentialsService;
+        ILaundryService _laundryService;
 
         public SettingsViewModel()
         {
             _settingsService = SettingsService.Instance;
             _credentialsService = CredentialsService.Instance;
+            _laundryService = LaundryService.Instance;
         }
 
-
-        public override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
+        #region Bindable properties
+        private string _name;
+        public string Name
         {
-            //TODO - auto load settings
-            var roomNumber = _settingsService.RoomNumber;
-            if (roomNumber != 0) RoomNumber = roomNumber;
-
-            var credentials = _credentialsService.GetUser();
-            if (credentials != null)
-            {
-                Username = credentials.UserName;
-                Password = credentials.Password;
-            }
-
-            return base.OnNavigatedToAsync(parameter, mode, state);
+            get { return _name; }
+            set { Set(ref _name, value); }
         }
-
 
         private int _roomNumber;
         public int RoomNumber
         {
             get { return _roomNumber; }
-            set { Set( ref _roomNumber, value); }
+            set { Set(ref _roomNumber, value); }
         }
 
         private string _username;
@@ -57,14 +50,64 @@ namespace Teknobyen.ViewModels
         public string Password
         {
             get { return _password; }
-            set { Set( ref _password, value); }
+            set { Set(ref _password, value); }
         }
 
-        public void SaveSettings()
+        private string _adminPassword;
+        public string AdminPassword
         {
+            get { return _adminPassword; }
+            set { Set( ref _adminPassword, value); }
+        }
+
+        private bool _isAdmin;
+        public bool IsAdmin
+        {
+            get { return _isAdmin; }
+            set { Set( ref _isAdmin, value); }
+        }
+
+
+        #endregion
+
+
+        public override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
+        {
+            Name = _settingsService.Name;
+            IsAdmin = _settingsService.IsAdmin;
+            RoomNumber = _settingsService.RoomNumber;
+
+            var credentials = _credentialsService.GetUser();
+            if (credentials != null)
+            {
+                Username = credentials.UserName;
+                Password = credentials.Password;
+            }
+
+            return base.OnNavigatedToAsync(parameter, mode, state);
+        }
+
+        public async void SaveSettings()
+        {
+            _settingsService.Name = Name;
             _settingsService.RoomNumber = RoomNumber;
 
-            _credentialsService.SaveUser(new Windows.Security.Credentials.PasswordCredential(App.APPID, Username, Password));
+            if (await _laundryService.IsValidCredentials(Username, Password))
+            {
+                _credentialsService.SaveUser(new Windows.Security.Credentials.PasswordCredential(App.APPID, Username, Password));
+            }
+
+            if (AdminPassword == "adMin")
+            {
+                IsAdmin = true;
+                _settingsService.IsAdmin = true;
+            }
+        }
+
+        public void LogoutOfAdmin()
+        {
+            _settingsService.IsAdmin = false;
+            IsAdmin = false;
         }
 
     }

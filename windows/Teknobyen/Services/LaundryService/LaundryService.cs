@@ -15,6 +15,13 @@ namespace Teknobyen.Services.LaundryService
 {
     public class LaundryService : ILaundryService
     {
+
+        public static LaundryService Instance{get;}
+        static LaundryService()
+        {
+            Instance = Instance ?? new LaundryService();
+        }
+
         public async Task<double> GetAccountBalance(string username, string password)
         {
             Double _accountBalance = Double.NaN;
@@ -79,6 +86,33 @@ namespace Teknobyen.Services.LaundryService
             }
 
             return machineList;
+        }
+
+        public async Task<bool> IsValidCredentials(string username, string password)
+        {
+            try
+            {
+                using (var client = GetClient(new Uri("http://129.241.152.11"), username, password))
+                {
+                    var response = await client.GetAsync(new Uri("http://129.241.152.11/LaundryState?lg=2&ly=9131"));
+                    if (response.IsSuccessStatusCode)
+                    {
+                        SettingsService.SettingsService.Instance.IsLoggedInToLaundrySite = true;
+                        return true;
+                    }
+                    else
+                    {
+                        SettingsService.SettingsService.Instance.IsLoggedInToLaundrySite = false;
+                        return false;
+                    }
+
+                }
+            }
+            catch (Exception)
+            {
+                SettingsService.SettingsService.Instance.IsLoggedInToLaundrySite = false;
+                return false;
+            }
         }
 
         private HttpClient GetClient(Uri baseUri, string username, string password)
