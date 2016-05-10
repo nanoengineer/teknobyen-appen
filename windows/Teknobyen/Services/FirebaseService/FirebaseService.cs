@@ -146,11 +146,85 @@ namespace Teknobyen.Services.FirebaseService
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 //TODO: log e to hockeyapp
             }
 
+            return success;
+        }
+
+        public async Task<bool> UpdateWashDayEntry(WashDayModel washDay)
+        {
+            bool success = false;
+            if (String.IsNullOrWhiteSpace(washDay.FBID))
+            {
+                return false;
+            }
+            string uri = $"{base_uri}/washdays/{washDay.FBID}.json?auth={client_secret}";
+
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Patch, new Uri(uri));
+
+                    //Serialize content
+                    var serializedContent = JsonConvert.SerializeObject(new WashDayJsonModel(washDay));
+                    HttpStringContent content = new HttpStringContent(serializedContent);
+                    request.Content = content;
+                    var s = await client.SendRequestAsync(request);
+
+                    if (s.StatusCode != HttpStatusCode.Ok)
+                    {
+                        success = false;
+                    }
+                    else
+                    {
+                        success = true;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                //TODO: log e to hockeyapp
+            }
+
+            return success;
+        }
+
+        public async Task<bool> SaveWashDayEntries(List<WashDayModel> washDayList)
+        {
+            bool success = false;
+
+            var currentList = await GetWashList();
+
+            foreach (var washDay in washDayList)
+            {
+                var entriesForWashDayDate = (from m in currentList
+                              where m.Date.Date == washDay.Date.Date
+                              select m).ToList();
+                if (entriesForWashDayDate.Count == 0)
+                {
+                    await SaveWashDayEntry(washDay);
+                    continue;
+                }
+                else if (entriesForWashDayDate.Count == 1)
+                {
+                    if (entriesForWashDayDate.First().Assignment != washDay.Assignment)
+                    {
+                        await SaveWashDayEntry(washDay);
+                        continue;
+                    }
+                }
+                else
+                {
+                    await UpdateWashDayEntry(washDay);
+                }
+
+            }
+
+            success = true;
             return success;
         }
     }

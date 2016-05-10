@@ -149,9 +149,63 @@ namespace Teknobyen.Common
             }
         }
 
-        public static List<RoomModel> GetContinuousListOfRooms(int beginning, int count, List<RoomModel> exclude)
+        public static List<RoomModel> GetContinuousListOfRooms(int beginning, int count, List<RoomModel> exclude = null)
         {
-            throw new NotImplementedException();
+            var roomList = new List<RoomModel>();
+
+            
+            var roomNumbersToExclude = new List<int>();
+            if (exclude != null)
+            {
+                foreach (var item in exclude)
+                {
+                    roomNumbersToExclude.Add(item.RoomNumber);
+                }
+            }
+
+            while (roomList.Count < count)
+            {
+                var rooms = (from r in AllRooms
+                             where (r.RoomNumber >= beginning)
+                             select r).ToList().OrderBy(e => e.RoomNumber).ToList();
+
+                if (exclude != null)
+                {
+                    rooms = (from r in rooms
+                             where (roomNumbersToExclude.Contains(r.RoomNumber) != true)
+                             select r).ToList().OrderBy(e => e.RoomNumber).ToList();
+                }
+                
+
+                if (rooms.Count > (count-roomList.Count))
+                {
+                    rooms = rooms.GetRange(0, (count - roomList.Count));
+                    roomList = rooms;
+                    return rooms;
+                }
+                else
+                {
+                    roomList.AddRange(rooms);
+
+                    //It gets here if it has selected all rooms from beginning to last roomnumber. 
+                    //beginning should therefore be set to 201, as it "wraps around"
+                    beginning = 201;
+                }
+            }
+
+            return roomList;
+        }
+
+        public static RoomModel GetRoomModel(int roomNumber)
+        {
+            var room = (from r in AllRooms
+                        where r.RoomNumber == roomNumber
+                        select r).ToList();
+            if (room.Count == 0)
+            {
+                return null;
+            }
+            return room.First();
         }
     }
 }

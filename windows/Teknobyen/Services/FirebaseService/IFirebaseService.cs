@@ -14,5 +14,9 @@ namespace Teknobyen.Services.FirebaseService
 
         Task<List<WashDayModel>> GetWashList();
         Task<bool> SaveWashDayEntry(WashDayModel washDay);
+        Task<bool> UpdateWashDayEntry(WashDayModel washDay);
+        Task<bool> SaveWashDayEntries(List<WashDayModel> washDayList);
+
+        
     }
 }

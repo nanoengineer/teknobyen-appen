@@ -19,7 +19,84 @@ namespace Teknobyen.Services.WashListService
         //TODO
         public List<WashDayModel> GenerateWashList(DateTime startDate, DateTime endDate, RoomModel startAt, List<RoomModel> extraRooms = null, List<RoomModel> roomsToSkip = null)
         {
-            throw new NotImplementedException();
+            int washDaysToCreate = (int)(endDate.Subtract(startDate)).TotalDays;
+            var roomList = RoomManager.GetContinuousListOfRooms(startAt.RoomNumber, (2 * washDaysToCreate) + 10);
+
+            var generatedWashList = new List<WashDayModel>();
+
+
+            int assignment = 1;
+            List<RoomModel> doubleRoomsOnHold = new List<RoomModel>();
+            var currentDate = startDate;
+            while (currentDate.Date <= endDate.Date)
+            {
+                //Gets the next room in the list and then removes it from all rooms list         
+                if (assignment == 1 && (roomList.First().DoubleRoom || doubleRoomsOnHold.Count > 0))
+                {
+                    RoomModel currentRoom;
+                    if (doubleRoomsOnHold.Count > 0)
+                    {
+                        currentRoom = doubleRoomsOnHold.First();
+                        doubleRoomsOnHold.Remove(currentRoom);
+                    }
+                    else
+                    {
+                        currentRoom = roomList.First();
+                        roomList.Remove(currentRoom);
+                    }
+
+                    var washDayOne = new WashDayModel();
+                    var washDayTwo = new WashDayModel();
+
+                    //Lage vaskeoppgave 1 for parhybel
+                    washDayOne.Date = currentDate.Date;
+                    washDayOne.Assignment = 1;
+                    washDayOne.RoomNumber = currentRoom.RoomNumber;
+                    generatedWashList.Add(washDayOne);
+
+                    //Vaskeoppgave to for parhybel samme dag
+                    washDayTwo.Date = currentDate.Date;
+                    washDayTwo.Assignment = 2;
+                    washDayTwo.RoomNumber = currentRoom.RoomNumber;
+                    generatedWashList.Add(washDayTwo);
+
+                    currentDate = currentDate.AddDays(1);
+                    continue;
+                }
+                else if (assignment == 2 && roomList.First().DoubleRoom)
+                {
+                    var currentRoom = roomList.First();
+                    roomList.Remove(currentRoom);
+                    doubleRoomsOnHold.Add(currentRoom);
+                    continue;
+                }
+                else
+                {   
+                    var currentRoom = roomList.First();
+                    roomList.Remove(currentRoom);
+                    
+                    var washDay = new WashDayModel();
+                    washDay.Date = currentDate.Date;
+                    washDay.Assignment = assignment;
+                    washDay.RoomNumber = currentRoom.RoomNumber;
+                    generatedWashList.Add(washDay);
+
+
+                    if (assignment == 1)
+                    {
+                        assignment = 2;
+                    }
+                    else
+                    {
+                        assignment = 1;
+                        currentDate = currentDate.AddDays(1);
+                    }
+
+                }
+            }
+
+
+            return generatedWashList;
         }
 
         public List<WashDayModel> ParseTextToWashList(string washListString)
@@ -76,7 +153,7 @@ namespace Teknobyen.Services.WashListService
                 }
                 if (listToValidate[2*i].Assignment != 1 || listToValidate[2*i+1].Assignment != 2)
                 {
-                    errorList.Add("Assignments not correctly numbered eg. not 1 and 2");
+                    errorList.Add($"Assignments not correctly numbered eg. not 1 and 2 on date {listToValidate[2*i].Date.ToString()}");
                 }
                 if (RoomManager.IsDoubleRoom(listToValidate[2*i].RoomNumber) || RoomManager.IsDoubleRoom(listToValidate[2 * i + 1].RoomNumber))
                 {

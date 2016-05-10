@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Teknobyen.Common;
 using Teknobyen.Models;
 using Teknobyen.Services.FirebaseService;
 using Teknobyen.Services.SettingsService;
+using Teknobyen.Services.WashListService;
 using Teknobyen.Views;
 using Template10.Mvvm;
 using Windows.UI.Xaml.Navigation;
@@ -17,12 +19,13 @@ namespace Teknobyen.ViewModels
         //IWashListService _washlistService;
         IFirebaseService _firebaseService;
         ISettingsService _settingsService;
-
+        IWashListService _washListService;
 
         public WashListOverviewPageViewModel()
         {
             _firebaseService = FirebaseService.Instance;
             _settingsService = SettingsService.Instance;
+            _washListService = WashListService.Instance;
         }
 
         #region Bindable proterties
@@ -62,6 +65,9 @@ namespace Teknobyen.ViewModels
                                where w.Date.Date >= DateTime.Today
                                select w).OrderBy(e => e.Date).ThenBy(e => e.Assignment).ToList().Find(e => e.RoomNumber == 503);
             }
+
+            var t = _washListService.GenerateWashList(new DateTime(2016, 5, 23), new DateTime(2016, 6, 5), RoomManager.GetRoomModel(303));
+            var g = _washListService.ValidateWashList(t);
         }
 
         public void GotoAdminPage()
