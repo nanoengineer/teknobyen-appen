@@ -19,7 +19,7 @@ namespace Teknobyen.Models
             this.name = jsonModel.name;
             this.roomNumber = int.Parse(jsonModel.roomNumber);
             this.date = DateTime.ParseExact(jsonModel.date, App.DATEFORMAT, CultureInfo.InvariantCulture);
-            this.startTime = DateTime.ParseExact(jsonModel.date, App.TIMEFORMAT, CultureInfo.InvariantCulture);
+            this.startTime = DateTime.ParseExact(jsonModel.startTime, App.TIMEFORMAT, CultureInfo.InvariantCulture);
             this.startTime = new DateTime(date.Year, date.Month, date.Day, startTime.Hour, startTime.Minute, 0);
             this.endTime = startTime.AddMinutes(double.Parse(jsonModel.duration) * 60);
         }

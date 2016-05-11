@@ -14,9 +14,12 @@
     <Resource Language="x-generate" />
   </Resources>
   <Applications>
-    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Teknobyen.App">
-      <uap:VisualElements DisplayName="Teknobyen.App" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="Sample" BackgroundColor="transparent">
-        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png">
+    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Teknobyen">
+      <uap:VisualElements DisplayName="Teknobyen" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="En app for alle beboere på Teknobyen i Trondheim. Du kan reservere prosjektoren, sjekke om det er ledige vaskemaskiner, og få varsel om når du har vaskedag. NB: Appen krever innlogging med brukernavn og passord fra vaskeriet." BackgroundColor="transparent">
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" ShortName="TB">
+          <uap:ShowNameOnTiles>
+            <uap:ShowOn Tile="square150x150Logo" />
+          </uap:ShowNameOnTiles>
         </uap:DefaultTile>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>

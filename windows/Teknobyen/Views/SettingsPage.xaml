@@ -52,7 +52,7 @@
 
         <Grid Grid.Row="1" Padding="5" MaxWidth="600" HorizontalAlignment="Stretch">
             <Grid.RowDefinitions>
-                <RowDefinition Height="0"/>
+                <RowDefinition Height="100"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="Auto"/>
@@ -61,6 +61,8 @@
                 <RowDefinition Height="30" />
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
+
+            <Image Height="60" Width="60" HorizontalAlignment="Center" VerticalAlignment="Center" Source="ms-appx:///Assets/Square150x150Logo.png" />
 
             <!-- Roomnumber and name setting -->
             <Grid  Grid.Row="1" HorizontalAlignment="Stretch">
@@ -73,7 +75,7 @@
                     <ColumnDefinition Width="2*" />
                     <ColumnDefinition Width="3*" />
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="Projektor reservasjon" Style="{StaticResource TitleTextBlockStyle}" HorizontalAlignment="Center" Grid.ColumnSpan="2" />
+                <TextBlock Text="Prosjektor reservasjon" Style="{StaticResource TitleTextBlockStyle}" HorizontalAlignment="Center" Grid.ColumnSpan="2" />
 
                 <TextBlock Grid.Row="1" Text="Navn:" Style="{StaticResource BaseTextBlockStyle}" />
                 <TextBox Grid.Row="1" Grid.Column="1" PlaceholderText="" Text="{x:Bind ViewModel.Name, Mode=TwoWay}"  HorizontalAlignment="Stretch" />

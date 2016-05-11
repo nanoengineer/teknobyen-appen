@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Template10.Controls"
+    xmlns:t10converters="using:Template10.Converters"
     xmlns:views="using:Teknobyen.Views"
     xmlns:vm="using:Teknobyen.ViewModels"
     xmlns:models="using:Teknobyen.Models"
@@ -15,6 +16,10 @@
     <Page.DataContext>
         <vm:ProjectorReservationOverviewViewModel x:Name="ViewModel" />
     </Page.DataContext>
+
+    <Page.Resources>
+        <t10converters:StringFormatConverter x:Key="StrFormatConverter" />
+    </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -53,16 +58,17 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.ColumnSpan="2" Text="{x:Bind comment}" Style="{StaticResource TitleTextBlockStyle}"/>
-                            <TextBlock Grid.Column="2" Text="{x:Bind roomNumber}" HorizontalAlignment="Right" Style="{StaticResource BodyTextBlockStyle}"/>
+                            <TextBlock Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" Style="{StaticResource BodyTextBlockStyle}">
+                                <Run Text="{x:Bind name}" />
+                                <Run Text=" - " />
+                                <Run Text="{x:Bind roomNumber}" />
+                            </TextBlock>
                             <TextBlock Grid.Row="1" Style="{StaticResource BaseTextBlockStyle}" Text="{x:Bind date.DayOfWeek}" />
                             <TextBlock Grid.Row="1" Grid.Column="1" Style="{StaticResource BodyTextBlockStyle}">
-                                <Run Text="{x:Bind startHour.Hour}" />
-                                <Run Text=":" />
-                                <Run Text="{x:Bind startHour.Minute}" />
+                                <!--<Run Text="{x:Bind startTime}" />-->
+                                <Run Text="{Binding startTime, Mode=OneWay, Converter={StaticResource StrFormatConverter}, ConverterParameter=\{0:t\}}" />
                                 <Run Text=" - " />
-                                <Run Text="{x:Bind stopHour.Hour}" />
-                                <Run Text=":" />
-                                <Run Text="{x:Bind stopHour.Minute}" />
+                                <Run Text="{Binding endTime, Mode=OneWay, Converter={StaticResource StrFormatConverter}, ConverterParameter=\{0:t\}}" />
                             </TextBlock>
                         </Grid>
                     </DataTemplate>

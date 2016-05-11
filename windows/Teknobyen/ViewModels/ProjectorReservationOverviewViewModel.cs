@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Teknobyen.Models;
+using Teknobyen.Services.CredentialsService;
 using Teknobyen.Services.FirebaseService;
+using Teknobyen.Services.SettingsService;
 using Teknobyen.Views;
 using Template10.Mvvm;
 using Windows.UI.Xaml.Navigation;
@@ -13,6 +15,8 @@ namespace Teknobyen.ViewModels
 {
     class ProjectorReservationOverviewViewModel : ViewModelBase
     {
+        FirebaseService _firebaseService;
+
 
         private List<ProjectorReservationModel> _reservationsList;
         public List<ProjectorReservationModel> ReservationsList
@@ -26,7 +30,7 @@ namespace Teknobyen.ViewModels
         {
             try
             {
-                var _firebaseService = new FirebaseService();
+                _firebaseService = new FirebaseService();
                 var list = await _firebaseService.GetReservations();
 
                 list = (from s in list
