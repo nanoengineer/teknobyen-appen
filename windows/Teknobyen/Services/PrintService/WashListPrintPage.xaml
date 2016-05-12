@@ -1,0 +1,280 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="Teknobyen.Services.PrintService.WashListPrintPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:PrintSample"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Foreground" Value="Black" />
+        </Style>
+        <Style TargetType="Border" >
+            <Setter Property="BorderBrush" Value="Black" />
+            <Setter Property="BorderThickness" Value="2" />
+        </Style>
+    </Page.Resources>
+
+
+    <Grid x:Name="PrintableArea" Background="White" BorderBrush="Black" BorderThickness="2" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Gray background -->
+        <Rectangle Fill="Gray" Grid.ColumnSpan="7" Grid.RowSpan="2" />
+
+        <!-- Header area -->
+        <Border BorderBrush="Black" BorderThickness="2">
+            <TextBlock Text="UKENR."  />
+        </Border>
+        <Border Grid.Column="1" Grid.ColumnSpan="5">
+            <TextBlock Text="UKE 17 25. apr - 01. mai" />
+        </Border>
+        <Border Grid.Column="6" />
+        <Border Grid.Row="1" Grid.Column="0" >
+            <TextBlock Text="DAG" />
+        </Border>
+        <Border Grid.Row="1" Grid.Column="1" >
+            <TextBlock Text="OPPG" />
+        </Border>
+        <Border Grid.Row="1" Grid.Column="2" >
+            <TextBlock Text="ROM" />
+        </Border>
+        <Border Grid.Row="1" Grid.Column="3" >
+            <TextBlock Text="VASKER" />
+        </Border>
+        <Border Grid.Row="1" Grid.Column="4" >
+            <TextBlock Text="SIGNATUR" />
+        </Border>
+        <Border Grid.Row="1" Grid.Column="5" >
+            <TextBlock Text="TID" />
+        </Border>
+        <Border Grid.Row="1" Grid.Column="6" >
+            <TextBlock Text="KONTROL" />
+        </Border>
+
+        <!-- Dager -->
+        <Border Grid.Row="2" Grid.RowSpan="2" >
+            <TextBlock Text="MANDAG" />
+        </Border>
+        <Border Grid.Row="4" Grid.RowSpan="2" >
+            <TextBlock Text="TIRSDAG" />
+        </Border>
+        <Border Grid.Row="6" Grid.RowSpan="2" >
+            <TextBlock Text="ONSDAG" />
+        </Border>
+        <Border Grid.Row="8" Grid.RowSpan="2" >
+            <TextBlock Text="TORSDAG" />
+        </Border>
+        <Border Grid.Row="10" Grid.RowSpan="2" >
+            <TextBlock Text="FREDAG" />
+        </Border>
+        <Border Grid.Row="12" Grid.RowSpan="2" >
+            <TextBlock Text="LØRDAG" />
+        </Border>
+        <Border Grid.Row="14" Grid.RowSpan="2" >
+            <TextBlock Text="SØNDAG" />
+        </Border>
+
+        <!-- Oppgave nummer -->
+        <Border Grid.Row="2" Grid.Column="1" >
+            <TextBlock Text="1" />
+        </Border>
+        <Border Grid.Row="3" Grid.Column="1" >
+            <TextBlock Text="2" />
+        </Border>
+        <Border Grid.Row="4" Grid.Column="1" >
+            <TextBlock Text="1" />
+        </Border>
+        <Border Grid.Row="5" Grid.Column="1" >
+            <TextBlock Text="2" />
+        </Border>
+        <Border Grid.Row="6" Grid.Column="1" >
+            <TextBlock Text="1" />
+        </Border>
+        <Border Grid.Row="7" Grid.Column="1" >
+            <TextBlock Text="2" />
+        </Border>
+        <Border Grid.Row="8" Grid.Column="1" >
+            <TextBlock Text="1" />
+        </Border>
+        <Border Grid.Row="9" Grid.Column="1" >
+            <TextBlock Text="2" />
+        </Border>
+        <Border Grid.Row="10" Grid.Column="1" >
+            <TextBlock Text="1" />
+        </Border>
+        <Border Grid.Row="11" Grid.Column="1" >
+            <TextBlock Text="2" />
+        </Border>
+        <Border Grid.Row="12" Grid.Column="1" >
+            <TextBlock Text="1" />
+        </Border>
+        <Border Grid.Row="13" Grid.Column="1" >
+            <TextBlock Text="2" />
+        </Border>
+        <Border Grid.Row="14" Grid.Column="1" >
+            <TextBlock Text="1" />
+        </Border>
+        <Border Grid.Row="15" Grid.Column="1" >
+            <TextBlock Text="2" />
+        </Border>
+
+        <!-- Romliste for oppgave. skal bindes -->
+        <Border Grid.Row="2" Grid.Column="2" >
+            <TextBlock Text="{x:Bind mon1}" />
+        </Border>
+        <Border Grid.Row="3" Grid.Column="2" >
+            <TextBlock Text="{x:Bind mon2}" />
+        </Border>
+        <Border Grid.Row="4" Grid.Column="2" >
+            <TextBlock Text="{x:Bind tue1}" />
+        </Border>
+        <Border Grid.Row="5" Grid.Column="2" >
+            <TextBlock Text="{x:Bind tue2}" />
+        </Border>
+        <Border Grid.Row="6" Grid.Column="2" >
+            <TextBlock Text="{x:Bind wed1}" />
+        </Border>
+        <Border Grid.Row="7" Grid.Column="2" >
+            <TextBlock Text="{x:Bind wed2}" />
+        </Border>
+        <Border Grid.Row="8" Grid.Column="2" >
+            <TextBlock Text="{x:Bind thu1}" />
+        </Border>
+        <Border Grid.Row="9" Grid.Column="2" >
+            <TextBlock Text="{x:Bind thu2}" />
+        </Border>
+        <Border Grid.Row="10" Grid.Column="2" >
+            <TextBlock Text="{x:Bind fri1}" />
+        </Border>
+        <Border Grid.Row="11" Grid.Column="2" >
+            <TextBlock Text="{x:Bind fri2}" />
+        </Border>
+        <Border Grid.Row="12" Grid.Column="2" >
+            <TextBlock Text="{x:Bind sat1}" />
+        </Border>
+        <Border Grid.Row="13" Grid.Column="2" >
+            <TextBlock Text="{x:Bind sat2}" />
+        </Border>
+        <Border Grid.Row="14" Grid.Column="2" >
+            <TextBlock Text="{x:Bind sun1}" />
+        </Border>
+        <Border Grid.Row="15" Grid.Column="2" >
+            <TextBlock Text="{x:Bind sun2}" />
+        </Border>
+
+        
+        <!-- Borders for å få rutenett -->
+        <Border Grid.Row="2" Grid.Column="3" />
+        <Border Grid.Row="2" Grid.Column="4" />
+        <Border Grid.Row="2" Grid.Column="5" />
+        <Border Grid.Row="2" Grid.Column="6" />
+
+        <Border Grid.Row="3" Grid.Column="3" />
+        <Border Grid.Row="3" Grid.Column="4" />
+        <Border Grid.Row="3" Grid.Column="5" />
+        <Border Grid.Row="3" Grid.Column="6" />
+
+        <Border Grid.Row="4" Grid.Column="3" />
+        <Border Grid.Row="4" Grid.Column="4" />
+        <Border Grid.Row="4" Grid.Column="5" />
+        <Border Grid.Row="4" Grid.Column="6" />
+
+        <Border Grid.Row="5" Grid.Column="3" />
+        <Border Grid.Row="5" Grid.Column="4" />
+        <Border Grid.Row="5" Grid.Column="5" />
+        <Border Grid.Row="5" Grid.Column="6" />
+
+        <Border Grid.Row="6" Grid.Column="3" />
+        <Border Grid.Row="6" Grid.Column="4" />
+        <Border Grid.Row="6" Grid.Column="5" />
+        <Border Grid.Row="6" Grid.Column="6" />
+
+        <Border Grid.Row="7" Grid.Column="3" />
+        <Border Grid.Row="7" Grid.Column="4" />
+        <Border Grid.Row="7" Grid.Column="5" />
+        <Border Grid.Row="7" Grid.Column="6" />
+
+        <Border Grid.Row="8" Grid.Column="3" />
+        <Border Grid.Row="8" Grid.Column="4" />
+        <Border Grid.Row="8" Grid.Column="5" />
+        <Border Grid.Row="8" Grid.Column="6" />
+
+        <Border Grid.Row="9" Grid.Column="3" />
+        <Border Grid.Row="9" Grid.Column="4" />
+        <Border Grid.Row="9" Grid.Column="5" />
+        <Border Grid.Row="9" Grid.Column="6" />
+
+        <Border Grid.Row="10" Grid.Column="3" />
+        <Border Grid.Row="10" Grid.Column="4" />
+        <Border Grid.Row="10" Grid.Column="5" />
+        <Border Grid.Row="10" Grid.Column="6" />
+
+        <Border Grid.Row="11" Grid.Column="3" />
+        <Border Grid.Row="11" Grid.Column="4" />
+        <Border Grid.Row="11" Grid.Column="5" />
+        <Border Grid.Row="11" Grid.Column="6" />
+
+        <Border Grid.Row="12" Grid.Column="3" />
+        <Border Grid.Row="12" Grid.Column="4" />
+        <Border Grid.Row="12" Grid.Column="5" />
+        <Border Grid.Row="12" Grid.Column="6" />
+
+        <Border Grid.Row="13" Grid.Column="3" />
+        <Border Grid.Row="13" Grid.Column="4" />
+        <Border Grid.Row="13" Grid.Column="5" />
+        <Border Grid.Row="13" Grid.Column="6" />
+
+        <Border Grid.Row="14" Grid.Column="3" />
+        <Border Grid.Row="14" Grid.Column="4" />
+        <Border Grid.Row="14" Grid.Column="5" />
+        <Border Grid.Row="14" Grid.Column="6" />
+
+        <Border Grid.Row="15" Grid.Column="3" />
+        <Border Grid.Row="15" Grid.Column="4" />
+        <Border Grid.Row="15" Grid.Column="5" />
+        <Border Grid.Row="15" Grid.Column="6" />
+    </Grid>
+</Page>

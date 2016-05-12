@@ -121,6 +121,10 @@
     <Compile Include="Services\FirebaseService\JsonModels.cs" />
     <Compile Include="Services\LaundryService\ILaundryService.cs" />
     <Compile Include="Services\LaundryService\LaundryService.cs" />
+    <Compile Include="Services\PrintService\PrintService.cs" />
+    <Compile Include="Services\PrintService\WashListPrintPage.xaml.cs">
+      <DependentUpon>WashListPrintPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Services\SettingsService\ISettingsService.cs" />
     <Compile Include="Services\SettingsService\SettingsService.cs" />
     <Compile Include="Services\WashListService\IWashListService.cs" />
@@ -203,6 +207,10 @@
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <ContainsDesignTimeResources>true</ContainsDesignTimeResources>
+    </Page>
+    <Page Include="Services\PrintService\WashListPrintPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles\Custom.xaml">
       <SubType>Designer</SubType>
