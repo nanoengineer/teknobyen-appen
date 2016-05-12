@@ -74,15 +74,24 @@ namespace Teknobyen.ViewModels
 
         public async override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
-            
-            WashList = await _firebaseService.GetWashList();
-            var roomnumber = _settingsService.RoomNumber;
-            if (roomnumber != 0)
+            try
             {
-                NextWashDay = (from w in WashList
-                               where w.Date.Date >= DateTime.Today
-                               select w).OrderBy(e => e.Date).ThenBy(e => e.Assignment).ToList().Find(e => e.RoomNumber == roomnumber);
+                WashList = await _firebaseService.GetWashList();
+                var roomnumber = _settingsService.RoomNumber;
+                if (roomnumber != 0)
+                {
+                    NextWashDay = (from w in WashList
+                                   where w.Date.Date >= DateTime.Today
+                                   select w).OrderBy(e => e.Date).ThenBy(e => e.Assignment).ToList().Find(e => e.RoomNumber == roomnumber);
+                }
             }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine(e.Message);
+                System.Diagnostics.Debug.WriteLine(e.StackTrace);
+                System.Diagnostics.Debug.WriteLine(e.InnerException);
+            }
+         
 
             //var t = _washListService.GenerateWashList(new DateTime(2016, 5, 23), new DateTime(2016, 8, 5), RoomManager.GetRoomModel(303));
             //var g = _washListService.ValidateWashList(t);
