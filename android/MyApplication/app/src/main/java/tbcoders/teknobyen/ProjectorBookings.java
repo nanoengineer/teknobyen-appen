@@ -17,6 +17,7 @@ import com.firebase.client.FirebaseError;
 import com.firebase.client.Query;
 import com.firebase.client.ValueEventListener;
 
+import java.sql.SQLOutput;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -61,16 +62,17 @@ public class ProjectorBookings extends AppCompatActivity {
             public void onDataChange(DataSnapshot snapshot) {
                 reservationList = new ArrayList<Reservations>();
 
-                System.out.println(snapshot);
-                reservationRef.child("-KHeS64gX3KEptGzpXlJ").setValue(null);
-                System.out.println(snapshot);
-
                 for (DataSnapshot postSnapshot: snapshot.getChildren()) {
+                    try{
+                        Reservations post = postSnapshot.getValue(Reservations.class);
+                        reservationList.add(post);
 
-                    Reservations post = postSnapshot.getValue(Reservations.class);
-                    reservationList.add(post);
-                    fillListView();
+                    }catch (Error e){
+                        System.out.println("Error");
+                    }
                 }
+                fillListView();
+                System.out.println("Done");
             }
             @Override
             public void onCancelled(FirebaseError firebaseError) {
