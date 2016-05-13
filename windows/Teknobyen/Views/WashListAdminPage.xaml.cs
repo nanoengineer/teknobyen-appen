@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Teknobyen.Models;
+using Teknobyen.Services.PrintService;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -25,6 +27,30 @@ namespace Teknobyen.Views
         public WashListAdminPage()
         {
             this.InitializeComponent();
+        }
+
+        PrintService _printService;
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            _printService = new PrintService(this);
+            _printService.RegisterForPrinting();
+        }
+
+        private async void Button_Click(object sender, RoutedEventArgs e)
+        {
+            
+            try
+            {
+               // _printService.PreparePrintContent(washListToPrint);
+               // await _printService.ShowPrintUIAsync();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.StackTrace);
+            }
+
+            
         }
     }
 }

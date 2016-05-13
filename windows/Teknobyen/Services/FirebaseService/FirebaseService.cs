@@ -45,9 +45,9 @@ namespace Teknobyen.Services.FirebaseService
                         var reservation = new ProjectorReservationModel(item.Key, item.Value);
                         returnObject.Add(reservation);
                     }
-                    catch (Exception)
+                    catch (Exception e)
                     {
-                        System.Diagnostics.Debug.WriteLine("deserializing failed");
+                        System.Diagnostics.Debug.WriteLine("deserializing failed" + e.Message);
                     }
                 }
             }

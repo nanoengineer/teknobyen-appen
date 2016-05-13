@@ -21,7 +21,8 @@ namespace Teknobyen.Models
             this.date = DateTime.ParseExact(jsonModel.date, App.DATEFORMAT, CultureInfo.InvariantCulture);
             this.startTime = DateTime.ParseExact(jsonModel.startTime, App.TIMEFORMAT, CultureInfo.InvariantCulture);
             this.startTime = new DateTime(date.Year, date.Month, date.Day, startTime.Hour, startTime.Minute, 0);
-            this.endTime = startTime.AddMinutes(double.Parse(jsonModel.duration) * 60);
+            var cultureI = new CultureInfo("en-US");
+            this.endTime = startTime.AddMinutes(double.Parse(jsonModel.duration, cultureI.NumberFormat) * 60);
         }
 
         public string reservationId { get; set; }

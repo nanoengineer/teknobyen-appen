@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Teknobyen.Models;
 using Teknobyen.Services.PrintService;
 using Windows.Graphics.Printing;
 using Windows.UI.Xaml;
@@ -66,6 +67,12 @@ namespace Teknobyen.Services.PrintService
                 return scenarioPage.FindName("PrintCanvas") as Canvas;
             }
         }
+
+        /// <summary>
+        /// List of all WashWeekModels to be printet. Each one represent a week
+        /// that will be printed.
+        /// </summary>
+        protected List<WashWeekModel> WashList;
 
         //------------------------------------------------------------------------
         //  METHODS START HERE
@@ -136,11 +143,12 @@ namespace Teknobyen.Services.PrintService
         /// Scenario 5 uses a different approach
         /// </summary>
         /// <param name="page">The page to print</param>
-        public virtual void PreparePrintContent(Page page)
+        public virtual void PreparePrintContent(List<WashWeekModel> washListToPrint)
         {
-            if (firstPage == null)
+            this.WashList = washListToPrint;
+            if (firstPage == null && WashList.Count > 0)
             {
-                firstPage = page;
+                firstPage = new WashListPrintPage(WashList[0]);
             }
 
             // Add the (newly created) page to the print canvas which is part of the visual tree and force it to go
@@ -201,7 +209,7 @@ namespace Teknobyen.Services.PrintService
 
             // We know there is at least one page to be printed. passing null as the first parameter to
             // AddOnePrintPreviewPage tells the function to add the first page.
-            AddOnePrintPreviewPage(null, pageDescription);
+            // AddOnePrintPreviewPage(null, pageDescription);
 
             // We know there are more pages to be added as long as the last RichTextBoxOverflow added to a print preview
             // page has extra content
@@ -211,6 +219,12 @@ namespace Teknobyen.Services.PrintService
             //{
             //    lastRTBOOnPage = AddOnePrintPreviewPage(lastRTBOOnPage, pageDescription);
             //}
+
+            foreach (var washListWeek in WashList)
+            {
+                AddOnePrintPreviewPage(washListWeek, pageDescription);
+            }
+
 
             if (PreviewPagesCreated != null)
             {
@@ -264,17 +278,13 @@ namespace Teknobyen.Services.PrintService
         /// </summary>
         /// <param name="lastRTBOAdded">Last RichTextBlockOverflow element added in the current content</param>
         /// <param name="printPageDescription">Printer's page description</param>
-        protected virtual void AddOnePrintPreviewPage(RichTextBlockOverflow lastRTBOAdded, PrintPageDescription printPageDescription)
+        protected virtual void AddOnePrintPreviewPage(WashWeekModel washWeekToPrint, PrintPageDescription printPageDescription)
         {
             // XAML element that is used to represent to "printing page"
             FrameworkElement page;
 
-            // The link container for text overflowing in this page
-            RichTextBlockOverflow textLink;
-
-
             // Flow content (text) from previous pages
-            page = new WashListPrintPage();
+            page = new WashListPrintPage(washWeekToPrint);
 
             // Set "paper" width
             page.Width = printPageDescription.PageSize.Width;
@@ -296,12 +306,6 @@ namespace Teknobyen.Services.PrintService
             PrintCanvas.Children.Add(page);
             PrintCanvas.InvalidateMeasure();
             PrintCanvas.UpdateLayout();
-
-            // Find the last text container and see if the content is overflowing
-            textLink = (RichTextBlockOverflow)page.FindName("ContinuationPageLinkedContainer");
-
-            // Check if this is the last page
-
 
             // Add the page to the page preview collection
             printPreviewPages.Add(page);

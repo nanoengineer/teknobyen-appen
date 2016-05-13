@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Teknobyen.Common;
 using Teknobyen.Models;
 using Teknobyen.Services.FirebaseService;
+using Teknobyen.Services.PrintService;
 using Teknobyen.Services.WashListService;
 using Template10.Mvvm;
 using Windows.UI.Xaml.Navigation;
@@ -14,6 +16,7 @@ namespace Teknobyen.ViewModels
 {
     class WashListAdminPageViewModel : ViewModelBase
     {
+        PrintService _printService;
         IFirebaseService _firebaseService;
         IWashListService _washListService;
 
@@ -64,7 +67,23 @@ namespace Teknobyen.ViewModels
 
         public async override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
-            WashDayList = (await _firebaseService.GetWashList()).OrderBy(e => e.Date).ThenBy(e => e.Assignment).ToList();
+            try
+            {
+                WashDayList = (await _firebaseService.GetWashList()).OrderBy(e => e.Date).ThenBy(e => e.Assignment).ToList();
+            }
+            catch (Exception)
+            {
+                //Log
+            }
+
+            //_printService = new PrintService();
+            //_printService.RegisterForPrinting();
+                
+        }
+
+        public async void OnPrintButtonClick()
+        {
+            //Done in codebehind because you need a canvas from the page
         }
 
         public void ParseWashListText()

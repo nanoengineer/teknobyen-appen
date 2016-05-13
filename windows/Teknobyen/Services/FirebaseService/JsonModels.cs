@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,7 +24,8 @@ namespace Teknobyen.Services.FirebaseService
             roomNumber = model.roomNumber.ToString();
             date = model.date.ToString(App.DATEFORMAT);
             startTime = model.startTime.ToString(App.TIMEFORMAT);
-            duration = (model.endTime.Subtract(model.startTime)).TotalHours.ToString();
+            var usCulture = new CultureInfo("en-US");
+            duration = (model.endTime.Subtract(model.startTime)).TotalHours.ToString(usCulture.NumberFormat);
         }
 
         public string userId { get; set; }
