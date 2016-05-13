@@ -12,6 +12,7 @@ public class MainActivity extends AppCompatActivity {
     private static ImageButton imgBTN;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        System.out.println("THIS IS THE BEGINNING OF THE END");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         OnClickWashingButtonListener();

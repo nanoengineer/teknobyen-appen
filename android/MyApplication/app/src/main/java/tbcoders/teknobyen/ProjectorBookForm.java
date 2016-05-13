@@ -246,14 +246,36 @@ public class ProjectorBookForm extends AppCompatActivity {
         });
     }
     public void writeToFireBase(String bookStartDate, String bookStartTime, String bookEndDate, String bookEndTime, String roomNr, String comment){
+
+        // TODO: FIX THIS!!!!
+        String userID = "USERID";
+        String name = "NAME";
+        String duration = "1.5"; // TODO should be 1.5 aka 1.5hours aka 90min
+
         Firebase ref = new Firebase("https://teknobyen.firebaseio.com");
         Firebase newBooking = ref.child("reservations");
         Map<String, String> newBookingMap = new HashMap<String, String>();
-        newBookingMap.put("startHour", bookStartTime);
-        newBookingMap.put("date", bookStartDate);
+
+        newBookingMap.put("userID", userID);
         newBookingMap.put("comment", comment);
-        newBookingMap.put("roomNumber", roomNr);
-        newBookingMap.put("stopHour", bookEndTime);
+        newBookingMap.put("name", name);
+        newBookingMap.put("roomnumber", roomNr);
+        newBookingMap.put("date", bookStartDate);
+        newBookingMap.put("startTime", bookStartTime);
+        newBookingMap.put("duration", duration);
+
         newBooking.push().setValue(newBookingMap);
+
+
+        /*** FORMAT
+        userId: AAAA BAAA AAAG AA
+        comment: Game of Thrones
+        name : Sindre
+        roomnumber : 503
+        date : 10.05.2016
+        startTime : 20:00
+        duration : 1.5
+        ***/
+
     }
 }
