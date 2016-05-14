@@ -93,7 +93,18 @@ The following are the features that will be implemented in the first public rele
 
 * __Cleaning List__
 
-    @SindreSB Fill this in please :)
+    * ###### Firebase Data Format: 
+      * __date__: 22.05.2016
+      * __assignment__: 1
+      * __roomNumber__ : 503
+      
+    * ###### Features that should be included in V1:
+    
+      * Show user when their next washday is. If they are not on the list then a message saying they are not on the current list should be displayed. 
+      
+      * User should recieve a notification on the day of their assignment. Minimum requirement is a notification at noon, but the user should have the ability to set the time of the notification on the settingspage. 
+      * A complete list of the washlist with date assignment and roonnumber sorted on date, then assignment should be displayed. 
+      
 
 ## Contributors
 
