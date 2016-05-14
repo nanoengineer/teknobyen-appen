@@ -83,7 +83,7 @@ The following are the features that will be implemented in the first public rele
         (STATUS UNKNOWN should be shown if the HTTP request failed during INITIAL request. If statuses could not be retrieved in subsequent requests, then show the last fetched statuses and display somewhere that an network error occured).
 
       * State Colors
-             ```python
+             ```swift
              let machineAvailColor = UIColor(rgba: "#97E37DD5")
              let machineBusyColor = UIColor(rgba: "#E3967DC5")
              let machineUnknownColor = UIColor(rgba: "#E3D059C5")
@@ -97,6 +97,6 @@ The following are the features that will be implemented in the first public rele
 
 * __Contributors__
 
-    * Android: @Alexolo, @SolveH, @arnagl
-    * iOS: @nanoengineer, @Misolini
-    * Windows PC/Mobile: @SindreSB
+    * Android: [Alexolo](https://github.com/Alexolo), [SolveH](https://github.com/SolveH), [arnagl](https://github.com/arnagl)
+    * iOS: [nanoengineer](https://github.com/nanoengineer), [Misolini](https://github.com/Misolini)
+    * Windows PC/Mobile: [SindreSB](https://github.com/SindreSB)
