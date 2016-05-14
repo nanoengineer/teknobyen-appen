@@ -94,7 +94,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/datePicker"
             android:layout_column="0"
-            android:layout_gravity="center_horizontal"/>
+            android:layout_gravity="center_horizontal"
+            android:visibility="visible"/>
 
         <NumberPicker
             android:layout_width="wrap_content"
@@ -125,16 +126,6 @@
             android:layout_weight="1"
             android:layout_gravity="bottom"
             android:layout_span="2" />
-
-        <Button
-            android:text="Sett slutttid"
-            android:id="@+id/setBookEnd"
-            android:layout_column="2"
-            android:layout_weight="1"
-            android:layout_gravity="bottom"
-            android:layout_height="wrap_content"
-            android:layout_span="2" />
-
     </TableRow>
 
 </TableLayout>
