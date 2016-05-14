@@ -35,7 +35,7 @@ The following are the features that will be implemented in the first public rele
 ## Feature Specifications
 * __Login Page__
 
-    * ##### Required fields:
+    * ###### Required fields:
       * __Name__
       * __Room number__
       * __washing machine ID__
@@ -82,7 +82,7 @@ The following are the features that will be implemented in the first public rele
 
         (STATUS UNKNOWN should be shown if the HTTP request failed during INITIAL request. If statuses could not be retrieved in subsequent requests, then show the last fetched statuses and display somewhere that an network error occured).
 
-      * State Colors
+      * State Colors Reference 
              ```swift
              let machineAvailColor = UIColor(rgba: "#97E37DD5")
              let machineBusyColor = UIColor(rgba: "#E3967DC5")
