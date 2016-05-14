@@ -3,17 +3,21 @@ package tbcoders.teknobyen;
 /**
  * Created by Alexander on 05/05/2016.
  */
-public class Reservations implements Comparable<Reservations>{
+public class Reservations implements Comparable<Reservations> {
 
-    private String userID;
     private String name;
-    private String roomnumber;
-    private String comment;
     private String date;
+    private String userID;
     private String startTime;
+    private String comment;
+    private String roomNumber;
     private String duration;
 
     public Reservations() {
+    }
+
+    public String getRoomNumber() {
+        return roomNumber;
     }
 
     public String getUserID() {
@@ -22,10 +26,6 @@ public class Reservations implements Comparable<Reservations>{
 
     public String getName() {
         return name;
-    }
-
-    public String getRoomnumber() {
-        return roomnumber;
     }
 
     public String getComment() {
@@ -46,7 +46,7 @@ public class Reservations implements Comparable<Reservations>{
 
     @Override
     public String toString() {
-        return roomnumber + ", " + name + "\n" +
+        return roomNumber + ", " + name + "\n" +
                 comment + "\n" +
                 date + "\t\t" + startTime + ", " + duration + "hrs";
     }

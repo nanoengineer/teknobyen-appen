@@ -2,8 +2,8 @@ package tbcoders.teknobyen;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,12 +14,9 @@ import android.widget.Toast;
 import com.firebase.client.Firebase;
 
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 import java.util.TimeZone;
 
 public class ProjectorBookForm extends AppCompatActivity {
@@ -47,33 +44,35 @@ public class ProjectorBookForm extends AppCompatActivity {
         OnClickReserveListener();
         setupNumberPickers();
     }
-    public void setupNumberPickers(){
-        pickDate = (NumberPicker)findViewById(R.id.datePicker);
+
+    public void setupNumberPickers() {
+        pickDate = (NumberPicker) findViewById(R.id.datePicker);
         Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Europe/Oslo"));
         //Veka startar på søndag som har verdi 1, derfor må eg trekke frå 1 når eg skal hente ut dag
         //frå lista over dagar
         int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK) - 1;
         dateValues = new String[6];
         dateValues[0] = "I dag";
-        for(int i = 1; i < 6; i++){
-            if(dayOfWeek + i > 6){
+        for (int i = 1; i < 6; i++) {
+            if (dayOfWeek + i > 6) {
                 dateValues[i] = weekDays[dayOfWeek + i - 7];
-            }else{
+            } else {
                 dateValues[i] = weekDays[dayOfWeek + i];
             }
-        }this.dateValues = dateValues;
+        }
+        this.dateValues = dateValues;
         pickDate.setDisplayedValues(dateValues);
         pickDate.setMaxValue(5);
         pickDate.setMinValue(0);
         pickDate.setWrapSelectorWheel(false);
 
-        pickHour = (NumberPicker)findViewById(R.id.startHourPicker);
+        pickHour = (NumberPicker) findViewById(R.id.startHourPicker);
         pickHour.setDisplayedValues(hourValues);
         pickHour.setMaxValue(23);
         pickHour.setMinValue(0);
         pickHour.setWrapSelectorWheel(false);
 
-        pickMin = (NumberPicker)findViewById(R.id.startMinutePicker);
+        pickMin = (NumberPicker) findViewById(R.id.startMinutePicker);
         pickMin.setMinValue(0);
         pickMin.setMaxValue(3);
         pickMin.setDisplayedValues(minValues);
@@ -81,10 +80,10 @@ public class ProjectorBookForm extends AppCompatActivity {
     }
 
     public void OnClickStartListener() {
-        pickDate = (NumberPicker)findViewById(R.id.datePicker);
-        pickHour = (NumberPicker)findViewById(R.id.startHourPicker);
-        pickMin = (NumberPicker)findViewById(R.id.startMinutePicker);
-        Button btn = (Button)findViewById(R.id.setBookStart);
+        pickDate = (NumberPicker) findViewById(R.id.datePicker);
+        pickHour = (NumberPicker) findViewById(R.id.startHourPicker);
+        pickMin = (NumberPicker) findViewById(R.id.startMinutePicker);
+        Button btn = (Button) findViewById(R.id.setBookStart);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -101,7 +100,7 @@ public class ProjectorBookForm extends AppCompatActivity {
                         endHourValue = 23;
                         endMinValue = 45;
                         writeStartTimeMessage();
-                        TextView endText = (TextView)findViewById(R.id.endtimeString);
+                        TextView endText = (TextView) findViewById(R.id.endtimeString);
                         endText.setText("");
                     } else {
                         if (shValue < endHourValue || shValue == endHourValue && trueMinValue < endMinValue) {
@@ -111,43 +110,47 @@ public class ProjectorBookForm extends AppCompatActivity {
                             endHourValue = 23;
                             endMinValue = 45;
                             writeStartTimeMessage();
-                            TextView endText = (TextView)findViewById(R.id.endtimeString);
+                            TextView endText = (TextView) findViewById(R.id.endtimeString);
                             endText.setText("");
                         }
                     }
-                }else{
+                } else {
                     alertMsg('w');
                 }
             }
         });
     }
-    public boolean controlCurrentTime(int day, int hour, int minute){
+
+    public boolean controlCurrentTime(int day, int hour, int minute) {
         Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Europe/Oslo"));
         int currentHour = cal.get(Calendar.HOUR_OF_DAY);
         int currentMin = cal.get(Calendar.MINUTE);
-        if(day != 0){
+        if (day != 0) {
             return true;
-        }if(hour >= currentHour){
-            if(hour > currentHour){
+        }
+        if (hour >= currentHour) {
+            if (hour > currentHour) {
                 return true;
-            }else{
-                if(minute > currentMin){
+            } else {
+                if (minute > currentMin) {
                     return true;
                 }
             }
-        }return false;
+        }
+        return false;
     }
-    public void OnClickEndListener(){
-        pickDate = (NumberPicker)findViewById(R.id.datePicker);
-        pickHour = (NumberPicker)findViewById(R.id.startHourPicker);
-        pickMin = (NumberPicker)findViewById(R.id.startMinutePicker);
-        Button btn = (Button)findViewById(R.id.setBookEnd);
+
+    public void OnClickEndListener() {
+        pickDate = (NumberPicker) findViewById(R.id.datePicker);
+        pickHour = (NumberPicker) findViewById(R.id.startHourPicker);
+        pickMin = (NumberPicker) findViewById(R.id.startMinutePicker);
+        Button btn = (Button) findViewById(R.id.setBookEnd);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Ulovlig å sette slutttid før starttid er satt (slik slepp vi å sjekke med current time)
-                TextView startText = (TextView)findViewById(R.id.starttimeString);
-                if(startText.getText().toString().length()>0){
+                TextView startText = (TextView) findViewById(R.id.starttimeString);
+                if (startText.getText().toString().length() > 0) {
                     int sdValue = pickDate.getValue();
                     int shValue = pickHour.getValue();
                     int smValue = pickMin.getValue();
@@ -162,15 +165,15 @@ public class ProjectorBookForm extends AppCompatActivity {
                             alertMsg('e');
                         }
                     }
-                }else{
+                } else {
                     Toast.makeText(ProjectorBookForm.this, "Vennligst velg starttid først", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 
-    public void writeStartTimeMessage(){
-        TextView startText = (TextView)findViewById(R.id.starttimeString);
+    public void writeStartTimeMessage() {
+        TextView startText = (TextView) findViewById(R.id.starttimeString);
         int dayValue = pickDate.getValue();
         startDayValue = dayValue;
         String day = dateValues[dayValue];
@@ -182,8 +185,9 @@ public class ProjectorBookForm extends AppCompatActivity {
         String trueMinValue = minValues[minValue];
         startText.setText(day + " " + trueHourValue + ":" + trueMinValue);
     }
-    public void writeEndTimeMessage(){
-        final TextView endText = (TextView)findViewById(R.id.endtimeString);
+
+    public void writeEndTimeMessage() {
+        final TextView endText = (TextView) findViewById(R.id.endtimeString);
         int dayValue = pickDate.getValue();
         endDayValue = dayValue;
         String day = dateValues[dayValue];
@@ -195,37 +199,39 @@ public class ProjectorBookForm extends AppCompatActivity {
         String trueMinValue = minValues[minValue];
         endText.setText(day + " " + trueHourValue + ":" + trueMinValue);
     }
-    private void alertMsg(char c){
+
+    private void alertMsg(char c) {
         String msg = "";
-        if(c == 's'){
+        if (c == 's') {
             msg = "Verdien for starttid må være mindre enn slutttid";
-        }else if(c == 'e'){
+        } else if (c == 'e') {
             msg = "Verdien for slutttid må være større enn starttid";
-        }else if(c == 'w'){
+        } else if (c == 'w') {
             msg = "Verdien for starttid må være større enn klokkeslettet som er nå";
-        }else if(c == 'r'){
+        } else if (c == 'r') {
             msg = "Vennligst velg starttid, slutttid og fyll inn beskrivelse";
         }
         Toast.makeText(ProjectorBookForm.this, msg, Toast.LENGTH_SHORT).show();
     }
-    public void OnClickReserveListener(){
-        Button btn = (Button)findViewById(R.id.bookreserveBTN);
+
+    public void OnClickReserveListener() {
+        Button btn = (Button) findViewById(R.id.bookreserveBTN);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TextView startText = (TextView)findViewById(R.id.starttimeString);
-                TextView endText = (TextView)findViewById(R.id.endtimeString);
-                EditText bookDesEdit = (EditText)findViewById(R.id.bookDescriptionEdit);
+                TextView startText = (TextView) findViewById(R.id.starttimeString);
+                TextView endText = (TextView) findViewById(R.id.endtimeString);
+                EditText bookDesEdit = (EditText) findViewById(R.id.bookDescriptionEdit);
                 int startTextLength = startText.getText().length();
                 int endTextLength = endText.getText().length();
                 int descriptionTextLength = bookDesEdit.getText().toString().length();
                 //Kontrollere om alle felt er utfylt før knappen kan trykkast
-                if(startTextLength > 0 && endTextLength > 0 && descriptionTextLength > 0){
+                if (startTextLength > 0 && endTextLength > 0 && descriptionTextLength > 0) {
                     SimpleDateFormat bookDateFormat = new SimpleDateFormat("dd.MM.yyyy");
                     Calendar calStart = Calendar.getInstance(TimeZone.getTimeZone("Europe/Oslo"));
                     calStart.add(Calendar.DATE, startDayValue);
                     String bookStartDate = bookDateFormat.format(calStart.getTime());
-                    String bookStartTime = "" + hourValues[startHourValue] + ":" + minValues[startMinValue];
+                    String bookStartTime = "" + hourValues[startHourValue] + "." + minValues[startMinValue];
 
                     Calendar calEnd = Calendar.getInstance(TimeZone.getTimeZone("Europe/Oslo"));
                     calEnd.add(Calendar.DATE, endDayValue);
@@ -239,43 +245,44 @@ public class ProjectorBookForm extends AppCompatActivity {
                     writeToFireBase(bookStartDate, bookStartTime, bookEndDate, bookEndTime, roomNr, bookText);
                     Intent intent = new Intent(ProjectorBookForm.this, ProjectorBookings.class);
                     startActivity(intent);
-                }else{
+                } else {
                     alertMsg('r');
                 }
             }
         });
     }
-    public void writeToFireBase(String bookStartDate, String bookStartTime, String bookEndDate, String bookEndTime, String roomNr, String comment){
+
+    public void writeToFireBase(String bookStartDate, String bookStartTime, String bookEndDate, String bookEndTime, String roomNr, String comment) {
 
         // TODO: FIX THIS!!!!
-        String userID = "USERID";
-        String name = "NAME";
+        String userID = "SampleID";
+        String name = "Sølve's Tiny Pecker";
         String duration = "1.5"; // TODO should be 1.5 aka 1.5hours aka 90min
 
         Firebase ref = new Firebase("https://teknobyen.firebaseio.com");
         Firebase newBooking = ref.child("reservations");
         Map<String, String> newBookingMap = new HashMap<String, String>();
 
-        newBookingMap.put("userID", userID);
-        newBookingMap.put("comment", comment);
         newBookingMap.put("name", name);
-        newBookingMap.put("roomnumber", roomNr);
         newBookingMap.put("date", bookStartDate);
+        newBookingMap.put("userID", userID);
         newBookingMap.put("startTime", bookStartTime);
+        newBookingMap.put("comment", comment);
+        newBookingMap.put("roomNumber", roomNr);
         newBookingMap.put("duration", duration);
 
         newBooking.push().setValue(newBookingMap);
 
 
         /*** FORMAT
-        userId: AAAA BAAA AAAG AA
-        comment: Game of Thrones
-        name : Sindre
-        roomnumber : 503
-        date : 10.05.2016
-        startTime : 20:00
-        duration : 1.5
-        ***/
+         userId: AAAA BAAA AAAG AA
+         comment: Game of Thrones
+         name : Sindre
+         roomnumber : 503
+         date : 10.05.2016
+         startTime : 20:00
+         duration : 1.5
+         ***/
 
     }
 }

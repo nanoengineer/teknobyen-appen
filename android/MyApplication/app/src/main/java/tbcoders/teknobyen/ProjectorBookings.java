@@ -62,8 +62,11 @@ public class ProjectorBookings extends AppCompatActivity {
             public void onDataChange(DataSnapshot snapshot) {
                 reservationList = new ArrayList<Reservations>();
 
+
+
                 for (DataSnapshot postSnapshot: snapshot.getChildren()) {
                     try{
+                        System.out.println(postSnapshot.getValue());
                         Reservations post = postSnapshot.getValue(Reservations.class);
                         reservationList.add(post);
 
@@ -90,6 +93,7 @@ public class ProjectorBookings extends AppCompatActivity {
         ArrayAdapter adapter = new ArrayAdapter(ProjectorBookings.this, android.R.layout.simple_list_item_1, reservationList);
         ListView bookingView = (ListView) findViewById(R.id.bookingView);
         bookingView.setAdapter(adapter);
+
 
 
         for (int i = 0; i < reservationList.size(); i++) {
