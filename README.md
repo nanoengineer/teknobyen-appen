@@ -82,6 +82,13 @@ The following are the features that will be implemented in the first public rele
 
         (STATUS UNKNOWN should be shown if the HTTP request failed during INITIAL request. If statuses could not be retrieved in subsequent requests, then show the last fetched statuses and display somewhere that an network error occured).
 
+      * State Colors
+             ```python
+             let machineAvailColor = UIColor(rgba: "#97E37DD5")
+             let machineBusyColor = UIColor(rgba: "#E3967DC5")
+             let machineUnknownColor = UIColor(rgba: "#E3D059C5")
+             ```
+
       * There should be a way for the user to fetch the latest status (e.g. button or pull to refresh) and there should also be a field somewhere that shows when the statuses were last updated. (e.g. Just Now, or 5 min. ago)
 
 * __Cleaning List__
