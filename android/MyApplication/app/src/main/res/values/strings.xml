@@ -23,4 +23,5 @@
     <!-- Strings related to projector -->
     <string name="reserve">Reserver</string>
     <string name="room">Room</string>
+    <string name="ingenstatus">Utilgjengelig</string>
 </resources>

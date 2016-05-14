@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.widget.LinearLayout;
@@ -20,14 +21,28 @@ import java.util.concurrent.ExecutionException;
 
 public class MachineStatus extends AppCompatActivity {
     //This class is for opening the web browser inside the app.
+    SwipeRefreshLayout swipeLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
         setContentView(R.layout.activity_washing_machine_status);
 
+        refreshData();
+
+        swipeLayout = (SwipeRefreshLayout) findViewById(R.id.machineStatusSwipe);
+        swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                System.out.println("Refreshing");
+                if(refreshData()){
+                    swipeLayout.setRefreshing(false);
+                }
+            }
+        });
+    }
+
+    private boolean refreshData() {
         try {
             urlScraping();
         } catch (IOException e) {
@@ -41,8 +56,9 @@ public class MachineStatus extends AppCompatActivity {
             e.printStackTrace();
         }
 
-
+        return true;
     }
+
 
     private void urlScraping() throws IOException, ExecutionException, InterruptedException {
 
@@ -64,20 +80,26 @@ public class MachineStatus extends AppCompatActivity {
                 TextView text = (TextView) findViewById(textViewIds[i]);
                 LinearLayout layout = (LinearLayout) findViewById((linearLayoutIds[i]));
                 text.setText(statusArray[i]);
-                if (layout != null) {
                     if (statusArray[i].equals("Ledig")) {
                         layout.setBackgroundColor(Color.parseColor("#AAFFAA"));
                     } else {
                         layout.setBackgroundColor(Color.parseColor("#ffa5a5"));
                     }
 
-                }
+
             }
 
         } else {
-            Toast.makeText(MachineStatus.this, "Could not load status.", Toast.LENGTH_LONG).show();
+            for (int i : linearLayoutIds) {
+                LinearLayout layout = (LinearLayout)findViewById(i);
+                layout.setBackgroundColor(Color.parseColor("#f5c8f9"));
+            }
+            for (int i : textViewIds){
+                TextView text = (TextView)findViewById(i);
+                text.setText(R.string.ingenstatus);
+            }
+            Toast.makeText(MachineStatus.this, "Kunne ikke koble til maskiner", Toast.LENGTH_LONG).show();
         }
-
     }
 
 }
