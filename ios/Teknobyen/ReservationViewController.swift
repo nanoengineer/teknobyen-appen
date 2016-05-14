@@ -53,8 +53,6 @@ class ReservationViewController: UITableViewController, ReservationDelegate {
         self.tableView.reloadData()
     }
     
-
-    
     
     func loadReservationsFromServers() {
         let ref = Constants.RootReference.childByAppendingPath("reservations")
@@ -64,7 +62,9 @@ class ReservationViewController: UITableViewController, ReservationDelegate {
                 let userID = stuff.value["userID"] as! String
                 let comment = stuff.value["comment"] as! String
                 let name = stuff.value["name"] as! String
-                let roomNumber = stuff.value["roomnumber"] as! String
+                
+                let roomNumber = stuff.value["roomNumber"] as! String
+                
                 let date = stuff.value["date"] as! String
                 let startTime = stuff.value["startTime"] as! String
                 let duration = stuff.value["duration"] as! String

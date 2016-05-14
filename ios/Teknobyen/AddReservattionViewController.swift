@@ -41,9 +41,17 @@ class AddReservattionViewController: UIViewController, UIPickerViewDelegate, UIP
         durationPicker.dataSource = self
         durationPicker.delegate = self
         
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+        
         dateFrom = datePicker.date
         updateLabels()
 
+    }
+    
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
     }
   
     
