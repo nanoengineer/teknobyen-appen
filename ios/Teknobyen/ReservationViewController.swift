@@ -60,13 +60,22 @@ class ReservationViewController: UITableViewController, ReservationDelegate {
         let ref = Constants.RootReference.childByAppendingPath("reservations")
         ref.observeSingleEventOfType(.Value, withBlock: { snapshot in
             for stuff in snapshot.children {
+
+                let userID = stuff.value["userID"] as! String
                 let comment = stuff.value["comment"] as! String
+                let name = stuff.value["name"] as! String
+                let roomNumber = stuff.value["roomnumber"] as! String
                 let date = stuff.value["date"] as! String
-                let roomNumber = stuff.value["roomNumber"] as! String
-                let startHour = stuff.value["startHour"] as! String
-                let stopHour = stuff.value["stopHour"] as! String
-                
-                let reservation = Reservation(date: date, startHour: startHour, stopHour: stopHour, roomNumber: Int(roomNumber)!, comment: comment)
+                let startTime = stuff.value["startTime"] as! String
+                let duration = stuff.value["duration"] as! String
+
+                let reservation = Reservation(  userID: userID,
+                                                comment: comment,
+                                                name: name,
+                                                roomNumber: roomNumber,
+                                                date: date,
+                                                startTime: startTime,
+                                                duration: duration)
                 
                 self.reservations.append(reservation)
             }
@@ -96,9 +105,10 @@ class ReservationViewController: UITableViewController, ReservationDelegate {
         let cell = tableView.dequeueReusableCellWithIdentifier("ReservationCell", forIndexPath: indexPath) as! ReservationTableViewCell
         let reservation = reservations[indexPath.row]
         
+        cell.nameLabel.text = reservation.name
         cell.dateLabel.text = reservation.date
         cell.roomLabel.text = "Rom \(reservation.roomNumber)"
-        cell.hourLabel.text = "Fra \(reservation.startHour) til \(reservation.stopHour)"
+        cell.hourLabel.text = "\(reservation.startTime) - \(reservation.endTime)"
         cell.commentLabel.text = reservation.comment
 
         return cell
@@ -118,14 +128,30 @@ protocol ReservationDelegate {
 
 
 struct Reservation {
-    let date: String
-    let startHour: String
-    let stopHour: String
-    let roomNumber: Int
+
+    let userID: String
     let comment: String
+    let name: String
+    let roomNumber: String
+    let date: String
+    let startTime: String
+    let duration: String
+    
+    var endTime: String {
+        get {
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.locale = NSLocale.init(localeIdentifier: "no_NO")
+            dateFormatter.dateFormat = "HH.mm"
+            
+            let start = dateFormatter.dateFromString(startTime)
+            let interval = NSTimeInterval.init(Float(duration)!*3600)
+            let end = start!.dateByAddingTimeInterval(interval)
+            return dateFormatter.stringFromDate(end)
+        }
+    }
     
     func format() -> [String: String] {
-        return ["date": date, "startHour": startHour, "stopHour": stopHour, "roomNumber": "\(roomNumber)", "comment": comment]
+        return ["userID": userID, "comment": comment, "name": name, "roomNumber": "\(roomNumber)", "date": date, "startTime": startTime, "duration": duration]
     }
     
 }

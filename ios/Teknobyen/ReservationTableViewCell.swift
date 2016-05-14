@@ -25,6 +25,7 @@ class ReservationTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var roomLabel: UILabel!
     @IBOutlet weak var hourLabel: UILabel!

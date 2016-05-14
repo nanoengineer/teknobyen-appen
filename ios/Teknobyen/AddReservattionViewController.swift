@@ -90,16 +90,23 @@ class AddReservattionViewController: UIViewController, UIPickerViewDelegate, UIP
         let comment = commentField.text != nil ? commentField.text! : ""
         let day = dateFormatter.stringFromDate(dateFrom)
         
-        dateFormatter.dateFormat = "HH:mm"
+        dateFormatter.dateFormat = "HH.mm"
         let startHour = dateFormatter.stringFromDate(dateFrom)
         
         let secondInterval = durationInSeconds()
         dateTo = dateFrom.dateByAddingTimeInterval(secondInterval)
         
-        let stopHour = dateFormatter.stringFromDate(dateTo)
+//        let stopHour = dateFormatter.stringFromDate(dateTo)
         let roomNumber = 418
-        
-        let reservation = Reservation(date: day, startHour: startHour, stopHour: stopHour, roomNumber: roomNumber, comment: comment)
+
+        let reservation = Reservation(userID: "SampleID",
+                                      comment: comment,
+                                      name: "Sølve's Tiny Pecker",
+                                      roomNumber: "\(roomNumber)",
+                                      date: day,
+                                      startTime: startHour,
+                                      duration: "1.5")
+
         saveReservationToServer(reservation)
         self.delegate.reservationReceived(reservation)
         self.navigationController?.popViewControllerAnimated(true)
