@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
         OnClickProjectorButtonListener();
         OnClickSettingsButtonListener();
         OnClickFyllaButtonListener();
+        OnClickWashListButtonListener();
 
         final MediaPlayer stemmerDetSound = MediaPlayer.create(this, R.raw.stemmerlyd);
         ImageButton playStemmerDetSound = (ImageButton) this.findViewById(R.id.btn_stemmer_det);
@@ -26,6 +27,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 stemmerDetSound.start();
+            }
+        });
+    }
+
+    private void OnClickWashListButtonListener() {
+        imgBTN = (ImageButton)findViewById(R.id.BTN_washList);
+        imgBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, CleaningLists.class);
+                startActivity(intent);
             }
         });
     }

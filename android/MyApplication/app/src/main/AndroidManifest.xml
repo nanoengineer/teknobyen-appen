@@ -29,6 +29,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".WashingMachine" />
+        <activity android:name=".CleaningLists" />
         <activity android:name=".MachineStatus" />
         <activity android:name=".LoginActivityWash" />
         <activity android:name=".MachineRefill" />
