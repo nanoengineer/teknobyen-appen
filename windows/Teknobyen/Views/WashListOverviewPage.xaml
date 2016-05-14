@@ -9,6 +9,7 @@
     xmlns:vm="using:Teknobyen.ViewModels"
     xmlns:models="using:Teknobyen.Models"
     xmlns:t10converters="using:Template10.Converters"
+    xmlns:localcontrols="using:Teknobyen.Controls"
     xmlns:converters="using:Teknobyen.Converters"
     mc:Ignorable="d">
 
@@ -111,7 +112,8 @@
 
                 <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="Vaskeliste:" />
 
-                <ListView Grid.Row="1" ItemsSource="{x:Bind ViewModel.WashList}" ContainerContentChanging="ListView_ContainerContentChanging" >
+                <localcontrols:WashListControl Grid.Row="1" WashList="{x:Bind ViewModel.WashList}"/>
+                <!--<ListView Grid.Row="1" ItemsSource="{x:Bind ViewModel.WashList}" ContainerContentChanging="ListView_ContainerContentChanging" >
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="models:WashDayModel" >
                             <Grid>
@@ -132,7 +134,7 @@
                             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                         </Style>
                     </ListView.ItemContainerStyle>
-                </ListView>
+                </ListView>-->
             </Grid>
         </Grid>
     </Grid>

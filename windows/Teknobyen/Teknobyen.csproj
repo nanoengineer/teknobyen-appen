@@ -105,10 +105,15 @@
     </Compile>
     <Compile Include="Common\RoomManager.cs" />
     <Compile Include="Common\Utils.cs" />
+    <Compile Include="Controls\AlternatingRowListView.cs" />
     <Compile Include="Controls\LargeImageButton.cs" />
     <Compile Include="Controls\WashingMachineControl.xaml.cs">
       <DependentUpon>WashingMachineControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\WashListControl.xaml.cs">
+      <DependentUpon>WashListControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\AssignmentToBackgroundColorConverter.cs" />
     <Compile Include="Converters\DateToStringConverter.cs" />
     <Compile Include="Models\LaundryMachineStatusModel.cs" />
     <Compile Include="Models\ProjectorReservationModel.cs" />
@@ -201,6 +206,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="Controls\WashingMachineControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\WashListControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

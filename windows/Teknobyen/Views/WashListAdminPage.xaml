@@ -7,12 +7,18 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Template10.Controls"
     xmlns:vm="using:Teknobyen.ViewModels"
+    xmlns:t10converters="using:Template10.Converters"
     xmlns:models ="using:Teknobyen.Models"
+    xmlns:localControls="using:Teknobyen.Controls"
     mc:Ignorable="d">
 
     <Page.DataContext>
         <vm:WashListAdminPageViewModel x:Name="ViewModel" />
     </Page.DataContext>
+
+    <Page.Resources>
+        <t10converters:StringFormatConverter x:Key="StrFormatConverter" />
+    </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="5">
         <Grid.RowDefinitions>
@@ -31,12 +37,84 @@
             <!-- Create washlist  -->
             <Canvas x:Name="PrintCanvas" Opacity="0"/>
             <Pivot Grid.Column="0">
-                <PivotItem Header="Skriv ut" >
+                <PivotItem Header="LAG NY">
+                    <Grid Margin="5,0,10,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            
+
+                            <TextBlock Text="Fra:" />
+                            <CalendarDatePicker Grid.Column="1" Margin="0,0,5,0" />
+
+                            <TextBlock Text="Til:" Grid.Row="1" Grid.Column="0" />
+                            <CalendarDatePicker Grid.Row="1" Grid.Column="1" Margin="0,0,5,0"/>
+
+                            <TextBlock Text="Straffevasker:" Grid.Row="2" />
+                            <TextBox PlaceholderText="f.eks 203, 401" Grid.Row="2" Grid.Column="1"/>
+                            <TextBlock Grid.Row="3" Grid.ColumnSpan="2" />
+
+                            <TextBlock Text="Fritak:" Grid.Row="4" />
+                            <TextBox PlaceholderText="f.eks 203, 401" Grid.Row="4" Grid.Column="1"/>
+                            <TextBlock Grid.Row="5" Grid.ColumnSpan="2" />
+
+                            <Button Content="Generer" Grid.Row="6" />
+
+                        </Grid>
+
+                        <ListView Grid.Row="1" >
+                            <ListView.ItemTemplate>
+                                <DataTemplate x:DataType="models:WashDayModel" >
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Text="{x:Bind Date.Date}" />
+                                        <TextBlock Grid.Column="1" Text="{x:Bind Assignment}" />
+                                        <TextBlock Grid.Column="2" Text="{x:Bind RoomNumber}" />
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                        </ListView>
+
+                        <Grid Grid.Row="2">
+                            <Button HorizontalAlignment="Left" Content="Lagre" />
+                            <Button HorizontalAlignment="Right" Content="Avbryt" />
+                        </Grid>
+                        
+                    </Grid>
+                </PivotItem>
+                <PivotItem Header="SKRIV UT" >
                     <Button Content="Print" Click="Button_Click" />
                 </PivotItem>
                 <PivotItem>
                     <PivotItem.Header>
-                        <TextBlock Text="Fra tekst" />
+                        <TextBlock Text="FRA TEKST"/>
                     </PivotItem.Header>
                     <Grid  Padding="5,0,10,0">
                         <Grid.RowDefinitions>
@@ -100,7 +178,7 @@
 
                 <TextBlock Text="Vaskeliste:" Style="{StaticResource TitleTextBlockStyle}" />
 
-                <ListView Grid.Row="1"
+                <!--<ListView Grid.Row="1"
                           ItemsSource="{x:Bind ViewModel.WashDayList}"
                           >
                     <ListView.ItemTemplate>
@@ -112,7 +190,7 @@
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
 
-                                <TextBlock Text="{x:Bind Date.Date}" />
+                                <TextBlock Text="{x:Bind Date.Date, Mode=OneWay, Converter={StaticResource StrFormatConverter}, ConverterParameter=\{0:d\}}" />
                                 <TextBlock Grid.Column="1" Text="{x:Bind Assignment}" />
                                 <TextBlock Grid.Column="2" Text="{x:Bind RoomNumber}" />
                             </Grid>
@@ -123,9 +201,11 @@
                             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                         </Style>
                     </ListView.ItemContainerStyle>
-                </ListView>
+                </ListView>-->
+                <localControls:WashListControl Grid.Row="1" WashList="{x:Bind ViewModel.WashDayList}" />
 
-                <Grid Grid.Row="2">
+
+                <Grid Grid.Row="2" Visibility="Collapsed" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
@@ -137,7 +217,7 @@
                     <TextBox Grid.Column="2" Text="{x:Bind ViewModel.SelectedWashDay.RoomNumber}" />
                 </Grid>
 
-                <StackPanel Grid.Row="3" Orientation="Horizontal">
+                <StackPanel Grid.Row="3" Orientation="Horizontal" Visibility="Collapsed" >
                     <Button >
                         <StackPanel Orientation="Horizontal">
                             <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE70F;" Margin="0,0,4,0"/>

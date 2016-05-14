@@ -37,6 +37,11 @@ namespace Teknobyen.Views
             _printService.RegisterForPrinting();
         }
 
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            _printService.UnregisterForPrinting();
+        }
+
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
             

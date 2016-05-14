@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Teknobyen.Common;
 using Teknobyen.Models;
+using Windows.Storage;
 
 namespace Teknobyen.Services.WashListService
 {
@@ -16,7 +17,7 @@ namespace Teknobyen.Services.WashListService
             Instance = Instance ?? new WashListService();
         }
 
-        //TODO
+        
         public List<WashDayModel> GenerateWashList(DateTime startDate, DateTime endDate, RoomModel startAt, List<RoomModel> extraRooms = null, List<RoomModel> roomsToSkip = null)
         {
             int washDaysToCreate = (int)(endDate.Subtract(startDate)).TotalDays;
@@ -166,6 +167,23 @@ namespace Teknobyen.Services.WashListService
             }
 
             return errorList;
+        }
+
+        public async Task<bool> BackupWashListToFile(List<WashDayModel> listToBackup)
+        {
+            string listAsString = "";
+            foreach (var item in listToBackup)
+            {
+                listAsString += $"{item.Date.ToString()}\t{item.Assignment}\t{item.RoomNumber} \n\r";
+            }
+
+            StorageFolder backupFolder = ApplicationData.Current.LocalFolder;
+            StorageFile backupFile = await backupFolder.CreateFileAsync(DateTime.Now.ToString());
+
+            await Windows.Storage.FileIO.WriteTextAsync(backupFile, listAsString);
+
+
+            return true;
         }
     }
 }

@@ -15,9 +15,9 @@ namespace Teknobyen.Models
         public WashDayModel(string id, WashDayJsonModel jsonModel)
         {
             FBID = id;
-            Date = DateTime.ParseExact(jsonModel.Date, App.DATEFORMAT, CultureInfo.InvariantCulture);
-            Assignment = jsonModel.Assignment;
-            RoomNumber = jsonModel.RoomNumber;
+            Date = DateTime.ParseExact(jsonModel.date, App.DATEFORMAT, CultureInfo.InvariantCulture);
+            Assignment = jsonModel.assignment;
+            RoomNumber = jsonModel.roomNumber;
         }
 
         [JsonIgnore]

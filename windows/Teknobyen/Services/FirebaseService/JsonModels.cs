@@ -43,14 +43,14 @@ namespace Teknobyen.Services.FirebaseService
 
         public WashDayJsonModel(WashDayModel model)
         {
-            this.Date = model.Date.ToString("dd.MM.yyyy");
-            this.Assignment = model.Assignment;
-            this.RoomNumber = model.RoomNumber;
+            this.date = model.Date.ToString("dd.MM.yyyy");
+            this.assignment = model.Assignment;
+            this.roomNumber = model.RoomNumber;
         }
 
-        public string Date { get; set; }
-        public int Assignment { get; set; }
-        public int RoomNumber { get; set; }
+        public string date { get; set; }
+        public int assignment { get; set; }
+        public int roomNumber { get; set; }
     }
 
 }

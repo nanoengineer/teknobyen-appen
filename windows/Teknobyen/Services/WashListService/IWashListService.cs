@@ -18,5 +18,7 @@ namespace Teknobyen.Services.WashListService
             List<RoomModel> extraRooms = null, 
             List<RoomModel> roomsToSkip = null);
 
+        Task<bool> BackupWashListToFile(List<WashDayModel> listToBackup);
+
     }
 }
