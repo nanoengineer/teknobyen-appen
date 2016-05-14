@@ -95,7 +95,7 @@ The following are the features that will be implemented in the first public rele
 
     @SindreSB Fill this in please :)
 
-* __Contributors__
+## Contributors
 
     * Android: [Alexolo](https://github.com/Alexolo), [SolveH](https://github.com/SolveH), [arnagl](https://github.com/arnagl)
     * iOS: [nanoengineer](https://github.com/nanoengineer), [Misolini](https://github.com/Misolini)
