@@ -34,7 +34,7 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <!-- Create washlist  -->
+            <!-- Pivot control  -->
             <Canvas x:Name="PrintCanvas" Opacity="0"/>
             <Pivot Grid.Column="0">
                 <PivotItem Header="LAG NY">
@@ -54,6 +54,7 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
@@ -62,49 +63,32 @@
                             
 
                             <TextBlock Text="Fra:" />
-                            <CalendarDatePicker Grid.Column="1" Margin="0,0,5,0" />
+                            <localControls:TwoWayCalendarDatePicker Grid.Column="1" Margin="0,0,5,0" SelectedDate="{x:Bind ViewModel.StartGenerationDate, Mode=TwoWay}" />
 
                             <TextBlock Text="Til:" Grid.Row="1" Grid.Column="0" />
-                            <CalendarDatePicker Grid.Row="1" Grid.Column="1" Margin="0,0,5,0"/>
+                            <localControls:TwoWayCalendarDatePicker Grid.Row="1" Grid.Column="1" Margin="0,0,5,0" SelectedDate="{x:Bind ViewModel.EndGenerationDate, Mode=TwoWay}" />
 
-                            <TextBlock Text="Straffevasker:" Grid.Row="2" />
-                            <TextBox PlaceholderText="f.eks 203, 401" Grid.Row="2" Grid.Column="1"/>
+                            <TextBlock Text="Begyn med rom:" Grid.Row="2" />
+                            <TextBox PlaceholderText="f.eks 203" Grid.Row="2" Grid.Column="1" Text="{x:Bind ViewModel.StartRoom, Mode=TwoWay}" />
                             <TextBlock Grid.Row="3" Grid.ColumnSpan="2" />
+                            
+                            <TextBlock Text="Straffevasker:" Grid.Row="3" />
+                            <TextBox PlaceholderText="f.eks 203 401" Grid.Row="3" Grid.Column="1" Text="{x:Bind ViewModel.RedoWashRoomList, Mode=TwoWay}" />
+                            <TextBlock Grid.Row="4" Grid.ColumnSpan="2" />
 
-                            <TextBlock Text="Fritak:" Grid.Row="4" />
-                            <TextBox PlaceholderText="f.eks 203, 401" Grid.Row="4" Grid.Column="1"/>
+                            <TextBlock Text="Fritak:" Grid.Row="5" />
+                            <TextBox PlaceholderText="f.eks 203 401" Grid.Row="5" Grid.Column="1" Text="{x:Bind ViewModel.ExcemptFromWashRoomList, Mode=TwoWay}"/>
                             <TextBlock Grid.Row="5" Grid.ColumnSpan="2" />
 
-                            <Button Content="Generer" Grid.Row="6" />
+                            <Button Content="Generer" Grid.Row="7" Click="{x:Bind ViewModel.GenerateWashList}" />
 
                         </Grid>
 
-                        <ListView Grid.Row="1" >
-                            <ListView.ItemTemplate>
-                                <DataTemplate x:DataType="models:WashDayModel" >
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="*" />
-                                        </Grid.ColumnDefinitions>
-
-                                        <TextBlock Text="{x:Bind Date.Date}" />
-                                        <TextBlock Grid.Column="1" Text="{x:Bind Assignment}" />
-                                        <TextBlock Grid.Column="2" Text="{x:Bind RoomNumber}" />
-                                    </Grid>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                            <ListView.ItemContainerStyle>
-                                <Style TargetType="ListViewItem">
-                                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                                </Style>
-                            </ListView.ItemContainerStyle>
-                        </ListView>
+                        <localControls:WashListControl Grid.Row="1" WashList="{x:Bind ViewModel.GeneratedWashDayList, Mode=TwoWay}" />
 
                         <Grid Grid.Row="2">
                             <Button HorizontalAlignment="Left" Content="Lagre" />
-                            <Button HorizontalAlignment="Right" Content="Avbryt" />
+                            <Button HorizontalAlignment="Right" Content="Avbryt" Click="{x:Bind ViewModel.ClearGeneratedList}" />
                         </Grid>
                         
                     </Grid>
@@ -178,30 +162,6 @@
 
                 <TextBlock Text="Vaskeliste:" Style="{StaticResource TitleTextBlockStyle}" />
 
-                <!--<ListView Grid.Row="1"
-                          ItemsSource="{x:Bind ViewModel.WashDayList}"
-                          >
-                    <ListView.ItemTemplate>
-                        <DataTemplate x:DataType="models:WashDayModel" >
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-
-                                <TextBlock Text="{x:Bind Date.Date, Mode=OneWay, Converter={StaticResource StrFormatConverter}, ConverterParameter=\{0:d\}}" />
-                                <TextBlock Grid.Column="1" Text="{x:Bind Assignment}" />
-                                <TextBlock Grid.Column="2" Text="{x:Bind RoomNumber}" />
-                            </Grid>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="ListViewItem">
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                        </Style>
-                    </ListView.ItemContainerStyle>
-                </ListView>-->
                 <localControls:WashListControl Grid.Row="1" WashList="{x:Bind ViewModel.WashDayList}" />
 
 

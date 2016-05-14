@@ -21,7 +21,21 @@ namespace Teknobyen.Services.WashListService
         public List<WashDayModel> GenerateWashList(DateTime startDate, DateTime endDate, RoomModel startAt, List<RoomModel> extraRooms = null, List<RoomModel> roomsToSkip = null)
         {
             int washDaysToCreate = (int)(endDate.Subtract(startDate)).TotalDays;
-            var roomList = RoomManager.GetContinuousListOfRooms(startAt.RoomNumber, (2 * washDaysToCreate) + 10);
+            List<RoomModel> roomList;
+            if (roomsToSkip == null)
+            {
+                roomList = RoomManager.GetContinuousListOfRooms(startAt.RoomNumber, (2 * washDaysToCreate) + 10 );
+            }
+            else
+            {
+                roomList = RoomManager.GetContinuousListOfRooms(startAt.RoomNumber, (2 * washDaysToCreate) + 10, roomsToSkip);
+            }
+            if (extraRooms != null)
+            {
+                extraRooms.AddRange(roomList);
+                roomList = extraRooms;
+            }
+
 
             var generatedWashList = new List<WashDayModel>();
 

@@ -107,6 +107,7 @@
     <Compile Include="Common\Utils.cs" />
     <Compile Include="Controls\AlternatingRowListView.cs" />
     <Compile Include="Controls\LargeImageButton.cs" />
+    <Compile Include="Controls\TwoWayCalendarDatePicker.cs" />
     <Compile Include="Controls\WashingMachineControl.xaml.cs">
       <DependentUpon>WashingMachineControl.xaml</DependentUpon>
     </Compile>
