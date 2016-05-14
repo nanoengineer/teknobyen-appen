@@ -17,7 +17,7 @@ struct Constants {
 
     var themeColor = UIColor(rgba: "#7DCAE3FF")
     let tabNormalColor = UIColor.grayColor()
-    let tabSelectedColor = UIColor(colorLiteralRed: 0, green: 122/255, blue: 1.0, alpha: 1.0)
+    let tabSelectedColor = UIColor.blueColor().colorWithAlphaComponent(0.4)
     
     let machineAvailColor = UIColor(rgba: "#97E37DD5")
     let machineBusyColor = UIColor(rgba: "#E3967DC5")

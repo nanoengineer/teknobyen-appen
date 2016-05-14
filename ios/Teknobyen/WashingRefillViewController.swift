@@ -9,11 +9,36 @@
 import UIKit
 import SafariServices
 
-class WashingRefillViewController: UIViewController {
+class WashingRefillViewController: UIViewController, SFSafariViewControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        loadWebPage()
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    private func openWithSafariVC(url: NSURL)
+    {
+        let svc = SFSafariViewController(URL: url)
+        svc.delegate = self
+        self.presentViewController(svc, animated: true, completion: nil)
+    }
+    
+    func safariViewControllerDidFinish(controller: SFSafariViewController)
+    {
+       
+    }
+    
+    
+    private func loadWebPage() {
         let username = "pkminne"
         let pwd = "b5e277"
         
@@ -37,19 +62,6 @@ class WashingRefillViewController: UIViewController {
             
         }
         task.resume()
-    
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    private func openWithSafariVC(url: NSURL)
-    {
-        let svc = SFSafariViewController(URL: url)
-        self.presentViewController(svc, animated: true, completion: nil)
     }
 
 

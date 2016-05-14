@@ -61,6 +61,13 @@ DerivedData/
 !default.perspectivev3
 xcuserdata/
 
+profile
+*.moved-aside
+DerivedData
+.idea/
+*.hmap
+*.xccheckout
+
 ## Other
 *.moved-aside
 *.xcuserstate

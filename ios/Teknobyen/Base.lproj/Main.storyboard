@@ -59,7 +59,7 @@
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="ex. 420" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="I4l-IP-4eR">
                                         <rect key="frame" x="-25" y="-30" width="97" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" enablesReturnKeyAutomatically="YES"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="phonePad" enablesReturnKeyAutomatically="YES"/>
                                         <variation key="heightClass=regular" fixedFrame="YES">
                                             <rect key="frame" x="211" y="209" width="144" height="30"/>
                                         </variation>
@@ -125,9 +125,18 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="panda9_happy" translatesAutoresizingMaskIntoConstraints="NO" id="cgP-9c-tmM">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                         <variation key="heightClass=regular" fixedFrame="YES">
-                                            <rect key="frame" x="147" y="76" width="81" height="81"/>
+                                            <rect key="frame" x="147" y="29" width="81" height="81"/>
                                         </variation>
                                     </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Velkommen til Teknobyen Appen!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IWn-CZ-q3A">
+                                        <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                        <color key="textColor" red="0.49019607840000001" green="0.79215686269999996" blue="0.89019607840000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="heightClass=regular" fixedFrame="YES">
+                                            <rect key="frame" x="52" y="118" width="272" height="21"/>
+                                        </variation>
+                                    </label>
                                 </subviews>
                                 <variation key="default">
                                     <mask key="subviews">
@@ -143,6 +152,7 @@
                                         <exclude reference="d13-y4-ZpU"/>
                                         <exclude reference="f3w-dt-GXe"/>
                                         <exclude reference="cgP-9c-tmM"/>
+                                        <exclude reference="IWn-CZ-q3A"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular" fixedFrame="YES">
@@ -160,6 +170,7 @@
                                         <include reference="d13-y4-ZpU"/>
                                         <include reference="f3w-dt-GXe"/>
                                         <include reference="cgP-9c-tmM"/>
+                                        <include reference="IWn-CZ-q3A"/>
                                     </mask>
                                 </variation>
                             </scrollView>
@@ -183,7 +194,9 @@
                         <outlet property="loginButton" destination="CnB-ik-plO" id="Dy0-50-cUb"/>
                         <outlet property="loginScrollView" destination="Ij7-HV-eym" id="rhf-wc-gPe"/>
                         <outlet property="loginVerifyImage" destination="d13-y4-ZpU" id="ohW-oe-2YB"/>
+                        <outlet property="nameTextField" destination="s0w-OH-A7z" id="Zrb-Z5-U3n"/>
                         <outlet property="pwdTextField" destination="NFf-Na-2a0" id="XAK-Oq-Mhu"/>
+                        <outlet property="roomNumTextField" destination="I4l-IP-4eR" id="SFZ-ef-l4H"/>
                         <outlet property="usernameTextField" destination="kmP-tb-R9O" id="lUG-Th-vEe"/>
                     </connections>
                 </viewController>

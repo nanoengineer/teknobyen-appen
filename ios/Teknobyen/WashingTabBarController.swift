@@ -7,9 +7,9 @@
 //
 
 import UIKit
+import SafariServices
 
-
-class WashingTabBarController: UITabBarController, UITabBarControllerDelegate {
+class WashingTabBarController: UITabBarController, UITabBarControllerDelegate, SFSafariViewControllerDelegate {
 
     let washingStatusVC = WashingStatusViewController()
     let washingRefillVC = WashingRefillViewController()
@@ -62,6 +62,7 @@ class WashingTabBarController: UITabBarController, UITabBarControllerDelegate {
   
         }
     }
+    
     
     override func shouldAutorotate() -> Bool {
         return false
