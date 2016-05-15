@@ -173,7 +173,7 @@ public class ProjectorBookActivity extends AppCompatActivity {
             duration += ".75";
         }
         reservation.setDuration(duration);
-        Calendar endCal = reservation.getCal();
+        Calendar endCal = reservation.getEndCall();
         System.out.println(endCal.DAY_OF_WEEK);
         endText.setText(weekDays[endCal.get(endCal.DAY_OF_WEEK)-1] + reservation.getEndTime());
         System.out.println("" + endCal.get(Calendar.DAY_OF_WEEK) + endCal.get(Calendar.DATE) + endCal.get(Calendar.DAY_OF_MONTH) + endCal.get(Calendar.MONTH) + endCal.get(Calendar.YEAR));
