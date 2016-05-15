@@ -152,6 +152,7 @@ public class ProjectorBookActivity extends AppCompatActivity {
         btn.setText("Sett varighet");
     }
     public void writeEndTimeMessage(int shValue, int smValue){
+        //hei
         TextView endText = (TextView) findViewById(R.id.endtimeString);
         String duration = "" + shValue;
         if(smValue == 1){
