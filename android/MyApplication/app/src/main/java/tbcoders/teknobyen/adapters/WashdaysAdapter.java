@@ -1,4 +1,4 @@
-package tbcoders.teknobyen.adaptor;
+package tbcoders.teknobyen.adapters;
 
 import android.app.Activity;
 import android.content.Context;

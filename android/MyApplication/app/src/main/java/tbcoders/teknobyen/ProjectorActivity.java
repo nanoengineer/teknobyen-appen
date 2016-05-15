@@ -19,7 +19,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.TimeZone;
 
-import tbcoders.teknobyen.adaptor.ReservationsAdapter;
+import tbcoders.teknobyen.adapters.ReservationsAdapter;
 import tbcoders.teknobyen.firebase.classes.Reservations;
 
 public class ProjectorActivity extends AppCompatActivity {

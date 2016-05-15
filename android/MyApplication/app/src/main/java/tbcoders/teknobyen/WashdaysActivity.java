@@ -16,7 +16,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.TimeZone;
 
-import tbcoders.teknobyen.adaptor.WashdaysAdapter;
+import tbcoders.teknobyen.adapters.WashdaysAdapter;
 import tbcoders.teknobyen.firebase.classes.Washdays;
 
 /**
