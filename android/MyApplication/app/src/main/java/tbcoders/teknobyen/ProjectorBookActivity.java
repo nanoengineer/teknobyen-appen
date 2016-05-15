@@ -20,6 +20,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TimeZone;
 
+import tbcoders.teknobyen.firebase.classes.Reservations;
+
 public class ProjectorBookActivity extends AppCompatActivity {
     //Booke form
     private NumberPicker pickHour = null;
@@ -38,6 +40,7 @@ public class ProjectorBookActivity extends AppCompatActivity {
     private int durationHour = 0;
     private int durationMin = 0;
     private boolean startMsgSet = false;
+    Reservations reservation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +49,9 @@ public class ProjectorBookActivity extends AppCompatActivity {
         OnClickStartListener();
         OnClickReserveListener();
         setupNumberPickers();
+        SharedPreferences prefs = getSharedPreferences("mypref", 0);
+        String roomNr = prefs.getString("roomnumber", "");
+        this.reservation = new Reservations("Name", "UserID", roomNr);
     }
     public void setupNumberPickers() {
         pickDate = (NumberPicker) findViewById(R.id.datePicker);
@@ -118,12 +124,8 @@ public class ProjectorBookActivity extends AppCompatActivity {
             return true;
         }
         if (hour >= currentHour) {
-            if (hour > currentHour) {
+            if (hour > currentHour || hour == currentHour && minute > currentMin) {
                 return true;
-            } else {
-                if (minute > currentMin) {
-                    return true;
-                }
             }
         }
         return false;
@@ -131,14 +133,24 @@ public class ProjectorBookActivity extends AppCompatActivity {
 
     public void writeStartTimeMessage(int dayValue, int hourValue, int minValue) {
         TextView startText = (TextView) findViewById(R.id.starttimeString);
+        //Legge inn i reservations klassen
+        SimpleDateFormat bookDateFormat = new SimpleDateFormat("dd.MM.yyyy");
+        String startTime = "" + hourValues[hourValue] + "." + minValues[minValue];
+        reservation.setStartTime(startTime);
+        Calendar calStart = Calendar.getInstance(TimeZone.getTimeZone("Europe/Oslo"));
+        calStart.add(Calendar.DATE, dayValue);
+        String date = bookDateFormat.format(calStart.getTime());
+        reservation.setDate(date);
+
+        System.out.println(bookDateFormat.format(reservation.getCal().getTime()));
+
         startDayValue = dayValue;
         String day = dateValues[dayValue];
-        String trueHourValue = hourValues[hourValue];
         startHourValue = hourValue;
         startMinValue = minValue;
-        String trueMinValue = minValues[minValue];
         this.startDayName = day;
-        startText.setText(day + " " + trueHourValue + ":" + trueMinValue);
+
+        startText.setText(day + " " + startTime);
         this.startMsgSet = true;
 
         //Endrar til duration
@@ -152,37 +164,20 @@ public class ProjectorBookActivity extends AppCompatActivity {
     }
     public void writeEndTimeMessage(int shValue, int smValue){
         TextView endText = (TextView) findViewById(R.id.endtimeString);
-        durationHour = shValue;
-        durationMin = smValue;
-        int endHourValue;
-        int endMinValue;
-        if(startHourValue + durationHour >= 24){
-            endHourValue = startHourValue + durationHour - 24;
-        }else{
-            endHourValue = startHourValue + durationHour;
+        String duration = "" + shValue;
+        if(smValue == 1){
+            duration += ".25";
+        }else if(smValue == 2){
+            duration += ".5";
+        }else if(smValue == 3) {
+            duration += ".75";
         }
-        if(startMinValue + durationMin >= 4){
-            endMinValue = startMinValue + durationMin - 4;
-            if(endHourValue + 1 >= 24){
-                endHourValue -= 23;
-            }else{
-                endHourValue += 1;
-            }
-        }else{
-            endMinValue = startMinValue + durationMin;
-        }
-        String endDay = "";
-        if(endHourValue < startHourValue){
-            int i = Arrays.asList(weekDays).indexOf(startDayName);
-            if(i + 1 > 6){
-                endDay = weekDays[0];
-            }else{
-                endDay = weekDays[i+1];
-            }
-        }else{
-            endDay = startDayName;
-        }
-        endText.setText(endDay + " " + hourValues[endHourValue] + ":" + minValues[endMinValue]);
+        reservation.setDuration(duration);
+        Calendar endCal = reservation.getCal();
+        System.out.println(endCal.DAY_OF_WEEK);
+        endText.setText(weekDays[endCal.get(endCal.DAY_OF_WEEK)-1] + reservation.getEndTime());
+        System.out.println("" + endCal.get(Calendar.DAY_OF_WEEK) + endCal.get(Calendar.DATE) + endCal.get(Calendar.DAY_OF_MONTH) + endCal.get(Calendar.MONTH) + endCal.get(Calendar.YEAR));
+
     }
 
     public void OnClickReserveListener() {
@@ -198,27 +193,8 @@ public class ProjectorBookActivity extends AppCompatActivity {
                 int descriptionTextLength = bookDesEdit.getText().toString().length();
                 //Kontrollere om alle felt er utfylt før knappen kan trykkast
                 if (startTextLength > 0 && endTextLength > 0 && descriptionTextLength > 0) {
-                    //date
-                    SimpleDateFormat bookDateFormat = new SimpleDateFormat("dd.MM.yyyy");
-                    Calendar calStart = Calendar.getInstance(TimeZone.getTimeZone("Europe/Oslo"));
-                    calStart.add(Calendar.DATE, startDayValue);
-                    String bookStartDate = bookDateFormat.format(calStart.getTime());
-                    //startHour
-                    String bookStartTime = "" + hourValues[startHourValue] + "." + minValues[startMinValue];
-                    //description
                     String bookText = bookDesEdit.getText().toString();
-                    SharedPreferences prefs = getSharedPreferences("mypref", 0);
-                    String roomNr = prefs.getString("roomnumber", "");
-                    //duration
-                    String duration = "" + durationHour;
-                    if(durationMin == 1){
-                        duration += ".25";
-                    }else if(durationMin == 2){
-                        duration += ".5";
-                    }else if(durationMin == 3) {
-                        duration += ".75";
-                    }
-                    writeToFireBase(bookStartDate, bookStartTime, duration, roomNr, bookText);
+                    writeToFireBase(reservation.getDate(), reservation.getStartTime(), reservation.getDuration(), reservation.getRoomNumber(), bookText);
                     Intent intent = new Intent(ProjectorBookActivity.this, ProjectorActivity.class);
                     startActivity(intent);
                 } else {
@@ -229,7 +205,6 @@ public class ProjectorBookActivity extends AppCompatActivity {
     }
 
     public void writeToFireBase(String bookStartDate, String bookStartTime, String duration, String roomNr, String comment) {
-
         // TODO: FIX THIS!!!!
         String userID = "SampleID";
         String name = "Ola Nordmann";
@@ -245,7 +220,6 @@ public class ProjectorBookActivity extends AppCompatActivity {
         newBookingMap.put("comment", comment);
         newBookingMap.put("roomNumber", roomNr);
         newBookingMap.put("duration", duration);
-
         newBooking.push().setValue(newBookingMap);
 
         /*** FORMAT
@@ -257,6 +231,5 @@ public class ProjectorBookActivity extends AppCompatActivity {
          startTime : 20:00
          duration : 1.5
          ***/
-
     }
 }
