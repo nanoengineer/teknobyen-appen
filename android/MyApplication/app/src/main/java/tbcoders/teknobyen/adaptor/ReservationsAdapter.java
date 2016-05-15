@@ -1,14 +1,19 @@
-package tbcoders.teknobyen.adaptors;
+package tbcoders.teknobyen.adaptor;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Random;
+import java.util.TimeZone;
 
 import tbcoders.teknobyen.R;
 import tbcoders.teknobyen.firebase.classes.Reservations;
@@ -17,6 +22,10 @@ import tbcoders.teknobyen.firebase.classes.Reservations;
  * Created by Alexander on 15/05/2016.
  */
 public class ReservationsAdapter extends ArrayAdapter<Reservations>{
+
+    SimpleDateFormat bookDateFormat = new SimpleDateFormat("dd.MM.yyyy");
+    String today = bookDateFormat.format(Calendar.getInstance(TimeZone.getTimeZone("Europe/Oslo")).getTime());
+    Random random = new Random();
 
     Context context;
     int layoutResourceId;
@@ -44,8 +53,7 @@ public class ReservationsAdapter extends ArrayAdapter<Reservations>{
             holder.txtName = (TextView) row.findViewById(R.id.txtReservationsName);
             holder.txtDate = (TextView) row.findViewById(R.id.txtReservationsDate);
             holder.txtComment = (TextView) row.findViewById(R.id.txtReservationsComment);
-            holder.txtStartTime = (TextView) row.findViewById(R.id.txtReservationsStartTime);
-            holder.txtDuration = (TextView) row.findViewById(R.id.txtReservationsDuration);
+            holder.txtStartEnd = (TextView) row.findViewById(R.id.txtReservationsStartEnd);
 
 
             row.setTag(holder);
@@ -60,8 +68,14 @@ public class ReservationsAdapter extends ArrayAdapter<Reservations>{
         holder.txtName.setText(reservation.getName());
         holder.txtDate.setText(reservation.getDate());
         holder.txtComment.setText(reservation.getComment());
-        holder.txtStartTime.setText(reservation.getStartTime());
-        holder.txtDuration.setText(reservation.getDuration() + "hrs");
+        holder.txtStartEnd.setText(reservation.getStartTime() + "-" + reservation.getDuration());
+
+        if (today.compareTo(reservation.getDate()) > 0) {
+            row.setBackgroundColor(Color.argb(25,255,0,0));
+        } else {
+            row.setBackgroundColor(Color.argb(25,0,255,0));
+        }
+
         return row;
     }
 
@@ -71,7 +85,6 @@ public class ReservationsAdapter extends ArrayAdapter<Reservations>{
         TextView txtName;
         TextView txtDate;
         TextView txtComment;
-        TextView txtStartTime;
-        TextView txtDuration;
+        TextView txtStartEnd;
     }
 }

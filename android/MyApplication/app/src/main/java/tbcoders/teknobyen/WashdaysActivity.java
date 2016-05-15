@@ -16,7 +16,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.TimeZone;
 
-import tbcoders.teknobyen.adaptors.WashdaysAdapter;
+import tbcoders.teknobyen.adaptor.WashdaysAdapter;
 import tbcoders.teknobyen.firebase.classes.Washdays;
 
 /**
@@ -70,11 +70,10 @@ public class WashdaysActivity extends AppCompatActivity {
         String today = bookDateFormat.format(cal.getTime());
 
         ArrayAdapter adapter = new WashdaysAdapter(WashdaysActivity.this, R.layout.custom_washlist_item, washdaysList);
-        final ListView bookingView = (ListView) findViewById(R.id.washingListView);
+        final ListView bookingView = (ListView) findViewById(R.id.washlistListView);
         bookingView.setAdapter(adapter);
         for (int i = 0; i < bookingView.getCount(); i++) {
             if (washdaysList.get(i).getDate().equals(today)) {
-
                 bookingView.setSelection(i);
                 break;
             }

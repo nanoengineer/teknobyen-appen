@@ -1,7 +1,8 @@
-package tbcoders.teknobyen.adaptors;
+package tbcoders.teknobyen.adaptor;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,6 +56,12 @@ public class WashdaysAdapter extends ArrayAdapter<Washdays>{
         holder.txtDate.setText(weather.getDate());
         holder.txtAssignment.setText(weather.getAssignment().toString());
         holder.txtRoom.setText(weather.getRoomNumber().toString());
+
+        if (position % 2 == 0) {
+            row.setBackgroundColor(Color.WHITE);
+        } else {
+            row.setBackgroundColor(Color.LTGRAY);
+        }
         return row;
     }
 
