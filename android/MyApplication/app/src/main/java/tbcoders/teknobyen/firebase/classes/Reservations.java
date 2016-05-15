@@ -1,9 +1,13 @@
-package tbcoders.teknobyen;
+package tbcoders.teknobyen.firebase.classes;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 /**
  * Created by Alexander on 05/05/2016.
  */
 public class Reservations implements Comparable<Reservations> {
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy kk.mm");
 
     private String name;
     private String date;
@@ -53,7 +57,11 @@ public class Reservations implements Comparable<Reservations> {
 
     @Override
     public int compareTo(Reservations another) {
-        int lastCmp = date.compareTo(another.date);
-        return (lastCmp != 0 ? lastCmp : startTime.compareTo(another.startTime));
+        try {
+            return dateFormat.parse(date + " " + startTime).compareTo(dateFormat.parse(another.getDate() + " " + another.getStartTime()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 }

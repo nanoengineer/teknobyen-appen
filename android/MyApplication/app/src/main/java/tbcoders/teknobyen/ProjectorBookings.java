@@ -19,6 +19,8 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.TimeZone;
 
+import tbcoders.teknobyen.firebase.classes.Reservations;
+
 public class ProjectorBookings extends AppCompatActivity {
     Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Europe/Oslo"));
     ArrayList<Reservations> reservationList;

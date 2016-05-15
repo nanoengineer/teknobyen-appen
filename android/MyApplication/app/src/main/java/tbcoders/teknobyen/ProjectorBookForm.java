@@ -212,11 +212,11 @@ public class ProjectorBookForm extends AppCompatActivity {
                     //duration
                     String duration = "" + durationHour;
                     if(durationMin == 1){
-                        duration += "25";
+                        duration += ".25";
                     }else if(durationMin == 2){
-                        duration += "5";
+                        duration += ".5";
                     }else if(durationMin == 3) {
-                        duration += "75";
+                        duration += ".75";
                     }
                     writeToFireBase(bookStartDate, bookStartTime, duration, roomNr, bookText);
                     Intent intent = new Intent(ProjectorBookForm.this, ProjectorBookings.class);
