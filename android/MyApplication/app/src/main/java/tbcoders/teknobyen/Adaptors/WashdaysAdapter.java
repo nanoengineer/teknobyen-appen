@@ -16,13 +16,13 @@ import tbcoders.teknobyen.firebase.classes.Washdays;
 /**
  * Created by Alexander on 15/05/2016.
  */
-public class WashlistAdapter extends ArrayAdapter<Washdays>{
+public class WashdaysAdapter extends ArrayAdapter<Washdays>{
 
     Context context;
     int layoutResourceId;
     ArrayList<Washdays> data;
 
-    public WashlistAdapter(Context context, int layoutResourceId, ArrayList<Washdays> data) {
+    public WashdaysAdapter(Context context, int layoutResourceId, ArrayList<Washdays> data) {
         super(context, layoutResourceId, data);
         this.layoutResourceId = layoutResourceId;
         this.context = context;

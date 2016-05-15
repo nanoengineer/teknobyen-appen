@@ -12,7 +12,7 @@ import android.webkit.WebViewClient;
 public class MyWebViewClient extends WebViewClient {
     @Override
     public void onReceivedHttpAuthRequest(WebView view, HttpAuthHandler handler, String host, String realm){
-        //Her hentes brukernavn og passord fra det som vart satt ved kjoering av MachineRefill eller MachineStatus ved autentisering
+        //Her hentes brukernavn og passord fra det som vart satt ved kjoering av MachineRefill eller MachineStatusActivity ved autentisering
         String[] userData = view.getHttpAuthUsernamePassword("http://129.241.152.11/", "");
         handler.proceed(userData[0], userData[1]);
     }

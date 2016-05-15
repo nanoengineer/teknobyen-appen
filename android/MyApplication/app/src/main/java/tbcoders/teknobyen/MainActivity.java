@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         imgBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, CleaningLists.class);
+                Intent intent = new Intent(MainActivity.this, WashdaysActivity.class);
                 startActivity(intent);
             }
         });
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         imgBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, ProjectorBookings.class);
+                Intent intent = new Intent(MainActivity.this, ProjectorActivity.class);
                 startActivity(intent);
             }
         });

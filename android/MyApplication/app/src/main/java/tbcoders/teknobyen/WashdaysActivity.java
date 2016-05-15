@@ -16,13 +16,13 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.TimeZone;
 
-import tbcoders.teknobyen.adaptors.WashlistAdapter;
+import tbcoders.teknobyen.adaptors.WashdaysAdapter;
 import tbcoders.teknobyen.firebase.classes.Washdays;
 
 /**
  * Created by Alexander on 14/05/2016.
  */
-public class CleaningLists extends AppCompatActivity {
+public class WashdaysActivity extends AppCompatActivity {
     Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Europe/Oslo"));
     ArrayList<Washdays> washdaysList;
 
@@ -69,7 +69,7 @@ public class CleaningLists extends AppCompatActivity {
         SimpleDateFormat bookDateFormat = new SimpleDateFormat("dd.MM.yyyy");
         String today = bookDateFormat.format(cal.getTime());
 
-        ArrayAdapter adapter = new WashlistAdapter(CleaningLists.this, R.layout.custom_washlist_item, washdaysList);
+        ArrayAdapter adapter = new WashdaysAdapter(WashdaysActivity.this, R.layout.custom_washlist_item, washdaysList);
         final ListView bookingView = (ListView) findViewById(R.id.washingListView);
         bookingView.setAdapter(adapter);
         for (int i = 0; i < bookingView.getCount(); i++) {

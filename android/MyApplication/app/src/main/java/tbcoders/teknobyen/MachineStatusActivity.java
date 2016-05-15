@@ -19,7 +19,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.ExecutionException;
 
-public class MachineStatus extends AppCompatActivity {
+public class MachineStatusActivity extends AppCompatActivity {
     //This class is for opening the web browser inside the app.
     SwipeRefreshLayout swipeLayout;
 
@@ -46,13 +46,13 @@ public class MachineStatus extends AppCompatActivity {
         try {
             urlScraping();
         } catch (IOException e) {
-            System.out.println("MachineStatus IOException");
+            System.out.println("MachineStatusActivity IOException");
             e.printStackTrace();
         } catch (InterruptedException e) {
-            System.out.println("MachineStatus InterruptedException");
+            System.out.println("MachineStatusActivity InterruptedException");
             e.printStackTrace();
         } catch (ExecutionException e) {
-            System.out.println("MachineStatus ExecutionException");
+            System.out.println("MachineStatusActivity ExecutionException");
             e.printStackTrace();
         }
 
@@ -67,7 +67,7 @@ public class MachineStatus extends AppCompatActivity {
         String name = sharedPref.getString("username", "");
         String password = sharedPref.getString("password", "");
 
-        Retrievedata retrieveStatus = new Retrievedata();
+        RetreiveWashingMachineStatus retrieveStatus = new RetreiveWashingMachineStatus();
         String machineStatusString = retrieveStatus.execute(name, password).get();
 
         int[] linearLayoutIds = {R.id.machine0, R.id.machine1, R.id.machine2, R.id.machine3, R.id.machine4, R.id.machine5};
@@ -98,45 +98,9 @@ public class MachineStatus extends AppCompatActivity {
                 TextView text = (TextView)findViewById(i);
                 text.setText(R.string.ingenstatus);
             }
-            Toast.makeText(MachineStatus.this, "Kunne ikke koble til maskiner", Toast.LENGTH_LONG).show();
+            Toast.makeText(MachineStatusActivity.this, "Kunne ikke koble til maskiner", Toast.LENGTH_LONG).show();
         }
     }
 
-}
-
-class Retrievedata extends AsyncTask<String, Void, String> {
-    @Override
-    protected String doInBackground(String... params) {
-        try {
-            URL statusUrl = new URL("http://129.241.152.11/LaundryState?lg=2&ly=9131");
-        } catch (MalformedURLException e) {
-            System.out.println("MachineStatus MalformedURLException");
-            e.printStackTrace();
-        }
-
-        String userPassword = params[0] + ":" + params[1];
-        String encoding = Base64.encodeToString(userPassword.getBytes(), Base64.DEFAULT);
-
-        org.jsoup.nodes.Document document = null;
-        try {
-            document = Jsoup
-                    .connect("http://129.241.152.11/LaundryState?lg=2&ly=9131")
-                    .header("Authorization", "Basic " + encoding)
-                    .get();
-
-            Elements data = document.getElementsByClass("p");
-
-            String status = "";
-            for (int i = 0; i < data.size(); i++) {
-                status += data.get(i).toString().split("<br>")[1] + ",";
-            }
-            return status;
-
-        } catch (IOException e) {
-            System.out.println("MachineStatus IOException");
-            e.printStackTrace();
-            return null;
-        }
-    }
 }
 

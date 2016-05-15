@@ -41,7 +41,7 @@ public class WashingMachine extends AppCompatActivity {
                         String userS = myprefs.getString("username", "");
                         String userP = myprefs.getString("password", "");
                         if(userS.length()>0 && userP.length()>0){
-                            Intent intent = new Intent(WashingMachine.this, MachineStatus.class);
+                            Intent intent = new Intent(WashingMachine.this, MachineStatusActivity.class);
                             startActivity(intent);
                         }else{
                             Intent intent = new Intent(WashingMachine.this, LoginActivityWash.class);

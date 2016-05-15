@@ -21,7 +21,7 @@ import java.util.TimeZone;
 
 import tbcoders.teknobyen.firebase.classes.Reservations;
 
-public class ProjectorBookings extends AppCompatActivity {
+public class ProjectorActivity extends AppCompatActivity {
     Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Europe/Oslo"));
     ArrayList<Reservations> reservationList;
 
@@ -40,7 +40,7 @@ public class ProjectorBookings extends AppCompatActivity {
         book_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ProjectorBookings.this, ProjectorBookForm.class);
+                Intent intent = new Intent(ProjectorActivity.this, ProjectorBookActivity.class);
                 startActivity(intent);
             }
         });
@@ -83,7 +83,7 @@ public class ProjectorBookings extends AppCompatActivity {
         SimpleDateFormat bookDateFormat = new SimpleDateFormat("dd.MM.yyyy");
         String today = bookDateFormat.format(cal.getTime());
 
-        ArrayAdapter adapter = new ArrayAdapter(ProjectorBookings.this, android.R.layout.simple_list_item_1, reservationList);
+        ArrayAdapter adapter = new ArrayAdapter(ProjectorActivity.this, android.R.layout.simple_list_item_1, reservationList);
         ListView bookingView = (ListView) findViewById(R.id.bookingView);
         bookingView.setAdapter(adapter);
 

@@ -29,12 +29,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".WashingMachine" />
-        <activity android:name=".CleaningLists" />
-        <activity android:name=".MachineStatus" />
+        <activity android:name=".WashdaysActivity" />
+        <activity android:name=".MachineStatusActivity" />
         <activity android:name=".LoginActivityWash" />
         <activity android:name=".MachineRefill" />
-        <activity android:name=".ProjectorBookings" />
-        <activity android:name=".ProjectorBookForm"></activity>
+        <activity android:name=".ProjectorActivity" />
+        <activity android:name=".ProjectorBookActivity"></activity>
     </application>
 
 </manifest>

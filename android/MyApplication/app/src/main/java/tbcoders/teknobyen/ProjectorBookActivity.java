@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TimeZone;
 
-public class ProjectorBookForm extends AppCompatActivity {
+public class ProjectorBookActivity extends AppCompatActivity {
     //Booke form
     private NumberPicker pickHour = null;
     private NumberPicker pickMin = null;
@@ -98,13 +98,13 @@ public class ProjectorBookForm extends AppCompatActivity {
                     if (controlCurrentTime(sdValue, shValue, trueMinValue)) {
                         writeStartTimeMessage(sdValue, shValue, smValue);
                     } else {
-                        Toast.makeText(ProjectorBookForm.this, "Verdi for starttid må være større enn nåværende klokkeslett", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ProjectorBookActivity.this, "Verdi for starttid må være større enn nåværende klokkeslett", Toast.LENGTH_SHORT).show();
                     }
                 }else{
                     if(shValue > 0 || smValue > 0){
                         writeEndTimeMessage(shValue, smValue);
                     }else{
-                        Toast.makeText(ProjectorBookForm.this, "Varighet må være større enn null", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ProjectorBookActivity.this, "Varighet må være større enn null", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -219,10 +219,10 @@ public class ProjectorBookForm extends AppCompatActivity {
                         duration += ".75";
                     }
                     writeToFireBase(bookStartDate, bookStartTime, duration, roomNr, bookText);
-                    Intent intent = new Intent(ProjectorBookForm.this, ProjectorBookings.class);
+                    Intent intent = new Intent(ProjectorBookActivity.this, ProjectorActivity.class);
                     startActivity(intent);
                 } else {
-                    Toast.makeText(ProjectorBookForm.this, "Vennligst velg starttid, slutttid og varighet", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ProjectorBookActivity.this, "Vennligst velg starttid, slutttid og varighet", Toast.LENGTH_SHORT).show();
                 }
             }
         });

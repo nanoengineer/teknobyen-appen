@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/webView"
     android:paddingRight="@dimen/webView"
     android:paddingTop="@dimen/webView"
-    tools:context=".MachineStatus">
+    tools:context=".MachineStatusActivity">
 
     <WebView
         android:layout_width="wrap_content"
