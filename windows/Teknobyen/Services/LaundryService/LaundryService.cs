@@ -39,9 +39,16 @@ namespace Teknobyen.Services.LaundryService
                 var sList = new List<string>();
                 foreach (var item in s)
                 {
-                    
+                    if (!item.InnerText.Contains("Kjøp"))
+                    {
+                        sList.Add(item.InnerText);
+                    }
                 }
 
+                var _balanceString = sList.First();
+                _balanceString = _balanceString.Substring(7).Split(new char[]{' '}).First();
+
+                _accountBalance = double.Parse(_balanceString);
             }
 
             return _accountBalance;

@@ -49,7 +49,7 @@ namespace Teknobyen.ViewModels
         public override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             GetLaundryMachineStatusList();
-            //GetLaundryAccountBalance(); Fikk nettvekrsfeil i svaret...
+            GetLaundryAccountBalance(); //Fikk nettvekrsfeil i svaret...
             return base.OnNavigatedToAsync(parameter, mode, state);
         }
 
