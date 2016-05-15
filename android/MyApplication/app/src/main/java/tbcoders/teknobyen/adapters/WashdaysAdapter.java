@@ -53,7 +53,7 @@ public class WashdaysAdapter extends ArrayAdapter<Washdays>{
         }
 
         Washdays weather = data.get(position);
-        holder.txtDate.setText(weather.getDate());
+        holder.txtDate.setText(weather.getPrettyDate());
         holder.txtAssignment.setText(weather.getAssignment().toString());
         holder.txtRoom.setText(weather.getRoomNumber().toString());
 

@@ -2,13 +2,15 @@ package tbcoders.teknobyen.firebase.classes;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 /**
  * Created by Alexander on 14/05/2016.
  */
 public class Washdays implements Comparable<Washdays>{
 
-    private SimpleDateFormat f = new SimpleDateFormat("dd.MM.yyyy");
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+    private SimpleDateFormat prettyFormat = new SimpleDateFormat("EE dd.MM", new Locale("no"));
     private Long assignment;
     private Long roomNumber;
     private String date;
@@ -28,15 +30,19 @@ public class Washdays implements Comparable<Washdays>{
         return assignment;
     }
 
-    @Override
-    public String toString() {
-        return date + "\t\t\t" + assignment + "\t\t" + roomNumber;
+    public String getPrettyDate() {
+        try {
+            return prettyFormat.format(dateFormat.parse(date));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override
     public int compareTo(Washdays another) {
         try {
-            int cmpDate = f.parse(date).compareTo(f.parse(another.getDate()));
+            int cmpDate = dateFormat.parse(date).compareTo(dateFormat.parse(another.getDate()));
             return cmpDate != 0 ? cmpDate : assignment.compareTo(another.getAssignment());
         } catch (ParseException e) {
             e.printStackTrace();

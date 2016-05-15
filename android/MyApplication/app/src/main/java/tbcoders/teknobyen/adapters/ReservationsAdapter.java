@@ -68,7 +68,7 @@ public class ReservationsAdapter extends ArrayAdapter<Reservations>{
         holder.txtName.setText(reservation.getName());
         holder.txtDate.setText(reservation.getDate());
         holder.txtComment.setText(reservation.getComment());
-        holder.txtStartEnd.setText(reservation.getStartTime() + "-" + reservation.getDuration());
+        holder.txtStartEnd.setText(reservation.getStartTime() + " - " + reservation.getEndTime());
 
         if (today.compareTo(reservation.getDate()) > 0) {
             row.setBackgroundColor(Color.argb(25,255,0,0));

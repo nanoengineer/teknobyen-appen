@@ -56,8 +56,6 @@ public class ProjectorActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot snapshot) {
                 reservationList = new ArrayList<>();
 
-
-
                 for (DataSnapshot postSnapshot: snapshot.getChildren()) {
                     try{
                         Reservations post = postSnapshot.getValue(Reservations.class);

@@ -1,11 +1,8 @@
 package tbcoders.teknobyen.firebase.classes;
 
-import android.content.Intent;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
@@ -70,16 +67,18 @@ public class Reservations implements Comparable<Reservations> {
     }
 
     public Calendar getStartCal(){
-        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm");
-        Calendar startCal = new GregorianCalendar(Integer.parseInt(date.substring(6,date.length())), Integer.parseInt(date.substring(3,5))-1, Integer.parseInt(date.substring(0,2)),Integer.parseInt(startTime.substring(0,2)),Integer.parseInt(startTime.substring(3,5)));
+        int year = Integer.parseInt(date.substring(6, date.length()));
+        int month = Integer.parseInt(date.substring(3, 5)) - 1;
+        int day = Integer.parseInt(date.substring(0, 2));
+        int hour = Integer.parseInt(startTime.substring(0, 2));
+        int minute = Integer.parseInt(startTime.substring(3, 5));
+        Calendar startCal = new GregorianCalendar(year, month, day, hour, minute);
         return startCal;
     }
     public String getEndTime(){
+
         Calendar endCal = getStartCal();
-        endCal.add(Calendar.HOUR, Integer.parseInt(duration.substring(0,1)));
-        if(duration.length()>1){
-            endCal.add(Calendar.MINUTE, (Integer.parseInt(duration.substring(2,duration.length()))*60)/100);
-        }
+        endCal.add(Calendar.MINUTE, (int) (60*Double.parseDouble(duration)));
         SimpleDateFormat hourFormat = new SimpleDateFormat("HH.mm");
         return hourFormat.format(endCal.getTime());
     }
@@ -90,13 +89,6 @@ public class Reservations implements Comparable<Reservations> {
             endCal.add(Calendar.MINUTE, (Integer.parseInt(duration.substring(2,duration.length()))*60)/100);
         }
         return endCal;
-    }
-
-    @Override
-    public String toString() {
-        return roomNumber + ", " + name + "\n" +
-                comment + "\n" +
-                date + "\t\t" + startTime + ", " + duration + "hrs";
     }
 
     @Override

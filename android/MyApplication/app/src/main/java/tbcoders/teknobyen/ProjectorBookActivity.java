@@ -136,6 +136,7 @@ public class ProjectorBookActivity extends AppCompatActivity {
         String date = bookDateFormat.format(calStart.getTime());
         reservation.setDate(date);
 
+
         String day = dateValues[dayValue];
         this.startDayName = day;
 
@@ -152,7 +153,6 @@ public class ProjectorBookActivity extends AppCompatActivity {
         btn.setText("Sett varighet");
     }
     public void writeEndTimeMessage(int shValue, int smValue){
-        //hei
         TextView endText = (TextView) findViewById(R.id.endtimeString);
         String duration = "" + shValue;
         if(smValue == 1){
@@ -203,7 +203,7 @@ public class ProjectorBookActivity extends AppCompatActivity {
         String name = "Ola Nordmann";
 
         Firebase ref = new Firebase("https://teknobyen.firebaseio.com");
-        Firebase newBooking = ref.child("reservations");
+        Firebase newBooking = new Firebase("https://teknobyen.firebaseio.com/reservations");
         Map<String, String> newBookingMap = new HashMap<>();
 
         newBookingMap.put("name", name);

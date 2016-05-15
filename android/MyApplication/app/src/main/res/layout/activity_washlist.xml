@@ -8,14 +8,43 @@
 
     <TextView
         android:layout_width="fill_parent"
-        android:layout_height="100sp"
-        android:text="New Text"
-        android:id="@+id/washlistText"
-        android:textSize="25sp" />
+        android:layout_height="wrap_content"
+        android:textSize="25sp"
+        android:id="@+id/washlistText1"
+        android:text="@string/neste_vaskedag"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:textColor="@android:color/black" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:id="@+id/washlistAssignmentText"
+            android:layout_weight="1"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/washlistDateText"
+            android:textSize="25sp"
+            android:layout_weight="1"
+            android:textColor="@android:color/black"
+            android:textAlignment="textEnd" />
+    </LinearLayout>
 
     <ListView
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="0dp"
         android:id="@+id/washlistListView"
         tools:listitem="@layout/custom_washlist_item"
         android:fastScrollEnabled="false"

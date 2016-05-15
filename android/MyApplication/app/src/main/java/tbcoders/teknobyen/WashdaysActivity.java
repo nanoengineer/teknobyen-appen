@@ -1,9 +1,11 @@
 package tbcoders.teknobyen;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
@@ -24,14 +26,23 @@ import tbcoders.teknobyen.firebase.classes.Washdays;
  */
 public class WashdaysActivity extends AppCompatActivity {
     Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Europe/Oslo"));
-    ArrayList<Washdays> washdaysList;
+    SimpleDateFormat bookDateFormat = new SimpleDateFormat("dd.MM.yyyy");
+    String today = bookDateFormat.format(cal.getTime());
 
+    ListView bookingView;
+    String roomNr;
+
+    ArrayList<Washdays> washdaysList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Firebase.setAndroidContext(this);
         setContentView(R.layout.activity_washlist);
+        SharedPreferences prefs = getSharedPreferences("mypref", 0);
+        roomNr = prefs.getString("roomnumber", "");
+        System.out.println(roomNr);
+        bookingView = (ListView) findViewById(R.id.washlistListView);
         fillAccessFirebase();
     }
 
@@ -52,6 +63,7 @@ public class WashdaysActivity extends AppCompatActivity {
                     }
                 }
                 fillListView();
+                getInfoFromList();
                 System.out.println("Done");
             }
 
@@ -65,17 +77,21 @@ public class WashdaysActivity extends AppCompatActivity {
 
     private void fillListView() {
         Collections.sort(washdaysList);
-        //Collections.reverse(washdaysList);
-        SimpleDateFormat bookDateFormat = new SimpleDateFormat("dd.MM.yyyy");
-        String today = bookDateFormat.format(cal.getTime());
-
         ArrayAdapter adapter = new WashdaysAdapter(WashdaysActivity.this, R.layout.custom_washlist_item, washdaysList);
-        final ListView bookingView = (ListView) findViewById(R.id.washlistListView);
         bookingView.setAdapter(adapter);
+
+    }
+
+    private void getInfoFromList() {
         for (int i = 0; i < bookingView.getCount(); i++) {
             if (washdaysList.get(i).getDate().equals(today)) {
                 bookingView.setSelection(i);
-                break;
+            }
+            if (washdaysList.get(i).getRoomNumber().toString().equals(roomNr)){
+                TextView textView1 = (TextView) findViewById(R.id.washlistAssignmentText);
+                TextView textView2 = (TextView) findViewById(R.id.washlistDateText);
+                textView1.setText("Oppgave: " + washdaysList.get(i).getAssignment().toString());
+                textView2.setText(washdaysList.get(i).getPrettyDate());
             }
         }
     }

@@ -24,4 +24,5 @@
     <string name="reserve">Reserver</string>
     <string name="room">Room</string>
     <string name="ingenstatus">Utilgjengelig</string>
+    <string name="neste_vaskedag">Neste Vaskedag</string>
 </resources>
