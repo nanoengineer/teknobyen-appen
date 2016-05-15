@@ -200,6 +200,7 @@ namespace Teknobyen.Common
             var room = (from r in AllRooms
                         where r.RoomNumber == roomNumber
                         select r).ToList();
+
             if (room.Count == 0)
             {
                 return null;

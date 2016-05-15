@@ -85,6 +85,7 @@ namespace Teknobyen.ViewModels
                                    select w).OrderBy(e => e.Date).ThenBy(e => e.Assignment).ToList().Find(e => e.RoomNumber == roomnumber);
                 }
 
+                
                 //await _washListService.BackupWashListToFile(WashList);
             }
             catch (Exception e)

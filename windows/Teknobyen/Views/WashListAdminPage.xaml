@@ -78,7 +78,7 @@
 
                             <TextBlock Text="Fritak:" Grid.Row="5" />
                             <TextBox PlaceholderText="f.eks 203 401" Grid.Row="5" Grid.Column="1" Text="{x:Bind ViewModel.ExcemptFromWashRoomList, Mode=TwoWay}"/>
-                            <TextBlock Grid.Row="5" Grid.ColumnSpan="2" />
+                            <TextBlock Grid.Row="6" Grid.ColumnSpan="2" />
 
                             <Button Content="Generer" Grid.Row="7" Click="{x:Bind ViewModel.GenerateWashList}" />
 

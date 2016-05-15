@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -27,7 +28,7 @@ namespace Teknobyen.Services.PrintService
         {
             this.InitializeComponent();
 
-            HeaderText = $"UKE {washweek.WeekNumber}";
+            populateProperties(washweek);
         }
 
         public string HeaderText { get; set; }
@@ -52,8 +53,9 @@ namespace Teknobyen.Services.PrintService
 
         private void populateProperties(WashWeekModel washlist)
         {
-            //Header
-            HeaderText = $"UKE {washlist.WeekNumber}";
+            //Heade
+            var noCulture = new CultureInfo("nb-NO");
+            HeaderText = $"UKE {washlist.WeekNumber} {washlist.StartDate.ToString("m", noCulture)} - {washlist.EndDate.ToString("m", noCulture)}";
 
             #region Set rooms for different days
             mon1 = getRoomNumber(washlist.WashDays, DayOfWeek.Monday, 1);

@@ -199,5 +199,24 @@ namespace Teknobyen.Services.WashListService
 
             return true;
         }
+
+        public List<WashWeekModel> GetPrintableWashList(List<WashDayModel> listToPrint)
+        {
+            listToPrint = listToPrint.OrderBy(e => e.Date).ThenBy(e => e.Assignment).ToList();
+            List<WashWeekModel> printableList = new List<WashWeekModel>();
+            while (listToPrint.Count > 0)
+            {
+                int currentYear = listToPrint.First().Date.Year;
+                int currentWeek = Utils.GetIso8601WeekOfYear(listToPrint.First().Date);
+                List<WashDayModel> washDaysForCurrentWeek = (from wd in listToPrint
+                                                             where Utils.GetIso8601WeekOfYear(wd.Date) == currentWeek
+                                                             select wd).OrderBy(e => e.Date).ToList();
+                listToPrint.RemoveAll(e => washDaysForCurrentWeek.Contains(e));
+
+                printableList.Add(new WashWeekModel(currentWeek, currentYear, washDaysForCurrentWeek));
+            }
+
+            return printableList;
+        }
     }
 }

@@ -115,6 +115,7 @@ namespace Teknobyen.ViewModels
         {
             try
             {
+                
                 WashDayList = (await _firebaseService.GetWashList()).OrderBy(e => e.Date).ThenBy(e => e.Assignment).ToList();
 
                 StartGenerationDate = WashDayList.Last().Date.AddDays(1);
@@ -250,7 +251,7 @@ namespace Teknobyen.ViewModels
 
         public void ClearGeneratedList()
         {
-            GeneratedWashDayList = new List<WashDayModel>();
+            this.GeneratedWashDayList = new List<WashDayModel>();
         }
     }
 }

@@ -18,6 +18,8 @@ namespace Teknobyen.Services.WashListService
             List<RoomModel> extraRooms = null, 
             List<RoomModel> roomsToSkip = null);
 
+        List<WashWeekModel> GetPrintableWashList(List<WashDayModel> listToPrint);
+
         Task<bool> BackupWashListToFile(List<WashDayModel> listToBackup);
 
     }

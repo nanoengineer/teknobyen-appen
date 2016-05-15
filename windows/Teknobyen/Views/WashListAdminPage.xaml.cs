@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Teknobyen.Models;
 using Teknobyen.Services.PrintService;
+using Teknobyen.Services.WashListService;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -47,8 +48,13 @@ namespace Teknobyen.Views
             
             try
             {
-               // _printService.PreparePrintContent(washListToPrint);
-               // await _printService.ShowPrintUIAsync();
+                var washListToPrint = WashListService.Instance.GetPrintableWashList(ViewModel.GeneratedWashDayList);
+                if (washListToPrint.Count < 1)
+                {
+                    return;
+                }
+                _printService.PreparePrintContent(washListToPrint);
+                await _printService.ShowPrintUIAsync();
             }
             catch (Exception ex)
             {
