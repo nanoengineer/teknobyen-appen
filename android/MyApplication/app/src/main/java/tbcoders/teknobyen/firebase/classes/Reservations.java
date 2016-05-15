@@ -83,7 +83,7 @@ public class Reservations implements Comparable<Reservations> {
         SimpleDateFormat hourFormat = new SimpleDateFormat("HH:mm");
         return hourFormat.format(endCal.getTime());
     }
-    public Calendar getEndCall(){
+    public Calendar getEndCal(){
         Calendar endCal = getStartCal();
         endCal.add(Calendar.HOUR, Integer.parseInt(duration.substring(0,1)));
         if(duration.length()>1){

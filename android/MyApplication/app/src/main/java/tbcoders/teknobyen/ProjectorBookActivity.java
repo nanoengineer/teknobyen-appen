@@ -14,7 +14,6 @@ import android.widget.Toast;
 import com.firebase.client.Firebase;
 
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -142,8 +141,6 @@ public class ProjectorBookActivity extends AppCompatActivity {
         String date = bookDateFormat.format(calStart.getTime());
         reservation.setDate(date);
 
-        System.out.println(bookDateFormat.format(reservation.getCal().getTime()));
-
         startDayValue = dayValue;
         String day = dateValues[dayValue];
         startHourValue = hourValue;
@@ -173,7 +170,7 @@ public class ProjectorBookActivity extends AppCompatActivity {
             duration += ".75";
         }
         reservation.setDuration(duration);
-        Calendar endCal = reservation.getEndCall();
+        Calendar endCal = reservation.getEndCal();
         System.out.println(endCal.DAY_OF_WEEK);
         endText.setText(weekDays[endCal.get(endCal.DAY_OF_WEEK)-1] + reservation.getEndTime());
         System.out.println("" + endCal.get(Calendar.DAY_OF_WEEK) + endCal.get(Calendar.DATE) + endCal.get(Calendar.DAY_OF_MONTH) + endCal.get(Calendar.MONTH) + endCal.get(Calendar.YEAR));
