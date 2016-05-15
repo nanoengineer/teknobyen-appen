@@ -32,12 +32,7 @@ public class ProjectorBookActivity extends AppCompatActivity {
     private final String[] weekDays = {"Søndag", "Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag", "Lørdag"};
     private final String[] hourDurations = {"0 timer", "1 time", "2 timer", "3 timer", "4 timer"};
     private final String[] minuteDurations = {"0 min", "15 min", "30 min", "45 min"};
-    private int startDayValue = 0;
-    private int startHourValue = 0;
-    private int startMinValue = 0;
     private String startDayName = "";
-    private int durationHour = 0;
-    private int durationMin = 0;
     private boolean startMsgSet = false;
     Reservations reservation;
 
@@ -132,7 +127,7 @@ public class ProjectorBookActivity extends AppCompatActivity {
 
     public void writeStartTimeMessage(int dayValue, int hourValue, int minValue) {
         TextView startText = (TextView) findViewById(R.id.starttimeString);
-        //Legge inn i reservations klassen
+        //Legge inn dato og starttid i reservations klassen
         SimpleDateFormat bookDateFormat = new SimpleDateFormat("dd.MM.yyyy");
         String startTime = "" + hourValues[hourValue] + "." + minValues[minValue];
         reservation.setStartTime(startTime);
@@ -141,10 +136,7 @@ public class ProjectorBookActivity extends AppCompatActivity {
         String date = bookDateFormat.format(calStart.getTime());
         reservation.setDate(date);
 
-        startDayValue = dayValue;
         String day = dateValues[dayValue];
-        startHourValue = hourValue;
-        startMinValue = minValue;
         this.startDayName = day;
 
         startText.setText(day + " " + startTime);
@@ -171,10 +163,13 @@ public class ProjectorBookActivity extends AppCompatActivity {
         }
         reservation.setDuration(duration);
         Calendar endCal = reservation.getEndCal();
-        System.out.println(endCal.DAY_OF_WEEK);
-        endText.setText(weekDays[endCal.get(endCal.DAY_OF_WEEK)-1] + reservation.getEndTime());
-        System.out.println("" + endCal.get(Calendar.DAY_OF_WEEK) + endCal.get(Calendar.DATE) + endCal.get(Calendar.DAY_OF_MONTH) + endCal.get(Calendar.MONTH) + endCal.get(Calendar.YEAR));
-
+        String endDay = "";
+        if(endCal.get(Calendar.DAY_OF_WEEK) == reservation.getStartCal().get(Calendar.DAY_OF_WEEK)){
+            endDay = startDayName;
+        }else{
+            endDay = weekDays[endCal.get(endCal.DAY_OF_WEEK)-1];
+        }
+        endText.setText(endDay + " " + reservation.getEndTime());
     }
 
     public void OnClickReserveListener() {
