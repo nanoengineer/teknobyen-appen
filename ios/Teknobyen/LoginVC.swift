@@ -33,7 +33,7 @@ class LoginVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(LoginVC.dismissKeyboard))
         view.addGestureRecognizer(tap)
         
-        self.loginButton.tintColor = AppConstants.themeColor
+        self.loginButton.tintColor = AppConstants.themeBlueColor
         self.loginButton.layer.cornerRadius = 5
 
         NSNotificationCenter.defaultCenter().addObserver(

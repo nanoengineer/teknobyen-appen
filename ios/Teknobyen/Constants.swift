@@ -15,7 +15,13 @@ var AppConstants = Constants()
 struct Constants {
     let titleString = "TEKNOBYEN"
 
-    var themeColor = UIColor(rgba: "#7DCAE3FF")
+    let themeBlueColor = UIColor(rgba: "#7DCAE3FF")
+    let themeRedColor = UIColor(rgba: "#E3967DFF")
+    let themeGreenColor = UIColor(rgba: "#97E37DFF")
+    let themePurpleColor = UIColor(rgba: "#C97DE3FF")
+    
+    
+    
     let tabNormalColor = UIColor.grayColor()
     let tabSelectedColor = UIColor.blueColor().colorWithAlphaComponent(0.4)
     
@@ -24,9 +30,17 @@ struct Constants {
     let machineUnknownColor = UIColor(rgba: "#E3D059C5")
     
     let numOfWashingMachines = 6
-    let washingMachineStartId: UInt =  4
+    let washingMachineStartId: UInt =  2
+    
+    let projectorBookingToggleText = durationDateText()
     
     var varDefs = VarDefinitions()
+}
+
+
+struct durationDateText {
+    let duration = "Velg varighet"
+    let date     = "Velg dato"
 }
 
 struct VarDefinitions {

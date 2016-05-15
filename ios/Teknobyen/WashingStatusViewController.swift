@@ -42,9 +42,9 @@ class WashingStatusViewController: UIViewController, UICollectionViewDelegate, U
         washingMachineCollection.allowsSelection = true
         
         refreshControl = UIRefreshControl()
-        let attributes = [NSForegroundColorAttributeName: AppConstants.themeColor]
+        let attributes = [NSForegroundColorAttributeName: AppConstants.themeBlueColor]
         refreshControl.attributedTitle = NSAttributedString(string: "Oppdatering...", attributes: attributes)
-        refreshControl.tintColor = AppConstants.themeColor
+        refreshControl.tintColor = AppConstants.themeBlueColor
         
         refreshControl.addTarget(self, action: #selector(WashingStatusViewController.pullToRefresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
 

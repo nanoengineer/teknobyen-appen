@@ -1,4 +1,5 @@
 PODS:
+  - EPCalendarPicker (1.0.8)
   - Firebase (2.5.1)
   - Fuzi (0.3.1)
   - Locksmith (2.0.8)
@@ -6,6 +7,7 @@ PODS:
   - UIColor_Hex_Swift (2.1)
 
 DEPENDENCIES:
+  - EPCalendarPicker
   - Firebase (>= 2.5.1)
   - Fuzi (~> 0.3.0)
   - Locksmith (~> 2.0.8)
@@ -13,12 +15,13 @@ DEPENDENCIES:
   - UIColor_Hex_Swift (~> 2.1)
 
 SPEC CHECKSUMS:
+  EPCalendarPicker: 0348fe754a7650582665ecc5ac98f4c0a0db0e91
   Firebase: 3565ea88b830f28f2c77ecc524622bc71a20d085
   Fuzi: 25118b725a1637f1676f63ae1acbba1f30a5dd6c
   Locksmith: a8ed41ac4c06506ea8cb199d8ec8a8d3d108eb2a
   PIDatePicker: 36548c3466dec16e7918e533486ffe86687f65e3
   UIColor_Hex_Swift: e91dc51f6bf252ec7bf74c8704ceedeeb7640c1c
 
-PODFILE CHECKSUM: c035a7298228a76a3068fc893c583f500d5efbcb
+PODFILE CHECKSUM: da546d50170122ed8766a760ce51ae6ea80b8463
 
 COCOAPODS: 1.0.0.rc.1

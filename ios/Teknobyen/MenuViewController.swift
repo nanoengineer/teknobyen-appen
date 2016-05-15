@@ -16,7 +16,7 @@ class MenuViewController: UIViewController {
     }
     
     private func initNavigationBar() {
-        self.navigationController?.navigationBar.barTintColor = AppConstants.themeColor
+        self.navigationController?.navigationBar.barTintColor = AppConstants.themeBlueColor
         AppConstants.varDefs.navBarHeight = (self.navigationController?.navigationBar.frame.size.height)!
     }
     

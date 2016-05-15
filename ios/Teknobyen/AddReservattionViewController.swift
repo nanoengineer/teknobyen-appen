@@ -19,12 +19,25 @@ class AddReservattionViewController: UIViewController, UIPickerViewDelegate, UIP
     @IBOutlet weak var toDate: UILabel!
     
     @IBOutlet weak var datePicker: UIDatePicker!
+    @IBOutlet weak var reservationButton: UIButton!
+    @IBOutlet weak var dateDurationSelectionButton: UIButton!
     
     var dateFrom: NSDate!
     var dateTo: NSDate!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        reservationButton.layer.cornerRadius = 5
+        reservationButton.backgroundColor = AppConstants.themeGreenColor
+        
+        dateDurationSelectionButton.layer.cornerRadius = 3
+        dateDurationSelectionButton.backgroundColor = AppConstants.themeBlueColor
+        dateDurationSelectionButton.tintColor = UIColor.whiteColor()
+        
+        
+        dateDurationSelectionButton.setTitle(AppConstants.projectorBookingToggleText.duration, forState: UIControlState.Normal)
+        
         
         datePicker.datePickerMode = .DateAndTime
         datePicker.minimumDate = NSDate() // NSDate() automatically gives today's date
@@ -35,7 +48,7 @@ class AddReservattionViewController: UIViewController, UIPickerViewDelegate, UIP
         datePicker.minuteInterval = 15
         datePicker.locale = NSLocale(localeIdentifier: "no_NO")
 
-        commentField.placeholder = "Beskrivelse"
+        commentField.placeholder = "feks. Game of Thrones"
         
         durationPicker.hidden = true
         durationPicker.dataSource = self
@@ -49,6 +62,10 @@ class AddReservattionViewController: UIViewController, UIPickerViewDelegate, UIP
 
     }
     
+    override func viewWillAppear(animated: Bool) {
+    
+    }
+    
     func dismissKeyboard() {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
@@ -57,12 +74,21 @@ class AddReservattionViewController: UIViewController, UIPickerViewDelegate, UIP
     
     @IBOutlet weak var durationPicker: UIPickerView!
     
-    @IBAction func userPressedOk(sender: AnyObject) {
-     
+    
+    @IBAction func dateDurationButtonIsPressed(sender: UIButton) {
+        
+        if sender.titleLabel?.text == AppConstants.projectorBookingToggleText.duration {
+            sender.setTitle(AppConstants.projectorBookingToggleText.date, forState: UIControlState.Normal)
+        }
+        else {
+              sender.setTitle(AppConstants.projectorBookingToggleText.duration, forState: UIControlState.Normal)
+        }
+        
         datePicker.hidden = !datePicker.hidden
         durationPicker.hidden = !durationPicker.hidden
         updateLabels()
     }
+    
     
     @IBAction func datePickerAction(sender: AnyObject) {
         updateLabels()
@@ -104,7 +130,6 @@ class AddReservattionViewController: UIViewController, UIPickerViewDelegate, UIP
         let secondInterval = durationInSeconds()
         dateTo = dateFrom.dateByAddingTimeInterval(secondInterval)
         
-//        let stopHour = dateFormatter.stringFromDate(dateTo)
         let roomNumber = 418
 
         let reservation = Reservation(userID: "SampleID",
@@ -113,7 +138,7 @@ class AddReservattionViewController: UIViewController, UIPickerViewDelegate, UIP
                                       roomNumber: "\(roomNumber)",
                                       date: day,
                                       startTime: startHour,
-                                      duration: "1.5")
+                                      duration: "\(durationInHours())")
 
         saveReservationToServer(reservation)
         self.delegate.reservationReceived(reservation)
@@ -122,6 +147,10 @@ class AddReservattionViewController: UIViewController, UIPickerViewDelegate, UIP
     
     private func durationInSeconds() -> Double {
         return Double(currentHours * 3600 + currentMinutes * 60)
+    }
+    
+    private func durationInHours() -> Double {
+        return Double(currentHours + currentMinutes/60)
     }
     
     private func updateToDate() {

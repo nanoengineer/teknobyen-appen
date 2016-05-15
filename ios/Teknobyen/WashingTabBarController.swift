@@ -21,7 +21,7 @@ class WashingTabBarController: UITabBarController, UITabBarControllerDelegate, S
         self.viewControllers = [washingStatusVC, washingRefillVC]
         self.navigationItem.title = "Vaskemaskiner"
         
-        self.tabBar.barTintColor = AppConstants.themeColor
+        self.tabBar.barTintColor = AppConstants.themeBlueColor
         self.tabBar.tintColor = AppConstants.tabSelectedColor
         
         statusTabBarItemSetUp()

@@ -9,5 +9,6 @@ pod 'Fuzi', '~> 0.3.0'
 pod 'PIDatePicker', '~> 0.1.0'
 pod 'UIColor_Hex_Swift', '~> 2.1'
 pod 'Locksmith', '~> 2.0.8'
+pod 'EPCalendarPicker'
 
 end
