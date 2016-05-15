@@ -1,13 +1,12 @@
 package tbcoders.teknobyen;
 
-import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.webkit.HttpAuthHandler;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 /**
  * Created by Sølve on 02.05.2016.
+ * MyApplication
  */
 public class MyWebViewClient extends WebViewClient {
     @Override

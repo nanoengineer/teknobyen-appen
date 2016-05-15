@@ -15,7 +15,8 @@
         android:id="@+id/bookingView"
         android:layout_above="@+id/reserve_btn"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        tools:listitem="@layout/custom_projector_item" />
 
     <Button
         android:layout_width="wrap_content"

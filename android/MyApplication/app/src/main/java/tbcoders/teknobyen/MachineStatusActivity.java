@@ -2,21 +2,14 @@ package tbcoders.teknobyen;
 
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Base64;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.jsoup.Jsoup;
-import org.jsoup.select.Elements;
-
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.concurrent.ExecutionException;
 
 public class MachineStatusActivity extends AppCompatActivity {
@@ -45,9 +38,6 @@ public class MachineStatusActivity extends AppCompatActivity {
     private boolean refreshData() {
         try {
             urlScraping();
-        } catch (IOException e) {
-            System.out.println("MachineStatusActivity IOException");
-            e.printStackTrace();
         } catch (InterruptedException e) {
             System.out.println("MachineStatusActivity InterruptedException");
             e.printStackTrace();
@@ -60,7 +50,7 @@ public class MachineStatusActivity extends AppCompatActivity {
     }
 
 
-    private void urlScraping() throws IOException, ExecutionException, InterruptedException {
+    private void urlScraping() throws ExecutionException, InterruptedException {
 
 
         SharedPreferences sharedPref = getSharedPreferences("mypref", 0);

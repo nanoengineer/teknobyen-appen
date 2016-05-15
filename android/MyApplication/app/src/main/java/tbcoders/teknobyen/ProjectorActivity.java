@@ -19,6 +19,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.TimeZone;
 
+import tbcoders.teknobyen.adaptors.ReservationsAdapter;
 import tbcoders.teknobyen.firebase.classes.Reservations;
 
 public class ProjectorActivity extends AppCompatActivity {
@@ -53,13 +54,12 @@ public class ProjectorActivity extends AppCompatActivity {
         reservationRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                reservationList = new ArrayList<Reservations>();
+                reservationList = new ArrayList<>();
 
 
 
                 for (DataSnapshot postSnapshot: snapshot.getChildren()) {
                     try{
-                        System.out.println(postSnapshot.getValue());
                         Reservations post = postSnapshot.getValue(Reservations.class);
                         reservationList.add(post);
 
@@ -83,11 +83,9 @@ public class ProjectorActivity extends AppCompatActivity {
         SimpleDateFormat bookDateFormat = new SimpleDateFormat("dd.MM.yyyy");
         String today = bookDateFormat.format(cal.getTime());
 
-        ArrayAdapter adapter = new ArrayAdapter(ProjectorActivity.this, android.R.layout.simple_list_item_1, reservationList);
+        ArrayAdapter adapter = new ReservationsAdapter(ProjectorActivity.this, R.layout.custom_projector_item, reservationList);
         ListView bookingView = (ListView) findViewById(R.id.bookingView);
         bookingView.setAdapter(adapter);
-
-
 
         for (int i = 0; i < reservationList.size(); i++) {
             if(reservationList.get(i).getDate().equals(today)){

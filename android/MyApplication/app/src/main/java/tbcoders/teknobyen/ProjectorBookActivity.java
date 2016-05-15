@@ -94,7 +94,7 @@ public class ProjectorBookActivity extends AppCompatActivity {
                 int smValue = pickMin.getValue();
                 int trueMinValue = Integer.parseInt(minValues[smValue]);
                 //Kontrollere om starttid er før slutttid før skriving og større enn current time
-                if(startMsgSet == false){
+                if(!startMsgSet){
                     if (controlCurrentTime(sdValue, shValue, trueMinValue)) {
                         writeStartTimeMessage(sdValue, shValue, smValue);
                     } else {
@@ -182,7 +182,7 @@ public class ProjectorBookActivity extends AppCompatActivity {
         }else{
             endDay = startDayName;
         }
-        endText.setText(endDay + " " + hourValues[endHourValue] + ":" + minValues[endMinValue]);;
+        endText.setText(endDay + " " + hourValues[endHourValue] + ":" + minValues[endMinValue]);
     }
 
     public void OnClickReserveListener() {
@@ -236,7 +236,7 @@ public class ProjectorBookActivity extends AppCompatActivity {
 
         Firebase ref = new Firebase("https://teknobyen.firebaseio.com");
         Firebase newBooking = ref.child("reservations");
-        Map<String, String> newBookingMap = new HashMap<String, String>();
+        Map<String, String> newBookingMap = new HashMap<>();
 
         newBookingMap.put("name", name);
         newBookingMap.put("date", bookStartDate);

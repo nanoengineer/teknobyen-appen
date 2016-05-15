@@ -40,9 +40,9 @@ public class WashdaysAdapter extends ArrayAdapter<Washdays>{
             row = inflater.inflate(layoutResourceId, parent, false);
 
             holder = new WashdaysHolder();
-            holder.txtDate = (TextView) row.findViewById(R.id.txtDate);
-            holder.txtAssignment = (TextView)row.findViewById(R.id.txtAssignment);
-            holder.txtRoom = (TextView)row.findViewById(R.id.txtRoom);
+            holder.txtDate = (TextView) row.findViewById(R.id.txtWashlistDate);
+            holder.txtAssignment = (TextView)row.findViewById(R.id.txtWashlistAssignment);
+            holder.txtRoom = (TextView)row.findViewById(R.id.txtWashlistRoom);
 
             row.setTag(holder);
         }
