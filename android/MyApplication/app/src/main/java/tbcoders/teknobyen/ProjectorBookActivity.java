@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -47,6 +50,35 @@ public class ProjectorBookActivity extends AppCompatActivity {
         String roomNr = prefs.getString("roomnumber", "");
         this.reservation = new Reservations("Name", "UserID", roomNr);
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_bookform, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.reserveBTN){
+            TextView startText = (TextView) findViewById(R.id.starttimeString);
+            TextView endText = (TextView) findViewById(R.id.endtimeString);
+            EditText bookDesEdit = (EditText) findViewById(R.id.bookDescriptionEdit);
+            int startTextLength = startText.getText().length();
+            int endTextLength = endText.getText().length();
+            int descriptionTextLength = bookDesEdit.getText().toString().length();
+            //Kontrollere om alle felt er utfylt før knappen kan trykkast
+            if (startTextLength > 0 && endTextLength > 0 && descriptionTextLength > 0) {
+                String bookText = bookDesEdit.getText().toString();
+                writeToFireBase(reservation.getDate(), reservation.getStartTime(), reservation.getDuration(), reservation.getRoomNumber(), bookText);
+                Intent intent = new Intent(ProjectorBookActivity.this, ProjectorActivity.class);
+                startActivity(intent);
+            } else {
+                Toast.makeText(ProjectorBookActivity.this, "Vennligst velg starttid, slutttid og varighet", Toast.LENGTH_SHORT).show();
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     public void setupNumberPickers() {
         pickDate = (NumberPicker) findViewById(R.id.datePicker);
         Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Europe/Oslo"));
@@ -174,31 +206,26 @@ public class ProjectorBookActivity extends AppCompatActivity {
     }
 
     public void OnClickReserveListener() {
-        Button btn = (Button) findViewById(R.id.bookreserveBTN);
+        Button btn = (Button) findViewById(R.id.bookresetBTN);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 TextView startText = (TextView) findViewById(R.id.starttimeString);
                 TextView endText = (TextView) findViewById(R.id.endtimeString);
-                EditText bookDesEdit = (EditText) findViewById(R.id.bookDescriptionEdit);
-                int startTextLength = startText.getText().length();
-                int endTextLength = endText.getText().length();
-                int descriptionTextLength = bookDesEdit.getText().toString().length();
-                //Kontrollere om alle felt er utfylt før knappen kan trykkast
-                if (startTextLength > 0 && endTextLength > 0 && descriptionTextLength > 0) {
-                    String bookText = bookDesEdit.getText().toString();
-                    writeToFireBase(reservation.getDate(), reservation.getStartTime(), reservation.getDuration(), reservation.getRoomNumber(), bookText);
-                    Intent intent = new Intent(ProjectorBookActivity.this, ProjectorActivity.class);
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(ProjectorBookActivity.this, "Vennligst velg starttid, slutttid og varighet", Toast.LENGTH_SHORT).show();
+                startText.setText("");
+                endText.setText("");
+                if(startMsgSet == true){
+                    setupNumberPickers();
+                    Button btn = (Button) findViewById(R.id.setBookStart);
+                    btn.setText("Sett varighet");
+                    pickDate.setVisibility(View.VISIBLE);
+                    startMsgSet = false;
                 }
             }
         });
     }
 
     public void writeToFireBase(String bookStartDate, String bookStartTime, String duration, String roomNr, String comment) {
-        // TODO: FIX THIS!!!!
         String userID = "SampleID";
         String name = "Ola Nordmann";
 
@@ -216,7 +243,7 @@ public class ProjectorBookActivity extends AppCompatActivity {
         newBooking.push().setValue(newBookingMap);
 
         /*** FORMAT
-         userId: AAAA BAAA AAAG AA
+         userID: AAAA BAAA AAAG AA
          comment: Game of Thrones
          name : Sindre
          roomnumber : 503

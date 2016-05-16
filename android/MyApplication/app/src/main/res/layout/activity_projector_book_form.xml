@@ -24,8 +24,8 @@
             android:layout_gravity="center_vertical" />
 
         <Button
-            android:text="Reserver"
-            android:id="@+id/bookreserveBTN"
+            android:text="Reset"
+            android:id="@+id/bookresetBTN"
             android:layout_column="3"
             android:layout_gravity="bottom"
             android:layout_weight="1" />
