@@ -48,8 +48,9 @@ public class ProjectorBookActivity extends AppCompatActivity {
         //OnClickReserveListener();
         setupNumberPickers();
         SharedPreferences prefs = getSharedPreferences("mypref", 0);
+        String personName = prefs.getString("personname", "");
         String roomNr = prefs.getString("roomnumber", "");
-        this.reservation = new Reservations("Name", "UserID", roomNr);
+        this.reservation = new Reservations(personName, "UserID", roomNr);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
@@ -70,7 +71,7 @@ public class ProjectorBookActivity extends AppCompatActivity {
             //Kontrollere om alle felt er utfylt før knappen kan trykkast
             if (startTextLength > 0 && endTextLength > 0 && descriptionTextLength > 0) {
                 String bookText = bookDesEdit.getText().toString();
-                writeToFireBase(reservation.getDate(), reservation.getStartTime(), reservation.getDuration(), reservation.getRoomNumber(), bookText);
+                writeToFireBase(reservation.getDate(), reservation.getStartTime(), reservation.getDuration(), bookText);
                 super.onBackPressed();
                 //Intent intent = new Intent(ProjectorBookActivity.this, ProjectorActivity.class);
                 //startActivity(intent);
@@ -224,40 +225,19 @@ public class ProjectorBookActivity extends AppCompatActivity {
         endText.setText(endDay + " " + reservation.getEndTime());
     }
 
-    /*public void OnClickReserveListener() {
-        Button btn = (Button) findViewById(R.id.bookresetBTN);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                TextView startText = (TextView) findViewById(R.id.starttimeString);
-                TextView endText = (TextView) findViewById(R.id.endtimeString);
-                startText.setText("");
-                endText.setText("");
-                if(startMsgSet == true){
-                    setupNumberPickers();
-                    Button btn = (Button) findViewById(R.id.setBookStart);
-                    btn.setText("Sett varighet");
-                    pickDate.setVisibility(View.VISIBLE);
-                    startMsgSet = false;
-                }
-            }
-        });
-    }*/
-
-    public void writeToFireBase(String bookStartDate, String bookStartTime, String duration, String roomNr, String comment) {
+    public void writeToFireBase(String bookStartDate, String bookStartTime, String duration, String comment) {
         String userID = "SampleID";
-        String name = "Ola Nordmann";
 
         Firebase ref = new Firebase("https://teknobyen.firebaseio.com");
         Firebase newBooking = new Firebase("https://teknobyen.firebaseio.com/reservations");
         Map<String, String> newBookingMap = new HashMap<>();
 
-        newBookingMap.put("name", name);
+        newBookingMap.put("name", reservation.getName());
         newBookingMap.put("date", bookStartDate);
         newBookingMap.put("userID", userID);
         newBookingMap.put("startTime", bookStartTime);
         newBookingMap.put("comment", comment);
-        newBookingMap.put("roomNumber", roomNr);
+        newBookingMap.put("roomNumber", reservation.getRoomNumber());
         newBookingMap.put("duration", duration);
         newBooking.push().setValue(newBookingMap);
 
