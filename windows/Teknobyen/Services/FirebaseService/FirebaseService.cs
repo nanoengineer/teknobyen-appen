@@ -88,21 +88,33 @@ namespace Teknobyen.Services.FirebaseService
         //Using https://www.firebase.com/docs/rest/guide/saving-data.html#section-post as guide
         public async Task<bool> SaveReservation(ProjectorReservationModel reservation)
         {
-            string uri = $"{base_uri}/reservations.json?auth={client_secret}";
-
-            using (var client = new HttpClient())
+            if (SettingsService.SettingsService.Instance.IsLoggedInToLaundrySite)
             {
-                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, new Uri(uri));
+                string username = CredentialsService.CredentialsService.Instance.GetUser().UserName;
+                int roomnumber = SettingsService.SettingsService.Instance.RoomNumber;
 
-                var jsonModel = new ReservationJsonModel(reservation);
-                var content = JsonConvert.SerializeObject(jsonModel);
-                HttpStringContent stringContent = new HttpStringContent(content);
+                reservation.userId = username;
+                reservation.roomNumber = roomnumber;
 
-                request.Content = stringContent;
+                string uri = $"{base_uri}/reservations.json?auth={client_secret}";
 
-                var response = await client.SendRequestAsync(request);
+                using (var client = new HttpClient())
+                {
+                    HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, new Uri(uri));
+
+                    var jsonModel = new ReservationJsonModel(reservation);
+                    var content = JsonConvert.SerializeObject(jsonModel);
+                    HttpStringContent stringContent = new HttpStringContent(content);
+
+                    request.Content = stringContent;
+
+                    var response = await client.SendRequestAsync(request);
+                }
+                return true;
             }
-            return true;
+
+            return false;
+            
        }
 
         public async Task<bool> SaveWashDayEntry(WashDayModel washDay)

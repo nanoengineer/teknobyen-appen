@@ -62,7 +62,7 @@
         </Grid.ColumnDefinitions>
 
         <!-- Gray background -->
-        <Rectangle Fill="Gray" Grid.ColumnSpan="7" Grid.RowSpan="2" />
+        <Rectangle Fill="LightGray" Grid.ColumnSpan="7" Grid.RowSpan="2" />
 
         <!-- Header area -->
         <Border BorderBrush="Black" BorderThickness="2">

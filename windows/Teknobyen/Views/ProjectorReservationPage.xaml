@@ -6,7 +6,14 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Template10.Controls"
+    xmlns:localControls="using:Teknobyen.Controls"
+    xmlns:models="using:Teknobyen.Models"
+    xmlns:vm="using:Teknobyen.ViewModels"
     mc:Ignorable="d">
+
+    <Page.DataContext>
+        <vm:ProjectorReservationViewModel x:Name="ViewModel" />
+    </Page.DataContext>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -34,16 +41,22 @@
         </controls:PageHeader>
 
 
-        <TextBlock Grid.Row="2" Text="Romnummer:" HorizontalAlignment="Center"  />
-        <TextBox Grid.Row="3" HorizontalAlignment="Center" />
+        <!--<TextBlock Grid.Row="2" Text="Romnummer:" HorizontalAlignment="Center"  />
+        <TextBox Grid.Row="3" HorizontalAlignment="Center" />-->
+        
         <TextBlock Grid.Row="4" Text="Dato" HorizontalAlignment="Center" />
-        <CalendarDatePicker x:Name="DatePickerControl" Grid.Row="5" HorizontalAlignment="Center" />
-        <TextBlock Grid.Row="6" Text="Start tid:" HorizontalAlignment="Center" />
-        <TimePicker Grid.Row="7" HorizontalAlignment="Center" MinuteIncrement="15"/>
-        <TextBlock Grid.Row="8" Text="Slutt tid:" HorizontalAlignment="Center" />
-        <TimePicker Grid.Row="9" HorizontalAlignment="Center" MinuteIncrement="15"/>
+        <localControls:TwoWayCalendarDatePicker SelectedDate="{x:Bind ViewModel.SelectedDate, Mode=TwoWay}" x:Name="DatePickerControl" Grid.Row="5" HorizontalAlignment="Center" />
+        
+        <TextBlock Grid.Row="6" Text="Starttid:" HorizontalAlignment="Center" />
+        <TimePicker Time="{x:Bind ViewModel.SelectedStartTime, Mode=TwoWay}" Grid.Row="7" HorizontalAlignment="Center" MinuteIncrement="15"/>
+        
+        <TextBlock Grid.Row="8" Text="Slutttid:" HorizontalAlignment="Center" />
+        <TimePicker Time="{x:Bind ViewModel.SelectedEndTime, Mode=TwoWay}" Grid.Row="9" HorizontalAlignment="Center" MinuteIncrement="15"/>
+
+
         <TextBlock Grid.Row="10" Text="Hva skal du/dere?" HorizontalAlignment="Center" />
-        <TextBox Grid.Row="11" HorizontalAlignment="Center" MinWidth="200" />
-        <Button Content="Reserver" HorizontalAlignment="Center" Grid.Row="12" Margin="5"/>
+        <TextBox Text="{x:Bind ViewModel.Comment, Mode=TwoWay}" Grid.Row="11" HorizontalAlignment="Center" PlaceholderText="Max 160 tegn" MinWidth="200" />
+        
+        <Button Content="Reserver" Click="{x:Bind ViewModel.SaveReservation}" HorizontalAlignment="Center" Grid.Row="12" Margin="5"/>
     </Grid>
 </Page>

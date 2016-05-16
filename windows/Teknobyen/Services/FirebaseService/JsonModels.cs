@@ -19,9 +19,9 @@ namespace Teknobyen.Services.FirebaseService
         public ReservationJsonModel(ProjectorReservationModel model)
         {
             userId = model.userId;
-            comment = model.comment;
             name = model.name;
             roomNumber = model.roomNumber.ToString();
+            comment = model.comment;
             date = model.date.ToString(App.DATEFORMAT);
             startTime = model.startTime.ToString(App.TIMEFORMAT);
             var usCulture = new CultureInfo("en-US");
