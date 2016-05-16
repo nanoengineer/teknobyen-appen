@@ -53,9 +53,9 @@ public class MachineStatusActivity extends AppCompatActivity {
     private void urlScraping() throws ExecutionException, InterruptedException {
 
 
-        SharedPreferences sharedPref = getSharedPreferences("mypref", 0);
+        SharedPreferences sharedPref = getSharedPreferences("mypref", MODE_PRIVATE);
         String name = sharedPref.getString("username", "");
-        String password = sharedPref.getString("password", "");
+        String password = Base64EncryptDecrypt.decrypt(sharedPref.getString("password", ""));
 
         RetreiveWashingMachineStatus retrieveStatus = new RetreiveWashingMachineStatus();
         String machineStatusString = retrieveStatus.execute(name, password).get();

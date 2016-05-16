@@ -47,10 +47,11 @@ public class LoginActivityWash extends AppCompatActivity {
             public void onClick(View view) {
                 if (username.getText().toString().length() > 0 && password.getText().toString().length() > 0) {
                     //For å lagre variabelar slik at dei skal vere tilgjengelige etter å ha lukka appen.
-                    SharedPreferences sharedPref = getSharedPreferences("mypref", 0);
+                    SharedPreferences sharedPref = getSharedPreferences("mypref", MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPref.edit();
                     String userS = username.getText().toString();
-                    String userP = password.getText().toString();
+                    //krypterar passord med Base64
+                    String userP = Base64EncryptDecrypt.encrypt(password.getText().toString());
                     editor.remove("username");
                     editor.remove("password");
                     editor.putString("username", userS);
@@ -82,7 +83,7 @@ public class LoginActivityWash extends AppCompatActivity {
                 String personName = nameEdit.getText().toString();
                 String roomNr = roomNrField.getText().toString();
                 if (Arrays.asList(roomNumbers).contains(Integer.valueOf(roomNr)) && personName.length()>0) {
-                    SharedPreferences sharedPref = getSharedPreferences("mypref", 0);
+                    SharedPreferences sharedPref = getSharedPreferences("mypref", MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPref.edit();
                     editor.remove("roomnumber");
                     editor.putString("roomnumber", roomNr);
@@ -96,5 +97,6 @@ public class LoginActivityWash extends AppCompatActivity {
             }
         });
     }
+
 
 }

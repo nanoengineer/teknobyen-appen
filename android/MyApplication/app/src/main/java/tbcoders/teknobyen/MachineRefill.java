@@ -14,9 +14,9 @@ public class MachineRefill extends AppCompatActivity {
         //Oppretter nettleser og henter inn brukernavn og passord fra telefonen
         WebView webView = (WebView)findViewById(R.id.webView);
         webView.setWebViewClient(new MyWebViewClient());
-        SharedPreferences sharedPref = getSharedPreferences("mypref", 0);
+        SharedPreferences sharedPref = getSharedPreferences("mypref", MODE_PRIVATE);
         String name = sharedPref.getString("username", "");
-        String password = sharedPref.getString("password", "");
+        String password = Base64EncryptDecrypt.decrypt(sharedPref.getString("password", ""));
         webView.setHttpAuthUsernamePassword("http://129.241.152.11/", "", name, password);
 
         //Setup for webView
