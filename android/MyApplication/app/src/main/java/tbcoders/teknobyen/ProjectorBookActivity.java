@@ -37,6 +37,7 @@ public class ProjectorBookActivity extends AppCompatActivity {
     private final String[] minuteDurations = {"0 min", "15 min", "30 min", "45 min"};
     private String startDayName = "";
     private boolean startMsgSet = false;
+    private boolean durationMsgSet = false;
     Reservations reservation;
 
     @Override
@@ -44,7 +45,7 @@ public class ProjectorBookActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_projector_book_form);
         OnClickStartListener();
-        OnClickReserveListener();
+        //OnClickReserveListener();
         setupNumberPickers();
         SharedPreferences prefs = getSharedPreferences("mypref", 0);
         String roomNr = prefs.getString("roomnumber", "");
@@ -133,11 +134,24 @@ public class ProjectorBookActivity extends AppCompatActivity {
                     } else {
                         Toast.makeText(ProjectorBookActivity.this, "Verdi for starttid må være større enn nåværende klokkeslett", Toast.LENGTH_SHORT).show();
                     }
-                }else{
+                }else if(!durationMsgSet){
                     if(shValue > 0 || smValue > 0){
                         writeEndTimeMessage(shValue, smValue);
                     }else{
                         Toast.makeText(ProjectorBookActivity.this, "Varighet må være større enn null", Toast.LENGTH_SHORT).show();
+                    }
+                }else{
+                    TextView startText = (TextView) findViewById(R.id.starttimeString);
+                    TextView endText = (TextView) findViewById(R.id.endtimeString);
+                    startText.setText("");
+                    endText.setText("");
+                    if(startMsgSet == true){
+                        setupNumberPickers();
+                        Button btn = (Button) findViewById(R.id.setBookStart);
+                        btn.setText("Sett starttid");
+                        pickDate.setVisibility(View.VISIBLE);
+                        startMsgSet = false;
+                        durationMsgSet = false;
                     }
                 }
             }
@@ -203,10 +217,14 @@ public class ProjectorBookActivity extends AppCompatActivity {
         }else{
             endDay = weekDays[endCal.get(endCal.DAY_OF_WEEK)-1];
         }
+        durationMsgSet = true;
+        Button btn = (Button) findViewById(R.id.setBookStart);
+        btn.setText("Reset");
+
         endText.setText(endDay + " " + reservation.getEndTime());
     }
 
-    public void OnClickReserveListener() {
+    /*public void OnClickReserveListener() {
         Button btn = (Button) findViewById(R.id.bookresetBTN);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -224,7 +242,7 @@ public class ProjectorBookActivity extends AppCompatActivity {
                 }
             }
         });
-    }
+    }*/
 
     public void writeToFireBase(String bookStartDate, String bookStartTime, String duration, String roomNr, String comment) {
         String userID = "SampleID";
