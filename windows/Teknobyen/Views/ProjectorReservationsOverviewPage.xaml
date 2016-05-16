@@ -33,53 +33,43 @@
             
         </controls:PageHeader>
 
-
-        <pr:PullToRefreshBox Grid.Row="1" >
-            <pr:PullToRefreshBox.TopIndicatorTemplate>
-                <DataTemplate>
-                    <pr:PullRefreshProgressControl Progress="{Binding}"
-                                            PullToRefreshText="Pull"
-                                            ReleaseToRefreshText="Release" />
-                </DataTemplate>
-            </pr:PullToRefreshBox.TopIndicatorTemplate>
             <!-- Listview med reservasjoner -->
-            <ListView ItemsSource="{x:Bind ViewModel.ReservationsList}" >
-                <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="models:ProjectorReservationModel">
-                        <Grid x:Name="GridItem">
-                            <Grid.RowDefinitions>
-                                <RowDefinition />
-                                <RowDefinition />
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
+        <ListView Grid.Row="2" ItemsSource="{x:Bind ViewModel.ReservationsList}" >
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="models:ProjectorReservationModel">
+                    <Grid x:Name="GridItem">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
 
-                            <TextBlock Grid.ColumnSpan="2" Text="{x:Bind comment}" Style="{StaticResource TitleTextBlockStyle}"/>
-                            <TextBlock Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" Style="{StaticResource BodyTextBlockStyle}">
+                        <TextBlock Grid.ColumnSpan="2" Text="{x:Bind comment}" Style="{StaticResource TitleTextBlockStyle}"/>
+                        <TextBlock Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" Style="{StaticResource BodyTextBlockStyle}">
                                 <Run Text="{x:Bind name}" />
                                 <Run Text=" - " />
                                 <Run Text="{x:Bind roomNumber}" />
-                            </TextBlock>
-                            <TextBlock Grid.Row="1" Style="{StaticResource BaseTextBlockStyle}" Text="{x:Bind date.DayOfWeek}" />
-                            <TextBlock Grid.Row="1" Grid.Column="1" Style="{StaticResource BodyTextBlockStyle}">
+                        </TextBlock>
+                        <TextBlock Grid.Row="1" Style="{StaticResource BaseTextBlockStyle}" Text="{x:Bind date.DayOfWeek}" />
+                        <TextBlock Grid.Row="1" Grid.Column="1" Style="{StaticResource BodyTextBlockStyle}">
                                 <!--<Run Text="{x:Bind startTime}" />-->
                                 <Run Text="{Binding startTime, Mode=OneWay, Converter={StaticResource StrFormatConverter}, ConverterParameter=\{0:t\}}" />
                                 <Run Text=" - " />
                                 <Run Text="{Binding endTime, Mode=OneWay, Converter={StaticResource StrFormatConverter}, ConverterParameter=\{0:t\}}" />
-                            </TextBlock>
-                        </Grid>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="ListViewItem">
-                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                    </Style>
-                </ListView.ItemContainerStyle>
-            </ListView>
-        </pr:PullToRefreshBox>
+                        </TextBlock>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
 
         <!-- Add reservation button -->
         <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="1" Background="Transparent" Margin="0,0,0,10" Click="{x:Bind ViewModel.GotoProjectorReservationPage}">

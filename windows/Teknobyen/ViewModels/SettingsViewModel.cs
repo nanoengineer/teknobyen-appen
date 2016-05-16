@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Teknobyen.Common;
 using Teknobyen.Services.CredentialsService;
 using Teknobyen.Services.LaundryService;
 using Teknobyen.Services.SettingsService;
+using Teknobyen.Views;
 using Template10.Mvvm;
 using Windows.UI.Xaml.Navigation;
 
@@ -89,19 +91,44 @@ namespace Teknobyen.ViewModels
 
         public async void SaveSettings()
         {
-            _settingsService.Name = Name;
-            _settingsService.RoomNumber = RoomNumber;
-
-            if (await _laundryService.IsValidCredentials(Username, Password))
+            bool allSettingsValid = true;
+            if (Name.Length < 2 || !RoomManager.IsValidRoom(RoomNumber))
             {
-                _credentialsService.SaveUser(new Windows.Security.Credentials.PasswordCredential(App.APPID, Username, Password));
+                allSettingsValid = false;
             }
-
+            else
+            {
+                _settingsService.Name = Name;
+                _settingsService.RoomNumber = RoomNumber;
+            }
+            
             if (AdminPassword == "adMin")
             {
                 IsAdmin = true;
                 _settingsService.IsAdmin = true;
             }
+
+            if (await _laundryService.IsValidCredentials(Username, Password))
+            {
+                _credentialsService.SaveUser(new Windows.Security.Credentials.PasswordCredential(App.APPID, Username, Password));
+            }
+            else
+            {
+                allSettingsValid = false;
+            }
+
+
+            if (allSettingsValid)
+            {
+                if (this.NavigationService.CanGoBack)
+                    NavigationService.GoBack();
+                _settingsService.FirstRunCompleted = true;
+
+                NavigationService.Navigate(typeof(MainPage));
+            }
+
+
+            
         }
 
         public void LogoutOfAdmin()

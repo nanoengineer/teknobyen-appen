@@ -12,5 +12,6 @@ namespace Teknobyen.Services.SettingsService
         string Name { get; set; }
         bool IsAdmin { get; set; }
         bool IsLoggedInToLaundrySite { get; set; }
+        bool FirstRunCompleted { get; set; }
     }
 }

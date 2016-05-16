@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Teknobyen.Services.SettingsService;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml.Data;
 
@@ -28,7 +29,15 @@ namespace Teknobyen
 
         public override Task OnStartAsync(StartKind startKind, IActivatedEventArgs args)
         {
-            NavigationService.Navigate(typeof(Views.MainPage));
+            if (SettingsService.Instance.FirstRunCompleted)
+            {
+                NavigationService.Navigate(typeof(Views.MainPage));
+            }
+            else
+            {
+                NavigationService.Navigate(typeof(Views.SettingsPage));
+            }
+            
             return Task.CompletedTask;
         }
     }

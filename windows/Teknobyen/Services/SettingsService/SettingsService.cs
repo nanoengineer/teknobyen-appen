@@ -68,5 +68,18 @@ namespace Teknobyen.Services.SettingsService
                 _helper.Write<bool>(nameof(IsLoggedInToLaundrySite), value);
             }
         }
+
+        public bool FirstRunCompleted
+        {
+            get
+            {
+                return _helper.Read<bool>(nameof(FirstRunCompleted), false);
+            }
+
+            set
+            {
+                _helper.Write<bool>(nameof(FirstRunCompleted), value);
+            }
+        }
     }
 }

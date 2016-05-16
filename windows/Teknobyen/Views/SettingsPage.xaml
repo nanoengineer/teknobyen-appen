@@ -38,19 +38,28 @@
             </t10convert:ValueWhenConverter.Otherwise>
         </t10convert:ValueWhenConverter>
     </Page.Resources>
-
-
-    <Grid x:Name="grid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" >
+    
+    
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
+            <RowDefinition  Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <controls:PageHeader Text="Settings" HorizontalContentAlignment="Center">
 
         </controls:PageHeader>
 
-        <Grid Grid.Row="1" Padding="5" MaxWidth="600" HorizontalAlignment="Stretch">
+        <ScrollViewer MaxHeight="600" Grid.Row="1" Padding="15" >
+            <Grid x:Name="grid" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                
+                
+                <Grid Grid.Row="1" Padding="5" MaxWidth="600" HorizontalAlignment="Stretch">
             <Grid.RowDefinitions>
                 <RowDefinition Height="100"/>
                 <RowDefinition Height="Auto"/>
@@ -106,7 +115,7 @@
             </Grid>
 
             <!-- Admin section -->
-            <!--<Grid Grid.Row="5" Visibility="{x:Bind ViewModel.IsAdmin, Converter={StaticResource CollapsedWhenTrueConverter}, Mode=OneWay}">
+            <Grid Grid.Row="5" Visibility="{x:Bind ViewModel.IsAdmin, Converter={StaticResource CollapsedWhenTrueConverter}, Mode=OneWay}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
@@ -117,16 +126,18 @@
                         <TextBox Text="{x:Bind ViewModel.AdminPassword, Mode=TwoWay}" />
                     </StackPanel>
                 </Grid>
-                <Grid Grid.Row="5" Visibility="{x:Bind ViewModel.IsAdmin, Converter={StaticResource VisibleWhenTrueConverter}, Mode=OneWay}">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <TextBlock Text="Du er logget inn som BBU medlem. Klikk knappen nedenfor for å logge ut." />
-                    <Button Grid.Row="1" Content="Logg ut" Click="{x:Bind ViewModel.LogoutOfAdmin}" />
-                </Grid>-->
+            <Grid Grid.Row="5" Visibility="{x:Bind ViewModel.IsAdmin, Converter={StaticResource VisibleWhenTrueConverter}, Mode=OneWay}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock Text="Du er logget inn som BBU medlem. Klikk knappen nedenfor for å logge ut." TextWrapping="Wrap" />
+                <Button Grid.Row="1" Content="Logg ut" Click="{x:Bind ViewModel.LogoutOfAdmin}" />
+            </Grid>
             <!-- Save button -->
             <Button Content="Lagre" Grid.Row="13" HorizontalAlignment="Center" Click="{x:Bind ViewModel.SaveSettings}"  />
         </Grid>
+            </Grid>
+        </ScrollViewer>
     </Grid>
 </Page>
