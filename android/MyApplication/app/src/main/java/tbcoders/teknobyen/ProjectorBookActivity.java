@@ -70,8 +70,9 @@ public class ProjectorBookActivity extends AppCompatActivity {
             if (startTextLength > 0 && endTextLength > 0 && descriptionTextLength > 0) {
                 String bookText = bookDesEdit.getText().toString();
                 writeToFireBase(reservation.getDate(), reservation.getStartTime(), reservation.getDuration(), reservation.getRoomNumber(), bookText);
-                Intent intent = new Intent(ProjectorBookActivity.this, ProjectorActivity.class);
-                startActivity(intent);
+                super.onBackPressed();
+                //Intent intent = new Intent(ProjectorBookActivity.this, ProjectorActivity.class);
+                //startActivity(intent);
             } else {
                 Toast.makeText(ProjectorBookActivity.this, "Vennligst velg starttid, slutttid og varighet", Toast.LENGTH_SHORT).show();
             }

@@ -87,11 +87,12 @@ public class WashdaysActivity extends AppCompatActivity {
             if (washdaysList.get(i).getDate().equals(today)) {
                 bookingView.setSelection(i);
             }
-            if (washdaysList.get(i).getRoomNumber().toString().equals(roomNr)){
+            if (washdaysList.get(i).getRoomNumber().toString().equals(roomNr) && washdaysList.get(i).getDate().compareTo(today) >= 0){
                 TextView textView1 = (TextView) findViewById(R.id.washlistAssignmentText);
                 TextView textView2 = (TextView) findViewById(R.id.washlistDateText);
                 textView1.setText("Oppgave: " + washdaysList.get(i).getAssignment().toString());
                 textView2.setText(washdaysList.get(i).getPrettyDate());
+                break;
             }
         }
     }
