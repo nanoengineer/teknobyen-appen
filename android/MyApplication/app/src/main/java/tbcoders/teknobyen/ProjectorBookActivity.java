@@ -47,7 +47,7 @@ public class ProjectorBookActivity extends AppCompatActivity {
         OnClickStartListener();
         //OnClickReserveListener();
         setupNumberPickers();
-        SharedPreferences prefs = getSharedPreferences("mypref", 0);
+        SharedPreferences prefs = getSharedPreferences("mypref", MODE_PRIVATE);
         String personName = prefs.getString("personname", "");
         String roomNr = prefs.getString("roomnumber", "");
         this.reservation = new Reservations(personName, "UserID", roomNr);
