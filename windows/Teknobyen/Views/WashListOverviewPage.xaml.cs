@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Teknobyen.Models;
+using Teknobyen.Services.SettingsService;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -26,6 +27,8 @@ namespace Teknobyen.Views
         public WashListOverviewPage()
         {
             this.InitializeComponent();
+
+            if (SettingsService.Instance.IsAdmin) AdminPageButton.Visibility = Visibility.Visible;
         }
 
         private void ListView_ContainerContentChanging(ListViewBase sender, ContainerContentChangingEventArgs args)

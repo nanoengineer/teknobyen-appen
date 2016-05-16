@@ -218,5 +218,13 @@ namespace Teknobyen.Services.WashListService
 
             return printableList;
         }
+
+        public List<WashDayModel> GetWashListBetweenDates(DateTime startDate, DateTime endDate, List<WashDayModel> washList)
+        {
+            washList = (from m in washList
+                        where m.Date.Date >= startDate.Date && m.Date.Date <= endDate.Date
+                        select m).OrderBy(e => e.Date).ThenBy(e => e.Assignment).ToList();
+            return washList;
+        }
     }
 }

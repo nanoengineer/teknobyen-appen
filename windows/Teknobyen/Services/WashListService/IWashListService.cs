@@ -21,6 +21,6 @@ namespace Teknobyen.Services.WashListService
         List<WashWeekModel> GetPrintableWashList(List<WashDayModel> listToPrint);
 
         Task<bool> BackupWashListToFile(List<WashDayModel> listToBackup);
-
+        List<WashDayModel> GetWashListBetweenDates(DateTime startDate, DateTime endDate, List<WashDayModel> washList);
     }
 }

@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Teknobyen.Models;
+using Teknobyen.Services.FirebaseService;
 using Teknobyen.Services.PrintService;
 using Teknobyen.Services.WashListService;
 using Windows.Foundation;
@@ -48,7 +49,14 @@ namespace Teknobyen.Views
             
             try
             {
-                var washListToPrint = WashListService.Instance.GetPrintableWashList(ViewModel.GeneratedWashDayList);
+                if (!startPrintDatePicker.Date.HasValue || !endPrintDatePicker.Date.HasValue)
+                {
+                    return;
+                }
+                var fullList = await FirebaseService.Instance.GetWashList();
+                List<WashDayModel> listToPrint = 
+                    WashListService.Instance.GetWashListBetweenDates(startPrintDatePicker.Date.Value.DateTime, endPrintDatePicker.Date.Value.DateTime, fullList);
+                var washListToPrint = WashListService.Instance.GetPrintableWashList(listToPrint);
                 if (washListToPrint.Count < 1)
                 {
                     return;
@@ -62,6 +70,16 @@ namespace Teknobyen.Views
             }
 
             
+        }
+
+        private void TwoWayCalendarDatePicker_DateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args)
+        {
+            if(sender.Date.HasValue)
+                endGenerationDatePicker.MinDate = sender.Date.Value;
+            if (endGenerationDatePicker.Date < sender.Date)
+            {
+                endGenerationDatePicker.Date = sender.Date;
+            }
         }
     }
 }

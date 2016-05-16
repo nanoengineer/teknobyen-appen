@@ -63,7 +63,7 @@
 
         <controls:PageHeader Text="Vaskeliste" HorizontalContentAlignment="Center" >
             <controls:PageHeader.SecondaryCommands>
-                <AppBarButton Label="Admin" Click="{x:Bind ViewModel.GotoAdminPage}" />
+                <AppBarButton x:Name="AdminPageButton" Label="Admin" Click="{x:Bind ViewModel.GotoAdminPage}" Visibility="Collapsed"/>
             </controls:PageHeader.SecondaryCommands>
         </controls:PageHeader>
 

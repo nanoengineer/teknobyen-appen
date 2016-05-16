@@ -63,10 +63,10 @@
                             
 
                             <TextBlock Text="Fra:" />
-                            <localControls:TwoWayCalendarDatePicker Grid.Column="1" Margin="0,0,5,0" SelectedDate="{x:Bind ViewModel.StartGenerationDate, Mode=TwoWay}" />
+                            <localControls:TwoWayCalendarDatePicker Grid.Column="1" Margin="0,0,5,0" SelectedDate="{x:Bind ViewModel.StartGenerationDate, Mode=TwoWay}" DateChanged="TwoWayCalendarDatePicker_DateChanged" />
 
                             <TextBlock Text="Til:" Grid.Row="1" Grid.Column="0" />
-                            <localControls:TwoWayCalendarDatePicker Grid.Row="1" Grid.Column="1" Margin="0,0,5,0" SelectedDate="{x:Bind ViewModel.EndGenerationDate, Mode=TwoWay}" />
+                            <localControls:TwoWayCalendarDatePicker x:Name="endGenerationDatePicker" Grid.Row="1" Grid.Column="1" Margin="0,0,5,0" SelectedDate="{x:Bind ViewModel.EndGenerationDate, Mode=TwoWay}" />
 
                             <TextBlock Text="Begyn med rom:" Grid.Row="2" />
                             <TextBox PlaceholderText="f.eks 203" Grid.Row="2" Grid.Column="1" Text="{x:Bind ViewModel.StartRoom, Mode=TwoWay}" />
@@ -94,12 +94,31 @@
                     </Grid>
                 </PivotItem>
                 <PivotItem Header="SKRIV UT" >
-                    <Button Content="Print" Click="Button_Click" />
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Text="Fra:" />
+                        <localControls:TwoWayCalendarDatePicker x:Name="startPrintDatePicker" Grid.Column="1" />
+
+                        <TextBlock Text="Til:" Grid.Row="1" />
+                        <localControls:TwoWayCalendarDatePicker x:Name="endPrintDatePicker" Grid.Row="1" Grid.Column="1" />
+
+                        <TextBlock Text="Mangler:" Grid.Row="2" />
+                        <TextBlock Grid.Row="2" Grid.Column="1" />
+
+                        <Button Grid.Row="3" Content="Skriv ut" Click="Button_Click" />
+                    </Grid>
                 </PivotItem>
-                <PivotItem>
-                    <PivotItem.Header>
-                        <TextBlock Text="FRA TEKST"/>
-                    </PivotItem.Header>
+                <PivotItem Header="FRA TEKST" >
                     <Grid  Padding="5,0,10,0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />

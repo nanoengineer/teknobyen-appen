@@ -166,7 +166,7 @@ namespace Teknobyen.Services.PrintService
         protected virtual void PrintTaskRequested(PrintManager sender, PrintTaskRequestedEventArgs e)
         {
             PrintTask printTask = null;
-            printTask = e.Request.CreatePrintTask("C# Printing SDK Sample", sourceRequested =>
+            printTask = e.Request.CreatePrintTask("Vaskeliste", sourceRequested =>
             {
                 // Print Task event handler is invoked when the print job is completed.
                 printTask.Completed += (s, args) =>
