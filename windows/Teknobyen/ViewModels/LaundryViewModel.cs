@@ -82,8 +82,15 @@ namespace Teknobyen.ViewModels
             {
                 Credentials = loginCredentials;
             }
-
-            var b = await _laundryService.GetAccountBalance(loginCredentials.UserName, loginCredentials.Password);
+            try
+            {
+                var b = await _laundryService.GetAccountBalance(loginCredentials.UserName, loginCredentials.Password);
+            }
+            catch (Exception)
+            {
+                
+            }
+            
         }
 
         

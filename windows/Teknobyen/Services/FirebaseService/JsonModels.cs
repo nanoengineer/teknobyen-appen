@@ -18,7 +18,7 @@ namespace Teknobyen.Services.FirebaseService
         public ReservationJsonModel() { }
         public ReservationJsonModel(ProjectorReservationModel model)
         {
-            userId = model.userId;
+            userID = model.userId;
             name = model.name;
             roomNumber = model.roomNumber.ToString();
             comment = model.comment;
@@ -28,7 +28,7 @@ namespace Teknobyen.Services.FirebaseService
             duration = (model.endTime.Subtract(model.startTime)).TotalHours.ToString(usCulture.NumberFormat);
         }
 
-        public string userId { get; set; }
+        public string userID { get; set; }
         public string comment { get; set; }
         public string name { get; set; }
         public string roomNumber { get; set; }

@@ -14,7 +14,7 @@ namespace Teknobyen.Models
         public ProjectorReservationModel(string id, ReservationJsonModel jsonModel)
         {
             this.reservationId = id;
-            this.userId = jsonModel.userId;
+            this.userId = jsonModel.userID;
             this.comment = jsonModel.comment;
             this.name = jsonModel.name;
             this.roomNumber = int.Parse(jsonModel.roomNumber);
