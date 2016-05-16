@@ -67,8 +67,7 @@ public class LoginActivityWash extends AppCompatActivity {
         cancel_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LoginActivityWash.this, WashingMachine.class);
-                startActivity(intent);
+                onBackPressed();
             }
         });
     }
