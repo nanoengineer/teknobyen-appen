@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Teknobyen.Services.NotificationService;
 using Teknobyen.Services.SettingsService;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml.Data;
@@ -37,6 +38,8 @@ namespace Teknobyen
             {
                 NavigationService.Navigate(typeof(Views.SettingsPage));
             }
+
+            NotificationService.Instance.HandleNextWashDayNotification();
             
             return Task.CompletedTask;
         }

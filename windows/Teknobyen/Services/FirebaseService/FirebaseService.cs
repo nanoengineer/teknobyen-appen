@@ -191,6 +191,30 @@ namespace Teknobyen.Services.FirebaseService
             return success;
         }
 
+        public async Task<WashDayModel> GetNextWashDay(RoomModel room)
+        {
+            try
+            {
+                var washList = await GetWashList();
+                var nextWashDay = (from n in washList
+                                   where n.RoomNumber == room.RoomNumber
+                                   select n).ToList();
+                if (nextWashDay.Count == 0)
+                {
+                    return null;
+                }
+                else
+                {
+                    return nextWashDay.OrderBy(e => e.Date).ThenBy(e => e.Assignment).First();
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            
+        }
+
         public async Task<bool> SaveWashDayEntries(List<WashDayModel> washDayList)
         {
             bool success = false;

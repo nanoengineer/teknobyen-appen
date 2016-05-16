@@ -130,6 +130,8 @@
     <Compile Include="Services\FirebaseService\JsonModels.cs" />
     <Compile Include="Services\LaundryService\ILaundryService.cs" />
     <Compile Include="Services\LaundryService\LaundryService.cs" />
+    <Compile Include="Services\NotificationService\INotificationService.cs" />
+    <Compile Include="Services\NotificationService\NotificationService.cs" />
     <Compile Include="Services\PrintService\PrintService.cs" />
     <Compile Include="Services\PrintService\WashListPrintPage.xaml.cs">
       <DependentUpon>WashListPrintPage.xaml</DependentUpon>
