@@ -25,31 +25,7 @@ namespace Teknobyen.Views
     /// </summary>
     public sealed partial class LaundryView : Page
     {
-        private string _username;
-        public string Username
-        {
-            get { return _username; }
-            set { _username = value; CheckCanSave(); }
-        }
-
-        private string _password;
-        public string Password
-        {
-            get { return _password; }
-            set { _password = value; CheckCanSave(); }
-        }
-
-        private void CheckCanSave () {
-            if (Username == null || Password == null)
-            {
-                MyContentDialog.IsPrimaryButtonEnabled = false;
-            }
-            else
-            {
-                MyContentDialog.IsPrimaryButtonEnabled = true;
-            }
-        }
-
+        
         public LaundryView()
         {
             this.InitializeComponent();
@@ -61,30 +37,7 @@ namespace Teknobyen.Views
 
         private void ViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if(e.PropertyName == "Credentials")
-            {
-                if (ViewModel.Credentials == null)
-                {
-                    ShowUsernameAndPassworDialog();
-                }
-            }
-        }
 
-        private async void ShowUsernameAndPassworDialog()
-        {
-            var result = await MyContentDialog.ShowAsync();
-            if (result == ContentDialogResult.Primary)
-            {
-                var newCredentials = new PasswordCredential(App.APPID, Username, Password);
-                ViewModel.Credentials = newCredentials;
-                ViewModel.GetLaundryMachineStatusList();
-            }
-        }
-        
-        //Meget stygg måte
-        private void CheckCanSave(object sender, KeyRoutedEventArgs e)
-        {
-            CheckCanSave();
         }
     }
 }

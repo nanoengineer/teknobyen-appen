@@ -116,6 +116,7 @@
     </Compile>
     <Compile Include="Converters\AssignmentToBackgroundColorConverter.cs" />
     <Compile Include="Converters\DateToStringConverter.cs" />
+    <Compile Include="Messages\EventTest.cs" />
     <Compile Include="Models\LaundryMachineStatusModel.cs" />
     <Compile Include="Models\ProjectorReservationModel.cs" />
     <Compile Include="Models\RoomModel.cs" />
@@ -192,6 +193,9 @@
     <Content Include="Assets\Square44x44Logo.scale-200.png" />
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Assets\StoreLogo.scale-100.png" />
+    <Content Include="Assets\StoreLogo.scale-125.png" />
+    <Content Include="Assets\StoreLogo.scale-150.png" />
+    <Content Include="Assets\StoreLogo.scale-200.png" />
     <Content Include="Assets\StoreLogo.scale-400.png" />
     <Content Include="Assets\Swedish Krona-96.png" />
     <Content Include="Assets\Video Projector-96.png" />

@@ -25,6 +25,18 @@ namespace Teknobyen.ViewModels
             _credentialsService = new CredentialsService();
         }
 
+        public override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
+        {
+            //App.EventAggregator.GetEvent<Messages.EventTest>().Subscribe(WriteDebug);
+
+            return Task.CompletedTask;
+        }
+
+        private void WriteDebug(string obj)
+        {
+            System.Diagnostics.Debug.WriteLine($"Event recieved at: {DateTime.Now.TimeOfDay}");
+        }
+
         public void GotoProjectorReservation()
         {
             this.NavigationService.Navigate(typeof(ProjectorReservationsOverviewPage));

@@ -49,17 +49,22 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <t10controls:PageHeader Text="Vaskeri status" HorizontalContentAlignment="Center">
-            <t10controls:PageHeader.SecondaryCommands>
-            </t10controls:PageHeader.SecondaryCommands>
         </t10controls:PageHeader>
 
+        <TextBlock Margin="20" Grid.Row="1" HorizontalAlignment="Center">
+            <Run Text="Balanse: "/>
+            <Run Text="{x:Bind ViewModel.AccountBalance, Mode=OneWay}" />
+            <Run Text=" kr" />
+        </TextBlock>
+        
         <!-- Gridview containing machine status -->
         <GridView ItemsSource="{x:Bind ViewModel.StatusCollection, Mode=OneWay}" 
-                  Grid.Row="1" 
+                  Grid.Row="2" 
                   HorizontalAlignment="Center" VerticalAlignment="Center" SelectionMode="None">
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="models:LaundryMachineStatusModel">
@@ -78,28 +83,6 @@
                 </Style>
             </GridView.ItemContainerStyle>
         </GridView>
-
-        <!--Set vivibility to false for designtime-->
-        <ContentDialog x:Name="MyContentDialog"
-                        VerticalAlignment="Stretch"
-                        Title="Innlogging"
-                       Visibility="Collapsed"
-                        PrimaryButtonText="Lagre"
-                        IsPrimaryButtonEnabled="False"
-                        SecondaryButtonText="Avbryt"
-                        MaxWidth="{Binding ActualWidth, ElementName=pageRoot}">
-            <StackPanel>
-                <TextBlock TextWrapping="Wrap" TextAlignment="Center">
-                    For å vise oversikt over ledige maskiner må du legge inn brukernavn og passord for vaskeriet. Du trenger kun å gjøre dette en gang.
-                </TextBlock>
-                <TextBlock Text="Brukernavn:" />
-                <TextBox Text="{x:Bind Username, Mode=TwoWay}" KeyUp="CheckCanSave"/>
-                <TextBlock Text="Passord:"/>
-                <TextBox Text="{x:Bind Password, Mode=TwoWay}" KeyUp="CheckCanSave"/>
-            </StackPanel>
-        </ContentDialog>
-
-        <!--<Button Content="Vis dialog" Click="Button_Click" HorizontalAlignment="Center" VerticalAlignment="Center"/>-->
     </Grid>
 
     

@@ -46,10 +46,18 @@ namespace Teknobyen.ViewModels
             set { Set(ref _statusCollection, value); }
         }
 
+        private double _accountBalance;
+        public double AccountBalance
+        {
+            get { return _accountBalance; }
+            set { Set(ref _accountBalance, value); }
+        }
+
+
         public override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             GetLaundryMachineStatusList();
-            GetLaundryAccountBalance(); //Fikk nettvekrsfeil i svaret...
+            GetLaundryAccountBalance(); 
             return base.OnNavigatedToAsync(parameter, mode, state);
         }
 
@@ -85,6 +93,7 @@ namespace Teknobyen.ViewModels
             try
             {
                 var b = await _laundryService.GetAccountBalance(loginCredentials.UserName, loginCredentials.Password);
+                AccountBalance = b;
             }
             catch (Exception)
             {
@@ -92,8 +101,5 @@ namespace Teknobyen.ViewModels
             }
             
         }
-
-        
-        
     }
 }

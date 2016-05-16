@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Teknobyen.Services.NotificationService;
 using Teknobyen.Services.SettingsService;
 using Windows.ApplicationModel.Activation;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
 
 namespace Teknobyen
@@ -19,12 +20,21 @@ namespace Teknobyen
         public static string DATEFORMAT = "dd.MM.yyyy";
         public static string TIMEFORMAT = "HH.mm";
 
+        public static Prism.Events.EventAggregator EventAggregator;
+
         public App() {
             InitializeComponent();
+            EventAggregator = new Prism.Events.EventAggregator();
         }
 
         public override Task OnInitializeAsync(IActivatedEventArgs args)
         {
+            
+            //var evt = EventAggregator.GetEvent<Messages.EventTest>();
+            //var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(2) };
+            //timer.Tick += (s, e) => evt.Publish("Hei");
+            //timer.Start();
+
             return Task.CompletedTask;
         }
 

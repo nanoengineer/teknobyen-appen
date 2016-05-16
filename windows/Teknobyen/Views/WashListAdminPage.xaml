@@ -20,7 +20,7 @@
         <t10converters:StringFormatConverter x:Key="StrFormatConverter" />
     </Page.Resources>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="5">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -28,7 +28,7 @@
 
         <controls:PageHeader Text="Vaskeliste administrasjon" HorizontalContentAlignment="Center" />
 
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Padding="5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />

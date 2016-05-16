@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="10587SindreBrun.Teknobyen" Publisher="CN=1C8A87EB-E851-4884-8D95-C4AD8C392680" Version="1.1.1.0" />
+  <Identity Name="10587SindreBrun.Teknobyen" Publisher="CN=1C8A87EB-E851-4884-8D95-C4AD8C392680" Version="1.1.9.0" />
   <mp:PhoneIdentity PhoneProductId="5442ab86-c5ee-444f-875f-8da85b07bfce" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>Teknobyen</DisplayName>
@@ -15,7 +15,7 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Teknobyen">
-      <uap:VisualElements DisplayName="Teknobyen" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="En app for alle beboere på Teknobyen i Trondheim. Du kan reservere prosjektoren, sjekke om det er ledige vaskemaskiner, og få varsel om når du har vaskedag. NB: Appen krever innlogging med brukernavn og passord fra vaskeriet." BackgroundColor="transparent">
+      <uap:VisualElements DisplayName="Teknobyen" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="En app for alle beboere på Teknobyen i Trondheim. Du kan reservere prosjektoren, sjekke om det er ledige vaskemaskiner, og få varsel om når du har vaskedag. NB: Appen krever innlogging med brukernavn og passord fra vaskeriet." BackgroundColor="white">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" ShortName="TB" Square310x310Logo="Assets\Square310x310Logo.png">
           <uap:ShowNameOnTiles>
             <uap:ShowOn Tile="square150x150Logo" />
