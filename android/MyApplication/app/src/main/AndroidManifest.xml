@@ -3,11 +3,7 @@
     package="tbcoders.teknobyen">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
-    <!-- To auto-complete the email text field in the login form with the user's emails -->
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    <uses-permission android:name="android.permission.READ_PROFILE" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.VIBRATE"/>
 
     <supports-screens
         android:largeScreens="true"
@@ -34,7 +30,7 @@
         <activity android:name=".LoginActivityWash" />
         <activity android:name=".MachineRefill" />
         <activity android:name=".ProjectorActivity" />
-        <activity android:name=".ProjectorBookActivity"></activity>
+        <activity android:name=".ProjectorBookActivity"/>
     </application>
 
 </manifest>

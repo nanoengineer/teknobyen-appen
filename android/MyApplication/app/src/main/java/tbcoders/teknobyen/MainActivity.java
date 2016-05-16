@@ -1,8 +1,10 @@
 package tbcoders.teknobyen;
 
+import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -23,12 +25,18 @@ public class MainActivity extends AppCompatActivity {
         OnClickFyllaButtonListener();
         OnClickWashListButtonListener();
 
+        final Vibrator x = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
+
         final MediaPlayer stemmerDetSound = MediaPlayer.create(this, R.raw.stemmerlyd);
         ImageButton playStemmerDetSound = (ImageButton) this.findViewById(R.id.btn_stemmer_det);
         playStemmerDetSound.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 stemmerDetSound.start();
+                long[] pattern = {600, 600, 50, 200};
+
+                x.vibrate(pattern, -1);
+
             }
         });
     }
