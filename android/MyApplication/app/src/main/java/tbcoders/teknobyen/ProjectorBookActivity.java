@@ -216,7 +216,7 @@ public class ProjectorBookActivity extends AppCompatActivity {
         newBooking.push().setValue(newBookingMap);
 
         /*** FORMAT
-         userId: AAAA BAAA AAAG AA
+         userID: AAAA BAAA AAAG AA
          comment: Game of Thrones
          name : Sindre
          roomnumber : 503

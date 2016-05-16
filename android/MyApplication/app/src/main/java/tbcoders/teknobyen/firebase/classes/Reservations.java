@@ -11,6 +11,7 @@ import java.util.TimeZone;
  */
 public class Reservations implements Comparable<Reservations> {
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy kk.mm");
+    private SimpleDateFormat timeFormat = new SimpleDateFormat("kk.mm");
     private Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Europe/Oslo"));
 
     private String name;
@@ -76,12 +77,12 @@ public class Reservations implements Comparable<Reservations> {
         return startCal;
     }
     public String getEndTime(){
-
         Calendar endCal = getStartCal();
         endCal.add(Calendar.MINUTE, (int) (60*Double.parseDouble(duration)));
         SimpleDateFormat hourFormat = new SimpleDateFormat("HH.mm");
         return hourFormat.format(endCal.getTime());
     }
+
     public Calendar getEndCal(){
         Calendar endCal = getStartCal();
         endCal.add(Calendar.HOUR, Integer.parseInt(duration.substring(0,1)));
@@ -94,7 +95,8 @@ public class Reservations implements Comparable<Reservations> {
     @Override
     public int compareTo(Reservations another) {
         try {
-            return dateFormat.parse(date + " " + startTime).compareTo(dateFormat.parse(another.getDate() + " " + another.getStartTime()));
+            int cmpDate =  dateFormat.parse(date + " " + startTime).compareTo(dateFormat.parse(another.getDate() + " " + another.getStartTime()));
+            return cmpDate != 0 ? cmpDate : timeFormat.parse(getEndTime()).compareTo(timeFormat.parse(another.getEndTime()));
         } catch (ParseException e) {
             e.printStackTrace();
         }
