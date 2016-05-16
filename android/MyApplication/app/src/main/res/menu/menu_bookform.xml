@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:id="@+id/reserveBTN"
         android:title="reserve"
-        android:icon="@mipmap/check_button"
+        android:icon="@drawable/ic_action_checkbutton"
         app:showAsAction="always">
 
     </item>
