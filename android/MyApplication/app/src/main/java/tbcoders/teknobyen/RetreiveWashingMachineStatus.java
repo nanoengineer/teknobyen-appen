@@ -23,7 +23,7 @@ class RetreiveWashingMachineStatus extends AsyncTask<String, Void, String> {
             e.printStackTrace();
         }
 
-        String userPassword = params[0] + ":" + params[1];
+        String userPassword = Base64EncryptDecrypt.decrypt(params[0]) + ":" + Base64EncryptDecrypt.decrypt(params[1]);
         String encoding = Base64.encodeToString(userPassword.getBytes(), Base64.DEFAULT);
 
         org.jsoup.nodes.Document document = null;

@@ -28,7 +28,7 @@ public class MachineStatusActivity extends AppCompatActivity {
             @Override
             public void onRefresh() {
                 System.out.println("Refreshing");
-                if(refreshData()){
+                if (refreshData()) {
                     swipeLayout.setRefreshing(false);
                 }
             }
@@ -52,12 +52,10 @@ public class MachineStatusActivity extends AppCompatActivity {
 
     private void urlScraping() throws ExecutionException, InterruptedException {
 
-
-        SharedPreferences sharedPref = getSharedPreferences("mypref", MODE_PRIVATE);
-        String name = Base64EncryptDecrypt.decrypt(sharedPref.getString("username", ""));
-        String password = Base64EncryptDecrypt.decrypt(sharedPref.getString("password", ""));
-
         RetreiveWashingMachineStatus retrieveStatus = new RetreiveWashingMachineStatus();
+        SharedPreferences sharedPref = getSharedPreferences("mypref", MODE_PRIVATE);
+        String name = sharedPref.getString("username", "");
+        String password = sharedPref.getString("password", "");
         String machineStatusString = retrieveStatus.execute(name, password).get();
 
         int[] linearLayoutIds = {R.id.machine0, R.id.machine1, R.id.machine2, R.id.machine3, R.id.machine4, R.id.machine5};
@@ -70,22 +68,22 @@ public class MachineStatusActivity extends AppCompatActivity {
                 TextView text = (TextView) findViewById(textViewIds[i]);
                 LinearLayout layout = (LinearLayout) findViewById((linearLayoutIds[i]));
                 text.setText(statusArray[i]);
-                    if (statusArray[i].equals("Ledig")) {
-                        layout.setBackgroundColor(Color.parseColor("#AAFFAA"));
-                    } else {
-                        layout.setBackgroundColor(Color.parseColor("#ffa5a5"));
-                    }
+                if (statusArray[i].equals("Ledig")) {
+                    layout.setBackgroundResource(R.color.washingmachineFree);
+                } else {
+                    layout.setBackgroundResource(R.color.washingmachineBusy);
+                }
 
 
             }
 
         } else {
             for (int i : linearLayoutIds) {
-                LinearLayout layout = (LinearLayout)findViewById(i);
-                layout.setBackgroundColor(Color.parseColor("#f5c8f9"));
+                LinearLayout layout = (LinearLayout) findViewById(i);
+                layout.setBackgroundResource(R.color.washingmachineUnavailable);
             }
-            for (int i : textViewIds){
-                TextView text = (TextView)findViewById(i);
+            for (int i : textViewIds) {
+                TextView text = (TextView) findViewById(i);
                 text.setText(R.string.ingenstatus);
             }
             Toast.makeText(MachineStatusActivity.this, "Kunne ikke koble til maskiner", Toast.LENGTH_LONG).show();
