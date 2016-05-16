@@ -115,7 +115,7 @@ class ReservationViewController: UITableViewController, ReservationDelegate {
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat    {
-        return 100.0;//Choose your custom row height
+        return 130.0;//Choose your custom row height
     }
 
   

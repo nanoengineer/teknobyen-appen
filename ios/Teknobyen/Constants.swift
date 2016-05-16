@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 import UIColor_Hex_Swift
 
+
+
 var AppConstants = Constants()
 
 struct Constants {
@@ -33,6 +35,23 @@ struct Constants {
     let washingMachineStartId: UInt =  2
     
     let projectorBookingToggleText = durationDateText()
+
+    let normalFont = UIFont(name: "Avenir Next", size: 17)
+    let boldFont = UIFont(name: "AvenirNext-DemiBold", size: 17)
+
+    var normalTextAttributes: [String : AnyObject] {
+        get {
+           return [NSForegroundColorAttributeName: UIColor.whiteColor(),
+             NSFontAttributeName: self.normalFont!]
+        }
+    }
+
+    var boldTextAttributes: [String : AnyObject] {
+        get {
+            return [NSForegroundColorAttributeName: UIColor.whiteColor(),
+                    NSFontAttributeName: self.boldFont!]
+        }
+    }
     
     var varDefs = VarDefinitions()
 }

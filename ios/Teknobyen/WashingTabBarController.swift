@@ -11,14 +11,14 @@ import SafariServices
 
 class WashingTabBarController: UITabBarController, UITabBarControllerDelegate, SFSafariViewControllerDelegate {
 
-    let washingStatusVC = WashingStatusViewController()
-    let washingRefillVC = WashingRefillViewController()
+//    var washingStatusVC = WashingStatusViewController()
+//    var washingRefillVC = WashingRefillViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.delegate = self
         AppConstants.varDefs.tabBarHeight = self.tabBar.frame.size.height
-        self.viewControllers = [washingStatusVC, washingRefillVC]
+//        self.viewControllers = [washingStatusVC, washingRefillVC]
         self.navigationItem.title = "Vaskemaskiner"
         
         self.tabBar.barTintColor = AppConstants.themeBlueColor
@@ -45,7 +45,7 @@ class WashingTabBarController: UITabBarController, UITabBarControllerDelegate, S
     }
     
     private func refillTabBarItemSetUp() {
-        let refillTab = UITabBarItem(title: "Påfyll", image: UIImage(named: "washingTabBarRefill"), tag: 1)
+        let refillTab = UITabBarItem(title: "Balanse", image: UIImage(named: "washingTabBarRefill"), tag: 1)
         self.viewControllers![1].tabBarItem = refillTab
         
         refillTab.setTitleTextAttributes([NSForegroundColorAttributeName : AppConstants.tabNormalColor], forState: UIControlState.Normal)
@@ -55,10 +55,9 @@ class WashingTabBarController: UITabBarController, UITabBarControllerDelegate, S
     func tabBarController(tabBarController: UITabBarController, didSelectViewController viewController: UIViewController) {
         if viewController == self.viewControllers![0] {
             print("Status")
-            washingStatusVC.loadMachineStatusHtml()
         }
         else {
-            print("Påfyll")
+            print("Balanse")
   
         }
     }

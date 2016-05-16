@@ -11,7 +11,11 @@ import Fuzi
 
 class WashingStatusViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
-    var washingMachineCollection: UICollectionView!
+    @IBOutlet weak var washingMachineCollection: UICollectionView!
+    
+    @IBOutlet weak var collectionFlowLayout: UICollectionViewFlowLayout!
+    
+    
     var washingMachinesData = [WashingMachine]()
     
     var refreshControl: UIRefreshControl!
@@ -19,18 +23,15 @@ class WashingStatusViewController: UIViewController, UICollectionViewDelegate, U
     override func viewDidLoad(){
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.whiteColor()
+        self.automaticallyAdjustsScrollViewInsets = false
         
         for index in 0...AppConstants.numOfWashingMachines-1 {
             washingMachinesData.append(WashingMachine(_id: index+2)) //machine's id starts at 2
         }
         
-        let layout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: AppConstants.varDefs.cellMargin, left: AppConstants.varDefs.cellMargin, bottom: AppConstants.varDefs.cellMargin, right:AppConstants.varDefs.cellMargin)
-        layout.itemSize = AppConstants.varDefs.cellSize
+        self.collectionFlowLayout.sectionInset = UIEdgeInsets(top: AppConstants.varDefs.cellMargin, left: AppConstants.varDefs.cellMargin, bottom: AppConstants.varDefs.cellMargin, right:AppConstants.varDefs.cellMargin)
         
-    
-        
-        washingMachineCollection = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
+        self.collectionFlowLayout.itemSize = AppConstants.varDefs.cellSize
 
         washingMachineCollection.dataSource = self
         washingMachineCollection.delegate = self
@@ -95,7 +96,7 @@ class WashingStatusViewController: UIViewController, UICollectionViewDelegate, U
 
     }
     
-    func loadMachineStatusHtml() {
+    private func loadMachineStatusHtml() {
         
         let username = "pkminne"
         let pwd = "b5e277"
@@ -112,6 +113,7 @@ class WashingStatusViewController: UIViewController, UICollectionViewDelegate, U
         let task = session.dataTaskWithURL(url!) {
             (let data, let response, let error) in
                 if data != nil {
+                    
                     let htmlString = NSString(data: data!, encoding: NSUTF8StringEncoding)
                     do {
                         // if encoding is omitted, it defaults to NSUTF8StringEncoding
@@ -147,7 +149,7 @@ class WashingStatusViewController: UIViewController, UICollectionViewDelegate, U
                     }
                 }
                 else {
-                    print("Error: \(error)): No internet connection")
+                    print("Error: \(error)): No internet connection!")
                     print("Reponse: \(response)")
                     self.washingMachineCollection.reloadData()
                 }

@@ -37,6 +37,7 @@
 		EA16AF9F1CDAAC2700E73625 /* Dashboard-50.png in Resources */ = {isa = PBXBuildFile; fileRef = EA16AF9E1CDAAC2700E73625 /* Dashboard-50.png */; };
 		EA16AFA11CDAB2CE00E73625 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA16AFA01CDAB2CE00E73625 /* Constants.swift */; };
 		EA16AFA31CDACB4200E73625 /* WashingRefillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA16AFA21CDACB4200E73625 /* WashingRefillViewController.swift */; };
+		EA683D841CE9E42B007EDC77 /* Question Mark.png in Resources */ = {isa = PBXBuildFile; fileRef = EA683D831CE9E42B007EDC77 /* Question Mark.png */; };
 		EA9155091CDEC8E2007AE37C /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9155081CDEC8E2007AE37C /* LoginVC.swift */; };
 		EAD13F151CDE3A50007D14E6 /* AddReservattionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD13F141CDE3A50007D14E6 /* AddReservattionViewController.swift */; };
 		EAD13F171CDE3DFE007D14E6 /* WashingMachineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD13F161CDE3DFE007D14E6 /* WashingMachineCell.swift */; };
@@ -77,6 +78,7 @@
 		EA16AF9E1CDAAC2700E73625 /* Dashboard-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Dashboard-50.png"; sourceTree = "<group>"; };
 		EA16AFA01CDAB2CE00E73625 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		EA16AFA21CDACB4200E73625 /* WashingRefillViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WashingRefillViewController.swift; sourceTree = "<group>"; };
+		EA683D831CE9E42B007EDC77 /* Question Mark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Question Mark.png"; sourceTree = "<group>"; };
 		EA9155081CDEC8E2007AE37C /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		EAD13F141CDE3A50007D14E6 /* AddReservattionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddReservattionViewController.swift; sourceTree = "<group>"; };
 		EAD13F161CDE3DFE007D14E6 /* WashingMachineCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WashingMachineCell.swift; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 		24C7C7C31CD4E45400859D37 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				EA683D831CE9E42B007EDC77 /* Question Mark.png */,
 				EA0600F71CDDE2C700057196 /* Washing Machine-edge.png */,
 				EA0600F31CDD3CA200057196 /* Washing Machine-50.png */,
 				EA16AF9E1CDAAC2700E73625 /* Dashboard-50.png */,
@@ -279,6 +282,7 @@
 				24C7C7C81CD4E45400859D37 /* Projector.png in Resources */,
 				EA16AF9F1CDAAC2700E73625 /* Dashboard-50.png in Resources */,
 				EA04F71C1CD5870500E7C1C9 /* Washing Machine-96.png in Resources */,
+				EA683D841CE9E42B007EDC77 /* Question Mark.png in Resources */,
 				24C7C7B11CD4DD0300859D37 /* LaunchScreen.storyboard in Resources */,
 				EA04F7191CD5870500E7C1C9 /* teknobyen.jpg in Resources */,
 				24C7C7CA1CD4E45400859D37 /* Washing.png in Resources */,

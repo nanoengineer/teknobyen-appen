@@ -8,12 +8,19 @@
 
 import UIKit
 import SafariServices
+import Fuzi
 
 class WashingRefillViewController: UIViewController, SFSafariViewControllerDelegate {
-
+    
+    
+    @IBOutlet weak var balanceLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        balanceLabel.layer.cornerRadius = 7
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -37,6 +44,9 @@ class WashingRefillViewController: UIViewController, SFSafariViewControllerDeleg
        
     }
     
+    private func updateBalanceLabel(string: String) {
+        self.balanceLabel.text = string
+    }
     
     private func loadWebPage() {
         let username = "pkminne"
@@ -50,16 +60,46 @@ class WashingRefillViewController: UIViewController, SFSafariViewControllerDeleg
         config.HTTPAdditionalHeaders = ["Authorization" : authString]
         let session = NSURLSession(configuration: config)
         
-        let url = NSURL(string: "http://129.241.152.11/AccountPayment?lg=2&ly=9131")
+        let url = NSURL(string: "http://129.241.152.11/SaldoForm?lg=2&ly=9131")
         let task = session.dataTaskWithURL(url!) {
             (let data, let response, let error) in
-            if let httpResponse = response as? NSHTTPURLResponse {
-                print(httpResponse.statusCode.description)
-                print(data)
-                print(error)
-                self.openWithSafariVC(url!)
+            if data != nil {
+                let htmlString = NSString(data: data!, encoding: NSASCIIStringEncoding) //WTF ARE YOU SERIOUS
+                
+                do {
+                    // if encoding is omitted, it defaults to NSUTF8StringEncoding
+                    let doc = try HTMLDocument(string: String(htmlString), encoding: NSUTF8StringEncoding)
+                    
+                    var textFlag = false
+                    var balanceString = ""
+                    
+                    for element in doc.xpath("//div[contains(@class, 'reservation')]/table//td[contains(@class, 'p')]/text()") {
+                        
+                        if textFlag == true {
+                            balanceString = balanceString + "       " + String(element)
+                            textFlag = false
+                        }
+                        
+                        if String(element) == "BALANSE" {
+                            textFlag = true
+                            balanceString = String(element) + ":"
+                        }
+                        
+                        dispatch_async(dispatch_get_main_queue(),{
+                            self.updateBalanceLabel(balanceString)
+                        })
+                        
+                    }
+                    
+                }
+                catch let error {
+                    print(error)
+                }
             }
-            
+            else {
+                print("Error: \(error)): No internet connection!")
+                print("Reponse: \(response)")
+            }
         }
         task.resume()
     }
