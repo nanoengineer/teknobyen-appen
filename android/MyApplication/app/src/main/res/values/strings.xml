@@ -25,4 +25,5 @@
     <string name="room">Room</string>
     <string name="ingenstatus">Utilgjengelig</string>
     <string name="neste_vaskedag">Neste Vaskedag</string>
+    <string name="ingvenvaskedag">Ingen vaskedag på listen</string>
 </resources>

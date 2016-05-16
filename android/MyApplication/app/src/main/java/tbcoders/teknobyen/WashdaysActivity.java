@@ -83,17 +83,33 @@ public class WashdaysActivity extends AppCompatActivity {
     }
 
     private void getInfoFromList() {
+        Boolean firstScrollLocation = false;
+        Integer nextWashday = null;
+
         for (int i = 0; i < bookingView.getCount(); i++) {
             if (washdaysList.get(i).getDate().equals(today)) {
-                bookingView.setSelection(i);
+                if(!firstScrollLocation){
+                    firstScrollLocation = true;
+                    bookingView.setSelection(i);
+                }
             }
             if (washdaysList.get(i).getRoomNumber().toString().equals(roomNr) && washdaysList.get(i).getDate().compareTo(today) >= 0){
-                TextView textView1 = (TextView) findViewById(R.id.washlistAssignmentText);
-                TextView textView2 = (TextView) findViewById(R.id.washlistDateText);
-                textView1.setText("Oppgave: " + washdaysList.get(i).getAssignment().toString());
-                textView2.setText(washdaysList.get(i).getPrettyDate());
-                break;
+                if(nextWashday == null){
+                    nextWashday = i;
+                }
             }
+        }
+        TextView textView1 = (TextView) findViewById(R.id.washlistText1);
+        TextView textViewAssignment = (TextView) findViewById(R.id.washlistAssignmentText);
+        TextView textViewDate = (TextView) findViewById(R.id.washlistDateText);
+        assert textView1 != null && textViewAssignment != null && textViewDate != null;
+
+        if(nextWashday != null){
+            textView1.setText(String.format("Neste vaskedag for %s", roomNr));
+            textViewAssignment.setText(String.format("Oppgave: %s", washdaysList.get(nextWashday).getAssignment().toString()));
+            textViewDate.setText(washdaysList.get(nextWashday).getPrettyDate());
+        }else{
+            textView1.setText(R.string.ingvenvaskedag);
         }
     }
 
