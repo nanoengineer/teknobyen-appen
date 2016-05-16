@@ -23,9 +23,14 @@ import tbcoders.teknobyen.adapters.ReservationsAdapter;
 import tbcoders.teknobyen.firebase.classes.Reservations;
 
 public class ProjectorActivity extends AppCompatActivity {
-    Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Europe/Oslo"));
-    ArrayList<Reservations> reservationList;
+    private Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Europe/Oslo"));
+    private ArrayList<Reservations> reservationList;
 
+    private SimpleDateFormat bookDateFormat = new SimpleDateFormat("dd.MM.yyyy");
+    private String today = bookDateFormat.format(cal.getTime());
+
+    private ListView bookingView;
+    private int scrollposition = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,26 +53,31 @@ public class ProjectorActivity extends AppCompatActivity {
     }
 
 
-    private void fillBookings(){
+    private void fillBookings() {
         final Firebase reservationRef = new Firebase("https://teknobyen.firebaseio.com/reservations");
 
         reservationRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
+                if (bookingView != null) {
+                    scrollposition = bookingView.getFirstVisiblePosition();
+                }
                 reservationList = new ArrayList<>();
 
-                for (DataSnapshot postSnapshot: snapshot.getChildren()) {
-                    try{
+                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                    try {
                         Reservations post = postSnapshot.getValue(Reservations.class);
                         reservationList.add(post);
 
-                    }catch (Error e){
+                    } catch (Error e) {
                         System.out.println("Error");
                     }
                 }
                 fillListView();
+                scrollToPosition();
                 System.out.println("Done");
             }
+
             @Override
             public void onCancelled(FirebaseError firebaseError) {
                 System.out.println("The read failed: " + firebaseError.getMessage());
@@ -75,21 +85,25 @@ public class ProjectorActivity extends AppCompatActivity {
         });
 
     }
-    private void fillListView(){
+
+    private void fillListView() {
         Collections.sort(reservationList);
         //Collections.reverse(reservationList);
-        SimpleDateFormat bookDateFormat = new SimpleDateFormat("dd.MM.yyyy");
-        String today = bookDateFormat.format(cal.getTime());
-
         ArrayAdapter adapter = new ReservationsAdapter(ProjectorActivity.this, R.layout.custom_projector_item, reservationList);
-        ListView bookingView = (ListView) findViewById(R.id.bookingView);
+        bookingView = (ListView) findViewById(R.id.bookingView);
         bookingView.setAdapter(adapter);
+    }
 
-        for (int i = 0; i < reservationList.size(); i++) {
-            if(reservationList.get(i).getDate().equals(today)){
-                bookingView.setSelection(i);
-                break;
+    private void scrollToPosition() {
+        if (scrollposition == -1) {
+            for (int i = 0; i < reservationList.size(); i++) {
+                if (reservationList.get(i).getDate().equals(today)) {
+                    bookingView.setSelection(i);
+                    break;
+                }
             }
+        } else {
+            bookingView.setSelection(scrollposition);
         }
     }
 
