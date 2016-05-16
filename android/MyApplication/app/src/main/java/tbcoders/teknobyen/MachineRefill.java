@@ -15,7 +15,7 @@ public class MachineRefill extends AppCompatActivity {
         WebView webView = (WebView)findViewById(R.id.webView);
         webView.setWebViewClient(new MyWebViewClient());
         SharedPreferences sharedPref = getSharedPreferences("mypref", MODE_PRIVATE);
-        String name = sharedPref.getString("username", "");
+        String name = Base64EncryptDecrypt.decrypt(sharedPref.getString("username", ""));
         String password = Base64EncryptDecrypt.decrypt(sharedPref.getString("password", ""));
         webView.setHttpAuthUsernamePassword("http://129.241.152.11/", "", name, password);
 

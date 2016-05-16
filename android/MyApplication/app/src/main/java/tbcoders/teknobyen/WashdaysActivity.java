@@ -39,7 +39,7 @@ public class WashdaysActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Firebase.setAndroidContext(this);
         setContentView(R.layout.activity_washlist);
-        SharedPreferences prefs = getSharedPreferences("mypref", 0);
+        SharedPreferences prefs = getSharedPreferences("mypref", MODE_PRIVATE);
         roomNr = prefs.getString("roomnumber", "");
         System.out.println(roomNr);
         bookingView = (ListView) findViewById(R.id.washlistListView);

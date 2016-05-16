@@ -54,7 +54,7 @@ public class MachineStatusActivity extends AppCompatActivity {
 
 
         SharedPreferences sharedPref = getSharedPreferences("mypref", MODE_PRIVATE);
-        String name = sharedPref.getString("username", "");
+        String name = Base64EncryptDecrypt.decrypt(sharedPref.getString("username", ""));
         String password = Base64EncryptDecrypt.decrypt(sharedPref.getString("password", ""));
 
         RetreiveWashingMachineStatus retrieveStatus = new RetreiveWashingMachineStatus();

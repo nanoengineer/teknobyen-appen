@@ -49,7 +49,7 @@ public class LoginActivityWash extends AppCompatActivity {
                     //For å lagre variabelar slik at dei skal vere tilgjengelige etter å ha lukka appen.
                     SharedPreferences sharedPref = getSharedPreferences("mypref", MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPref.edit();
-                    String userS = username.getText().toString();
+                    String userS = Base64EncryptDecrypt.encrypt(username.getText().toString());
                     //krypterar passord med Base64
                     String userP = Base64EncryptDecrypt.encrypt(password.getText().toString());
                     editor.remove("username");
