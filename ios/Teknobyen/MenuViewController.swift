@@ -13,11 +13,8 @@ class MenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initNavigationBar()
-        
-        UILabel.appearanceWhenContainedInInstancesOfClasses([UIButton.self]).font = AppConstants.normalFont! //Doesn't seem to be of any effect...
-        UILabel.appearance().font = AppConstants.normalFont
-        
     }
+    
     
     private func initNavigationBar() {
         self.navigationController?.navigationBar.barTintColor = AppConstants.themeBlueColor

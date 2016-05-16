@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Locksmith
+
 
 class LoginVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate {
 
@@ -31,36 +33,45 @@ class LoginVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.loginScrollView.bounces = true
-        self.loginScrollView.alwaysBounceVertical = true
-        self.loginScrollView.delegate = self
-        self.navigationItem.title = "Logg Inn"
+        self.uiSetUp()
+        self.keyboardSetUp()
+
+    }
+    
+    private func keyboardSetUp() {
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: #selector(LoginVC.keyboardWillShow(_:)),
+            name: UIKeyboardWillShowNotification,
+            object: nil
+        )
         
-        
-        
-        textFieldDelegatesSet()
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: #selector(LoginVC.keyboardWillHide(_:)),
+            name: UIKeyboardWillHideNotification,
+            object: nil
+        )
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(LoginVC.dismissKeyboard))
         view.addGestureRecognizer(tap)
+    }
+    
+    private func uiSetUp() {
+        self.loginScrollView.bounces = true
+        self.loginScrollView.alwaysBounceVertical = true
+        self.loginScrollView.delegate = self
         
-        self.loginButton.tintColor = AppConstants.themeBlueColor
+        self.navigationItem.title = "Logg inn"
+        
+        self.loginButton.backgroundColor = AppConstants.themeGreenColor
+        self.loginButton.setTitle(self.navigationItem.title, forState: UIControlState.Normal)
         self.loginButton.layer.cornerRadius = 5
+        self.loginButton.titleLabel?.font = UIFont(name: AppConstants.normalFontName, size: 22)
         
         self.loginVerificationIndicatorUpdate()
-
-        NSNotificationCenter.defaultCenter().addObserver(
-        self,
-                selector: #selector(LoginVC.keyboardWillShow(_:)),
-        name: UIKeyboardWillShowNotification,
-        object: nil
-        )
-
-        NSNotificationCenter.defaultCenter().addObserver(
-        self,
-                selector: #selector(LoginVC.keyboardWillHide(_:)),
-        name: UIKeyboardWillHideNotification,
-        object: nil
-        )
+        
+        textFieldDelegatesSet()
         
     }
 
@@ -68,15 +79,48 @@ class LoginVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate {
         switch self.verificationState {
         case .notVerified:
             self.loginVerifyImage.image = UIImage(named: "Cancel")
+            self.loginButton.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.5)
+            self.loginButton.enabled = false
         case .verified:
             self.loginVerifyImage.image = UIImage(named: "Ok")
+            self.loginButton.backgroundColor = AppConstants.themeGreenColor
+            self.loginButton.enabled = true
         case .unknown:
             self.loginVerifyImage.image = UIImage(named: "Question Mark")
+            self.loginButton.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.5)
+            self.loginButton.enabled = false
         }
     }
 
     @IBAction func loginButtonPressed(sender: UIButton) {
-    
+        
+        self.loginVerifcationRequest()
+        
+        if verificationState == .verified {
+            UserTBCredentials.name = nameTextField.text!
+            UserTBCredentials.roomNumber = roomNumTextField.text!
+            UserTBCredentials.username = usernameTextField.text!
+            UserTBCredentials.password = pwdTextField.text!
+            
+            do {
+                try UserTBCredentials.createInSecureStore()
+            }
+            catch {
+                print("Storage Error")
+            }
+        }
+        else {
+            print("Invalid Info")
+        }
+    }
+    @IBAction func deleteCredentialsPressed(sender: UIButton) {
+        
+        do {
+            try UserTBCredentials.deleteFromSecureStore()
+        }
+        catch {
+            print("Deletion Error")
+        }
     }
 
     private func loginVerifcationRequest() {
@@ -117,7 +161,7 @@ class LoginVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate {
 
     func keyboardWillShow(notification: NSNotification) {
         if let activeField = self.activeTextField, keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
-            let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardSize.height + 40, right: 0.0)
+            let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardSize.height, right: 0.0)
             self.loginScrollView.contentInset = contentInsets
             self.loginScrollView.scrollIndicatorInsets = contentInsets
             var aRect = self.view.frame
@@ -140,6 +184,16 @@ class LoginVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate {
     
     func textFieldDidEndEditing(textField: UITextField) {
         self.activeTextField =  nil
+        if textField == usernameTextField || textField == pwdTextField {
+            if textField == usernameTextField {
+                if pwdTextField.text != "" {
+                    self.loginVerifcationRequest()
+                }
+            }
+            else {
+                self.loginVerifcationRequest()
+            }
+        }
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -151,9 +205,22 @@ class LoginVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate {
             pwdTextField.becomeFirstResponder()
         } else if textField == pwdTextField {
             pwdTextField.resignFirstResponder()
-            self.loginVerifcationRequest()            
         }
         return true
+    }
+    
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        if textField == roomNumTextField {
+            let currentCharacterCount = textField.text?.characters.count ?? 0
+            if (range.length + range.location > currentCharacterCount){
+                return false
+            }
+            let newLength = currentCharacterCount + string.characters.count - range.length
+            return newLength <= 3
+        }
+        else {
+            return true
+        }
     }
     
     private func textFieldDelegatesSet() {

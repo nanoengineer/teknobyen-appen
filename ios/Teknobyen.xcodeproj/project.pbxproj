@@ -38,6 +38,7 @@
 		EA16AFA11CDAB2CE00E73625 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA16AFA01CDAB2CE00E73625 /* Constants.swift */; };
 		EA16AFA31CDACB4200E73625 /* WashingRefillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA16AFA21CDACB4200E73625 /* WashingRefillViewController.swift */; };
 		EA683D841CE9E42B007EDC77 /* Question Mark.png in Resources */ = {isa = PBXBuildFile; fileRef = EA683D831CE9E42B007EDC77 /* Question Mark.png */; };
+		EA683D861CEA00E4007EDC77 /* TBCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA683D851CEA00E4007EDC77 /* TBCredentials.swift */; };
 		EA9155091CDEC8E2007AE37C /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9155081CDEC8E2007AE37C /* LoginVC.swift */; };
 		EAD13F151CDE3A50007D14E6 /* AddReservattionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD13F141CDE3A50007D14E6 /* AddReservattionViewController.swift */; };
 		EAD13F171CDE3DFE007D14E6 /* WashingMachineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD13F161CDE3DFE007D14E6 /* WashingMachineCell.swift */; };
@@ -79,6 +80,7 @@
 		EA16AFA01CDAB2CE00E73625 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		EA16AFA21CDACB4200E73625 /* WashingRefillViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WashingRefillViewController.swift; sourceTree = "<group>"; };
 		EA683D831CE9E42B007EDC77 /* Question Mark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Question Mark.png"; sourceTree = "<group>"; };
+		EA683D851CEA00E4007EDC77 /* TBCredentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBCredentials.swift; sourceTree = "<group>"; };
 		EA9155081CDEC8E2007AE37C /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		EAD13F141CDE3A50007D14E6 /* AddReservattionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddReservattionViewController.swift; sourceTree = "<group>"; };
 		EAD13F161CDE3DFE007D14E6 /* WashingMachineCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WashingMachineCell.swift; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 				EA16AFA01CDAB2CE00E73625 /* Constants.swift */,
 				241FDD611CD692CE00961AFE /* MenuViewController.swift */,
 				EA0600F91CDE0B5E00057196 /* TBNavigationController.swift */,
+				EA683D851CEA00E4007EDC77 /* TBCredentials.swift */,
 			);
 			name = General;
 			sourceTree = "<group>";
@@ -308,7 +311,7 @@
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "\uD83D\uDCE6 Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -323,7 +326,7 @@
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "\uD83D\uDCE6 Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -338,7 +341,7 @@
 			);
 			inputPaths = (
 			);
-			name = "📦 Embed Pods Frameworks";
+			name = "\uD83D\uDCE6 Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -354,6 +357,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EAD13F151CDE3A50007D14E6 /* AddReservattionViewController.swift in Sources */,
+				EA683D861CEA00E4007EDC77 /* TBCredentials.swift in Sources */,
 				24C7C7A71CD4DD0300859D37 /* AppDelegate.swift in Sources */,
 				EA16AF941CDA9E0900E73625 /* WashingTabBarController.swift in Sources */,
 				EA16AF9B1CDAA60B00E73625 /* WashingStatusViewController.swift in Sources */,

@@ -36,6 +36,7 @@ struct Constants {
     
     let projectorBookingToggleText = durationDateText()
 
+    let normalFontName = "Avenir Next"
     let normalFont = UIFont(name: "Avenir Next", size: 17)
     let boldFont = UIFont(name: "AvenirNext-DemiBold", size: 17)
 

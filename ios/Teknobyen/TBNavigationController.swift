@@ -14,6 +14,24 @@ class TBNavigationController: UINavigationController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        initDefaultAppearances()
+        initCredentials()
+    }
+    
+    private func initDefaultAppearances() {
+        UILabel.appearanceWhenContainedInInstancesOfClasses([UIButton.self]).font = AppConstants.normalFont! //Doesn't seem to be of any effect...
+        UILabel.appearance().font = AppConstants.normalFont
+        UITextField.appearance().font = AppConstants.normalFont
+    }
+    
+    private func initCredentials() {
+        if let result = UserTBCredentials.readFromSecureStore() {
+            UserTBCredentials.credentialsFill(result.data as! [String:String])
+            print(UserTBCredentials)
+        }
+        else {
+            print("No credentials retrived")
+        }
     }
 
     override func didReceiveMemoryWarning() {

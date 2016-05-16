@@ -58,6 +58,8 @@ class ReservationViewController: UITableViewController, ReservationDelegate {
         let ref = Constants.RootReference.childByAppendingPath("reservations")
         ref.observeSingleEventOfType(.Value, withBlock: { snapshot in
             for stuff in snapshot.children {
+                
+                
 
                 let userID = stuff.value["userID"] as! String
                 let comment = stuff.value["comment"] as! String

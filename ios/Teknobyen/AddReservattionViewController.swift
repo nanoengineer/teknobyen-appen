@@ -129,13 +129,11 @@ class AddReservattionViewController: UIViewController, UIPickerViewDelegate, UIP
         
         let secondInterval = durationInSeconds()
         dateTo = dateFrom.dateByAddingTimeInterval(secondInterval)
-        
-        let roomNumber = 418
 
-        let reservation = Reservation(userID: "SampleID",
+        let reservation = Reservation(userID: UserTBCredentials.username!,
                                       comment: comment,
-                                      name: "Sølve's Tiny Pecker",
-                                      roomNumber: "\(roomNumber)",
+                                      name: UserTBCredentials.name!,
+                                      roomNumber: UserTBCredentials.roomNumber!,
                                       date: day,
                                       startTime: startHour,
                                       duration: "\(durationInHours())")

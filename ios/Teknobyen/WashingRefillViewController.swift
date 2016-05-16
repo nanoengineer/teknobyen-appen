@@ -49,8 +49,8 @@ class WashingRefillViewController: UIViewController, SFSafariViewControllerDeleg
     }
     
     private func loadWebPage() {
-        let username = "pkminne"
-        let pwd = "b5e277"
+        let username = UserTBCredentials.username!
+        let pwd = UserTBCredentials.password!
         
         let config = NSURLSessionConfiguration.defaultSessionConfiguration()
         let userPasswordString = "\(username):\(pwd)"
