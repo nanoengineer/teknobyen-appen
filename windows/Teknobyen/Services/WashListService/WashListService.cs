@@ -5,18 +5,26 @@ using System.Text;
 using System.Threading.Tasks;
 using Teknobyen.Common;
 using Teknobyen.Models;
+using Teknobyen.Services.StorageService;
+using Teknobyen.Services.FirebaseService;
+using Teknobyen.Services.StorageService;
 using Windows.Storage;
 
 namespace Teknobyen.Services.WashListService
 {
     public class WashListService : IWashListService
     {
+        private IFirebaseService _firbaseService;
+
         public static WashListService Instance { get; }
         static WashListService()
         {
             Instance = Instance ?? new WashListService();
         }
-
+        private WashListService()
+        {
+            _firbaseService = FirebaseService.FirebaseService.Instance;
+        }
         
         public List<WashDayModel> GenerateWashList(DateTime startDate, DateTime endDate, RoomModel startAt, List<RoomModel> extraRooms = null, List<RoomModel> roomsToSkip = null)
         {
@@ -144,13 +152,13 @@ namespace Teknobyen.Services.WashListService
             return ParsedWashList;
         }
 
-        public IList<string> ValidateWashList(List<WashDayModel> listToValidate)
+        public List<string> ValidateWashList(List<WashDayModel> listToValidate)
         {
             //Must be sorted by date and then assignment
             listToValidate =  listToValidate.OrderBy(e => e.Date).ThenBy(e => e.Assignment).ToList();
 
 
-            IList<string> errorList = new List<string>();
+            List<string> errorList = new List<string>();
             //First ensure there are even entries in the list
             var entriesCount = listToValidate.Count;
             if (entriesCount % 2 != 0)
@@ -226,5 +234,38 @@ namespace Teknobyen.Services.WashListService
                         select m).OrderBy(e => e.Date).ThenBy(e => e.Assignment).ToList();
             return washList;
         }
+
+        public List<WashDayModel> GetWashList(bool syncAfterRetieve)
+        {
+            try
+            {
+                //if(syncAfterRetieve) SyncWashList();
+                using (var db = new WashlistContext())
+                {
+                    return db.Washdays.OrderBy(e => e.Date).ThenBy(e => e.Assignment).ToList();
+                }
+            }
+            catch (Exception)
+            {
+                throw new Exception();
+            }
+        }
+
+        public async void SyncWashList()
+        {
+            throw new NotImplementedException();
+            /*
+             * Get washlist from firebase service
+             * See if there are any changes
+             * 
+             * if changes
+             * commit and fire washlist updated
+             * 
+             * if no changes
+             * exit 
+             */
+        }
+
+      
     }
 }

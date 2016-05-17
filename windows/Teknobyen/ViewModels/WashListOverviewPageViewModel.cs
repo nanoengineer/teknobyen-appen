@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Teknobyen.Common;
 using Teknobyen.Models;
+using Teknobyen.Services.StorageService;
 using Teknobyen.Services.FirebaseService;
 using Teknobyen.Services.SettingsService;
 using Teknobyen.Services.WashListService;
@@ -76,7 +77,13 @@ namespace Teknobyen.ViewModels
         {
             try
             {
-                WashList = await _firebaseService.GetWashList();
+                //WashList = await _firebaseService.GetWashList();
+                using (var db = new WashlistContext())
+                {
+                    WashList = db.Washdays.OrderBy(e => e.Date).ThenBy(e => e.Assignment).ToList();
+                }
+
+               
                 var roomnumber = _settingsService.RoomNumber;
                 if (roomnumber != 0)
                 {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -25,6 +26,7 @@ namespace Teknobyen.Models
             this.endTime = startTime.AddMinutes(double.Parse(jsonModel.duration, cultureI.NumberFormat) * 60);
         }
 
+        [Key]
         public string reservationId { get; set; }
         public string userId { get; set; }
         public string comment { get; set; }

@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Teknobyen.Models;
+using Microsoft.EntityFrameworkCore;
+using Teknobyen.Services.StorageService;
 using Windows.Web.Http;
 
 namespace Teknobyen.Services.FirebaseService
@@ -79,6 +81,13 @@ namespace Teknobyen.Services.FirebaseService
                     }
                 }
             }
+
+            //using (var db = new WashlistContext())
+            //{
+            //    db.Washdays.AddRange(listOfWashDays.ToArray());
+            //    db.SaveChanges();
+            //}
+
 
             return listOfWashDays.OrderBy(e => e.Date).ThenBy(e => e.Assignment).ToList();
 

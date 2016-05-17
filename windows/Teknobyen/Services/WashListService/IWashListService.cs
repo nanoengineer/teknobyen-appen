@@ -9,8 +9,10 @@ namespace Teknobyen.Services.WashListService
 {
     interface IWashListService
     {
-        List<WashDayModel> ParseTextToWashList(string washListString);
-        IList<string> ValidateWashList(List<WashDayModel> listToValidate);
+        List<WashDayModel> GetWashList(bool syncAfterRetieve);
+        void SyncWashList();
+        
+
 
         List<WashDayModel> GenerateWashList(
             DateTime startDate, DateTime endDate, 
@@ -19,8 +21,9 @@ namespace Teknobyen.Services.WashListService
             List<RoomModel> roomsToSkip = null);
 
         List<WashWeekModel> GetPrintableWashList(List<WashDayModel> listToPrint);
-
         Task<bool> BackupWashListToFile(List<WashDayModel> listToBackup);
         List<WashDayModel> GetWashListBetweenDates(DateTime startDate, DateTime endDate, List<WashDayModel> washList);
+        List<WashDayModel> ParseTextToWashList(string washListString);
+        List<string> ValidateWashList(List<WashDayModel> listToValidate);
     }
 }

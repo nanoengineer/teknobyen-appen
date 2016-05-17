@@ -1,7 +1,10 @@
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading.Tasks;
+using Teknobyen.Services.StorageService;
 using Teknobyen.Services.NotificationService;
 using Teknobyen.Services.SettingsService;
+using Teknobyen.Services.StorageService;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
@@ -25,6 +28,17 @@ namespace Teknobyen
         public App() {
             InitializeComponent();
             EventAggregator = new Prism.Events.EventAggregator();
+
+            #region Apply any pending migrations to DBs
+            using (var db = new WashlistContext())
+            {
+                db.Database.Migrate();
+            }
+            using (var db = new ProjectorReservationContext())
+            {
+                db.Database.Migrate();
+            }
+            #endregion
         }
 
         public override Task OnInitializeAsync(IActivatedEventArgs args)

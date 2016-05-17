@@ -117,6 +117,16 @@
     <Compile Include="Converters\AssignmentToBackgroundColorConverter.cs" />
     <Compile Include="Converters\DateToStringConverter.cs" />
     <Compile Include="Messages\EventTest.cs" />
+    <Compile Include="Migrations\20160516213555_MyFirstMigration.cs" />
+    <Compile Include="Migrations\20160516213555_MyFirstMigration.designer.cs">
+      <DependentUpon>20160516213555_MyFirstMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\ProjectorReservation\20160516213624_MyFirstMigration.cs" />
+    <Compile Include="Migrations\ProjectorReservation\20160516213624_MyFirstMigration.designer.cs">
+      <DependentUpon>20160516213624_MyFirstMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\ProjectorReservation\ProjectorReservationContextModelSnapshot.cs" />
+    <Compile Include="Migrations\WashlistContextModelSnapshot.cs" />
     <Compile Include="Models\LaundryMachineStatusModel.cs" />
     <Compile Include="Models\ProjectorReservationModel.cs" />
     <Compile Include="Models\RoomModel.cs" />
@@ -126,6 +136,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\CredentialsService\CredentialsService.cs" />
     <Compile Include="Services\CredentialsService\ICredentialsService.cs" />
+    <Compile Include="Services\StorageService\IStorageService.cs" />
+    <Compile Include="Services\StorageService\ProjectorReservationContext.cs" />
+    <Compile Include="Services\StorageService\WashlistContext.cs" />
     <Compile Include="Services\FirebaseService\FirebaseService.cs" />
     <Compile Include="Services\FirebaseService\IFirebaseService.cs" />
     <Compile Include="Services\FirebaseService\JsonModels.cs" />
