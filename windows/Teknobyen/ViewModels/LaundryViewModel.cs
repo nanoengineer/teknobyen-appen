@@ -73,9 +73,16 @@ namespace Teknobyen.ViewModels
             {
                 Credentials = loginCredentials;
             }
-
-            var mList = await _laundryService.GetMachineStatusList(loginCredentials.UserName, loginCredentials.Password);
-            StatusCollection = mList;
+            try
+            {
+                var mList = await _laundryService.GetMachineStatusList(loginCredentials.UserName, loginCredentials.Password);
+                StatusCollection = mList;
+            }
+            catch (Exception)
+            {
+                //display error
+            }
+            
         }
 
         public async void GetLaundryAccountBalance()

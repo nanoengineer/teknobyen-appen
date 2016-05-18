@@ -35,15 +35,13 @@
         </Grid.RowDefinitions>
 
         <controls:PageHeader Text="Teknobyen" HorizontalContentAlignment="Center">
-            <controls:PageHeader.SecondaryCommands>
-            </controls:PageHeader.SecondaryCommands>
         </controls:PageHeader>
 
         <Button Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="5" Background="Transparent" Click="{x:Bind ViewModel.GotoSettingsPage}">
             <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE713;" FontSize="30" />
         </Button>
-        
-        
+
+
         <StackPanel x:Name="ButtonsPanel" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical">
             <control:LargeImageButton x:Name="ProjectorButton" 
                                       Style="{StaticResource MainButtonStyle}" 
@@ -60,8 +58,9 @@
                     Click="{x:Bind ViewModel.GotoWashlistPage}">
                 <Image Source="ms-appx:///Assets/Washing_list.png" />
             </control:LargeImageButton>
-
         </StackPanel>
+
+        
     </Grid>
 </Page>
 

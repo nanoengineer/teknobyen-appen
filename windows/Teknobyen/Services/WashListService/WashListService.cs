@@ -7,14 +7,16 @@ using Teknobyen.Common;
 using Teknobyen.Models;
 using Teknobyen.Services.StorageService;
 using Teknobyen.Services.FirebaseService;
-using Teknobyen.Services.StorageService;
 using Windows.Storage;
+using Prism.Events;
+using Teknobyen.Messages;
 
 namespace Teknobyen.Services.WashListService
 {
     public class WashListService : IWashListService
     {
         private IFirebaseService _firbaseService;
+        private EventAggregator EventAggregator;
 
         public static WashListService Instance { get; }
         static WashListService()
@@ -24,6 +26,7 @@ namespace Teknobyen.Services.WashListService
         private WashListService()
         {
             _firbaseService = FirebaseService.FirebaseService.Instance;
+            EventAggregator = App.EventAggregator;
         }
         
         public List<WashDayModel> GenerateWashList(DateTime startDate, DateTime endDate, RoomModel startAt, List<RoomModel> extraRooms = null, List<RoomModel> roomsToSkip = null)
@@ -239,7 +242,7 @@ namespace Teknobyen.Services.WashListService
         {
             try
             {
-                //if(syncAfterRetieve) SyncWashList();
+                if(syncAfterRetieve) SyncWashList();
                 using (var db = new WashlistContext())
                 {
                     return db.Washdays.OrderBy(e => e.Date).ThenBy(e => e.Assignment).ToList();
@@ -247,13 +250,12 @@ namespace Teknobyen.Services.WashListService
             }
             catch (Exception)
             {
-                throw new Exception();
+                return null;
             }
         }
 
         public async void SyncWashList()
         {
-            throw new NotImplementedException();
             /*
              * Get washlist from firebase service
              * See if there are any changes
@@ -264,6 +266,24 @@ namespace Teknobyen.Services.WashListService
              * if no changes
              * exit 
              */
+            bool madeChanges = false;
+            try
+            {
+                using (var db = new WashlistContext())
+                {
+                    var washlistFromWeb = await _firbaseService.GetWashList();
+                    db.Washdays.AddRange(washlistFromWeb.ToArray());
+                    await db.SaveChangesAsync();
+                }
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine(e.Message);
+            }
+
+
+            EventAggregator.GetEvent<WashlistUpdated>().Publish("");
+            
         }
 
       

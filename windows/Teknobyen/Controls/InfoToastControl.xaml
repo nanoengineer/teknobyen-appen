@@ -1,0 +1,23 @@
+﻿<UserControl
+    x:Class="Teknobyen.Controls.InfoToastControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Teknobyen.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <Grid x:Name="RootGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Rectangle x:Name="BackgroundRect"  Grid.Row="1" RadiusX="10" RadiusY="10" Width="{Binding RenderSize.Width, ElementName=InfoTextBox}" >
+            <Rectangle.Fill>
+                <SolidColorBrush Color="#FF717171" Opacity="0.98"/>
+            </Rectangle.Fill>
+        </Rectangle>
+        <TextBlock x:Name="InfoTextBox" Grid.Row="1" Text="Må ha tekst her" MaxWidth="230" TextWrapping="Wrap" TextAlignment="Center" HorizontalAlignment="Center" Padding="10,3,10,3" Foreground="White"  />
+    </Grid>
+</UserControl>

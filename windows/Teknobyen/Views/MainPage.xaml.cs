@@ -10,5 +10,6 @@ namespace Teknobyen.Views
             InitializeComponent();
             NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
         }
+
     }
 }

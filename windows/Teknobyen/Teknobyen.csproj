@@ -106,6 +106,9 @@
     <Compile Include="Common\RoomManager.cs" />
     <Compile Include="Common\Utils.cs" />
     <Compile Include="Controls\AlternatingRowListView.cs" />
+    <Compile Include="Controls\InfoToastControl.xaml.cs">
+      <DependentUpon>InfoToastControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\LargeImageButton.cs" />
     <Compile Include="Controls\TwoWayCalendarDatePicker.cs" />
     <Compile Include="Controls\WashingMachineControl.xaml.cs">
@@ -117,6 +120,7 @@
     <Compile Include="Converters\AssignmentToBackgroundColorConverter.cs" />
     <Compile Include="Converters\DateToStringConverter.cs" />
     <Compile Include="Messages\EventTest.cs" />
+    <Compile Include="Messages\WashlistUpdated.cs" />
     <Compile Include="Migrations\20160516213555_MyFirstMigration.cs" />
     <Compile Include="Migrations\20160516213555_MyFirstMigration.designer.cs">
       <DependentUpon>20160516213555_MyFirstMigration.cs</DependentUpon>
@@ -154,6 +158,7 @@
     <Compile Include="Services\SettingsService\SettingsService.cs" />
     <Compile Include="Services\WashListService\IWashListService.cs" />
     <Compile Include="Services\WashListService\WashListService.cs" />
+    <Compile Include="Services\WashListService\WashListWrapper.cs" />
     <Compile Include="ViewModels\LaundryViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\ProjectorReservationOverviewViewModel.cs" />
@@ -226,6 +231,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\InfoToastControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\WashingMachineControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

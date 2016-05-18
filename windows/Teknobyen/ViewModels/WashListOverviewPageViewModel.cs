@@ -12,6 +12,7 @@ using Teknobyen.Services.WashListService;
 using Teknobyen.Views;
 using Template10.Mvvm;
 using Windows.UI.Xaml.Navigation;
+using Teknobyen.Messages;
 
 namespace Teknobyen.ViewModels
 {
@@ -75,25 +76,11 @@ namespace Teknobyen.ViewModels
 
         public async override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
+            App.EventAggregator.GetEvent<WashlistUpdated>().Subscribe(GetUpdatedList);
+
             try
             {
-                //WashList = await _firebaseService.GetWashList();
-                using (var db = new WashlistContext())
-                {
-                    WashList = db.Washdays.OrderBy(e => e.Date).ThenBy(e => e.Assignment).ToList();
-                }
-
-               
-                var roomnumber = _settingsService.RoomNumber;
-                if (roomnumber != 0)
-                {
-                    NextWashDay = (from w in WashList
-                                   where w.Date.Date >= DateTime.Today
-                                   select w).OrderBy(e => e.Date).ThenBy(e => e.Assignment).ToList().Find(e => e.RoomNumber == roomnumber);
-                }
-
-                
-                //await _washListService.BackupWashListToFile(WashList);
+                WashList = _washListService.GetWashList(true);
             }
             catch (Exception e)
             {
@@ -101,10 +88,22 @@ namespace Teknobyen.ViewModels
                 System.Diagnostics.Debug.WriteLine(e.StackTrace);
                 System.Diagnostics.Debug.WriteLine(e.InnerException);
             }
-         
+        }
 
-            //var t = _washListService.GenerateWashList(new DateTime(2016, 5, 23), new DateTime(2016, 8, 5), RoomManager.GetRoomModel(303));
-            //var g = _washListService.ValidateWashList(t);
+        private void GetUpdatedList(string obj)
+        {
+            WashList = _washListService.GetWashList(false);
+        }
+
+        private void UpdateNextWashDay()
+        {
+            var roomnumber = _settingsService.RoomNumber;
+            if (roomnumber != 0 && WashList != null)
+            {
+                NextWashDay = (from w in WashList
+                               where w.Date.Date >= DateTime.Today
+                               select w).OrderBy(e => e.Date).ThenBy(e => e.Assignment).ToList().Find(e => e.RoomNumber == roomnumber);
+            }
         }
 
         public void GotoAdminPage()
