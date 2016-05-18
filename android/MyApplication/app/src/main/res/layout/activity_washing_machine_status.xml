@@ -42,7 +42,10 @@
                     android:singleLine="false"
                     android:text="@string/ingenstatus"
                     android:textAlignment="gravity"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:lines="2"
+                    android:paddingEnd="10dp"
+                    android:paddingStart="10dp" />
 
             </LinearLayout>
 
@@ -75,7 +78,10 @@
                     android:singleLine="false"
                     android:text="@string/ingenstatus"
                     android:textAlignment="gravity"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:lines="2"
+                    android:paddingEnd="10dp"
+                    android:paddingStart="10dp" />
 
             </LinearLayout>
 
@@ -114,7 +120,10 @@
                     android:singleLine="false"
                     android:text="@string/ingenstatus"
                     android:textAlignment="gravity"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:lines="2"
+                    android:paddingEnd="10dp"
+                    android:paddingStart="10dp" />
 
             </LinearLayout>
 
@@ -147,7 +156,10 @@
                     android:singleLine="false"
                     android:text="@string/ingenstatus"
                     android:textAlignment="gravity"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:lines="2"
+                    android:paddingEnd="10dp"
+                    android:paddingStart="10dp" />
 
             </LinearLayout>
 
@@ -187,7 +199,10 @@
                     android:singleLine="false"
                     android:text="@string/ingenstatus"
                     android:textAlignment="gravity"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:lines="2"
+                    android:paddingEnd="10dp"
+                    android:paddingStart="10dp" />
 
             </LinearLayout>
 
@@ -220,7 +235,10 @@
                     android:singleLine="false"
                     android:text="@string/ingenstatus"
                     android:textAlignment="gravity"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:lines="2"
+                    android:paddingEnd="10dp"
+                    android:paddingStart="10dp" />
 
             </LinearLayout>
 
