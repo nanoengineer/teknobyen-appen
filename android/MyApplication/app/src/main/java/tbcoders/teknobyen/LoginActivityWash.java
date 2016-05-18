@@ -81,17 +81,21 @@ public class LoginActivityWash extends AppCompatActivity {
             public void onClick(View view) {
                 String personName = nameEdit.getText().toString();
                 String roomNr = roomNrField.getText().toString();
-                if (Arrays.asList(roomNumbers).contains(Integer.valueOf(roomNr)) && personName.length()>0) {
-                    SharedPreferences sharedPref = getSharedPreferences("mypref", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPref.edit();
-                    editor.remove("roomnumber");
-                    editor.putString("roomnumber", roomNr);
-                    editor.putString("personname", personName);
-                    editor.commit();
-                    Intent intent = new Intent(LoginActivityWash.this, MainActivity.class);
-                    startActivity(intent);
+                if (roomNr.length() == 3 && personName.length()>0) {
+                    if(Arrays.asList(roomNumbers).contains(Integer.valueOf(roomNr))){
+                        SharedPreferences sharedPref = getSharedPreferences("mypref", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPref.edit();
+                        editor.remove("roomnumber");
+                        editor.putString("roomnumber", roomNr);
+                        editor.putString("personname", personName);
+                        editor.commit();
+                        Intent intent = new Intent(LoginActivityWash.this, MainActivity.class);
+                        startActivity(intent);
+                    }else{
+                        Toast.makeText(LoginActivityWash.this, "Skriv inn gyldig romnummer", Toast.LENGTH_SHORT).show();
+                    }
                 } else {
-                    Toast.makeText(LoginActivityWash.this, "Skriv inn gyldig romnummer", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivityWash.this, "Skriv navn og 3-sifret romnummer", Toast.LENGTH_SHORT).show();
                 }
             }
         });
