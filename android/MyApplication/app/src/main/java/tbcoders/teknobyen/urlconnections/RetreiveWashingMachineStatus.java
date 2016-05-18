@@ -1,4 +1,4 @@
-package tbcoders.teknobyen;
+package tbcoders.teknobyen.urlconnections;
 
 import android.os.AsyncTask;
 import android.util.Base64;
@@ -11,10 +11,12 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
 
+import tbcoders.teknobyen.Base64EncryptDecrypt;
+
 /**
  * Created by Alexander on 15/05/2016.
  */
-class RetreiveWashingMachineStatus extends AsyncTask<String, Void, String> {
+public class RetreiveWashingMachineStatus extends AsyncTask<String, Void, String> {
     @Override
     protected String doInBackground(String... params) {
         try {

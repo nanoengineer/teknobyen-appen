@@ -1,7 +1,6 @@
 package tbcoders.teknobyen;
 
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -9,8 +8,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.IOException;
 import java.util.concurrent.ExecutionException;
+
+import tbcoders.teknobyen.urlconnections.RetreiveWashingMachineStatus;
 
 public class MachineStatusActivity extends AppCompatActivity {
     //This class is for opening the web browser inside the app.

@@ -4,12 +4,28 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
 import java.util.Arrays;
+import java.util.concurrent.ExecutionException;
+
+import tbcoders.teknobyen.urlconnections.AuthenticateUser;
 
 public class LoginActivityWash extends AppCompatActivity {
     private static EditText username;
@@ -45,6 +61,7 @@ public class LoginActivityWash extends AppCompatActivity {
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                checkHttpResponse(username.getText().toString(), password.getText().toString());
                 if (username.getText().toString().length() > 0 && password.getText().toString().length() > 0) {
                     //For å lagre variabelar slik at dei skal vere tilgjengelige etter å ha lukka appen.
                     SharedPreferences sharedPref = getSharedPreferences("mypref", MODE_PRIVATE);
@@ -101,5 +118,24 @@ public class LoginActivityWash extends AppCompatActivity {
         });
     }
 
+
+    private boolean checkHttpResponse(String username, String password){
+
+        AuthenticateUser authenticateUser = new AuthenticateUser();
+        try {
+            String statusCode = authenticateUser.execute(username, password).get();
+            if(statusCode.equals("200")){
+                System.out.println("Code is good");
+                return true;
+            }
+            else{
+                System.out.println("Code is bad " + statusCode);
+                return false;
+            }
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
 }
