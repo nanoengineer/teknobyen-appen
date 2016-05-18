@@ -6,7 +6,7 @@
     <color name="colorAccent">#FF4081</color>
     <color name="genBackground">#FFFFFF</color>
     <color name="logoDefault">#000000</color>
-    <color name="washingmachineFree">#E37DD597</color>
-    <color name="washingmachineBusy">#967dc5e3</color>
-    <color name="washingmachineUnavailable">#d059c5e3</color>
+    <color name="washingmachineFree">#D597E37D</color>
+    <color name="washingmachineBusy">#C5E3967D</color>
+    <color name="washingmachineUnavailable">#C5E3D059</color>
 </resources>

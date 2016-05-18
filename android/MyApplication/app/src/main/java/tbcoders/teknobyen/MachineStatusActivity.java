@@ -68,7 +68,7 @@ public class MachineStatusActivity extends AppCompatActivity {
                 TextView text = (TextView) findViewById(textViewIds[i]);
                 LinearLayout layout = (LinearLayout) findViewById((linearLayoutIds[i]));
                 text.setText(statusArray[i]);
-                if (statusArray[i].equals("Ledig")) {
+                if (statusArray[i].substring(0,5).equals("Ledig")) {
                     layout.setBackgroundResource(R.color.washingmachineFree);
                 } else {
                     layout.setBackgroundResource(R.color.washingmachineBusy);

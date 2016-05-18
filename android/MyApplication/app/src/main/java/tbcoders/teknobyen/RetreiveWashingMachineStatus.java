@@ -9,6 +9,7 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Arrays;
 
 /**
  * Created by Alexander on 15/05/2016.
@@ -37,8 +38,17 @@ class RetreiveWashingMachineStatus extends AsyncTask<String, Void, String> {
 
             String status = "";
             for (int i = 0; i < data.size(); i++) {
-                status += data.get(i).toString().split("<br>")[1] + ",";
+                String[] string = data.get(i).toString().split("<br>");
+                string[0] = "";
+                for (int j = 1; j < string.length; j++) {
+                    String s = string[j];
+                    s = s.replace("</td>", "");
+                    status += s + " ";
+                }
+                status += ",";
             }
+
+            System.out.println(status);
             return status;
 
         } catch (IOException e) {
