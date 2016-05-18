@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:background="@color/genBackground"
     android:stretchColumns="0,1"
-    tools:context="tbcoders.teknobyen.MainActivity">
+    tools:context="tbcoders.teknobyen.MainActivity"
+    android:padding="10dp">
 <TableRow>
     <ImageButton
         android:scaleType="fitCenter"

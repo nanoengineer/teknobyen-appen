@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item android:id="@+id/reserveBTN"
-        android:title="reserve"
+    <item
+        android:id="@+id/reserveBTN"
         android:icon="@drawable/ic_action_checkbutton"
+        android:title="reserve"
         app:showAsAction="always">
 
     </item>
