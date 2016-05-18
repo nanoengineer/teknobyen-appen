@@ -6,7 +6,7 @@
     android:measureWithLargestChild="false"
     android:orientation="vertical"
     android:padding="10dp"
-    tools:context="tbcoders.teknobyen.LoginActivityWash">
+    tools:context=".SettingsActivity">
 
     <Space
         android:layout_width="match_parent"

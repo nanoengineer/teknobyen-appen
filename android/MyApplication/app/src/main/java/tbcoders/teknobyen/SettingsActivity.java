@@ -4,30 +4,17 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
-
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
-import java.net.URL;
 import java.util.Arrays;
 import java.util.concurrent.ExecutionException;
 
 import tbcoders.teknobyen.urlconnections.AuthenticateUser;
 
-public class LoginActivityWash extends AppCompatActivity {
+public class SettingsActivity extends AppCompatActivity {
     private static EditText username;
     private static EditText password;
     private static EditText roomNrField;
@@ -46,7 +33,7 @@ public class LoginActivityWash extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_activity_wash);
+        setContentView(R.layout.activity_settings);
         loginButton();
         roomButton();
 
@@ -74,10 +61,10 @@ public class LoginActivityWash extends AppCompatActivity {
                     editor.putString("username", userS);
                     editor.putString("password", userP);
                     editor.commit();
-                    Intent intent = new Intent(LoginActivityWash.this, WashingMachine.class);
+                    Intent intent = new Intent(SettingsActivity.this, WashingMachine.class);
                     startActivity(intent);
                 } else {
-                    Toast.makeText(LoginActivityWash.this, "Feltene for brukernavn og passord kan ikke være tomme", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SettingsActivity.this, "Feltene for brukernavn og passord kan ikke være tomme", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -106,13 +93,13 @@ public class LoginActivityWash extends AppCompatActivity {
                         editor.putString("roomnumber", roomNr);
                         editor.putString("personname", personName);
                         editor.commit();
-                        Intent intent = new Intent(LoginActivityWash.this, MainActivity.class);
+                        Intent intent = new Intent(SettingsActivity.this, MainActivity.class);
                         startActivity(intent);
                     }else{
-                        Toast.makeText(LoginActivityWash.this, "Skriv inn gyldig romnummer", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SettingsActivity.this, "Skriv inn gyldig romnummer", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(LoginActivityWash.this, "Skriv navn og 3-sifret romnummer", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SettingsActivity.this, "Skriv navn og 3-sifret romnummer", Toast.LENGTH_SHORT).show();
                 }
             }
         });

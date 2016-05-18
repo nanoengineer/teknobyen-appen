@@ -25,7 +25,7 @@ public class WashingMachine extends AppCompatActivity {
         loginbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(WashingMachine.this, LoginActivityWash.class);
+                Intent intent = new Intent(WashingMachine.this, SettingsActivity.class);
                 startActivity(intent);
             }
         });
@@ -44,7 +44,7 @@ public class WashingMachine extends AppCompatActivity {
                             Intent intent = new Intent(WashingMachine.this, MachineStatusActivity.class);
                             startActivity(intent);
                         }else{
-                            Intent intent = new Intent(WashingMachine.this, LoginActivityWash.class);
+                            Intent intent = new Intent(WashingMachine.this, SettingsActivity.class);
                             startActivity(intent);
                         }
                     }
@@ -64,7 +64,7 @@ public class WashingMachine extends AppCompatActivity {
                             Intent intent = new Intent(WashingMachine.this, MachineRefill.class);
                             startActivity(intent);
                         }else{
-                            Intent intent = new Intent(WashingMachine.this, LoginActivityWash.class);
+                            Intent intent = new Intent(WashingMachine.this, SettingsActivity.class);
                             startActivity(intent);
                         }
                     }
