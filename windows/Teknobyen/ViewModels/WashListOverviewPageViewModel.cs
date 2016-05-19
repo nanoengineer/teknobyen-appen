@@ -98,6 +98,12 @@ namespace Teknobyen.ViewModels
             }
         }
 
+        public override Task OnNavigatedFromAsync(IDictionary<string, object> pageState, bool suspending)
+        {
+            App.EventAggregator.GetEvent<WashlistUpdated>().Unsubscribe(GetUpdatedList);
+            return base.OnNavigatedFromAsync(pageState, suspending);
+        }
+
         private void GetUpdatedList(string obj)
         {
             WashList = _washListService.GetWashList(false);

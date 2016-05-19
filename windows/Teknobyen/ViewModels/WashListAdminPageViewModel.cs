@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Teknobyen.Common;
+using Teknobyen.Messages;
 using Teknobyen.Models;
 using Teknobyen.Services.FirebaseService;
 using Teknobyen.Services.PrintService;
@@ -113,24 +114,30 @@ namespace Teknobyen.ViewModels
 
         public async override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
+            //Subscribe to washlist updated event
+            App.EventAggregator.GetEvent<WashlistUpdated>().Subscribe(UpdateWashlist);
             try
             {
-                
-                WashDayList = (await _firebaseService.GetWashList()).OrderBy(e => e.Date).ThenBy(e => e.Assignment).ToList();
-
+                WashDayList = _washListService.GetWashList(true);
                 StartGenerationDate = WashDayList.Last().Date.AddDays(1);
                 StartRoom = (WashDayList.Last().RoomNumber +1).ToString();
             }
             catch (Exception)
             {
                 StartGenerationDate = DateTimeOffset.Now;
-                //Log
             }
-            
-            EndGenerationDate = DateTimeOffset.Now.AddDays(28);
-            //_printService = new PrintService();
-            //_printService.RegisterForPrinting();
-                
+            EndGenerationDate = DateTimeOffset.Now.AddDays(28);                
+        }
+
+        public override Task OnNavigatedFromAsync(IDictionary<string, object> pageState, bool suspending)
+        {
+            App.EventAggregator.GetEvent<WashlistUpdated>().Unsubscribe(UpdateWashlist);
+            return base.OnNavigatedFromAsync(pageState, suspending);
+        }
+
+        private void UpdateWashlist(string obj)
+        {
+            WashDayList = _washListService.GetWashList(false);
         }
 
         public async void OnPrintButtonClick()
@@ -247,6 +254,8 @@ namespace Teknobyen.ViewModels
             {
                 System.Diagnostics.Debug.WriteLine($"Save failed because: {e.InnerException}");
             }
+
+            _washListService.SyncWashList();
         }
 
         public void ClearGeneratedList()
