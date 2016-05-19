@@ -1,16 +1,4 @@
-﻿<!--
-//*********************************************************
-//
-// Copyright (c) Microsoft. All rights reserved.
-// This code is licensed under the MIT License (MIT).
-// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
-// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
-// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
-//
-//*********************************************************
--->
-<Page
+﻿<Page
     x:Class="Teknobyen.Services.PrintService.WashListPrintPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -32,6 +20,7 @@
     </Page.Resources>
 
 
+    
     <Grid x:Name="PrintableArea" Background="White" BorderBrush="Black" BorderThickness="2" Margin="40">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -50,6 +39,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -276,5 +266,9 @@
         <Border Grid.Row="15" Grid.Column="4" />
         <Border Grid.Row="15" Grid.Column="5" />
         <Border Grid.Row="15" Grid.Column="6" />
+
+        <Border Grid.Row="16" Grid.ColumnSpan="7">
+            <TextBlock  HorizontalAlignment="Center" Text="Laget med Teknobyen appen for Windows 10!" TextWrapping="Wrap" TextAlignment="Center"/>
+        </Border>
     </Grid>
 </Page>
