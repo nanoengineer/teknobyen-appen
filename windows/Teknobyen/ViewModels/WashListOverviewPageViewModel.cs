@@ -72,6 +72,14 @@ namespace Teknobyen.ViewModels
             set { Set( ref _washAssignmentText, value); }
         }
 
+        private bool _notConnectedToInternet;
+        public bool NotConnectedToInernet
+        {
+            get { return _notConnectedToInternet; }
+            set { Set(ref _notConnectedToInternet, value); }
+        }
+
+
         #endregion
 
         public async override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
