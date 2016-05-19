@@ -87,7 +87,7 @@
                         <localControls:WashListControl Grid.Row="1" WashList="{x:Bind ViewModel.GeneratedWashDayList, Mode=TwoWay}" />
 
                         <Grid Grid.Row="2">
-                            <Button HorizontalAlignment="Left" Content="Lagre" />
+                            <Button HorizontalAlignment="Left" Content="Lagre" Click="{x:Bind ViewModel.SaveGeneratedList}" />
                             <Button HorizontalAlignment="Right" Content="Avbryt" Click="{x:Bind ViewModel.ClearGeneratedList}" />
                         </Grid>
                         

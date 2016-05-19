@@ -256,24 +256,63 @@ namespace Teknobyen.Services.WashListService
 
         public async void SyncWashList()
         {
-            /*
-             * Get washlist from firebase service
-             * See if there are any changes
-             * 
-             * if changes
-             * commit and fire washlist updated
-             * 
-             * if no changes
-             * exit 
-             */
+            /*********************************************************
+             * ASSUMPTION:
+             * All changes is going to be add or remove
+             * Though this will handle changes, but as new entities
+             * in local storage. Done so FBID newe goes out of sync
+             ******************************************************/
             bool madeChanges = false;
             try
             {
                 using (var db = new WashlistContext())
                 {
-                    var washlistFromWeb = await _firbaseService.GetWashList();
-                    db.Washdays.AddRange(washlistFromWeb.ToArray());
-                    await db.SaveChangesAsync();
+                    //Get copies of list from web and locally stored list, and wrap them in wrappers
+                    //that allow searching for items
+                    var washlistFromWeb = new WashListWrapper(await _firbaseService.GetWashList());
+                    var localList = new WashListWrapper(db.Washdays.ToList());
+
+
+                    //First remove those in local storage that aren't in result from web
+                    //Filtering on date and assignment
+                    #region Removed wahsdays
+                    var washdaysToRemove = new List<WashDayModel>();
+                    foreach (var item in localList.WashList)
+                    {
+                        if (!washlistFromWeb.IsWashdayInList(item))
+                        {
+                            washdaysToRemove.Add(item);
+                        }
+                    }
+
+                    if (washdaysToRemove.Count > 0)
+                    {
+                        db.Washdays.RemoveRange(washdaysToRemove.ToArray());
+                        madeChanges = true;
+                    }
+                    #endregion
+
+                    //Now add washdays in list online that are't in local storage
+                    //Still filtering on assignment and day
+                    #region New washdays
+                    var washdaysToAdd = new List<WashDayModel>();
+                    foreach (var item in washlistFromWeb.WashList)
+                    {
+                        if (!localList.IsWashdayInList(item))
+                        {
+                            washdaysToAdd.Add(item);
+                        }
+                    }
+
+                    if (washdaysToAdd.Count > 0)
+                    {
+                        db.Washdays.AddRange(washdaysToAdd.ToArray());
+                        madeChanges = true;
+                    }
+                    #endregion
+
+                    //Save all pending changes
+                    db.SaveChanges();
                 }
             }
             catch (Exception e)
@@ -282,8 +321,13 @@ namespace Teknobyen.Services.WashListService
             }
 
 
-            EventAggregator.GetEvent<WashlistUpdated>().Publish("");
-            
+            //Should be commented out
+            //await Task.Delay(1000);
+
+            if (madeChanges)
+            {
+                EventAggregator.GetEvent<WashlistUpdated>().Publish("");
+            }       
         }
 
       

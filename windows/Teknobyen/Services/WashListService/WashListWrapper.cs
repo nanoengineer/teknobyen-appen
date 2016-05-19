@@ -17,7 +17,21 @@ namespace Teknobyen.Services.WashListService
 
         public bool IsWashdayInList(WashDayModel washday)
         {
-            return WashList.Contains(washday);
+            try
+            {
+                var match = (from m in WashList
+                            where m.FBID == washday.FBID && m.Date.Date == washday.Date.Date && m.Assignment == washday.Assignment && m.RoomNumber == washday.RoomNumber
+                            select m);
+                if (match.Count() > 0)
+                {
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return false;
         }
 
         public bool IsDateAndAssignmentInList(WashDayModel washday)

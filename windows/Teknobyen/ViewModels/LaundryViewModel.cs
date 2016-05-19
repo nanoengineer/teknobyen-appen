@@ -24,7 +24,7 @@ namespace Teknobyen.ViewModels
 
         public LaundryViewModel()
         {
-            _laundryService = new LaundryService();
+            _laundryService = LaundryService.Instance;
             _credentialsService = CredentialsService.Instance;
         }
 
