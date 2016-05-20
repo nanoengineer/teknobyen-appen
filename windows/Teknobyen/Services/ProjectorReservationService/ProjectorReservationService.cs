@@ -35,7 +35,7 @@ namespace Teknobyen.Services.ProjectorReservationService
             using (var db = new ProjectorReservationContext())
             {
                 var reservations = db.ProjectorReservations.OrderBy(e => e.startTime).ToList();
-                SyncReservations();
+                if(syncAfterRetrieve) SyncReservations();
                 return reservations;
             }
         }
