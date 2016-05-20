@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Teknobyen.Messages;
 using Teknobyen.Models;
 using Teknobyen.Services.CredentialsService;
 using Teknobyen.Services.FirebaseService;
+using Teknobyen.Services.ProjectorReservationService;
 using Teknobyen.Services.SettingsService;
 using Teknobyen.Views;
 using Template10.Mvvm;
@@ -15,7 +17,7 @@ namespace Teknobyen.ViewModels
 {
     class ProjectorReservationOverviewViewModel : ViewModelBase
     {
-        FirebaseService _firebaseService;
+        IProjectorReservationService _projectorService;
 
 
         private List<ProjectorReservationModel> _reservationsList;
@@ -26,23 +28,26 @@ namespace Teknobyen.ViewModels
         }
 
 
+        public ProjectorReservationOverviewViewModel()
+        {
+            _projectorService = ProjectorReservationService.Instance;
+        }
+
         public async override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
-            try
-            {
-                _firebaseService = new FirebaseService();
-                var list = await _firebaseService.GetReservations();
+            App.EventAggregator.GetEvent<ProjectorReservationsUpdated>().Subscribe(UpdateReservationsList);
+            ReservationsList = _projectorService.GetReservations(true).Where(e => e.endTime > DateTime.Now).ToList();
+        }
 
-                list = (from s in list
-                        where s.endTime > DateTime.Now
-                        select s).ToList();
-                list.Sort();
-                ReservationsList = list;
-            }
-            catch (Exception)
-            {
-                //Log to hockey app
-            }
+        public override Task OnNavigatedFromAsync(IDictionary<string, object> pageState, bool suspending)
+        {
+            App.EventAggregator.GetEvent<ProjectorReservationsUpdated>().Unsubscribe(UpdateReservationsList);
+            return base.OnNavigatedFromAsync(pageState, suspending);
+        }
+
+        private void UpdateReservationsList(string obj)
+        {
+            ReservationsList = _projectorService.GetReservations(true).Where(e => e.endTime > DateTime.Now).ToList();
         }
 
         public void GotoProjectorReservationPage()
