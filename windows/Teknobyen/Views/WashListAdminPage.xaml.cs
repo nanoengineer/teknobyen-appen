@@ -53,9 +53,8 @@ namespace Teknobyen.Views
                 {
                     return;
                 }
-                var fullList = await FirebaseService.Instance.GetWashList();
                 List<WashDayModel> listToPrint = 
-                    WashListService.Instance.GetWashListBetweenDates(startPrintDatePicker.Date.Value.DateTime, endPrintDatePicker.Date.Value.DateTime, fullList);
+                    WashListService.Instance.GetWashListBetweenDates(startPrintDatePicker.Date.Value.DateTime, endPrintDatePicker.Date.Value.DateTime, ViewModel.WashDayList);
                 var washListToPrint = WashListService.Instance.GetPrintableWashList(listToPrint);
                 if (washListToPrint.Count < 1)
                 {

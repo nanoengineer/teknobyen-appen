@@ -1,17 +1,16 @@
-﻿<Page
-    x:Class="Teknobyen.Views.WashListOverviewPage"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Teknobyen.Views"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:controls="using:Template10.Controls"
-    xmlns:vm="using:Teknobyen.ViewModels"
-    xmlns:models="using:Teknobyen.Models"
-    xmlns:t10converters="using:Template10.Converters"
-    xmlns:localcontrols="using:Teknobyen.Controls"
-    xmlns:converters="using:Teknobyen.Converters"
-    mc:Ignorable="d">
+﻿<Page x:Class="Teknobyen.Views.WashListOverviewPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:controls="using:Template10.Controls"
+      xmlns:converters="using:Teknobyen.Converters"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="using:Teknobyen.Views"
+      xmlns:localcontrols="using:Teknobyen.Controls"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:models="using:Teknobyen.Models"
+      xmlns:t10converters="using:Template10.Converters"
+      xmlns:vm="using:Teknobyen.ViewModels"
+      mc:Ignorable="d">
 
     <Page.DataContext>
         <vm:WashListOverviewPageViewModel x:Name="ViewModel" />
@@ -42,22 +41,22 @@
             <VisualStateGroup x:Name="VisualStateGroup">
                 <VisualState x:Name="VisualState">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="{StaticResource NormalMinWidth}"/>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource NormalMinWidth}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="LoadingText.(Textblock.Column)" Value="1"/>
-                        <Setter Target="LoadingText.(Textblock.Row)" Value="0"/>
-                        <Setter Target="LoadingText.(Textblock.RowSpan)" Value="2"/>
-                        <Setter Target="LoadingText.(Textblock.ColumnSpan)" Value="1"/>
-                        
-                        <Setter Target="WashListGrid.(Grid.Column)" Value="1"/>
-                        <Setter Target="WashListGrid.(Grid.Row)" Value="0"/>
-                        <Setter Target="WashListGrid.(Grid.RowSpan)" Value="2"/>
-                        <Setter Target="WashListGrid.(Grid.ColumnSpan)" Value="1"/>
+                        <Setter Target="LoadingText.(Textblock.Column)" Value="1" />
+                        <Setter Target="LoadingText.(Textblock.Row)" Value="0" />
+                        <Setter Target="LoadingText.(Textblock.RowSpan)" Value="2" />
+                        <Setter Target="LoadingText.(Textblock.ColumnSpan)" Value="1" />
 
-                        <Setter Target="NextWashDayInfo.(Grid.RowSpan)" Value="2"/>
-                        <Setter Target="NextWashDayInfo.(Grid.ColumnSpan)" Value="1"/>
-                        <Setter Target="WashListGrid.(Grid.ColumnSpan)" Value="1"/>
+                        <Setter Target="WashListGrid.(Grid.Column)" Value="1" />
+                        <Setter Target="WashListGrid.(Grid.Row)" Value="0" />
+                        <Setter Target="WashListGrid.(Grid.RowSpan)" Value="2" />
+                        <Setter Target="WashListGrid.(Grid.ColumnSpan)" Value="1" />
+
+                        <Setter Target="NextWashDayInfo.(Grid.RowSpan)" Value="2" />
+                        <Setter Target="NextWashDayInfo.(Grid.ColumnSpan)" Value="1" />
+                        <Setter Target="WashListGrid.(Grid.ColumnSpan)" Value="1" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
@@ -68,52 +67,78 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <controls:PageHeader Text="Vaskeliste" HorizontalContentAlignment="Center" >
+        <controls:PageHeader HorizontalContentAlignment="Center" Text="Vaskeliste">
             <controls:PageHeader.SecondaryCommands>
-                <AppBarButton x:Name="AdminPageButton" Label="Admin" Click="{x:Bind ViewModel.GotoAdminPage}" Visibility="Collapsed"/>
+                <AppBarButton x:Name="AdminPageButton"
+                              Click="{x:Bind ViewModel.GotoAdminPage}"
+                              Label="Admin"
+                              Visibility="Collapsed" />
             </controls:PageHeader.SecondaryCommands>
         </controls:PageHeader>
 
         <Grid Grid.Row="1" Padding="10">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Grid x:Name="NextWashDayInfo" Grid.RowSpan="1" Grid.ColumnSpan="2">
+            <Grid x:Name="NextWashDayInfo"
+                  Grid.RowSpan="1"
+                  Grid.ColumnSpan="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="Neste vaskedag:" />
-                <!-- Neste vaskedag -->
+                <!--  Neste vaskedag  -->
                 <Grid Grid.Row="1" Visibility="{x:Bind ViewModel.NextWashDay, Converter={StaticResource CollapsedWhenNullConverter}}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Grid.Column="0" Style="{StaticResource SubtitleTextBlockStyle}"  Text="{x:Bind ViewModel.NextWashDay.Date.DayOfWeek}" />
-                    <TextBlock Grid.Column="1" Style="{StaticResource SubtitleTextBlockStyle}" Text="om" />
-                    <TextBlock Grid.Column="2" Style="{StaticResource SubtitleTextBlockStyle}" Text="{x:Bind ViewModel.TimeToNextWashDayText}" />
+                    <TextBlock Grid.Column="0"
+                               Style="{StaticResource SubtitleTextBlockStyle}"
+                               Text="{x:Bind ViewModel.NextWashDay.Date.DayOfWeek}" />
+                    <TextBlock Grid.Column="1"
+                               Style="{StaticResource SubtitleTextBlockStyle}"
+                               Text="om" />
+                    <TextBlock Grid.Column="2"
+                               Style="{StaticResource SubtitleTextBlockStyle}"
+                               Text="{x:Bind ViewModel.TimeToNextWashDayText}" />
                 </Grid>
-                <TextBlock Grid.Row="1" Text="Ingen fremtidige vaskedager er registrert på ditt rom." Style="{StaticResource SubtitleTextBlockStyle}" Visibility="{x:Bind ViewModel.NextWashDay, Converter={StaticResource VisibleWhenNullConverter}, Mode=OneWay}" />
+                <TextBlock Grid.Row="1"
+                           Style="{StaticResource SubtitleTextBlockStyle}"
+                           Text="Ingen fremtidige vaskedager er registrert på ditt rom."
+                           Visibility="{x:Bind ViewModel.NextWashDay, Converter={StaticResource VisibleWhenNullConverter}, Mode=OneWay}" />
             </Grid>
 
-            <!--  Full vaskeliste -->
-            <TextBlock x:Name="LoadingText" Text="Vent litt..." HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.RowSpan="1" Grid.Row="1" Grid.ColumnSpan="2" Visibility="{x:Bind ViewModel.WashList, Converter={StaticResource VisibleWhenNullConverter}, Mode=OneWay}" />
+            <!--  Full vaskeliste  -->
+            <TextBlock x:Name="LoadingText"
+                       Grid.Row="1"
+                       Grid.RowSpan="1"
+                       Grid.Column="0"
+                       Grid.ColumnSpan="2"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Text="Vent litt..."
+                       Visibility="{x:Bind ViewModel.WashList, Converter={StaticResource VisibleWhenNullConverter}, Mode=OneWay}" />
 
-            <Grid x:Name="WashListGrid" Grid.Column="0" Grid.RowSpan="1" Grid.Row="1" Grid.ColumnSpan="2">
+            <Grid x:Name="WashListGrid"
+                  Grid.Row="1"
+                  Grid.RowSpan="1"
+                  Grid.Column="0"
+                  Grid.ColumnSpan="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
@@ -121,7 +146,7 @@
 
                 <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="Vaskeliste:" />
 
-                <localcontrols:WashListControl Grid.Row="1" WashList="{x:Bind ViewModel.WashList, Mode=OneWay}"/>
+                <localcontrols:WashListControl Grid.Row="1" WashList="{x:Bind ViewModel.WashList, Mode=OneWay}" />
             </Grid>
         </Grid>
     </Grid>

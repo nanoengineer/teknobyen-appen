@@ -258,5 +258,15 @@ namespace Teknobyen.Services.FirebaseService
             success = true;
             return success;
         }
+
+        public Task<bool> DeleteWashDayEntry(WashDayModel washDay)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> DeleteWashDayEntries(List<WashDayModel> washDaysToDelete)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

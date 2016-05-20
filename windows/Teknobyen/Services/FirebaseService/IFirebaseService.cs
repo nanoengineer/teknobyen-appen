@@ -11,11 +11,12 @@ namespace Teknobyen.Services.FirebaseService
     {
         Task<List<ProjectorReservationModel>> GetReservations();
         Task<bool> SaveReservation(ProjectorReservationModel s);
-
         Task<List<WashDayModel>> GetWashList();
         Task<bool> SaveWashDayEntry(WashDayModel washDay);
-        Task<bool> UpdateWashDayEntry(WashDayModel washDay);
         Task<bool> SaveWashDayEntries(List<WashDayModel> washDayList);
+        Task<bool> UpdateWashDayEntry(WashDayModel washDay);
+        Task<bool> DeleteWashDayEntry(WashDayModel washDay);
+        Task<bool> DeleteWashDayEntries(List<WashDayModel> washDaysToDelete);        
         Task<WashDayModel> GetNextWashDay(RoomModel room);
 
 
