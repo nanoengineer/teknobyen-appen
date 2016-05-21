@@ -35,9 +35,18 @@ namespace Teknobyen.Controls
                 SetValueDp(WashListProperty, value);
                 try
                 {
-                    WashListView.ScrollIntoView((from m in WashList
-                                                 where m.Date == DateTime.Today && m.Assignment == 1
-                                                 select m).First(), ScrollIntoViewAlignment.Leading);
+                    if (WashList == null)
+                    {
+                        return;
+                    }
+                    var todaysWashDayModels = from m in WashList
+                                              where m.Date == DateTime.Today && m.Assignment == 1
+                                              select m;
+
+                    if (todaysWashDayModels.Count() > 0)
+                    {
+                        WashListView.ScrollIntoView(todaysWashDayModels.First(), ScrollIntoViewAlignment.Leading);
+                    }
                 }
                 catch (Exception)
                 {

@@ -38,6 +38,10 @@ namespace Teknobyen
             {
                 db.Database.Migrate();
             }
+            using (var db = new LaundryBalanceContext())
+            {
+                db.Database.Migrate();
+            }
             #endregion
         }
 

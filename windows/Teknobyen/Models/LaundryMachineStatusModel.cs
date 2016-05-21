@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 
 namespace Teknobyen.Models
 {
@@ -10,8 +11,19 @@ namespace Teknobyen.Models
             MinutesLeft = _minutesLeft;
         }
 
+        public LaundryMachineStatusModel(int machineId, int minutesLeft, DateTime reservedTime, MachineStatus status)
+        {
+            MachineId = machineId;
+            MinutesLeft = minutesLeft;
+            ReservedTime = reservedTime;
+            Status = status;
+        }
+
         public int MachineId { get; set; }
         public int MinutesLeft { get; set; }
+        public DateTime ReservedTime { get; set; }
+        public MachineStatus Status { get; set; }
+
 
         [JsonIgnore]
         public bool Available {
@@ -24,5 +36,13 @@ namespace Teknobyen.Models
                 return false;
             }
         }
+    }
+
+    public enum MachineStatus
+    {
+        Available,
+        Busy,
+        Reserved,
+        Unknown
     }
 }

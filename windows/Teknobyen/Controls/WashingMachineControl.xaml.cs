@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
@@ -62,7 +63,12 @@ namespace Teknobyen.Controls
 
         private void UserControl_RightTapped(object sender, RightTappedRoutedEventArgs e)
         {
-            
+            System.Diagnostics.Debug.WriteLine($"machine {Mid} right tapped");
+        }
+
+        private void UserControl_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine($"machine {Mid} tapped");
         }
     }
 }

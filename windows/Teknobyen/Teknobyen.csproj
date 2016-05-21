@@ -120,18 +120,25 @@
     <Compile Include="Converters\AssignmentToBackgroundColorConverter.cs" />
     <Compile Include="Converters\DateToStringConverter.cs" />
     <Compile Include="Messages\EventTest.cs" />
+    <Compile Include="Messages\LaundryBalanceUpdated.cs" />
     <Compile Include="Messages\ProjectorReservationsUpdated.cs" />
     <Compile Include="Messages\WashlistUpdated.cs" />
     <Compile Include="Migrations\20160516213555_MyFirstMigration.cs" />
     <Compile Include="Migrations\20160516213555_MyFirstMigration.designer.cs">
       <DependentUpon>20160516213555_MyFirstMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\LaundryBalance\20160520183548_LaundryBalanceMigration.cs" />
+    <Compile Include="Migrations\LaundryBalance\20160520183548_LaundryBalanceMigration.designer.cs">
+      <DependentUpon>20160520183548_LaundryBalanceMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\LaundryBalance\LaundryBalanceContextModelSnapshot.cs" />
     <Compile Include="Migrations\ProjectorReservation\20160516213624_MyFirstMigration.cs" />
     <Compile Include="Migrations\ProjectorReservation\20160516213624_MyFirstMigration.designer.cs">
       <DependentUpon>20160516213624_MyFirstMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ProjectorReservation\ProjectorReservationContextModelSnapshot.cs" />
     <Compile Include="Migrations\WashlistContextModelSnapshot.cs" />
+    <Compile Include="Models\LaundryBalanceModel.cs" />
     <Compile Include="Models\LaundryMachineStatusModel.cs" />
     <Compile Include="Models\ProjectorReservationModel.cs" />
     <Compile Include="Models\RoomModel.cs" />
@@ -145,6 +152,7 @@
     <Compile Include="Services\ProjectorReservationService\ProjectorReservationService.cs" />
     <Compile Include="Services\ProjectorReservationService\ReservationListWrapper.cs" />
     <Compile Include="Services\StorageService\IStorageService.cs" />
+    <Compile Include="Services\StorageService\LaundryBalanceContext.cs" />
     <Compile Include="Services\StorageService\ProjectorReservationContext.cs" />
     <Compile Include="Services\StorageService\WashlistContext.cs" />
     <Compile Include="Services\FirebaseService\FirebaseService.cs" />

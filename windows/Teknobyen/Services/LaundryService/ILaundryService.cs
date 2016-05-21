@@ -12,6 +12,6 @@ namespace Teknobyen.Services.LaundryService
     {
         Task<bool> IsValidCredentials(string username, string password);
         Task<ObservableCollection<LaundryMachineStatusModel>> GetMachineStatusList(string username, string password);
-        Task<Double> GetAccountBalance(string username, string password);
+        LaundryBalanceModel GetAccountBalance(string username, string password, bool syncAfterRetieve);
     }
 }

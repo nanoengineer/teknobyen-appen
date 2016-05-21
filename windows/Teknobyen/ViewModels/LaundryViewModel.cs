@@ -85,7 +85,7 @@ namespace Teknobyen.ViewModels
             
         }
 
-        public async void GetLaundryAccountBalance()
+        public void GetLaundryAccountBalance()
         {
             var loginCredentials = _credentialsService.GetUser();
             if (loginCredentials == null)
@@ -99,8 +99,8 @@ namespace Teknobyen.ViewModels
             }
             try
             {
-                var b = await _laundryService.GetAccountBalance(loginCredentials.UserName, loginCredentials.Password);
-                AccountBalance = b;
+                var b = _laundryService.GetAccountBalance(loginCredentials.UserName, loginCredentials.Password, true);
+                AccountBalance = 0;
             }
             catch (Exception)
             {

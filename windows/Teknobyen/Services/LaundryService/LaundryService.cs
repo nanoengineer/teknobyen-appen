@@ -6,7 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Teknobyen.Messages;
 using Teknobyen.Models;
+using Teknobyen.Services.StorageService;
 using Windows.Security.Credentials;
 using Windows.Web.Http;
 using Windows.Web.Http.Filters;
@@ -22,36 +24,81 @@ namespace Teknobyen.Services.LaundryService
             Instance = Instance ?? new LaundryService();
         }
 
-        public async Task<double> GetAccountBalance(string username, string password)
+        public LaundryBalanceModel GetAccountBalance(string username, string password, bool syncAfterRetrieve)
         {
-            Double _accountBalance = Double.NaN;
-
-            using (var client = GetClient(new Uri("http://129.241.152.11"), username, password))
+            //Using messaging here as well
+            if (syncAfterRetrieve)
             {
-                var response = await client.GetAsync(new Uri("http://129.241.152.11/SaldoForm?lg=2&ly=9131"));
-                string htmlContent = await response.Content.ReadAsStringAsync();
-
-                var doc = new HtmlDocument();
-                doc.LoadHtml(htmlContent);
-
-                var s = doc.DocumentNode.Descendants("tr").Where(x => x.InnerText.Contains("BALANSE"));
-
-                var sList = new List<string>();
-                foreach (var item in s)
-                {
-                    if (!item.InnerText.Contains("Kjøp"))
-                    {
-                        sList.Add(item.InnerText);
-                    }
-                }
-
-                var _balanceString = sList.First();
-                _balanceString = _balanceString.Substring(7).Split(new char[]{' '}).First();
-
-                _accountBalance = double.Parse(_balanceString);
+                GetAccountBalanceFromWeb(username, password);
             }
 
-            return _accountBalance;
+            //Returning last stored balance. Will be updated unless there is an internetproblem.
+            using (var db = new LaundryBalanceContext())
+            {
+                if (db.Balance.Count() > 0)
+                {
+                    return db.Balance.OrderByDescending(e => e.Retrieved).First();
+                }
+                else
+                {
+                    //Being here means this is the first time. Only option is to return null and wait for
+                    //sync from web to send message
+                    return null;
+                }
+            }
+        }
+
+        private async void GetAccountBalanceFromWeb(string username, string password)
+        {
+            bool balanceUpdated = false;
+            try
+            {
+                LaundryBalanceModel balance;
+
+                using (var client = GetClient(new Uri("http://129.241.152.11"), username, password))
+                {
+                    var response = await client.GetAsync(new Uri("http://129.241.152.11/SaldoForm?lg=2&ly=9131"));
+                    string htmlContent = await response.Content.ReadAsStringAsync();
+
+                    var doc = new HtmlDocument();
+                    doc.LoadHtml(htmlContent);
+
+                    var s = doc.DocumentNode.Descendants("tr").Where(x => x.InnerText.Contains("BALANSE"));
+
+                    var sList = new List<string>();
+                    foreach (var item in s)
+                    {
+                        if (!item.InnerText.Contains("Kjøp"))
+                        {
+                            sList.Add(item.InnerText);
+                        }
+                    }
+
+                    var _balanceString = sList.First();
+                    _balanceString = _balanceString.Substring(7).Split(new char[] { ' ' }).First();
+
+                    double _accountBalance = double.Parse(_balanceString);
+
+
+                    balance = new LaundryBalanceModel(DateTime.Now, _accountBalance);
+                    balanceUpdated = true;
+                }
+
+                if (balanceUpdated && balance != null)
+                {
+                    using (var db = new LaundryBalanceContext())
+                    {
+                        db.Balance.Add(balance);
+                        db.SaveChanges();
+                    }
+                    App.EventAggregator.GetEvent<LaundryBalanceUpdated>().Publish("");
+                }
+
+            }
+            catch (Exception)
+            {
+                //Log exception
+            }
         }
 
         public async Task<ObservableCollection<LaundryMachineStatusModel>> GetMachineStatusList(string username, string password)

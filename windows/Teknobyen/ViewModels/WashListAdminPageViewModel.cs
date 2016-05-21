@@ -112,7 +112,7 @@ namespace Teknobyen.ViewModels
         #endregion
 
 
-        public async override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
+        public override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             //Subscribe to washlist updated event
             App.EventAggregator.GetEvent<WashlistUpdated>().Subscribe(UpdateWashlist);
@@ -126,7 +126,9 @@ namespace Teknobyen.ViewModels
             {
                 StartGenerationDate = DateTimeOffset.Now;
             }
-            EndGenerationDate = DateTimeOffset.Now.AddDays(28);                
+            EndGenerationDate = DateTimeOffset.Now.AddDays(28);
+
+            return Task.CompletedTask;                
         }
 
         public override Task OnNavigatedFromAsync(IDictionary<string, object> pageState, bool suspending)
@@ -138,11 +140,6 @@ namespace Teknobyen.ViewModels
         private void UpdateWashlist(string obj)
         {
             WashDayList = _washListService.GetWashList(false);
-        }
-
-        public async void OnPrintButtonClick()
-        {
-            //Done in codebehind because you need a canvas from the page
         }
 
         public void ParseWashListText()

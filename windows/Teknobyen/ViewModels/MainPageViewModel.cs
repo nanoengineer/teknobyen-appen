@@ -13,6 +13,7 @@ using Windows.Web.Http.Headers;
 using Windows.Web.Http.Filters;
 using Teknobyen.Services.FirebaseService;
 using Teknobyen.Models;
+using Windows.UI.Xaml.Media.Animation;
 
 namespace Teknobyen.ViewModels
 {
@@ -49,12 +50,12 @@ namespace Teknobyen.ViewModels
 
         public void GotoWashlistPage()
         {
-            this.NavigationService.Navigate(typeof(WashListOverviewPage));
+            this.NavigationService.Navigate(typeof(WashListOverviewPage), new DrillInNavigationTransitionInfo());
         }
 
         public void GotoSettingsPage()
         {
-            this.NavigationService.Navigate(typeof(SettingsPage));
+            this.NavigationService.Navigate(typeof(SettingsPage), new DrillInNavigationTransitionInfo());
         }
     }
 }
