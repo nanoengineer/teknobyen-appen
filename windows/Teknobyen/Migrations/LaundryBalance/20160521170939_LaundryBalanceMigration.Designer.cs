@@ -8,7 +8,7 @@ using Teknobyen.Services.StorageService;
 namespace Teknobyen.Migrations.LaundryBalance
 {
     [DbContext(typeof(LaundryBalanceContext))]
-    [Migration("20160520183548_LaundryBalanceMigration")]
+    [Migration("20160521170939_LaundryBalanceMigration")]
     partial class LaundryBalanceMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

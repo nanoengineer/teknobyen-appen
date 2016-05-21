@@ -50,12 +50,12 @@ namespace Teknobyen.ViewModels
 
         public void GotoWashlistPage()
         {
-            this.NavigationService.Navigate(typeof(WashListOverviewPage), new DrillInNavigationTransitionInfo());
+            this.NavigationService.Navigate(typeof(WashListOverviewPage));
         }
 
         public void GotoSettingsPage()
         {
-            this.NavigationService.Navigate(typeof(SettingsPage), new DrillInNavigationTransitionInfo());
+            this.NavigationService.Navigate(typeof(SettingsPage));
         }
     }
 }

@@ -35,7 +35,9 @@ namespace Teknobyen.Services.LaundryService
             //Returning last stored balance. Will be updated unless there is an internetproblem.
             using (var db = new LaundryBalanceContext())
             {
-                if (db.Balance.Count() > 0)
+                db.Balance.Add(new LaundryBalanceModel(DateTime.Now, 30));
+                int count = db.Balance.ToList().Count;
+                if (count > 0)
                 {
                     return db.Balance.OrderByDescending(e => e.Retrieved).First();
                 }

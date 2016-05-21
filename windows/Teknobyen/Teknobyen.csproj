@@ -127,9 +127,9 @@
     <Compile Include="Migrations\20160516213555_MyFirstMigration.designer.cs">
       <DependentUpon>20160516213555_MyFirstMigration.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\LaundryBalance\20160520183548_LaundryBalanceMigration.cs" />
-    <Compile Include="Migrations\LaundryBalance\20160520183548_LaundryBalanceMigration.designer.cs">
-      <DependentUpon>20160520183548_LaundryBalanceMigration.cs</DependentUpon>
+    <Compile Include="Migrations\LaundryBalance\20160521170939_LaundryBalanceMigration.cs" />
+    <Compile Include="Migrations\LaundryBalance\20160521170939_LaundryBalanceMigration.designer.cs">
+      <DependentUpon>20160521170939_LaundryBalanceMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\LaundryBalance\LaundryBalanceContextModelSnapshot.cs" />
     <Compile Include="Migrations\ProjectorReservation\20160516213624_MyFirstMigration.cs" />
