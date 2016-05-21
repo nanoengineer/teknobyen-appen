@@ -30,8 +30,8 @@ namespace Teknobyen.Controls
         
         
         #region Stagger constants 
-        private const float ENTRANCE_ANIMATION_DURATION = 350; 
-        private const float ENTRANCE_ANIMATION_OPACITY_STAGGER_DELAY = 25; 
+        private const float ENTRANCE_ANIMATION_DURATION = 100; 
+        private const float ENTRANCE_ANIMATION_OPACITY_STAGGER_DELAY = 20; 
         private const float ENTRANCE_ANIMATION_TEXT_STAGGER_DELAY = 25; 
         #endregion 
         
