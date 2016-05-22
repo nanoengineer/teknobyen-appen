@@ -88,7 +88,15 @@ namespace Teknobyen.ViewModels
 
             try
             {
-                WashList = _washListService.GetWashList(true);
+                
+                //Looks like there is a performance issue with EF7 
+                //on cold start. Running async minimizes feeling of 
+                //freezing on UI
+                var t = await Task.Run<List<WashDayModel>>(() => {
+                    return _washListService.GetWashList(true);
+                });
+                WashList = t;
+                
             }
             catch (Exception e)
             {

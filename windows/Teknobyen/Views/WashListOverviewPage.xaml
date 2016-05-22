@@ -124,15 +124,19 @@
             </Grid>
 
             <!--  Full vaskeliste  -->
-            <TextBlock x:Name="LoadingText"
-                       Grid.Row="1"
-                       Grid.RowSpan="1"
-                       Grid.Column="0"
-                       Grid.ColumnSpan="2"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center"
-                       Text="Vent litt..."
-                       Visibility="{x:Bind ViewModel.WashList, Converter={StaticResource VisibleWhenNullConverter}, Mode=OneWay}" />
+            <StackPanel Grid.Row="1"
+                        Grid.RowSpan="1"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Orientation="Vertical"
+                        Visibility="{x:Bind ViewModel.WashList, Converter={StaticResource VisibleWhenNullConverter}, Mode=OneWay}">
+                <ProgressRing Width="30" Height="30" />
+                <TextBlock x:Name="LoadingText" Text="Vent litt..." />
+
+            </StackPanel>
+
 
             <Grid x:Name="WashListGrid"
                   Grid.Row="1"

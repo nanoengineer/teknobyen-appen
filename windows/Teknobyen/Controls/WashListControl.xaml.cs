@@ -156,12 +156,12 @@ namespace Teknobyen.Controls
 
                 //Item index relative to visible
                 var relativeItemIndex = itemIndex - itemsPanel.FirstVisibleIndex;
-
+                double delayFactor = 80d;
                 // Create KeyFrameAnimations 
                 KeyFrameAnimation offsetAnimation = _compositor.CreateScalarKeyFrameAnimation();
                 offsetAnimation.InsertExpressionKeyFrame(1f, "0");
                 offsetAnimation.Duration = TimeSpan.FromMilliseconds(1250);
-                offsetAnimation.DelayTime = TimeSpan.FromMilliseconds(relativeItemIndex * 100);
+                offsetAnimation.DelayTime = TimeSpan.FromMilliseconds(relativeItemIndex * delayFactor);
 
 
 
@@ -170,14 +170,14 @@ namespace Teknobyen.Controls
                 scaleAnimation.InsertKeyFrame(0.1f, new Vector3(0.05f, 0.05f, 0.05f));
                 scaleAnimation.InsertKeyFrame(1f, new Vector3(1f, 1f, 0f));
                 scaleAnimation.Duration = TimeSpan.FromMilliseconds(1000);
-                scaleAnimation.DelayTime = TimeSpan.FromMilliseconds(relativeItemIndex * 100);
+                scaleAnimation.DelayTime = TimeSpan.FromMilliseconds(relativeItemIndex * delayFactor);
 
 
 
                 KeyFrameAnimation fadeAnimation = _compositor.CreateScalarKeyFrameAnimation();
                 fadeAnimation.InsertExpressionKeyFrame(1f, "1");
                 fadeAnimation.Duration = TimeSpan.FromMilliseconds(500);
-                fadeAnimation.DelayTime = TimeSpan.FromMilliseconds(relativeItemIndex * 100);
+                fadeAnimation.DelayTime = TimeSpan.FromMilliseconds(relativeItemIndex * delayFactor);
 
                 // Start animations 
                 itemVisual.StartAnimation("Offset.Y", offsetAnimation);
