@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,20 +26,28 @@ namespace Teknobyen.ViewModels
             set { Set(ref _selectedDate, value); }
         }
 
-        private TimeSpan _selectedStartTime;
+        private TimeSpan _selectedStartTime = DateTime.Now.TimeOfDay;
         public TimeSpan SelectedStartTime
         {
             get { return _selectedStartTime; }
             set { Set(ref _selectedStartTime, value); }
         }
 
-        private TimeSpan _selectedEndTime;
-
-        public TimeSpan SelectedEndTime
+        
+        private ObservableCollection<DurationModel> _durations;
+        public ObservableCollection<DurationModel> Durations
         {
-            get { return _selectedEndTime; }
-            set { Set(ref _selectedEndTime, value); }
+            get { return _durations; }
+            set { Set(ref _durations, value); }
         }
+
+        private object _selectedDuration;
+        public object SelectedDuration
+        {
+            get { return _selectedDuration; }
+            set { Set(ref _selectedDuration, value); }
+        }
+
 
         private string _comment;
         public string Comment
@@ -57,9 +66,20 @@ namespace Teknobyen.ViewModels
         public override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             SelectedDate = DateTimeOffset.Now;
+            SetUpDurations();
             return base.OnNavigatedToAsync(parameter, mode, state);
+            
         }
 
+        private void SetUpDurations()
+        {
+            var t = new ObservableCollection<DurationModel>();
+            for (int i = 1; i <= 16; i++)
+            {
+                t.Add(new DurationModel(TimeSpan.FromMinutes(i * 15)));
+            }
+            Durations = t;
+        }
 
         public async void SaveReservation()
         {
@@ -71,9 +91,12 @@ namespace Teknobyen.ViewModels
             m.roomNumber = _settingsService.RoomNumber;
             m.date = SelectedDate.DateTime;
             m.startTime = new DateTime(m.date.Year, m.date.Month, m.date.Day, SelectedStartTime.Hours, SelectedStartTime.Minutes, 0);
-            m.endTime = m.startTime.Add(new TimeSpan(1, 0, 0));
+
+            if (SelectedDuration == null) return;
+            m.endTime = m.startTime.Add((SelectedDuration as DurationModel).Duration);
 
             await _firebaseService.SaveReservation(m);
+            NavigationService.GoBack();
         }
 
 

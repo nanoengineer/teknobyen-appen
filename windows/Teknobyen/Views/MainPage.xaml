@@ -24,7 +24,7 @@
                         <AdaptiveTrigger MinWindowWidth="{StaticResource NormalMinWidth}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="ButtonsPanel.Orientation" Value="Horizontal" />
+                        <!--<Setter Target="ButtonsPanel.Orientation" Value="Horizontal" />-->
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
@@ -37,6 +37,19 @@
 
         <controls:PageHeader HorizontalContentAlignment="Center" Text="Teknobyen" />
 
+
+        <!--
+            Stemmer det knapp
+            øvers i ventre hjørne
+        -->
+        <Button Grid.Row="1"
+                Margin="5"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Background="Wheat"
+                Content="Hello" 
+                Click="Button_Click"/>
+
         <Button Grid.Row="1"
                 Margin="5"
                 HorizontalAlignment="Right"
@@ -48,28 +61,46 @@
                        Text="&#xE713;" />
         </Button>
 
+        <!--<ScrollViewer Grid.Row="1"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center"
+                      VerticalScrollBarVisibility="Auto">
 
-        <StackPanel x:Name="ButtonsPanel"
-                    Grid.Row="1"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Orientation="Vertical">
+        </ScrollViewer>-->
+        <VariableSizedWrapGrid x:Name="ButtonsPanel"
+                               Grid.Row="1"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Orientation="Horizontal">
             <control:LargeImageButton x:Name="ProjectorButton"
                                       Click="{x:Bind ViewModel.GotoProjectorReservation}"
                                       Style="{StaticResource MainButtonStyle}">
-                <Image Source="ms-appx:///Assets/Video Projector-96.png" />
+                <StackPanel Orientation="Vertical">
+                    <Image Source="ms-appx:///Assets/Video Projector-96.png" />
+                    <TextBlock HorizontalAlignment="Center"
+                               Foreground="Black"
+                               Text="Prosjektor" />
+                </StackPanel>
             </control:LargeImageButton>
             <control:LargeImageButton x:Name="ClothesWashButton"
                                       Click="{x:Bind ViewModel.GotoLaundryMenu}"
                                       Style="{StaticResource MainButtonStyle}">
-                <Image Source="ms-appx:///Assets/Washing Machine-96.png" />
+                <StackPanel Orientation="Vertical">
+                    <Image Source="ms-appx:///Assets/Washing Machine-96.png" />
+                    <TextBlock HorizontalAlignment="Center"
+                               Foreground="Black"
+                               Text="Vaskeri" />
+                </StackPanel>
             </control:LargeImageButton>
             <control:LargeImageButton x:Name="WashListButton"
                                       Click="{x:Bind ViewModel.GotoWashlistPage}"
                                       Style="{StaticResource MainButtonStyle}">
-                <Image Source="ms-appx:///Assets/Washing_list.png" />
+                <StackPanel Orientation="Vertical">
+                    <Image Source="ms-appx:///Assets/Washing_list.png" />
+                    <TextBlock HorizontalAlignment="Center" Text="Vaskeliste" />
+                </StackPanel>
             </control:LargeImageButton>
-        </StackPanel>
+        </VariableSizedWrapGrid>
     </Grid>
 </Page>
 

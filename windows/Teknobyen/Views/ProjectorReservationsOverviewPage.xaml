@@ -36,6 +36,7 @@
                 HorizontalAlignment="Right"
                 VerticalAlignment="Bottom"
                 Background="Transparent"
+                Canvas.ZIndex="10"
                 Click="{x:Bind ViewModel.GotoProjectorReservationPage}">
             <Grid>
                 <Ellipse Width="50"

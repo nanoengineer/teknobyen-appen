@@ -138,11 +138,11 @@
     </Compile>
     <Compile Include="Migrations\ProjectorReservation\ProjectorReservationContextModelSnapshot.cs" />
     <Compile Include="Migrations\WashlistContextModelSnapshot.cs" />
+    <Compile Include="Models\DurationModel.cs" />
     <Compile Include="Models\LaundryBalanceModel.cs" />
     <Compile Include="Models\LaundryMachineStatusModel.cs" />
     <Compile Include="Models\ProjectorReservationModel.cs" />
     <Compile Include="Models\RoomModel.cs" />
-    <Compile Include="Models\TextAndValueModel.cs" />
     <Compile Include="Models\WashDayModel.cs" />
     <Compile Include="Models\WashWeekModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
