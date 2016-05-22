@@ -34,14 +34,13 @@ namespace Teknobyen.ViewModels
             set { Set(ref _name, value); }
         }
 
-        private string _roomNumber;
-        public string RoomNumber
+        private int _roomNumber;
+        public int RoomNumber
         {
             get { return _roomNumber; }
             set
             {
-                string numString = new string(value.Where(c => char.IsDigit(c)).ToArray());
-                Set(ref _roomNumber, numString);
+                Set(ref _roomNumber, value);
             }
         }
 
@@ -81,7 +80,7 @@ namespace Teknobyen.ViewModels
         {
             Name = _settingsService.Name;
             IsAdmin = _settingsService.IsAdmin;
-            RoomNumber = _settingsService.RoomNumber.ToString();
+            RoomNumber = _settingsService.RoomNumber;
 
             var credentials = _credentialsService.GetUser();
             if (credentials != null)
@@ -96,14 +95,14 @@ namespace Teknobyen.ViewModels
         public async void SaveSettings()
         {
             bool allSettingsValid = true;
-            if (Name.Length < 2 || !RoomManager.IsValidRoom(int.Parse(RoomNumber)))
+            if (Name.Length < 2 || !RoomManager.IsValidRoom(RoomNumber))
             {
                 allSettingsValid = false;
             }
             else
             {
                 _settingsService.Name = Name;
-                _settingsService.RoomNumber = int.Parse(RoomNumber);
+                _settingsService.RoomNumber = RoomNumber;
             }
             
             if (AdminPassword == "adMin")
