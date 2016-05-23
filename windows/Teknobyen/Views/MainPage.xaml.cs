@@ -18,11 +18,11 @@ namespace Teknobyen.Views
         {
             //var _compositor = ElementCompositionPreview.GetElementVisual(this).Compositor;
             //var animation = _compositor.CreateScalarKeyFrameAnimation();
-            //animation.InsertKeyFrame(0.5f, 0.5f);
+            //animation.InsertKeyFrame(0.5f, 4f);
             //animation.Duration = TimeSpan.FromSeconds(5);
-
+            //
             //var visual = ElementCompositionPreview.GetElementVisual(ProjectorButton);
-
+            //
             //visual.StartAnimation("Scale.X", animation);
         }
     }

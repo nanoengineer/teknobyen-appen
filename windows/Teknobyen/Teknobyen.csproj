@@ -208,6 +208,7 @@
     <None Include="Teknobyen_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Alert-96.png" />
     <Content Include="Assets\Cancel-96.png" />
     <Content Include="Assets\LaundrySymbol.png" />
     <Content Include="Assets\Ok-96.png" />

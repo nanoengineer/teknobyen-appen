@@ -31,6 +31,37 @@ namespace Teknobyen.Views
 
             DoInitialRoomSelcetionSetup();
             CheckRoomnumberValidity();
+
+            SetupLaundryLoginStatus();
+        }
+
+        private void SetupLaundryLoginStatus()
+        {
+            ViewModel.PropertyChanged += ViewModel_PropertyChanged;
+        }
+
+        private void ViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(ViewModel.LaundryLoginIsValid))
+            {
+                CkeckLaundryLoginValidity();
+            }
+        }
+
+        private void CkeckLaundryLoginValidity()
+        {
+            switch (ViewModel.LaundryLoginIsValid)
+            {
+                case true:
+                    LaundryLoginValidImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/Ok-96.png"));
+                    break;
+                case false:
+                    LaundryLoginValidImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/Cancel-96.png"));
+                    break;
+                default:
+                    LaundryLoginValidImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/Alert-96.png"));
+                    break;
+            }
         }
 
         private void DoInitialRoomSelcetionSetup()

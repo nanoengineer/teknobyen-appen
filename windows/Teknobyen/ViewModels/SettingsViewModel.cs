@@ -58,6 +58,13 @@ namespace Teknobyen.ViewModels
             set { Set(ref _password, value); }
         }
 
+        private bool? _laundryLoginIsValid;
+        public bool? LaundryLoginIsValid
+        {
+            get { return _laundryLoginIsValid; }
+            set { Set(ref _laundryLoginIsValid, value); }
+        }
+
         private string _adminPassword;
         public string AdminPassword
         {
@@ -94,6 +101,7 @@ namespace Teknobyen.ViewModels
 
         public async void SaveSettings()
         {
+            await ValidateLogin();
             bool allSettingsValid = true;
             if (Name.Length < 2 || !RoomManager.IsValidRoom(RoomNumber))
             {
@@ -140,5 +148,18 @@ namespace Teknobyen.ViewModels
             IsAdmin = false;
         }
 
+        public async Task ValidateLogin()
+        {
+            try
+            {
+                bool valid = await _laundryService.IsValidCredentials(Username, Password);
+                LaundryLoginIsValid = valid;
+
+            }
+            catch (Exception)
+            {
+                LaundryLoginIsValid = null;
+            }
+        }
     }
 }
