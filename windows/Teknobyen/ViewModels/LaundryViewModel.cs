@@ -26,6 +26,13 @@ namespace Teknobyen.ViewModels
         {
             _laundryService = LaundryService.Instance;
             _credentialsService = CredentialsService.Instance;
+
+            #region Setup unknow laundry status until info loaded
+            for (int i = 0; i < 6; i++)
+            {
+                StatusCollection.Add(new LaundryMachineStatusModel());
+            }
+            #endregion
         }
 
 

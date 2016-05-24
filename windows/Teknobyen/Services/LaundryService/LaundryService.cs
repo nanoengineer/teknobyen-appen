@@ -122,21 +122,39 @@ namespace Teknobyen.Services.LaundryService
                     string status = ss.Substring(8); //Contains status Must be prossesed further
                     string number = ss.Substring(7,1); //Contains machine number
 
-                    int mNum = 0;
-                    bool sussess = int.TryParse(number, out mNum); //Throw exc if false
+                    int machineId = 0;
+                    bool sussess = int.TryParse(number, out machineId); //Throw exc if false
 
-                    int minutesLeft = 0;
-                    if (status == "Ledig")
+
+                    //Flere statuser
+                    //Reservert
+
+                    //Ledig
+                    //Resttid
+
+                    int minutesLeft = -1;
+                    DateTime reservedTime = DateTime.MinValue;
+                    MachineStatus machineStatus = MachineStatus.Unknown;
+
+                    if ((status.Contains("Ledig") && status.Contains("kl")) || (status.Contains("Reservert fra")))
                     {
+                        machineStatus = MachineStatus.Reserved;
+                        string reservedTimeString = Regex.Replace(status, "[^0-9:]", "");
+                        reservedTime = DateTime.Today.Date.Add(TimeSpan.Parse(reservedTimeString));
+                    }
+                    else if (status == "Ledig")
+                    {
+                        machineStatus = MachineStatus.Available;
                         minutesLeft = -1;
                     }
-                    else
+                    else if(status.Contains("Resttid"))
                     {
+                        machineStatus = MachineStatus.Busy;
                         string minutesLeftString = Regex.Replace(status, "[^0-9]", "");
                         bool convertionSuccess = int.TryParse(minutesLeftString, out minutesLeft);
                     }
 
-                    var machine = new LaundryMachineStatusModel(mNum, minutesLeft);
+                    var machine = new LaundryMachineStatusModel(machineId, minutesLeft, reservedTime, machineStatus);
                     machineList.Add(machine);
                 }
             }

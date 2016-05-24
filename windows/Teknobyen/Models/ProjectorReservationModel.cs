@@ -26,6 +26,11 @@ namespace Teknobyen.Models
             this.endTime = startTime.AddMinutes(double.Parse(jsonModel.duration, cultureI.NumberFormat) * 60);
         }
 
+        private double Clamp(double value, double limit)
+        {
+            return value > limit ? limit : value;
+        }
+
         [Key]
         public string reservationId { get; set; }
         public string userId { get; set; }
