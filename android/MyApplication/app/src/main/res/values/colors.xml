@@ -9,4 +9,7 @@
     <color name="washingmachineFree">#D597E37D</color>
     <color name="washingmachineBusy">#C5E3967D</color>
     <color name="washingmachineUnavailable">#C5E3D059</color>
+    <color name="accepted">#00ff00</color>
+    <color name="declined">#ff0000</color>
+
 </resources>

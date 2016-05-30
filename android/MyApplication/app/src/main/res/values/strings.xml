@@ -12,6 +12,7 @@
     <!-- Knapper -->
     <string name="accept">Bekreft</string>
     <string name="cancel">Avbryt</string>
+    <string name="back">Tilbake</string>
 
 
     <!-- Strings related to login -->

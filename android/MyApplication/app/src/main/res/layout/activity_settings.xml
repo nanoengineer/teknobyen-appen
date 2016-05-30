@@ -67,11 +67,17 @@
         android:gravity="end"
         android:orientation="horizontal">
 
+        <Space
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1" />
+
         <Button
             android:id="@+id/romNrBTN"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/accept" />
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:text="@string/accept"
+            android:layout_weight="1" />
     </LinearLayout>
 
     <Space
@@ -94,11 +100,11 @@
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/authenticationCheck"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@mipmap/check_button" />
+            android:src="@mipmap/check_button"/>
     </LinearLayout>
 
     <LinearLayout
@@ -153,17 +159,15 @@
         android:layout_weight="1"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/cancelBTN"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/cancel" />
+        <Space
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1" />
 
         <Button
             android:id="@+id/acceptBTN"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
             android:layout_weight="1"
             android:text="@string/accept" />
 
@@ -182,6 +186,20 @@
             android:layout_span="2"
             android:text="@string/infoLogin"
             android:textAppearance="?android:attr/textAppearanceSmall" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <Button
+            android:id="@+id/cancelBTN"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/back" />
     </LinearLayout>
 
 </LinearLayout>
