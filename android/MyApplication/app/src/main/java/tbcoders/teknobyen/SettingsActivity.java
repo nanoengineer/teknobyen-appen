@@ -65,22 +65,24 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                //For å lagre variabelar slik at dei skal vere tilgjengelige etter å ha lukka appen.
+                SharedPreferences sharedPref = getSharedPreferences("mypref", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPref.edit();
                 if (username.getText().toString().length() > 0 && password.getText().toString().length() > 0) {
+                    String userS = Base64EncryptDecrypt.encrypt(username.getText().toString());
+                    //krypterar passord med Base64
+                    String userP = Base64EncryptDecrypt.encrypt(password.getText().toString());
+                    editor.putString("username", userS);
+                    editor.putString("password", userP);
+                    editor.apply();
+
                     if (checkHttpResponse(username.getText().toString(), password.getText().toString())) {
-                        //For å lagre variabelar slik at dei skal vere tilgjengelige etter å ha lukka appen.
-                        SharedPreferences sharedPref = getSharedPreferences("mypref", MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sharedPref.edit();
-                        String userS = Base64EncryptDecrypt.encrypt(username.getText().toString());
-                        //krypterar passord med Base64
-                        String userP = Base64EncryptDecrypt.encrypt(password.getText().toString());
-                        editor.remove("username");
-                        editor.remove("password");
-                        editor.putString("username", userS);
-                        editor.putString("password", userP);
-                        editor.commit();
-                        // return to previous page
-                        Toast.makeText(SettingsActivity.this, "Gyldig bruker er registrert", Toast.LENGTH_SHORT).show();
+                        editor.putBoolean("authenticated", true);
+                        editor.apply();
+                        Toast.makeText(SettingsActivity.this, "Gyldig bruker er autorisert", Toast.LENGTH_SHORT).show();
                     } else {
+                        editor.putBoolean("authenticated", false);
+                        editor.apply();
                         Toast.makeText(SettingsActivity.this, "Brukernavn eller passord er feil, kan ikke autentisere!", Toast.LENGTH_SHORT).show();
                     }
                 } else {
@@ -109,10 +111,9 @@ public class SettingsActivity extends AppCompatActivity {
                     if (Arrays.asList(roomNumbers).contains(Integer.valueOf(roomNr))) {
                         SharedPreferences sharedPref = getSharedPreferences("mypref", MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPref.edit();
-                        editor.remove("roomnumber");
                         editor.putString("roomnumber", roomNr);
                         editor.putString("personname", personName);
-                        editor.commit();
+                        editor.apply();
                         // return to previous page
                         Toast.makeText(SettingsActivity.this, "Navn og Romnummer er opdatert", Toast.LENGTH_SHORT).show();
                     } else {
@@ -127,7 +128,6 @@ public class SettingsActivity extends AppCompatActivity {
 
 
     private boolean checkHttpResponse(String username, String password) {
-
         AuthenticateUser authenticateUser = new AuthenticateUser();
         ImageView check = (ImageView) findViewById(R.id.authenticationCheck);
         try {

@@ -31,10 +31,6 @@ public class AuthenticateUser extends AsyncTask<String, Void, String> {
             connection.connect();
 
             int code = connection.getResponseCode();
-            System.out.println("Response code of the object is " + code);
-            if (code == 200) {
-                System.out.println("OK");
-            }
             return String.valueOf(code);
         } catch (IOException e) {
             e.printStackTrace();

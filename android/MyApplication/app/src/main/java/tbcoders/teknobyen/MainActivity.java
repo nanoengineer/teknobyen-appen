@@ -4,9 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -23,7 +23,12 @@ public class MainActivity extends AppCompatActivity {
         OnClickProjectorButtonListener();
         OnClickFyllaButtonListener();
         OnClickWashListButtonListener();
+        OnClickStemmerDetButtonListener();
+    }
 
+
+
+    private void OnClickStemmerDetButtonListener() {
         final Vibrator x = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
 
         final MediaPlayer stemmerDetSound = MediaPlayer.create(this, R.raw.stemmerlyd);
@@ -33,9 +38,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v){
                 stemmerDetSound.start();
                 long[] pattern = {600, 600, 50, 200};
-
                 x.vibrate(pattern, -1);
-
             }
         });
     }
