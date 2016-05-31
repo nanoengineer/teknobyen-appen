@@ -10,37 +10,22 @@ import android.widget.ImageButton;
 
 public class WashingMachine extends AppCompatActivity {
     private static ImageButton imageButton;
-    private static Button loginbtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_washing_machine);
         OnClickStatusListener();
         OnClickRefillListener();
-        OnClickLoginListener();
     }
 
-    private void OnClickLoginListener() {
-        loginbtn = (Button)findViewById(R.id.alertLogin);
-        loginbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(WashingMachine.this, SettingsActivity.class);
-                startActivity(intent);
-            }
-        });
-    }
     public void OnClickStatusListener(){
-
         imageButton = (ImageButton) findViewById(R.id.BTN_washingS);
         imageButton.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         SharedPreferences myprefs = getSharedPreferences("mypref", 0);
-                        String userS = myprefs.getString("username", "");
-                        String userP = myprefs.getString("password", "");
-                        if(userS.length()>0 && userP.length()>0){
+                        if(myprefs.getBoolean("authenticated", false)){
                             Intent intent = new Intent(WashingMachine.this, MachineStatusActivity.class);
                             startActivity(intent);
                         }else{
@@ -58,9 +43,7 @@ public class WashingMachine extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         SharedPreferences myprefs = getSharedPreferences("mypref", 0);
-                        String userS = myprefs.getString("username", "");
-                        String userP = myprefs.getString("password", "");
-                        if(userS.length()>0 && userP.length()>0){
+                        if(myprefs.getBoolean("authenticated", false)){
                             Intent intent = new Intent(WashingMachine.this, MachineRefill.class);
                             startActivity(intent);
                         }else{
