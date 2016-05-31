@@ -4,12 +4,14 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.concurrent.ExecutionException;
 
+import tbcoders.teknobyen.urlconnections.RetreiveWashingMachineBalance;
 import tbcoders.teknobyen.urlconnections.RetreiveWashingMachineStatus;
 
 public class MachineStatusActivity extends AppCompatActivity {
@@ -37,7 +39,8 @@ public class MachineStatusActivity extends AppCompatActivity {
 
     private boolean refreshData() {
         try {
-            urlScraping();
+            updateBalance();
+            updateWashingmachines();
         } catch (InterruptedException e) {
             System.out.println("MachineStatusActivity InterruptedException");
             e.printStackTrace();
@@ -49,8 +52,19 @@ public class MachineStatusActivity extends AppCompatActivity {
         return true;
     }
 
+    private void updateBalance() throws ExecutionException, InterruptedException{
+        RetreiveWashingMachineBalance retrieveStatus = new RetreiveWashingMachineBalance();
+        SharedPreferences sharedPref = getSharedPreferences("mypref", MODE_PRIVATE);
+        String name = sharedPref.getString("username", "");
+        String password = sharedPref.getString("password", "");
+        String machineBalance = retrieveStatus.execute(name, password).get();
 
-    private void urlScraping() throws ExecutionException, InterruptedException {
+        TextView balance = (TextView) findViewById(R.id.machineBalance);
+        balance.setText(machineBalance);
+    }
+
+
+    private void updateWashingmachines() throws ExecutionException, InterruptedException {
 
         RetreiveWashingMachineStatus retrieveStatus = new RetreiveWashingMachineStatus();
         SharedPreferences sharedPref = getSharedPreferences("mypref", MODE_PRIVATE);

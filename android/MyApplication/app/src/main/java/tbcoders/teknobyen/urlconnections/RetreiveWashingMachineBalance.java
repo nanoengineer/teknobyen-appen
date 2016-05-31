@@ -16,7 +16,7 @@ import tbcoders.teknobyen.Base64EncryptDecrypt;
 /**
  * Created by Alexander on 15/05/2016.
  */
-public class RetreiveWashingMachineStatus extends AsyncTask<String, Void, String> {
+public class RetreiveWashingMachineBalance extends AsyncTask<String, Void, String> {
     @Override
     protected String doInBackground(String... params) {
 
@@ -26,26 +26,25 @@ public class RetreiveWashingMachineStatus extends AsyncTask<String, Void, String
         org.jsoup.nodes.Document document = null;
         try {
             document = Jsoup
-                    .connect("http://129.241.152.11/LaundryState?lg=2&ly=9131")
+                    .connect("http://129.241.152.11/SaldoForm?lg=2&ly=9131")
                     .header("Authorization", "Basic " + encoding)
                     .get();
 
             Elements data = document.getElementsByClass("p");
-
-            String status = "";
+            Integer balanseIndex = null;
+            String balance = "Balance: ";
             for (int i = 0; i < data.size(); i++) {
-                String[] string = data.get(i).toString().split("<br>");
-                string[0] = "";
-                for (int j = 1; j < string.length; j++) {
-                    String s = string[j];
-                    s = s.replace("</td>", "");
-                    status += s + " ";
+                String s = data.get(i).toString();
+                s = s.substring(s.indexOf(">")+1, s.lastIndexOf("</td>"));
+                if(s.equals("BALANSE")){
+                    balanseIndex = i;
                 }
-                status += ",";
+                if(balanseIndex != null && i == balanseIndex + 1){
+                    balance += s;
+                }
             }
+            return balance;
 
-            System.out.println(status);
-            return status;
 
         } catch (IOException e) {
             System.out.println("MachineStatusActivity IOException");
