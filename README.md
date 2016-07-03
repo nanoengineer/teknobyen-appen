@@ -78,6 +78,8 @@ The following are the features that will be implemented in the first public rele
       * States
         * LEDIG
         * XY MIN.
+        * UTE AV DRIFT (Out of Order)
+        * LEDIG TIL ... (Reserved)
         * STATUS UNKNOWN
 
         (STATUS UNKNOWN should be shown if the HTTP request failed during INITIAL request. If statuses could not be retrieved in subsequent requests, then show the last fetched statuses and display somewhere that an network error occured).
@@ -85,7 +87,9 @@ The following are the features that will be implemented in the first public rele
       * State Colors Reference 
              ```swift
              let machineAvailColor = UIColor(rgba: "#97E37DD5")
+             //Also applies reserved state
              let machineBusyColor = UIColor(rgba: "#E3967DC5")
+             //Also applies to Out of Order state
              let machineUnknownColor = UIColor(rgba: "#E3D059C5")
              ```
 
