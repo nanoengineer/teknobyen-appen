@@ -41,6 +41,10 @@ class WashingMachineCell: UICollectionViewCell {
                 self.backgroundColor = AppConstants.machineAvailColor
             case .Running:
                 self.backgroundColor = AppConstants.machineBusyColor
+            case .Reserved:
+                self.backgroundColor = AppConstants.machineAvailColor
+            case .OutOfOrder:
+                self.backgroundColor = AppConstants.machineBusyColor
             case .Unknown:
                 self.backgroundColor = AppConstants.machineUnknownColor
             }

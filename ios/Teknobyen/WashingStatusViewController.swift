@@ -130,12 +130,28 @@ class WashingStatusViewController: UIViewController, UICollectionViewDelegate, U
                                 self.washingMachinesData[machineIndex].status = WashingMachineStatus.Available
                                 self.washingMachinesData[machineIndex].minutesRemaining = 0
                             }
-                            else {
+                            else if elementString.containsString("Resttid") {
                                 let statusMin = String(element).substringWithRange(elementString.startIndex.advancedBy(9) ..< elementString.endIndex.advancedBy(-5))
                                 self.washingMachinesData[machineIndex].status = WashingMachineStatus.Running
                                 self.washingMachinesData[machineIndex].minutesRemaining = Int(statusMin)!
                             }
-                            
+                            else if elementString.containsString("Ute av drift") {
+                                self.washingMachinesData[machineIndex].status = WashingMachineStatus.OutOfOrder
+                                self.washingMachinesData[machineIndex].minutesRemaining = 0
+                            }
+                            else if elementString.containsString("Ledig til") {
+                                machineIndex -= 1
+                                //Since "Ledig til" and the time string "kl. hh:mm" are separated, skip this string
+                                //TODO: Pretty hacky solution for now, find a better one later!
+                            }
+                            else if elementString.containsString("kl.") {
+                                self.washingMachinesData[machineIndex].status = WashingMachineStatus.Reserved
+                                self.washingMachinesData[machineIndex].minutesRemaining = 0
+                                self.washingMachinesData[machineIndex].reservationTime = elementString.capitalizedString
+                            }
+                            else {
+                                self.washingMachinesData[machineIndex].status = WashingMachineStatus.Unknown
+                            }
                             machineIndex += 1
                         }
                         

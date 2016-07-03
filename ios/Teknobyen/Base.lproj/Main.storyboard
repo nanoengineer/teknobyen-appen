@@ -786,7 +786,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W7I-s5-Fwo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="515" y="352"/>
+            <point key="canvasLocation" x="505" y="351.75"/>
         </scene>
         <!--Add Reservattion View Controller-->
         <scene sceneID="Xoo-K1-mhD">
